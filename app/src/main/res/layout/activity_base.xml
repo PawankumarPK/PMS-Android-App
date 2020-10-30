@@ -42,7 +42,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <fragment
-        android:id="@+id/contractorHostFragment"
+        android:id="@+id/hostFragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
