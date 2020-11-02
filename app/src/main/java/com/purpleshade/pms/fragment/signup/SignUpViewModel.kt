@@ -1,4 +1,4 @@
-package com.purpleshade.pms.fragment
+package com.purpleshade.pms.fragment.signup
 
 import androidx.lifecycle.ViewModel
 

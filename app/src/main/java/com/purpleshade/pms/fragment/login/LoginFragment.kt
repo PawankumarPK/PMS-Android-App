@@ -27,14 +27,13 @@ class LoginFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
-
         baseActivity.toolbar.visibility = View.GONE
 
         val login = view.findViewById<Button>(R.id.mLogin)
         val register = view.findViewById<TextView>(R.id.mRegister)
 
         login.setOnClickListener {
-            Toast.makeText(baseActivity, "Clicked", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
         }
         register.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
