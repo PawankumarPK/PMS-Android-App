@@ -6,4 +6,5 @@
     <dimen name="size30">30sp</dimen>
     <dimen name="size16">16sp</dimen>
     <dimen name="size10">10dp</dimen>
+    <dimen name="size15">15dp</dimen>
 </resources>
