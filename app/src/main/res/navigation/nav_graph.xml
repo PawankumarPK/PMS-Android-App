@@ -26,5 +26,14 @@
         android:id="@+id/homeFragment"
         android:name="com.purpleshade.pms.fragment.home.HomeFragment"
         android:label="home_fragment"
-        tools:layout="@layout/home_fragment" />
+        tools:layout="@layout/home_fragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_createRecordFragment"
+            app:destination="@id/createRecordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createRecordFragment"
+        android:name="com.purpleshade.pms.fragment.createRecord.CreateRecordFragment"
+        android:label="create_record_fragment"
+        tools:layout="@layout/create_record_fragment" />
 </navigation>

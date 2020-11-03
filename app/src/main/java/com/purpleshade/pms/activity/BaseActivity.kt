@@ -20,7 +20,7 @@ class BaseActivity : AppCompatActivity() {
 
         toolbar = findViewById<Toolbar>(R.id.mToolbar)
         fragmentTitle = findViewById<TextView>(R.id.mFragmentTitle)
-        backButton = findViewById<ImageView>(R.id.mBack)
+        backButton = findViewById<ImageView>(R.id.mBackButton)
 
 
 

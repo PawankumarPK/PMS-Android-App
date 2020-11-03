@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.purpleshade.pms.R
 import com.purpleshade.pms.fragment.BaseFragment
 import com.purpleshade.pms.fragment.home.adapter.PasswordsAdapter
@@ -16,6 +18,7 @@ class HomeFragment : BaseFragment() {
     private lateinit var viewModel: HomeViewModel
     lateinit var adapter: PasswordsAdapter
     lateinit var recyclerView: RecyclerView
+    lateinit var fabButton: FloatingActionButton
     private var passwordList: ArrayList<String> = ArrayList()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -30,8 +33,13 @@ class HomeFragment : BaseFragment() {
         baseActivity.fragmentTitle.text = "All Passwords"
         baseActivity.backButton.visibility = View.GONE
 
-        recyclerView = view.findViewById<RecyclerView>(R.id.mRecyclerView)
+        recyclerView = view.findViewById(R.id.mRecyclerView)
+        fabButton = view.findViewById(R.id.mFabButton)
+
         loadAdapter()
+        fabButton.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_createRecordFragment)
+        }
     }
 
     private fun loadAdapter() {

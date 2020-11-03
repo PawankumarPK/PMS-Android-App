@@ -19,7 +19,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/mBack"
+                android:id="@+id/mBackButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_back_arrow" />
@@ -30,9 +30,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/size16"
                 android:layout_marginLeft="@dimen/size16"
-                android:layout_toEndOf="@+id/mBack"
-                android:layout_toRightOf="@+id/mBack"
-                android:fontFamily="@font/raleway_medium"
+                android:layout_toEndOf="@+id/mBackButton"
+                android:layout_toRightOf="@+id/mBackButton"
+                android:fontFamily="@font/raleway_bold"
                 android:text="Login"
                 android:textColor="@color/colorWhite"
                 android:textSize="18sp" />
