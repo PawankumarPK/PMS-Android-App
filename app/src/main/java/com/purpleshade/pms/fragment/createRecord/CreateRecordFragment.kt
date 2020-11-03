@@ -23,7 +23,7 @@ class CreateRecordFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(CreateRecordViewModel::class.java)
-        baseActivity.fragmentTitle.text = "Create New Record"
+        baseActivity.fragmentTitle.text = getString(R.string.createNewRecord)
         baseActivity.backButton.visibility = View.VISIBLE
 
         done = view.findViewById(R.id.mDone)

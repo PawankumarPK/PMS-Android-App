@@ -30,7 +30,7 @@ class HomeFragment : BaseFragment() {
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
         baseActivity.toolbar.visibility = View.VISIBLE
-        baseActivity.fragmentTitle.text = "All Passwords"
+        baseActivity.fragmentTitle.text = getString(R.string.allPassword)
         baseActivity.backButton.visibility = View.GONE
 
         recyclerView = view.findViewById(R.id.mRecyclerView)

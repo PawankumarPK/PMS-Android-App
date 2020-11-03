@@ -19,7 +19,7 @@
             android:layout_marginStart="@dimen/size15"
             android:layout_marginEnd="@dimen/size15"
             android:layout_marginTop="@dimen/size10"
-            android:hint="Title"
+            android:hint="@string/title"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -39,7 +39,7 @@
             android:layout_marginStart="@dimen/size15"
             android:layout_marginTop="@dimen/size10"
             android:layout_marginEnd="@dimen/size15"
-            android:hint="Website Address"
+            android:hint="@string/website_address"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -59,7 +59,7 @@
             android:layout_marginStart="@dimen/size15"
             android:layout_marginEnd="@dimen/size15"
             android:layout_marginTop="@dimen/size10"
-            android:hint="Email"
+            android:hint="@string/email"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -77,7 +77,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
             android:layout_marginTop="@dimen/size10"
-            android:hint="Password"
+            android:hint="@string/password"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -96,7 +96,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
             android:layout_marginTop="@dimen/size10"
-            android:hint="Add Note"
+            android:hint="@string/add_note"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -116,7 +116,7 @@
         android:layout_margin="@dimen/size20"
         android:background="@drawable/gradient"
         android:fontFamily="@font/raleway_medium"
-        android:text="Done"
+        android:text="@string/done"
         android:textAllCaps="false"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/size16" />
