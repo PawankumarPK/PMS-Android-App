@@ -3,7 +3,9 @@ package com.purpleshade.pms.fragment.home.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.purpleshade.pms.R
 
@@ -26,10 +28,16 @@ class PasswordsAdapter(val passwordList: ArrayList<String>) : RecyclerView.Adapt
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val title = itemView.findViewById<TextView>(R.id.mTitle)
+        val edit = itemView.findViewById<ImageView>(R.id.mEdit)
+
+        private val v = view
 
         fun onBind(pos: Int) {
             val data = passwordList[pos]
             title.text = data
+            edit.setOnClickListener {
+                v.findNavController().navigate(R.id.action_homeFragment_to_createRecordFragment)
+            }
 
         }
     }

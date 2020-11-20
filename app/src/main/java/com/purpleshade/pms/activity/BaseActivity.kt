@@ -7,6 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import com.purpleshade.pms.R
+import com.purpleshade.pms.network.standardObjects.RetrofitClient
+import com.purpleshade.pms.utils.Helper
 
 class BaseActivity : AppCompatActivity() {
 
@@ -18,9 +20,12 @@ class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base)
 
+        RetrofitClient.initRosAPI(Helper.getConfigValue(this, "ros_url")!!)
+
         toolbar = findViewById<Toolbar>(R.id.mToolbar)
         fragmentTitle = findViewById<TextView>(R.id.mFragmentTitle)
         backButton = findViewById<ImageView>(R.id.mBackButton)
+
 
 
 
