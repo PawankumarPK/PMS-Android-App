@@ -14,10 +14,11 @@ import androidx.navigation.fragment.findNavController
 import com.purpleshade.pms.R
 import com.purpleshade.pms.activity.BaseActivity
 import com.purpleshade.pms.fragment.BaseFragment
+import com.purpleshade.pms.fragment.login.modal.LoginDetailModal
 import com.purpleshade.pms.network.signupModel.SignUpModel
 import com.purpleshade.pms.network.standardObjects.RetrofitClient
 import com.purpleshade.pms.utils.Records
-import kotlinx.android.synthetic.main.sign_up_fragment.*
+import kotlinx.android.synthetic.main.login_fragment.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,44 +37,36 @@ class LoginFragment : BaseFragment() {
 
         baseActivity.toolbar.visibility = View.GONE
 
-       // signUp()
-
         val login = view.findViewById<Button>(R.id.mLogin)
         val register = view.findViewById<TextView>(R.id.mRegister)
 
         login.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+            doLogin()
         }
         register.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
         }
-        //baseActivity.mToolbar.visibility = View.VISIBLE
     }
 
+    private fun doLogin() {
+        val email = mUserId.text
+        val password = mUserPassword.text
 
-    //Removable call
-
-    private fun signUp() {
         val api = RetrofitClient.rosService
-        val call = api.allRecords()
+        val call = api.login(email.toString(), password.toString())
 
-        call.enqueue(object : Callback<Records> {
-            override fun onFailure(call: Call<Records>?, t: Throwable?) {
+        call.enqueue(object : Callback<SignUpModel> {
+            override fun onFailure(call: Call<SignUpModel>?, t: Throwable?) {
                 Toast.makeText(baseActivity, "Something went wrong", Toast.LENGTH_SHORT).show()
             }
 
-            override fun onResponse(call: Call<Records>, response: Response<Records>) {
-                Toast.makeText(baseActivity, "Successfully", Toast.LENGTH_SHORT).show()
-                if (response.isSuccessful){
-                    val data = response.body()!!.recordDetail
-                    for(i in data.indices){
-                        val title = data[i].title
-                        Log.d("Data===>>",title)
-                    }
+            override fun onResponse(call: Call<SignUpModel>, response: Response<SignUpModel>) {
+                if (response.isSuccessful) {
+                    Toast.makeText(baseActivity, "User Login Successfully", Toast.LENGTH_SHORT).show()
+                    val res = response.body()!!.message
+                    Log.d("====>>>", res)
                 }
 
-                // floors = response.body().floors!!
-                // addFloorButtons()
             }
         })
     }
