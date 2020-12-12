@@ -8,11 +8,12 @@ import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.purpleshade.pms.R
+import com.purpleshade.pms.utils.RecordList
 
 /**
  * Created by pawan on 02,November,2020
  */
-class PasswordsAdapter(val passwordList: ArrayList<String>) : RecyclerView.Adapter<PasswordsAdapter.ViewHolder>() {
+class PasswordsAdapter(val passwordList: ArrayList<RecordList>) : RecyclerView.Adapter<PasswordsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.password_viewholder, parent, false))
@@ -34,7 +35,7 @@ class PasswordsAdapter(val passwordList: ArrayList<String>) : RecyclerView.Adapt
 
         fun onBind(pos: Int) {
             val data = passwordList[pos]
-            title.text = data
+            title.text = data.title
             edit.setOnClickListener {
                 v.findNavController().navigate(R.id.action_homeFragment_to_createRecordFragment)
             }

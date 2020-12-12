@@ -20,7 +20,7 @@ class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base)
 
-        RetrofitClient.initRosAPI(Helper.getConfigValue(this, "ros_url")!!)
+        RetrofitClient.initRosAPI(Helper.getConfigValue(this, "api_url")!!)
 
         toolbar = findViewById<Toolbar>(R.id.mToolbar)
         fragmentTitle = findViewById<TextView>(R.id.mFragmentTitle)

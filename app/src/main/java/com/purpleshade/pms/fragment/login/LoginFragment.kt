@@ -2,22 +2,17 @@ package com.purpleshade.pms.fragment.login
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.purpleshade.pms.R
-import com.purpleshade.pms.activity.BaseActivity
 import com.purpleshade.pms.fragment.BaseFragment
-import com.purpleshade.pms.fragment.login.modal.LoginDetailModal
 import com.purpleshade.pms.network.signupModel.SignUpModel
 import com.purpleshade.pms.network.standardObjects.RetrofitClient
-import com.purpleshade.pms.utils.Records
 import kotlinx.android.synthetic.main.login_fragment.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -52,7 +47,7 @@ class LoginFragment : BaseFragment() {
         val email = mUserId.text
         val password = mUserPassword.text
 
-        val api = RetrofitClient.rosService
+        val api = RetrofitClient.apiService
         val call = api.login(email.toString(), password.toString())
 
         call.enqueue(object : Callback<SignUpModel> {
@@ -64,7 +59,10 @@ class LoginFragment : BaseFragment() {
                 if (response.isSuccessful) {
                     Toast.makeText(baseActivity, "User Login Successfully", Toast.LENGTH_SHORT).show()
                     val res = response.body()!!.message
-                    Log.d("====>>>", res)
+                    if (res.equals("User Found"))
+                        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                    else
+                        Toast.makeText(baseActivity, "Invalid credential", Toast.LENGTH_SHORT).show()
                 }
 
             }

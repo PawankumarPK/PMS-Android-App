@@ -1,9 +1,11 @@
 package com.purpleshade.pms.fragment.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +14,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.purpleshade.pms.R
 import com.purpleshade.pms.fragment.BaseFragment
 import com.purpleshade.pms.fragment.home.adapter.PasswordsAdapter
+import com.purpleshade.pms.network.standardObjects.RetrofitClient
+import com.purpleshade.pms.utils.RecordList
+import com.purpleshade.pms.utils.Records
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.util.function.LongFunction
 
 class HomeFragment : BaseFragment() {
 
@@ -19,7 +28,7 @@ class HomeFragment : BaseFragment() {
     lateinit var adapter: PasswordsAdapter
     lateinit var recyclerView: RecyclerView
     lateinit var fabButton: FloatingActionButton
-    private var passwordList: ArrayList<String> = ArrayList()
+    private var passwordList: ArrayList<RecordList> = ArrayList()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.home_fragment, container, false)
@@ -43,19 +52,43 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun loadAdapter() {
-        loadList()
+        loadRecordList()
         adapter = PasswordsAdapter(passwordList)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(baseActivity)
     }
 
-    private fun loadList() {
+    /*private fun loadList() {
         passwordList.add("Google")
         passwordList.add("Facebook")
         passwordList.add("WhatsApp")
         passwordList.add("Gmail")
         passwordList.add("Instagram")
         passwordList.add("Linkdin")
+    }*/
+
+    private fun loadRecordList() {
+        val api = RetrofitClient.apiService
+        val call = api.allRecords("5fb3eb2156edb62195ff980c")
+
+        call.enqueue(object : Callback<Records> {
+            override fun onFailure(call: Call<Records>, t: Throwable) {
+                Toast.makeText(baseActivity, "Something went wrong", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onResponse(call: Call<Records>, response: Response<Records>) {
+                Toast.makeText(baseActivity, "Record Load Successfully", Toast.LENGTH_SHORT).show()
+                if (response.isSuccessful) {
+                    val record = response.body()!!.recordDetail
+                    for (i in record) {
+                        passwordList.add(i)
+                        adapter.notifyDataSetChanged()
+                        Log.d("===>>",passwordList.toString())
+                    }
+                }
+            }
+
+        })
 
     }
 }

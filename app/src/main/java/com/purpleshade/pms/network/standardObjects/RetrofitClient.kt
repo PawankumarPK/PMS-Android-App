@@ -6,17 +6,17 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
 
-    var rosURL: String = ""
-    lateinit var rosService: ApiService
+    var apiURL: String = ""
+    lateinit var apiService: ApiService
 
     fun initRosAPI(baseURLs: String) {
-        rosURL = baseURLs
+        apiURL = baseURLs
         val retrofitInstance = Retrofit.Builder()
-                .baseUrl(rosURL)
+                .baseUrl(apiURL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
-        rosService = retrofitInstance.create(ApiService::class.java)
+        apiService = retrofitInstance.create(ApiService::class.java)
     }
 
 }

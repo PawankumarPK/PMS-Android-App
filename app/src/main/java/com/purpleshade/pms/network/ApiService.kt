@@ -26,16 +26,6 @@ interface ApiService {
         @Field("password") password: String, @Field("confirmPassword") confmPass: String): Call<SignUpModel>
 
     @GET("/records/allRecords")
-    fun allRecords(): Call<Records>
-
-
-    /* @FormUrlEncoded
-     @POST("signup")
-     suspend fun userSignup(
-         @Field("name") name: String,
-         @Field("email") email: String,
-         @Field("password") password: String
-     ): Response<AuthResponse>
- */
+    fun allRecords(@Query("id") id:String): Call<Records>
 
 }
