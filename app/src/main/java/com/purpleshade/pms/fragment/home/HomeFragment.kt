@@ -53,8 +53,9 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun loadAdapter() {
-        loadRecordList()
         adapter = PasswordsAdapter(passwordList)
+        adapter.notifyDataSetChanged()
+        loadRecordList()
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(baseActivity)
     }
@@ -80,6 +81,5 @@ class HomeFragment : BaseFragment() {
             }
 
         })
-
     }
 }
