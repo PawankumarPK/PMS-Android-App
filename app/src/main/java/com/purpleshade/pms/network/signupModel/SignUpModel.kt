@@ -8,4 +8,7 @@ import com.google.gson.annotations.SerializedName
 class SignUpModel {
     @SerializedName("message")
     var message: String? = null
+
+    @SerializedName("token")
+    var token: String? = null
 }

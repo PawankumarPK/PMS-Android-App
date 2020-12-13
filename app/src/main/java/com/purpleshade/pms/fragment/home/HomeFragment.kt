@@ -69,7 +69,7 @@ class HomeFragment : BaseFragment() {
 
     private fun loadRecordList() {
         val api = RetrofitClient.apiService
-        val call = api.allRecords("5fb3eb2156edb62195ff980c")
+        val call = api.allRecords("5fb3eac356edb62195ff980a")
 
         call.enqueue(object : Callback<Records> {
             override fun onFailure(call: Call<Records>, t: Throwable) {
@@ -83,7 +83,6 @@ class HomeFragment : BaseFragment() {
                     for (i in record) {
                         passwordList.add(i)
                         adapter.notifyDataSetChanged()
-                        Log.d("===>>",passwordList.toString())
                     }
                 }
             }

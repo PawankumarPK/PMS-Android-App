@@ -2,6 +2,7 @@ package com.purpleshade.pms.fragment.login
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import com.purpleshade.pms.R
 import com.purpleshade.pms.fragment.BaseFragment
 import com.purpleshade.pms.network.signupModel.SignUpModel
 import com.purpleshade.pms.network.standardObjects.RetrofitClient
+import com.purpleshade.pms.utils.JWTUtils
 import kotlinx.android.synthetic.main.login_fragment.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -59,8 +61,12 @@ class LoginFragment : BaseFragment() {
                 if (response.isSuccessful) {
                     Toast.makeText(baseActivity, "User Login Successfully", Toast.LENGTH_SHORT).show()
                     val res = response.body()!!.message
+                    val token = response.body()!!.token
+                    JWTUtils.decoded(token!!)
+                    Log.d("===>>", token)
                     if (res.equals("User Found"))
-                        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                    //findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                        Toast.makeText(baseActivity, "Login Successfully", Toast.LENGTH_SHORT).show()
                     else
                         Toast.makeText(baseActivity, "Invalid credential", Toast.LENGTH_SHORT).show()
                 }
