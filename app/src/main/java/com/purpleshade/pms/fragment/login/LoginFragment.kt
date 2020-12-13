@@ -23,6 +23,8 @@ import retrofit2.Response
 class LoginFragment : BaseFragment() {
 
     private lateinit var viewModel: LoginViewModel
+    var token = ""
+    var tokenDetail = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.login_fragment, container, false)
@@ -61,17 +63,17 @@ class LoginFragment : BaseFragment() {
                 if (response.isSuccessful) {
                     Toast.makeText(baseActivity, "User Login Successfully", Toast.LENGTH_SHORT).show()
                     val res = response.body()!!.message
-                    val token = response.body()!!.token
-                    JWTUtils.decoded(token!!)
-                    Log.d("===>>", token)
+                    token = response.body()!!.token.toString()
+                    JWTUtils.decoded(token)
+                    JWTUtils.parseUserDetail()
                     if (res.equals("User Found"))
-                    //findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-                        Toast.makeText(baseActivity, "Login Successfully", Toast.LENGTH_SHORT).show()
+                        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                     else
                         Toast.makeText(baseActivity, "Invalid credential", Toast.LENGTH_SHORT).show()
                 }
 
             }
         })
+
     }
 }

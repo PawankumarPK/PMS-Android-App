@@ -15,6 +15,7 @@ import com.purpleshade.pms.R
 import com.purpleshade.pms.fragment.BaseFragment
 import com.purpleshade.pms.fragment.home.adapter.PasswordsAdapter
 import com.purpleshade.pms.network.standardObjects.RetrofitClient
+import com.purpleshade.pms.utils.JWTUtils
 import com.purpleshade.pms.utils.RecordList
 import com.purpleshade.pms.utils.Records
 import retrofit2.Call
@@ -58,18 +59,9 @@ class HomeFragment : BaseFragment() {
         recyclerView.layoutManager = LinearLayoutManager(baseActivity)
     }
 
-    /*private fun loadList() {
-        passwordList.add("Google")
-        passwordList.add("Facebook")
-        passwordList.add("WhatsApp")
-        passwordList.add("Gmail")
-        passwordList.add("Instagram")
-        passwordList.add("Linkdin")
-    }*/
-
     private fun loadRecordList() {
         val api = RetrofitClient.apiService
-        val call = api.allRecords("5fb3eac356edb62195ff980a")
+        val call = api.allRecords(JWTUtils.userId)
 
         call.enqueue(object : Callback<Records> {
             override fun onFailure(call: Call<Records>, t: Throwable) {
