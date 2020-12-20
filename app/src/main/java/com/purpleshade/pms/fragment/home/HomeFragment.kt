@@ -53,11 +53,12 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun loadAdapter() {
-        adapter = PasswordsAdapter(passwordList)
-        adapter.notifyDataSetChanged()
+        adapter = PasswordsAdapter(baseActivity,passwordList)
+    //    adapter.notifyDataSetChanged()
         loadRecordList()
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(baseActivity)
+
     }
 
     private fun loadRecordList() {

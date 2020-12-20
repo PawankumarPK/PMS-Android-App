@@ -33,4 +33,7 @@ interface ApiService {
         @Field("password") password: String,
         @Field("addNote") addNote: String
     ): Call<SignUpModel>
+
+    @DELETE("records/deleteRecord")
+    fun deleteRecord(@Query("id") id: String) : Call<SignUpModel>
 }
