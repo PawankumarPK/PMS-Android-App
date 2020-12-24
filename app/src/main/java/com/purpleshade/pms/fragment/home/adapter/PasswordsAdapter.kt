@@ -1,6 +1,7 @@
 package com.purpleshade.pms.fragment.home.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import com.purpleshade.pms.network.standardObjects.RetrofitClient
 import com.purpleshade.pms.utils.JWTUtils
 import com.purpleshade.pms.utils.RecordList
 import com.purpleshade.pms.utils.Records
+import com.purpleshade.pms.utils.customObject.RecordDetail
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -51,17 +53,15 @@ class PasswordsAdapter(val context : Context,val passwordList: ArrayList<RecordL
             title.text = data.title
             recordId = data._id
             edit.setOnClickListener {
+                RecordDetail.recordId = data._id
                 v.findNavController().navigate(R.id.action_homeFragment_to_createRecordFragment)
             }
 
             delete.setOnClickListener {
                 loadRecordList()
                 passwordList.removeAt(pos)
-                //notifyItemChanged(pos)
-              //  notifyDataSetChanged()
                 notifyItemRemoved(pos)
             }
-
         }
 
         private fun loadRecordList() {

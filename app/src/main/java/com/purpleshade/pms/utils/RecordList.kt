@@ -13,6 +13,9 @@ class RecordList {
     @SerializedName("title")
     var title = ""
 
+    @SerializedName("websiteAddress")
+    var websiteAddress: String? = null
+
     @SerializedName("email")
     var email = ""
 

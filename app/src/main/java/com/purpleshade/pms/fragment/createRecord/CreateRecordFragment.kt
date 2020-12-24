@@ -2,6 +2,7 @@ package com.purpleshade.pms.fragment.createRecord
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,8 @@ import com.purpleshade.pms.R
 import com.purpleshade.pms.fragment.BaseFragment
 import com.purpleshade.pms.network.signupModel.SignUpModel
 import com.purpleshade.pms.network.standardObjects.RetrofitClient
+import com.purpleshade.pms.utils.Records
+import com.purpleshade.pms.utils.customObject.RecordDetail
 import kotlinx.android.synthetic.main.create_record_fragment.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -32,6 +35,7 @@ class CreateRecordFragment : BaseFragment() {
         baseActivity.fragmentTitle.text = getString(R.string.createNewRecord)
         baseActivity.backButton.visibility = View.VISIBLE
 
+        getRecordDetails()
 
         baseActivity.backButton.setOnClickListener {
             findNavController().navigate(R.id.homeFragment)
@@ -61,6 +65,43 @@ class CreateRecordFragment : BaseFragment() {
 
             override fun onResponse(call: Call<SignUpModel>, response: Response<SignUpModel>) {
                 Toast.makeText(baseActivity, "Add Record Successfully", Toast.LENGTH_SHORT).show()
+            }
+
+        })
+    }
+
+    private fun getRecordDetails() {
+
+        val api = RetrofitClient.apiService
+        val call = api.recordDetail(RecordDetail.recordId)
+
+        call.enqueue(object : Callback<Records> {
+            override fun onFailure(call: Call<Records>, t: Throwable) {
+                Toast.makeText(baseActivity, "Something went wrong", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onResponse(call: Call<Records>, response: Response<Records>) {
+                if (response.isSuccessful) {
+                    Toast.makeText(baseActivity, "Get Record Successfully", Toast.LENGTH_SHORT).show()
+                    val msg = response.body()!!.message
+                    val recordDetail = response.body()!!.recordDetail
+
+                    for (i in recordDetail) {
+                        val title = i.title
+                        val webAddress = i.websiteAddress
+                        val email = i.email
+                        val password = i.password
+                        val addNote = i.addNote
+
+                        mTitle.setText(title)
+                        mWebAddress.setText(webAddress)
+                        mEmail.setText(email)
+                        mPassword.setText(password)
+                        mAddNote.setText(addNote)
+
+                    }
+
+                }
             }
 
         })

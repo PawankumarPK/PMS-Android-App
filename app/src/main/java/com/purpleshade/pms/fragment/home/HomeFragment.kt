@@ -75,6 +75,8 @@ class HomeFragment : BaseFragment() {
                 if (response.isSuccessful) {
                     val record = response.body()!!.recordDetail
                     for (i in record) {
+                     //   var title = i.title
+                      //  Log.d("---->>>",title)
                         passwordList.add(i)
                         adapter.notifyDataSetChanged()
                     }
@@ -83,4 +85,6 @@ class HomeFragment : BaseFragment() {
 
         })
     }
+
+
 }

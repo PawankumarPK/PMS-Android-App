@@ -36,4 +36,13 @@ interface ApiService {
 
     @DELETE("records/deleteRecord")
     fun deleteRecord(@Query("id") id: String) : Call<SignUpModel>
+/*
+
+    @PATCH("updateDetails")
+    fun updateRecord(@Query("id") id:String) : Call<RecordDetails>
+*/
+
+
+    @GET("records/recordDetail")
+    fun recordDetail(@Query("id") id:String) : Call<Records>
 }

@@ -12,4 +12,5 @@ class Records {
 
     @SerializedName("record")
     var recordDetail: ArrayList<RecordList> = ArrayList()
+
 }
