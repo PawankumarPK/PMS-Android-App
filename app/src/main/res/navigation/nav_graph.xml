@@ -30,10 +30,17 @@
         <action
             android:id="@+id/action_homeFragment_to_createRecordFragment"
             app:destination="@id/createRecordFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_updateRecordFragment"
+            app:destination="@id/updateRecordFragment" />
     </fragment>
     <fragment
         android:id="@+id/createRecordFragment"
         android:name="com.purpleshade.pms.fragment.createRecord.CreateRecordFragment"
         android:label="create_record_fragment"
         tools:layout="@layout/create_record_fragment" />
+    <fragment
+        android:id="@+id/updateRecordFragment"
+        android:name="com.purpleshade.pms.fragment.update.UpdateRecordFragment"
+        android:label="UpdateRecordFragment" />
 </navigation>

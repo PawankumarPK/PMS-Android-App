@@ -54,7 +54,7 @@ class PasswordsAdapter(val context : Context,val passwordList: ArrayList<RecordL
             recordId = data._id
             edit.setOnClickListener {
                 RecordDetail.recordId = data._id
-                v.findNavController().navigate(R.id.action_homeFragment_to_createRecordFragment)
+                v.findNavController().navigate(R.id.action_homeFragment_to_updateRecordFragment)
             }
 
             delete.setOnClickListener {

@@ -2,6 +2,7 @@ package com.purpleshade.pms.network
 
 import com.purpleshade.pms.network.signupModel.SignUpModel
 import com.purpleshade.pms.utils.Records
+import com.purpleshade.pms.utils.customObject.UpdateRecord
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -35,14 +36,13 @@ interface ApiService {
     ): Call<SignUpModel>
 
     @DELETE("records/deleteRecord")
-    fun deleteRecord(@Query("id") id: String) : Call<SignUpModel>
-/*
+    fun deleteRecord(@Query("id") id: String): Call<SignUpModel>
 
-    @PATCH("updateDetails")
-    fun updateRecord(@Query("id") id:String) : Call<RecordDetails>
-*/
+    @PATCH("records/updateDetails")
+    fun updateRecord(
+        @Query("id") id: String, @Body post: UpdateRecord): Call<SignUpModel>
 
 
     @GET("records/recordDetail")
-    fun recordDetail(@Query("id") id:String) : Call<Records>
+    fun recordDetail(@Query("id") id: String): Call<Records>
 }

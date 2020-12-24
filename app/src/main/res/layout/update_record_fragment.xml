@@ -113,13 +113,13 @@
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/mDone"
+        android:id="@+id/mUpdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/size20"
         android:background="@drawable/gradient"
         android:fontFamily="@font/raleway_medium"
-        android:text="@string/add"
+        android:text="@string/update"
         android:textAllCaps="false"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/size16"

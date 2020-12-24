@@ -35,8 +35,6 @@ class CreateRecordFragment : BaseFragment() {
         baseActivity.fragmentTitle.text = getString(R.string.createNewRecord)
         baseActivity.backButton.visibility = View.VISIBLE
 
-        getRecordDetails()
-
         baseActivity.backButton.setOnClickListener {
             findNavController().navigate(R.id.homeFragment)
         }
@@ -65,43 +63,6 @@ class CreateRecordFragment : BaseFragment() {
 
             override fun onResponse(call: Call<SignUpModel>, response: Response<SignUpModel>) {
                 Toast.makeText(baseActivity, "Add Record Successfully", Toast.LENGTH_SHORT).show()
-            }
-
-        })
-    }
-
-    private fun getRecordDetails() {
-
-        val api = RetrofitClient.apiService
-        val call = api.recordDetail(RecordDetail.recordId)
-
-        call.enqueue(object : Callback<Records> {
-            override fun onFailure(call: Call<Records>, t: Throwable) {
-                Toast.makeText(baseActivity, "Something went wrong", Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onResponse(call: Call<Records>, response: Response<Records>) {
-                if (response.isSuccessful) {
-                    Toast.makeText(baseActivity, "Get Record Successfully", Toast.LENGTH_SHORT).show()
-                    val msg = response.body()!!.message
-                    val recordDetail = response.body()!!.recordDetail
-
-                    for (i in recordDetail) {
-                        val title = i.title
-                        val webAddress = i.websiteAddress
-                        val email = i.email
-                        val password = i.password
-                        val addNote = i.addNote
-
-                        mTitle.setText(title)
-                        mWebAddress.setText(webAddress)
-                        mEmail.setText(email)
-                        mPassword.setText(password)
-                        mAddNote.setText(addNote)
-
-                    }
-
-                }
             }
 
         })
