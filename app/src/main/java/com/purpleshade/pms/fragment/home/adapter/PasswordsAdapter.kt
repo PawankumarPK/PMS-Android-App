@@ -13,9 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.purpleshade.pms.R
 import com.purpleshade.pms.network.signupModel.SignUpModel
 import com.purpleshade.pms.network.standardObjects.RetrofitClient
-import com.purpleshade.pms.utils.JWTUtils
 import com.purpleshade.pms.utils.RecordList
-import com.purpleshade.pms.utils.Records
 import com.purpleshade.pms.utils.customObject.RecordDetail
 import retrofit2.Call
 import retrofit2.Callback
@@ -27,6 +25,7 @@ import retrofit2.Response
 class PasswordsAdapter(val context : Context,val passwordList: ArrayList<RecordList>) : RecyclerView.Adapter<PasswordsAdapter.ViewHolder>() {
 
     var recordId = ""
+    var onEventListener : OnEventListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.password_viewholder, parent, false))
@@ -51,22 +50,26 @@ class PasswordsAdapter(val context : Context,val passwordList: ArrayList<RecordL
         fun onBind(pos: Int) {
             val data = passwordList[pos]
             title.text = data.title
-            recordId = data._id
             edit.setOnClickListener {
                 RecordDetail.recordId = data._id
                 v.findNavController().navigate(R.id.action_homeFragment_to_updateRecordFragment)
             }
 
             delete.setOnClickListener {
-                loadRecordList()
+                loadRecordList(data._id)
                 passwordList.removeAt(pos)
                 notifyItemRemoved(pos)
             }
+
+            passwordView.setOnClickListener {
+                RecordDetail.recordId = data._id
+                onEventListener!!.viewRecordDetails()
+            }
         }
 
-        private fun loadRecordList() {
+        private fun loadRecordList(id : String) {
             val api = RetrofitClient.apiService
-            val call = api.deleteRecord(recordId)
+            val call = api.deleteRecord(id)
 
             call.enqueue(object : Callback<SignUpModel> {
                 override fun onFailure(call: Call<SignUpModel>, t: Throwable) {
@@ -79,6 +82,10 @@ class PasswordsAdapter(val context : Context,val passwordList: ArrayList<RecordL
 
             })
         }
+    }
+
+    interface OnEventListener{
+        fun viewRecordDetails()
     }
 
 }
