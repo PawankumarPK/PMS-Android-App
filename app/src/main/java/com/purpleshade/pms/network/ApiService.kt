@@ -1,9 +1,11 @@
 package com.purpleshade.pms.network
 
-import com.purpleshade.pms.network.signupModel.SignUpModel
-import com.purpleshade.pms.utils.Records
-import com.purpleshade.pms.utils.customObject.UpdateRecord
+import com.purpleshade.pms.model.SignUpModel
+import com.purpleshade.pms.model.Records
+import com.purpleshade.pms.model.UpdateRecord
 import retrofit2.Call
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
 /**
@@ -40,9 +42,20 @@ interface ApiService {
 
     @PATCH("records/updateDetails")
     fun updateRecord(
-        @Query("id") id: String, @Body post: UpdateRecord): Call<SignUpModel>
+        @Query("id") id: String, @Body post: UpdateRecord
+    ): Call<SignUpModel>
 
 
     @GET("records/recordDetail")
     fun recordDetail(@Query("id") id: String): Call<Records>
+
+    companion object {
+        operator fun invoke(): ApiService {
+            return Retrofit.Builder()
+                .baseUrl("http://192.168.0.109:3000")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(ApiService::class.java)
+        }
+    }
 }

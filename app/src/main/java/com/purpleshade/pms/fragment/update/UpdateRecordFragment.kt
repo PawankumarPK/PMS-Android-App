@@ -9,10 +9,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.purpleshade.pms.R
 import com.purpleshade.pms.fragment.BaseFragment
-import com.purpleshade.pms.network.signupModel.SignUpModel
-import com.purpleshade.pms.network.standardObjects.RetrofitClient
-import com.purpleshade.pms.utils.Records
-import com.purpleshade.pms.utils.customObject.UpdateRecord
+import com.purpleshade.pms.model.SignUpModel
+import com.purpleshade.pms.network.RetrofitClient
+import com.purpleshade.pms.model.Records
+import com.purpleshade.pms.model.UpdateRecord
 import com.purpleshade.pms.utils.customObject.RecordDetail
 import kotlinx.android.synthetic.main.update_record_fragment.*
 import retrofit2.Call

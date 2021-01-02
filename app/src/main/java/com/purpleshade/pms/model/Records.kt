@@ -1,6 +1,7 @@
-package com.purpleshade.pms.utils
+package com.purpleshade.pms.model
 
 import com.google.gson.annotations.SerializedName
+import com.purpleshade.pms.model.RecordList
 
 /**
  * Created by pawan on 20,November,2020

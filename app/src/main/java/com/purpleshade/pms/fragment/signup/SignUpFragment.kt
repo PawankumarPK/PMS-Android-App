@@ -11,8 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.purpleshade.pms.R
 import com.purpleshade.pms.fragment.BaseFragment
-import com.purpleshade.pms.network.signupModel.SignUpModel
-import com.purpleshade.pms.network.standardObjects.RetrofitClient
+import com.purpleshade.pms.model.SignUpModel
+import com.purpleshade.pms.network.RetrofitClient
 import kotlinx.android.synthetic.main.sign_up_fragment.*
 import retrofit2.Call
 import retrofit2.Callback

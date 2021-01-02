@@ -1,6 +1,5 @@
-package com.purpleshade.pms.network.standardObjects
+package com.purpleshade.pms.network
 
-import com.purpleshade.pms.network.ApiService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

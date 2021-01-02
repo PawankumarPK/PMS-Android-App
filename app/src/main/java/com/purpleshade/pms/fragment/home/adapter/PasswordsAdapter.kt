@@ -1,7 +1,6 @@
 package com.purpleshade.pms.fragment.home.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +10,9 @@ import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.purpleshade.pms.R
-import com.purpleshade.pms.network.signupModel.SignUpModel
-import com.purpleshade.pms.network.standardObjects.RetrofitClient
-import com.purpleshade.pms.utils.RecordList
+import com.purpleshade.pms.model.SignUpModel
+import com.purpleshade.pms.network.RetrofitClient
+import com.purpleshade.pms.model.RecordList
 import com.purpleshade.pms.utils.customObject.RecordDetail
 import retrofit2.Call
 import retrofit2.Callback

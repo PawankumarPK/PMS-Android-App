@@ -1,4 +1,4 @@
-package com.purpleshade.pms.utils
+package com.purpleshade.pms.model
 
 import com.google.gson.annotations.SerializedName
 

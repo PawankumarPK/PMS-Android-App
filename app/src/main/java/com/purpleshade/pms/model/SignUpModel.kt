@@ -1,4 +1,4 @@
-package com.purpleshade.pms.network.signupModel
+package com.purpleshade.pms.model
 
 import com.google.gson.annotations.SerializedName
 
