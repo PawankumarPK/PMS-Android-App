@@ -20,6 +20,7 @@ import com.purpleshade.pms.utils.JWTUtils
 import com.purpleshade.pms.model.RecordList
 import com.purpleshade.pms.model.Records
 import com.purpleshade.pms.utils.customObject.RecordDetail
+import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.password_detail_bottomsheet.*
 import kotlinx.android.synthetic.main.password_detail_bottomsheet.view.*
 import retrofit2.Call
@@ -52,9 +53,9 @@ class HomeFragment : BaseFragment(), PasswordsAdapter.OnEventListener {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
-        baseActivity.toolbar.visibility = View.VISIBLE
-        baseActivity.fragmentTitle.text = getString(R.string.allPassword)
-        baseActivity.backButton.visibility = View.GONE
+        baseActivity.mToolbar.visibility = View.VISIBLE
+        baseActivity.mFragmentTitle.text = getString(R.string.allPassword)
+        baseActivity.mBackButton.visibility = View.GONE
 
         recyclerView = view.findViewById(R.id.mRecyclerView)
         fabButton = view.findViewById(R.id.mFabButton)

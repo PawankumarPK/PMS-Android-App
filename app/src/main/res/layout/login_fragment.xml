@@ -3,9 +3,14 @@
 <layout>
 
     <data>
+
         <variable
             name="viewModel"
             type="com.purpleshade.pms.fragment.login.LoginViewModel" />
+
+        <variable
+            name="presenter"
+            type="com.purpleshade.pms.utils.customInterface.AuthListener" />
     </data>
 
 
@@ -76,8 +81,8 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/raleway_medium"
                             android:inputType="textEmailAddress"
-                            android:textStyle="bold"
-                            android:text="@={viewModel.email}"/>
+                            android:text="@={viewModel.email}"
+                            android:textStyle="bold" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -95,8 +100,8 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/raleway_medium"
                             android:inputType="textPassword"
-                            android:textStyle="bold"
-                            android:text="@={viewModel.password}"/>
+                            android:text="@={viewModel.password}"
+                            android:textStyle="bold" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -107,20 +112,20 @@
                         android:layout_margin="@dimen/size20"
                         android:background="@drawable/gradient"
                         android:fontFamily="@font/raleway_medium"
+                        android:onClick="@{viewModel.onLoginButtonClick}"
                         android:text="@string/login"
                         android:textAllCaps="false"
                         android:textColor="@color/colorWhite"
-                        android:textSize="@dimen/size16"
-                        android:onClick="@{viewModel.onLoginButtonClick}"/>
+                        android:textSize="@dimen/size16" />
 
 
                     <ProgressBar
-                        android:visibility="gone"
                         android:id="@+id/mProgressBar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/size20"/>
+                        android:layout_marginTop="@dimen/size20"
+                        android:visibility="@{viewModel.progressBar}" />
 
                 </LinearLayout>
 

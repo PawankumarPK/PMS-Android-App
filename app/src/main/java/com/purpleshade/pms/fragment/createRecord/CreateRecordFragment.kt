@@ -11,6 +11,7 @@ import com.purpleshade.pms.R
 import com.purpleshade.pms.fragment.BaseFragment
 import com.purpleshade.pms.model.SignUpModel
 import com.purpleshade.pms.network.RetrofitClient
+import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.create_record_fragment.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -27,10 +28,9 @@ class CreateRecordFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(CreateRecordViewModel::class.java)
-        baseActivity.fragmentTitle.text = getString(R.string.createNewRecord)
-        baseActivity.backButton.visibility = View.VISIBLE
-
-        baseActivity.backButton.setOnClickListener {
+        baseActivity.mFragmentTitle.text = getString(R.string.createNewRecord)
+        baseActivity.mToolbar.visibility = View.VISIBLE
+        baseActivity.mBackButton.setOnClickListener {
             findNavController().navigate(R.id.homeFragment)
         }
 

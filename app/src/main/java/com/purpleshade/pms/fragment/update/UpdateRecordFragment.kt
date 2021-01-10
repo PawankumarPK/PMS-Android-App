@@ -14,6 +14,7 @@ import com.purpleshade.pms.network.RetrofitClient
 import com.purpleshade.pms.model.Records
 import com.purpleshade.pms.model.UpdateRecord
 import com.purpleshade.pms.utils.customObject.RecordDetail
+import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.update_record_fragment.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -31,12 +32,12 @@ class UpdateRecordFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(UpdateRecordViewModel::class.java)
-        baseActivity.fragmentTitle.text = getString(R.string.updateRecord)
-        baseActivity.backButton.visibility = View.VISIBLE
+        baseActivity.mFragmentTitle.text = getString(R.string.updateRecord)
+        baseActivity.mBackButton.visibility = View.VISIBLE
 
         getRecordDetails()
         mUpdate.setOnClickListener { updateRecord() }
-        baseActivity.backButton.setOnClickListener {
+        baseActivity.mBackButton.setOnClickListener {
             findNavController().navigate(R.id.homeFragment)
         }
 

@@ -3,6 +3,7 @@ package com.purpleshade.pms.network
 import com.purpleshade.pms.model.SignUpModel
 import com.purpleshade.pms.model.Records
 import com.purpleshade.pms.model.UpdateRecord
+import com.purpleshade.pms.utils.Helper
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -49,13 +50,13 @@ interface ApiService {
     @GET("records/recordDetail")
     fun recordDetail(@Query("id") id: String): Call<Records>
 
-    companion object {
+    /*companion object {
         operator fun invoke(): ApiService {
             return Retrofit.Builder()
-                .baseUrl("http://192.168.0.109:3000")
+                .baseUrl("")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(ApiService::class.java)
         }
-    }
+    }*/
 }

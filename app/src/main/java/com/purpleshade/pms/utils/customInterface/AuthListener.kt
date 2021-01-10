@@ -6,8 +6,9 @@ import androidx.lifecycle.LiveData
  * Created by pawan on 02,January,2021
  */
 interface AuthListener {
-
-    fun onStarted()
+    //fun onStarted()
     fun onSuccess(responseSuccess : LiveData<String>)
-    fun onFailed(message : String)
+    //fun onFailed(message : String)
+
+    //fun loginData()
 }
