@@ -18,7 +18,6 @@ import kotlinx.android.synthetic.main.activity_base.*
 class LoginFragment : BaseFragment(), AuthListener {
     private lateinit var viewModel: LoginViewModel
     lateinit var binding: LoginFragmentBinding
-    lateinit var v: View
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.login_fragment, container, false)
@@ -33,7 +32,6 @@ class LoginFragment : BaseFragment(), AuthListener {
         viewModel = ViewModelProvider(this, factory).get(LoginViewModel::class.java)
         viewModel.authListener = this
         binding.viewModel = viewModel
-        v = view
         baseActivity.mToolbar.visibility = View.GONE
 
     }

@@ -5,6 +5,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.findNavController
+import com.purpleshade.pms.R
 import com.purpleshade.pms.repository.LoginRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
 
@@ -25,6 +27,11 @@ class LoginViewModel(val context: Context, private val repository: LoginReposito
         }
         val repo = repository.doLogin(email.toString(), password.toString(), progressBar, context, view)
         authListener!!.onSuccess(repo)
+
+    }
+
+    fun onRegisterClick(view : View){
+        view.findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
 
     }
 }

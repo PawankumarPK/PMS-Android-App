@@ -21,7 +21,11 @@
         android:id="@+id/signUpFragment"
         android:name="com.purpleshade.pms.fragment.signup.SignUpFragment"
         android:label="sign_up_fragment"
-        tools:layout="@layout/sign_up_fragment" />
+        tools:layout="@layout/sign_up_fragment" >
+        <action
+            android:id="@+id/action_signUpFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.purpleshade.pms.fragment.home.HomeFragment"
