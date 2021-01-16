@@ -46,5 +46,10 @@
     <fragment
         android:id="@+id/updateRecordFragment"
         android:name="com.purpleshade.pms.fragment.update.UpdateRecordFragment"
-        android:label="UpdateRecordFragment" />
+        android:label="UpdateRecordFragment"
+        tools:layout="@layout/update_record_fragment">
+        <action
+            android:id="@+id/action_updateRecordFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>

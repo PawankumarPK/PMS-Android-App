@@ -22,8 +22,9 @@ class UpdateRecordViewModel(val context: Context, val repository: UpdateRecordRe
 
     fun onUpdateButtonClick(view: View) {
         progressBar.postValue(true)
-        //val repository = repository.updateRecord(context, progressBar, title!!, webAddress!!, email!!, password!!, addNote!!)
-        //authListener!!.onSuccess(repository)
+        val repo = repository.updateRecord(context, progressBar, title!!, webAddress!!, email!!, password!!, addNote!!)
+        authListener!!.onSuccess(repo)
+        repository.view = view
 
     }
 

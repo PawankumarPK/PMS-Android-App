@@ -7,6 +7,8 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.findNavController
+import com.purpleshade.pms.R
 import com.purpleshade.pms.fragment.update.UpdateRecordViewModel
 import com.purpleshade.pms.model.Records
 import com.purpleshade.pms.model.SignUpModel
@@ -27,6 +29,7 @@ class UpdateRecordRepository {
     var email : EditText? = null
     var password : EditText? = null
     var addNote : EditText? = null
+    var view : View? = null
 
     fun getRecordDetails(context: Context, progressBar: MutableLiveData<Boolean>): LiveData<String> {
         val responseGetRecordDetail = MutableLiveData<String>()
@@ -41,7 +44,7 @@ class UpdateRecordRepository {
 
             override fun onResponse(call: Call<Records>, response: Response<Records>) {
                 if (response.isSuccessful) {
-                    context.toast("Record load successfully")
+                   // context.toast("Record load successfully")
                     progressBar.postValue(false)
                     val msg = response.body()!!.message
                     val recordDetail = response.body()!!.recordDetail
@@ -77,6 +80,7 @@ class UpdateRecordRepository {
             override fun onResponse(call: Call<SignUpModel>, response: Response<SignUpModel>) {
                 progressBar.postValue(false)
                 context.toast("Record Update Successfully")
+                view!!.findNavController().navigate(R.id.action_updateRecordFragment_to_homeFragment)
             }
 
         })
