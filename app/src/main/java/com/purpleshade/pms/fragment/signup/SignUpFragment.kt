@@ -43,39 +43,7 @@ class SignUpFragment : BaseFragment(), AuthListener {
         viewModel.authListener = this
         binding.viewModel = viewModel
 
-        //val login = view.findViewById<TextView>(R.id.mLogin)
-        /*login.setOnClickListener {
-            findNavController().navigate(R.id.loginFragment)
-        }*/
-        /*mRegister.setOnClickListener {
-            signUp()
-        }*/
     }
-
-    private fun signUp() {
-        val username = mUsername.text
-        val email = mEmail.text
-        val password = mPassword.text
-        val confirmPass = mConfirmPassword.text
-
-        Log.d("====>>>", "$username $email $password $confirmPass")
-
-        val api = RetrofitClient.apiService
-        val call = api.signUp(username.toString(), email.toString(), password.toString(), confirmPass.toString())
-
-        call.enqueue(object : Callback<SignUpModel> {
-            override fun onFailure(call: Call<SignUpModel>?, t: Throwable?) {
-                Toast.makeText(baseActivity, "Something went wrong", Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onResponse(call: Call<SignUpModel>, response: Response<SignUpModel>) {
-                Toast.makeText(baseActivity, "User Register Successfully", Toast.LENGTH_SHORT).show()
-                // floors = response.body().floors!!
-                // addFloorButtons()
-            }
-        })
-    }
-
     override fun onSuccess(responseSuccess: LiveData<String>) {
         responseSuccess.observe(this, Observer {
 

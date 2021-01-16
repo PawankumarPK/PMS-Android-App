@@ -4,46 +4,55 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.*
 import androidx.navigation.fragment.findNavController
 import com.purpleshade.pms.R
+import com.purpleshade.pms.databinding.UpdateRecordFragmentBinding
 import com.purpleshade.pms.fragment.BaseFragment
-import com.purpleshade.pms.model.SignUpModel
-import com.purpleshade.pms.network.RetrofitClient
-import com.purpleshade.pms.model.Records
-import com.purpleshade.pms.model.UpdateRecord
-import com.purpleshade.pms.utils.customObject.RecordDetail
+import com.purpleshade.pms.repository.UpdateRecordRepository
+import com.purpleshade.pms.utils.customInterface.AuthListener
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.update_record_fragment.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
-class UpdateRecordFragment : BaseFragment() {
+class UpdateRecordFragment : BaseFragment(), AuthListener {
 
     private lateinit var viewModel: UpdateRecordViewModel
+    lateinit var binding: UpdateRecordFragmentBinding
+    val repository = UpdateRecordRepository()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.update_record_fragment, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.update_record_fragment, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(UpdateRecordViewModel::class.java)
+        binding.lifecycleOwner = this
+        val factory = UpdateViewModelFactory(baseActivity, repository)
+        viewModel = ViewModelProvider(this, factory).get(UpdateRecordViewModel::class.java)
+        viewModel.authListener = this
+        binding.viewModel = viewModel
+
+
         baseActivity.mFragmentTitle.text = getString(R.string.updateRecord)
         baseActivity.mBackButton.visibility = View.VISIBLE
 
-        getRecordDetails()
-        mUpdate.setOnClickListener { updateRecord() }
+        //mUpdate.setOnClickListener { updateRecord() }
+        viewModel.getRecordDetails(mTitle,mWebAddress,mEmail,mPassword,mAddNote)
         baseActivity.mBackButton.setOnClickListener {
             findNavController().navigate(R.id.homeFragment)
         }
-
     }
 
-    private fun getRecordDetails() {
+    override fun onSuccess(responseSuccess: LiveData<String>) {
+        responseSuccess.observe(this, Observer {
+
+        })
+    }
+
+    /*private fun getRecordDetails() {
         val api = RetrofitClient.apiService
         val call = api.recordDetail(RecordDetail.recordId)
 
@@ -102,5 +111,5 @@ class UpdateRecordFragment : BaseFragment() {
 
         })
     }
-
+*/
 }

@@ -70,7 +70,7 @@ class HomeFragment : BaseFragment(), PasswordsAdapter.OnEventListener {
 
     private fun loadAdapter() {
         adapter = PasswordsAdapter(baseActivity, passwordList)
-        //    adapter.notifyDataSetChanged()
+        adapter.notifyDataSetChanged()
         adapter.onEventListener = this
         loadRecordList()
         recyclerView.adapter = adapter
