@@ -22,6 +22,14 @@ fun ProgressBar.hide() {
     visibility = View.GONE
 }
 
+fun View.show(){
+    visibility = View.VISIBLE
+}
+
+fun View.Gone(){
+    visibility = View.GONE
+}
+
 fun View.snackbar(message: String) {
     Snackbar.make(this, message, Snackbar.LENGTH_LONG).also { snackbar ->
         snackbar.setAction("OK") {

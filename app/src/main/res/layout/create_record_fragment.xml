@@ -1,129 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragment.createRecord.CreateRecordFragment">
 
-    <LinearLayout
+<layout>
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="com.purpleshade.pms.fragment.createRecord.CreateRecordViewModel" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        tools:context=".fragment.createRecord.CreateRecordFragment">
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <LinearLayout
+            android:id="@+id/mLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/size15"
-            android:layout_marginTop="@dimen/size10"
-            android:layout_marginEnd="@dimen/size15"
-            android:hint="@string/title"
-            app:errorEnabled="true">
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/mTitle"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableEnd="@drawable/ic_title"
-                android:drawableRight="@drawable/ic_title"
-                android:fontFamily="@font/raleway_medium"
-                android:inputType="textPersonName" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginStart="@dimen/size15"
+                android:layout_marginTop="@dimen/size10"
+                android:layout_marginEnd="@dimen/size15"
+                android:hint="@string/title"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/mTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_title"
+                    android:drawableRight="@drawable/ic_title"
+                    android:fontFamily="@font/raleway_medium"
+                    android:inputType="textPersonName"
+                    android:text="@={viewModel.title}"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size15"
+                android:layout_marginTop="@dimen/size10"
+                android:layout_marginEnd="@dimen/size15"
+                android:hint="@string/website_address"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/mWebAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_website"
+                    android:drawableRight="@drawable/ic_website"
+                    android:fontFamily="@font/raleway_medium"
+                    android:inputType="textMultiLine"
+                    android:text="@={viewModel.webAddress}"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size15"
+                android:layout_marginTop="@dimen/size10"
+                android:layout_marginEnd="@dimen/size15"
+                android:hint="@string/email"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/mEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_email"
+                    android:drawableRight="@drawable/ic_email"
+                    android:inputType="textEmailAddress"
+                    android:text="@={viewModel.email}"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="@dimen/size10"
+                android:layout_marginEnd="15dp"
+                android:hint="@string/password"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/mPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_password"
+                    android:drawableRight="@drawable/ic_password"
+                    android:inputType="textVisiblePassword"
+                    android:text="@={viewModel.password}"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="@dimen/size10"
+                android:layout_marginEnd="15dp"
+                android:hint="@string/add_note"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/mAddNote"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_note"
+                    android:drawableRight="@drawable/ic_password"
+                    android:inputType="textMultiLine"
+                    android:text="@={viewModel.addNote}"/>
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/mProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="@dimen/size50"
+            app:layout_constraintTop_toBottomOf="@+id/mLinearLayout"
+            android:visibility="@{viewModel.progressBar ? View.VISIBLE : View.GONE}" />
+
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/mDone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/size15"
-            android:layout_marginTop="@dimen/size10"
-            android:layout_marginEnd="@dimen/size15"
-            android:hint="@string/website_address"
-            app:errorEnabled="true">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/mWebAddress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableEnd="@drawable/ic_website"
-                android:drawableRight="@drawable/ic_website"
-                android:fontFamily="@font/raleway_medium"
-                android:inputType="textMultiLine" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/size15"
-            android:layout_marginTop="@dimen/size10"
-            android:layout_marginEnd="@dimen/size15"
-            android:hint="@string/email"
-            app:errorEnabled="true">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/mEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableEnd="@drawable/ic_email"
-                android:drawableRight="@drawable/ic_email"
-                android:inputType="textEmailAddress" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="@dimen/size10"
-            android:layout_marginEnd="15dp"
-            android:hint="@string/password"
-            app:errorEnabled="true">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/mPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableEnd="@drawable/ic_password"
-                android:drawableRight="@drawable/ic_password"
-                android:inputType="textVisiblePassword" />
-        </com.google.android.material.textfield.TextInputLayout>
+            android:layout_margin="@dimen/size20"
+            android:background="@drawable/gradient"
+            android:fontFamily="@font/raleway_medium"
+            android:text="@string/add"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/size16"
+            android:onClick="@{viewModel.onAddButtonClick}"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="@dimen/size10"
-            android:layout_marginEnd="15dp"
-            android:hint="@string/add_note"
-            app:errorEnabled="true">
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/mAddNote"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableEnd="@drawable/ic_note"
-                android:drawableRight="@drawable/ic_password"
-                android:inputType="textMultiLine" />
-        </com.google.android.material.textfield.TextInputLayout>
-    </LinearLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/mDone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/size20"
-        android:background="@drawable/gradient"
-        android:fontFamily="@font/raleway_medium"
-        android:text="@string/add"
-        android:textAllCaps="false"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/size16"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
