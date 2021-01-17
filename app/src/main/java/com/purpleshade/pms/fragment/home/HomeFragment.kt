@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,25 +16,26 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.purpleshade.pms.R
+import com.purpleshade.pms.databinding.HomeFragmentBinding
 import com.purpleshade.pms.fragment.BaseFragment
 import com.purpleshade.pms.fragment.home.adapter.PasswordsAdapter
 import com.purpleshade.pms.network.RetrofitClient
 import com.purpleshade.pms.utils.JWTUtils
 import com.purpleshade.pms.model.RecordList
 import com.purpleshade.pms.model.Records
+import com.purpleshade.pms.repository.HomeRepository
+import com.purpleshade.pms.utils.customInterface.AuthListener
 import com.purpleshade.pms.utils.customObject.RecordDetail
 import kotlinx.android.synthetic.main.activity_base.*
+import kotlinx.android.synthetic.main.home_fragment.*
 import kotlinx.android.synthetic.main.password_detail_bottomsheet.*
 import kotlinx.android.synthetic.main.password_detail_bottomsheet.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HomeFragment : BaseFragment(), PasswordsAdapter.OnEventListener {
+class HomeFragment : BaseFragment(),AuthListener {
 
-    private lateinit var viewModel: HomeViewModel
-    lateinit var adapter: PasswordsAdapter
-    lateinit var recyclerView: RecyclerView
     lateinit var fabButton: FloatingActionButton
     private var passwordList: ArrayList<RecordList> = ArrayList()
 
@@ -44,41 +48,45 @@ class HomeFragment : BaseFragment(), PasswordsAdapter.OnEventListener {
 
     lateinit var bottomSheetDialog : BottomSheetDialog
 
+    private lateinit var viewModel: HomeViewModel
+    lateinit var binding : HomeFragmentBinding
+    lateinit var adapter: PasswordsAdapter
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.home_fragment, container, false)
+        binding = DataBindingUtil.inflate(inflater,R.layout.home_fragment,container,false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+
+        val repository = HomeRepository()
+        val factory = HomeViewModelFactory(baseActivity,baseActivity,repository)
+        viewModel = ViewModelProvider(this,factory).get(HomeViewModel::class.java)
+        viewModel.authListener = this
+        binding.viewModel = viewModel
 
         baseActivity.mToolbar.visibility = View.VISIBLE
         baseActivity.mFragmentTitle.text = getString(R.string.allPassword)
         baseActivity.mBackButton.visibility = View.GONE
-
-        recyclerView = view.findViewById(R.id.mRecyclerView)
         fabButton = view.findViewById(R.id.mFabButton)
 
-        loadAdapter()
-
+        viewModel.loadAdapterList(mRecyclerView)
 
         fabButton.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_createRecordFragment)
         }
     }
 
-    private fun loadAdapter() {
-        adapter = PasswordsAdapter(baseActivity, passwordList)
-        adapter.notifyDataSetChanged()
-        adapter.onEventListener = this
-        loadRecordList()
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(baseActivity)
+    override fun onSuccess(responseSuccess: LiveData<String>) {
+        responseSuccess.observe(this, Observer {
 
+        })
     }
 
-    private fun loadRecordList() {
+
+    /*private fun loadRecordList() {
         val api = RetrofitClient.apiService
         val call = api.allRecords(JWTUtils.userId)
 
@@ -102,8 +110,8 @@ class HomeFragment : BaseFragment(), PasswordsAdapter.OnEventListener {
 
         })
     }
-
-    private fun getRecordDetails(id: String) {
+*/
+    /*private fun getRecordDetails(id: String) {
         val api = RetrofitClient.apiService
         val call = api.recordDetail(id)
 
@@ -137,7 +145,7 @@ class HomeFragment : BaseFragment(), PasswordsAdapter.OnEventListener {
             }
 
         })
-    }
+    }*/
 
     private fun bottomSheetVisible() {
          bottomSheetDialog = BottomSheetDialog(baseActivity)
@@ -153,10 +161,11 @@ class HomeFragment : BaseFragment(), PasswordsAdapter.OnEventListener {
         bottomSheetDialog.show()
     }
 
-    override fun viewRecordDetails() {
+    /*override fun viewRecordDetails() {
         getRecordDetails(RecordDetail.recordId)
         bottomSheetVisible()
-    }
+    }*/
+
 
 
 }
