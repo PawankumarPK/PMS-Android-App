@@ -1,6 +1,7 @@
 package com.purpleshade.pms.fragment.home.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,18 +58,13 @@ class PasswordsAdapter(val view: View, val context: Context, val passwordList: A
                 onEventListener!!.viewRecordDetails()
             }
 
-           /* binding.mDelete.setOnClickListener {
-              //  loadRecordList(data._id)
+          /*  binding.mDelete.setOnClickListener {
+                loadRecordList(data._id)
                 passwordList.removeAt(pos)
                 notifyItemRemoved(pos)
                 Log.d("----pos",list[pos].toString())
-            }
-*/
+            }*/
 /*
-            edit.setOnClickListener {
-                RecordDetail.recordId = data._id
-                v.findNavController().navigate(R.id.action_homeFragment_to_updateRecordFragment)
-            }
 
             delete.setOnClickListener {
                 loadRecordList(data._id)
@@ -76,10 +72,6 @@ class PasswordsAdapter(val view: View, val context: Context, val passwordList: A
                 notifyItemRemoved(pos)
             }
 
-            passwordView.setOnClickListener {
-                RecordDetail.recordId = data._id
-                onEventListener!!.viewRecordDetails()
-            }
 */
         }
 
