@@ -2,6 +2,7 @@ package com.purpleshade.pms.fragment.home
 
 import android.app.Activity
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
@@ -16,8 +17,6 @@ import com.purpleshade.pms.repository.HomeRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
 import com.purpleshade.pms.utils.customObject.RecordDetail
 import kotlinx.android.synthetic.main.password_detail_bottomsheet.view.*
-import java.util.*
-import kotlin.collections.ArrayList
 
 class HomeViewModel(val context: Context, val actvity: Activity, val repository: HomeRepository) : ViewModel(), PasswordsAdapter.OnEventListener {
 
@@ -26,6 +25,7 @@ class HomeViewModel(val context: Context, val actvity: Activity, val repository:
     var passwordList: ArrayList<RecordList> = ArrayList()
     lateinit var bottomSheetDialog: BottomSheetDialog
 
+    //Insert list into recycleView
     fun loadAdapterList(view: RecyclerView) {
         loadAdapter(view)
         val repo = repository.loadRecordList(context, passwordList, adapter)
@@ -33,7 +33,7 @@ class HomeViewModel(val context: Context, val actvity: Activity, val repository:
     }
 
     private fun loadAdapter(view: RecyclerView) {
-        adapter = PasswordsAdapter(context, passwordList)
+        adapter = PasswordsAdapter(view,context, passwordList)
         adapter.notifyDataSetChanged()
         adapter.onEventListener = this
         view.adapter = adapter
@@ -56,7 +56,8 @@ class HomeViewModel(val context: Context, val actvity: Activity, val repository:
 
     override fun viewRecordDetails() {
         bottomSheetDialog = BottomSheetDialog(context)
-        repository.getRecordDetails(RecordDetail.recordId,context,bottomSheetDialog)
+        repository.getRecordDetails(RecordDetail.recordId, context, bottomSheetDialog)
+        Log.d("---->>>",RecordDetail.recordId)
         bottomSheetVisible(actvity)
     }
 

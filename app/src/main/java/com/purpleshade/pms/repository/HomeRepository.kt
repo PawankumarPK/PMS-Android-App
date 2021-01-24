@@ -1,6 +1,7 @@
 package com.purpleshade.pms.repository
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -20,7 +21,6 @@ import retrofit2.Response
  */
 class HomeRepository {
 
-    var recordId = ""
     var title = ""
     var webAddress = ""
     var email = ""
@@ -71,6 +71,7 @@ class HomeRepository {
 
                     for (i in recordDetail) {
                         title = i.title
+                        Log.d("====>>>title",i.title)
                         webAddress = i.websiteAddress.toString()
                         email = i.email
                         password = i.password

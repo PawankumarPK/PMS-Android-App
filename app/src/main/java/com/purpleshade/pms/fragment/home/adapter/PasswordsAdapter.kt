@@ -6,28 +6,28 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
+import androidx.databinding.DataBindingUtil.inflate
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.purpleshade.pms.R
-import com.purpleshade.pms.model.SignUpModel
-import com.purpleshade.pms.network.RetrofitClient
+import com.purpleshade.pms.databinding.PasswordViewholderBinding
 import com.purpleshade.pms.model.RecordList
 import com.purpleshade.pms.utils.customObject.RecordDetail
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+
 
 /**
  * Created by pawan on 02,November,2020
  */
-class PasswordsAdapter(val context : Context,val passwordList: ArrayList<RecordList>) : RecyclerView.Adapter<PasswordsAdapter.ViewHolder>() {
+class PasswordsAdapter(val view: View, val context: Context, val passwordList: ArrayList<RecordList>) : RecyclerView.Adapter<PasswordsAdapter.ViewHolder>() {
 
     var recordId = ""
-    var onEventListener : OnEventListener? = null
+    var onEventListener: OnEventListener? = null
+    var title: String? = null
+    lateinit var viewModel: PasswordViewModel
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(context).inflate(R.layout.password_viewholder, parent, false))
+        val binding: PasswordViewholderBinding = inflate(LayoutInflater.from(parent.context), R.layout.password_viewholder, parent, false)
+        return ViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
@@ -35,20 +35,36 @@ class PasswordsAdapter(val context : Context,val passwordList: ArrayList<RecordL
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.onBind(position)
+        holder.onBind(passwordList,position)
     }
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val title = itemView.findViewById<TextView>(R.id.mTitle)
-        val edit = itemView.findViewById<ImageView>(R.id.mEdit)
-        val delete = itemView.findViewById<ImageView>(R.id.mDelete)
-        val passwordView  = itemView.findViewById<ImageView>(R.id.mPasswordView)
+    inner class ViewHolder(val binding: PasswordViewholderBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        private val v = view
+        val edit = itemView.findViewById<ImageView>(R.id.mEdit);
+        val title = itemView.findViewById<TextView>(R.id.mTitle);
 
-        fun onBind(pos: Int) {
-            val data = passwordList[pos]
-            title.text = data.title
+        fun onBind(list: ArrayList<RecordList>, pos:Int) {
+            binding.viewModelAdapter = list[pos]
+            binding.executePendingBindings()
+
+            binding.mEdit.setOnClickListener {
+                RecordDetail.recordId = binding.viewModelAdapter!!._id
+                view.findNavController().navigate(R.id.action_homeFragment_to_updateRecordFragment)
+            }
+
+            binding.mPasswordView.setOnClickListener {
+                RecordDetail.recordId = binding.viewModelAdapter!!._id
+                onEventListener!!.viewRecordDetails()
+            }
+
+           /* binding.mDelete.setOnClickListener {
+              //  loadRecordList(data._id)
+                passwordList.removeAt(pos)
+                notifyItemRemoved(pos)
+                Log.d("----pos",list[pos].toString())
+            }
+*/
+/*
             edit.setOnClickListener {
                 RecordDetail.recordId = data._id
                 v.findNavController().navigate(R.id.action_homeFragment_to_updateRecordFragment)
@@ -64,9 +80,10 @@ class PasswordsAdapter(val context : Context,val passwordList: ArrayList<RecordL
                 RecordDetail.recordId = data._id
                 onEventListener!!.viewRecordDetails()
             }
+*/
         }
 
-        private fun loadRecordList(id : String) {
+        /*private fun loadRecordList(id: String) {
             val api = RetrofitClient.apiService
             val call = api.deleteRecord(id)
 
@@ -80,10 +97,10 @@ class PasswordsAdapter(val context : Context,val passwordList: ArrayList<RecordL
                 }
 
             })
-        }
+        }*/
     }
 
-    interface OnEventListener{
+    interface OnEventListener {
         fun viewRecordDetails()
     }
 

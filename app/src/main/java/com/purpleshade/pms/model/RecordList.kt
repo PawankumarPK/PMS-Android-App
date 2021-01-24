@@ -1,5 +1,6 @@
 package com.purpleshade.pms.model
 
+import androidx.lifecycle.ViewModel
 import com.google.gson.annotations.SerializedName
 
 /**
