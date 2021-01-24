@@ -31,6 +31,7 @@
             android:backgroundTint="@color/colorPrimaryDark"
             android:contentDescription="@null"
             android:src="@drawable/ic_add"
+            android:onClick="@{viewModel.fabButtonClick}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:tint="@color/colorWhite" />

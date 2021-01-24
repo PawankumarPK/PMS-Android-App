@@ -52,9 +52,6 @@ class HomeFragment : BaseFragment(),AuthListener {
 
         viewModel.loadAdapterList(mRecyclerView)
 
-        fabButton.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_createRecordFragment)
-        }
     }
 
     override fun onSuccess(responseSuccess: LiveData<String>) {

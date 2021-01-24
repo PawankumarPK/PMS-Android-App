@@ -36,15 +36,13 @@ class PasswordsAdapter(val view: View, val context: Context, val passwordList: A
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.onBind(passwordList,position)
+        holder.onBind(passwordList, position)
     }
 
     inner class ViewHolder(val binding: PasswordViewholderBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        val edit = itemView.findViewById<ImageView>(R.id.mEdit);
-        val title = itemView.findViewById<TextView>(R.id.mTitle);
 
-        fun onBind(list: ArrayList<RecordList>, pos:Int) {
+        fun onBind(list: ArrayList<RecordList>, pos: Int) {
             binding.viewModelAdapter = list[pos]
             binding.executePendingBindings()
 
@@ -58,42 +56,17 @@ class PasswordsAdapter(val view: View, val context: Context, val passwordList: A
                 onEventListener!!.viewRecordDetails()
             }
 
-          /*  binding.mDelete.setOnClickListener {
-                loadRecordList(data._id)
-                passwordList.removeAt(pos)
-                notifyItemRemoved(pos)
-                Log.d("----pos",list[pos].toString())
-            }*/
-/*
-
-            delete.setOnClickListener {
-                loadRecordList(data._id)
+            binding.mDelete.setOnClickListener {
+                onEventListener!!.deleteRecord(binding.viewModelAdapter!!._id)
                 passwordList.removeAt(pos)
                 notifyItemRemoved(pos)
             }
-
-*/
         }
-
-        /*private fun loadRecordList(id: String) {
-            val api = RetrofitClient.apiService
-            val call = api.deleteRecord(id)
-
-            call.enqueue(object : Callback<SignUpModel> {
-                override fun onFailure(call: Call<SignUpModel>, t: Throwable) {
-                    Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show()
-                }
-
-                override fun onResponse(call: Call<SignUpModel>, response: Response<SignUpModel>) {
-                    Toast.makeText(context, "Delete Record Successfully", Toast.LENGTH_SHORT).show()
-                }
-
-            })
-        }*/
     }
 
     interface OnEventListener {
         fun viewRecordDetails()
+        fun deleteRecord(id: String)
     }
 
 }

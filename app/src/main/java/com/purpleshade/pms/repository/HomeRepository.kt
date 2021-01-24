@@ -8,6 +8,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.purpleshade.pms.fragment.home.adapter.PasswordsAdapter
 import com.purpleshade.pms.model.RecordList
 import com.purpleshade.pms.model.Records
+import com.purpleshade.pms.model.SignUpModel
 import com.purpleshade.pms.network.RetrofitClient
 import com.purpleshade.pms.utils.JWTUtils
 import com.purpleshade.pms.utils.toast
@@ -86,6 +87,22 @@ class HomeRepository {
                     }
 
                 }
+            }
+
+        })
+    }
+
+     fun deleteRecordItem(context: Context,id: String) {
+        val api = RetrofitClient.apiService
+        val call = api.deleteRecord(id)
+
+        call.enqueue(object : Callback<SignUpModel> {
+            override fun onFailure(call: Call<SignUpModel>, t: Throwable) {
+                context.toast("Something went wrong")
+            }
+
+            override fun onResponse(call: Call<SignUpModel>, response: Response<SignUpModel>) {
+                context.toast("Delete Record Successfully")
             }
 
         })
