@@ -9,18 +9,18 @@ import com.purpleshade.pms.utils.customInterface.AuthListener
 
 class CreateRecordViewModel(val context: Context, val repository: CreateRecordRepository) : ViewModel() {
     var title: String? = null
-    var webAddress: String? = null
-    var email: String? = null
-    var password: String? = null
-    var addNote: String? = null
+    var webAddress = ""
+    var email = ""
+    var password = ""
+    var addNote = ""
 
     var progressBar : MutableLiveData<Boolean> = MutableLiveData()
 
-     var authListener: AuthListener? = null
+    var authListener: AuthListener? = null
 
     fun onAddButtonClick(view: View) {
         progressBar.postValue(true)
-        val repo = repository.fillRecordDetails(context,view,progressBar,title!!,webAddress!!,email!!,password!!,addNote!!)
+        val repo = repository.fillRecordDetails(context,view,progressBar,title!!, webAddress, email, password, addNote)
         authListener!!.onSuccess(repo)
     }
 
