@@ -31,8 +31,6 @@ class SignupRepository {
             override fun onResponse(call: Call<SignUpModel>, response: Response<SignUpModel>) {
                 progressBar.postValue(false)
                 Toast.makeText(context, "User Register Successfully", Toast.LENGTH_SHORT).show()
-                // floors = response.body().floors!!
-                // addFloorButtons()
             }
         })
         return signUpResponse

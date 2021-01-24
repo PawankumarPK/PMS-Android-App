@@ -21,10 +21,8 @@ import com.purpleshade.pms.utils.customObject.RecordDetail
  */
 class PasswordsAdapter(val view: View, val context: Context, val passwordList: ArrayList<RecordList>) : RecyclerView.Adapter<PasswordsAdapter.ViewHolder>() {
 
-    var recordId = ""
     var onEventListener: OnEventListener? = null
     var title: String? = null
-    lateinit var viewModel: PasswordViewModel
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: PasswordViewholderBinding = inflate(LayoutInflater.from(parent.context), R.layout.password_viewholder, parent, false)

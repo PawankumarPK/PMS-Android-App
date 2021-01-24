@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.purpleshade.pms.repository.CreateRecordRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
+import com.purpleshade.pms.utils.toast
 
 class CreateRecordViewModel(val context: Context, val repository: CreateRecordRepository) : ViewModel() {
     var title: String? = null
@@ -20,8 +21,12 @@ class CreateRecordViewModel(val context: Context, val repository: CreateRecordRe
 
     fun onAddButtonClick(view: View) {
         progressBar.postValue(true)
-        val repo = repository.fillRecordDetails(context,view,progressBar,title!!, webAddress, email, password, addNote)
-        authListener!!.onSuccess(repo)
+        if (title != null) {
+            val repo = repository.fillRecordDetails(context, view, progressBar, title!!, webAddress, email, password, addNote)
+            authListener!!.onSuccess(repo)
+        }else{
+            context.toast("Title is missing")
+        }
     }
 
 }

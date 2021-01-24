@@ -66,13 +66,10 @@ class HomeRepository {
 
             override fun onResponse(call: Call<Records>, response: Response<Records>) {
                 if (response.isSuccessful) {
-                    context.toast("Get Record Successfully")
-                    val msg = response.body()!!.message
                     val recordDetail = response.body()!!.recordDetail
 
                     for (i in recordDetail) {
                         title = i.title
-                        Log.d("====>>>title",i.title)
                         webAddress = i.websiteAddress.toString()
                         email = i.email
                         password = i.password

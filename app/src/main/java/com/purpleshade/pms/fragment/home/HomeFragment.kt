@@ -28,8 +28,6 @@ class HomeFragment : BaseFragment(),AuthListener {
 
     private lateinit var viewModel: HomeViewModel
     lateinit var binding : HomeFragmentBinding
-    lateinit var adapter: PasswordsAdapter
-    var passwordList: ArrayList<RecordList> = ArrayList()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater,R.layout.home_fragment,container,false)

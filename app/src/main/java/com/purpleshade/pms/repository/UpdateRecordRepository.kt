@@ -44,7 +44,6 @@ class UpdateRecordRepository {
 
             override fun onResponse(call: Call<Records>, response: Response<Records>) {
                 if (response.isSuccessful) {
-                   // context.toast("Record load successfully")
                     progressBar.postValue(false)
                     val msg = response.body()!!.message
                     val recordDetail = response.body()!!.recordDetail

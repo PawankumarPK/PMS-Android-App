@@ -38,7 +38,6 @@ class LoginFragment : BaseFragment(), AuthListener {
 
     override fun onSuccess(responseSuccess: LiveData<String>) {
         responseSuccess.observe(this, Observer {
-            // Toast.makeText(baseActivity, it, Toast.LENGTH_SHORT).show()
         })
     }
 

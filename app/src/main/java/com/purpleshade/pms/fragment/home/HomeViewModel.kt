@@ -63,7 +63,6 @@ class HomeViewModel(val context: Context, val actvity: Activity, val repository:
     override fun viewRecordDetails() {
         bottomSheetDialog = BottomSheetDialog(context)
         repository.getRecordDetails(RecordDetail.recordId, context, bottomSheetDialog)
-        Log.d("---->>>",RecordDetail.recordId)
         bottomSheetVisible(actvity)
     }
 
