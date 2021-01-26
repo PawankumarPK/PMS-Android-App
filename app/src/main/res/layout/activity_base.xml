@@ -41,13 +41,22 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <ProgressBar
+        android:id="@+id/mProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size20"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:indeterminateOnly="true"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/mToolbar"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mNetworkCheckLayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size50"
         android:background="@color/colorWarning"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@+id/mToolbar">
+        app:layout_constraintTop_toBottomOf="@+id/mProgressBar"
+        >
 
         <TextView
             android:layout_width="wrap_content"

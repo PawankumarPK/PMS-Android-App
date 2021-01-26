@@ -2,6 +2,7 @@ package com.purpleshade.pms.repository
 
 import android.content.Context
 import android.view.View
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,6 +12,7 @@ import com.purpleshade.pms.model.SignUpModel
 import com.purpleshade.pms.network.RetrofitClient
 import com.purpleshade.pms.utils.JWTUtils
 import com.purpleshade.pms.utils.customObject.UserResponse
+import com.purpleshade.pms.utils.hide
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,7 +22,7 @@ import retrofit2.Response
  */
 class LoginRepository {
 
-    fun doLogin(email: String, password: String, progressBar: MutableLiveData<Boolean>, context: Context, view: View): LiveData<String> {
+    fun doLogin(email: String, password: String, progressBar: MutableLiveData<Boolean>, context: Context, view: View ,progress:ProgressBar): LiveData<String> {
         val loginResponse = MutableLiveData<String>()
         val api = RetrofitClient.apiService
         val call = api.login(email, password)
@@ -38,11 +40,13 @@ class LoginRepository {
                     JWTUtils.decoded(token)
                     JWTUtils.parseUserDetail()
                     if (UserResponse.response.equals("User Found")) {
-                        progressBar.postValue(false)
+                      //  progressBar.postValue(false)
+                        progress.hide()
                         view.findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                     }
                 } else {
-                    progressBar.postValue(false)
+                    //progressBar.postValue(false)
+                    progress.hide()
                     Toast.makeText(context, "InValid Credential", Toast.LENGTH_SHORT).show()
                 }
             }

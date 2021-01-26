@@ -116,15 +116,6 @@
                         android:textColor="@color/colorWhite"
                         android:textSize="@dimen/size16" />
 
-
-                    <ProgressBar
-                        android:id="@+id/mProgressBar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/size20"
-                        android:visibility="@{viewModel.progressBar ? View.VISIBLE : View.GONE}" />
-
                 </LinearLayout>
 
                 <TextView

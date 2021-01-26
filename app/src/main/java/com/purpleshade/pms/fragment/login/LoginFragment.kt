@@ -27,10 +27,9 @@ class LoginFragment : BaseFragment(), AuthListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        NetworkConnectionIntercepter(baseActivity)
         val repository = LoginRepository()
         binding.lifecycleOwner = this
-        val factory = AuthViewModelFactory(baseActivity, repository)
+        val factory = AuthViewModelFactory(baseActivity, repository,baseActivity.mProgressBar)
         viewModel = ViewModelProvider(this, factory).get(LoginViewModel::class.java)
         viewModel.authListener = this
         binding.viewModel = viewModel
