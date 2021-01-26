@@ -38,7 +38,7 @@ class CreateRecordFragment : BaseFragment(),AuthListener {
         super.onViewCreated(view, savedInstanceState)
 
         val repository = CreateRecordRepository()
-        val factory = CreateRecordViewModelFactory(baseActivity,repository)
+        val factory = CreateRecordViewModelFactory(baseActivity,repository,baseActivity.mProgressBar)
         viewModel = ViewModelProvider(this,factory).get(CreateRecordViewModel::class.java)
         viewModel.authListener = this
         binding.viewModel = viewModel
