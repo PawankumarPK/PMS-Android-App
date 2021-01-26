@@ -2,15 +2,18 @@ package com.purpleshade.pms.fragment.signup
 
 import android.content.Context
 import android.view.View
+import android.widget.ProgressBar
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.purpleshade.pms.R
 import com.purpleshade.pms.repository.SignupRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
+import com.purpleshade.pms.utils.hide
+import com.purpleshade.pms.utils.show
 import com.purpleshade.pms.utils.toast
 
-class SignUpViewModel(val context: Context, private val repository: SignupRepository) : ViewModel() {
+class SignUpViewModel(val context: Context, private val repository: SignupRepository,val progressBar: ProgressBar) : ViewModel() {
 
     var username: String? = null
     var email: String? = null
@@ -18,13 +21,12 @@ class SignUpViewModel(val context: Context, private val repository: SignupReposi
     var confirmPassword: String? = null
 
     var authListener: AuthListener? = null
-    var progressBar: MutableLiveData<Boolean> = MutableLiveData()
 
 
     fun signUpButtonClick(view: View) {
-        progressBar.postValue(true)
+        progressBar.show()
         if (username.isNullOrEmpty() || email.isNullOrEmpty() || password.isNullOrEmpty() || confirmPassword.isNullOrEmpty()) {
-            progressBar.postValue(false)
+            progressBar.hide()
             context.toast("Field Empty")
             return
         }

@@ -19,6 +19,7 @@ import com.purpleshade.pms.model.SignUpModel
 import com.purpleshade.pms.network.RetrofitClient
 import com.purpleshade.pms.repository.SignupRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
+import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.sign_up_fragment.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -38,7 +39,7 @@ class SignUpFragment : BaseFragment(), AuthListener {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = this
         val repository = SignupRepository()
-        val factory = SignUpViewModelFactory(baseActivity,repository)
+        val factory = SignUpViewModelFactory(baseActivity,repository,baseActivity.mProgressBar)
         viewModel = ViewModelProvider(this,factory).get(SignUpViewModel::class.java)
         viewModel.authListener = this
         binding.viewModel = viewModel

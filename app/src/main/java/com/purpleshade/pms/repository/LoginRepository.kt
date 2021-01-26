@@ -22,7 +22,7 @@ import retrofit2.Response
  */
 class LoginRepository {
 
-    fun doLogin(email: String, password: String, progressBar: MutableLiveData<Boolean>, context: Context, view: View ,progress:ProgressBar): LiveData<String> {
+    fun doLogin(email: String, password: String, context: Context, view: View, progressBar:ProgressBar): LiveData<String> {
         val loginResponse = MutableLiveData<String>()
         val api = RetrofitClient.apiService
         val call = api.login(email, password)
@@ -40,13 +40,11 @@ class LoginRepository {
                     JWTUtils.decoded(token)
                     JWTUtils.parseUserDetail()
                     if (UserResponse.response.equals("User Found")) {
-                      //  progressBar.postValue(false)
-                        progress.hide()
+                        progressBar.hide()
                         view.findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                     }
                 } else {
-                    //progressBar.postValue(false)
-                    progress.hide()
+                    progressBar.hide()
                     Toast.makeText(context, "InValid Credential", Toast.LENGTH_SHORT).show()
                 }
             }

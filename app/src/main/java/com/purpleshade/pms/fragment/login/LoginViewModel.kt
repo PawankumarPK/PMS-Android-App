@@ -3,8 +3,6 @@ package com.purpleshade.pms.fragment.login
 import android.content.Context
 import android.view.View
 import android.widget.ProgressBar
-import android.widget.Toast
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.purpleshade.pms.R
@@ -14,23 +12,22 @@ import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.show
 import com.purpleshade.pms.utils.toast
 
-class LoginViewModel(val context: Context, private val repository: LoginRepository, val progress: ProgressBar) : ViewModel() {
+class LoginViewModel(val context: Context, private val repository: LoginRepository, val progressBar: ProgressBar) : ViewModel() {
 
     var email: String? = null
     var password: String? = null
     var authListener: AuthListener? = null
 
-    val progressBar: MutableLiveData<Boolean> = MutableLiveData()
 
     fun onLoginButtonClick(view: View) {
-        progress.show()
+        progressBar.show()
         if (email.isNullOrEmpty() || password.isNullOrEmpty()) {
-            progress.hide()
+            progressBar.hide()
             context.toast("Field Empty")
             return
         }
 
-        val repo = repository.doLogin(email.toString(), password.toString(), progressBar, context, view, progress)
+        val repo = repository.doLogin(email.toString(), password.toString(), context, view, progressBar)
         authListener!!.onSuccess(repo)
     }
 
