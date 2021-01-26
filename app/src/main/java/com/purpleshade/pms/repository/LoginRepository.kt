@@ -1,6 +1,7 @@
 package com.purpleshade.pms.repository
 
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
@@ -13,6 +14,7 @@ import com.purpleshade.pms.network.RetrofitClient
 import com.purpleshade.pms.utils.JWTUtils
 import com.purpleshade.pms.utils.customObject.UserResponse
 import com.purpleshade.pms.utils.hide
+import com.purpleshade.pms.utils.snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,6 +32,7 @@ class LoginRepository {
         call.enqueue(object : Callback<SignUpModel> {
             override fun onFailure(call: Call<SignUpModel>?, t: Throwable?) {
                 loginResponse.value = t?.message
+                progressBar.hide()
             }
 
             override fun onResponse(call: Call<SignUpModel>, response: Response<SignUpModel>) {
@@ -45,7 +48,7 @@ class LoginRepository {
                     }
                 } else {
                     progressBar.hide()
-                    Toast.makeText(context, "InValid Credential", Toast.LENGTH_SHORT).show()
+                    view.snackbar("Invalid Credential")
                 }
             }
         })
