@@ -38,7 +38,7 @@ class HomeFragment : BaseFragment(),AuthListener {
         super.onViewCreated(view, savedInstanceState)
 
         val repository = HomeRepository()
-        val factory = HomeViewModelFactory(baseActivity,baseActivity,repository)
+        val factory = HomeViewModelFactory(baseActivity,baseActivity,repository,baseActivity.mProgressBar)
         viewModel = ViewModelProvider(this,factory).get(HomeViewModel::class.java)
         viewModel.authListener = this
         binding.viewModel = viewModel

@@ -2,6 +2,7 @@ package com.purpleshade.pms.repository
 
 import android.content.Context
 import android.util.Log
+import android.widget.ProgressBar
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -11,6 +12,7 @@ import com.purpleshade.pms.model.Records
 import com.purpleshade.pms.model.SignUpModel
 import com.purpleshade.pms.network.RetrofitClient
 import com.purpleshade.pms.utils.JWTUtils
+import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.toast
 import kotlinx.android.synthetic.main.password_detail_bottomsheet.*
 import retrofit2.Call
@@ -28,7 +30,7 @@ class HomeRepository {
     var password = ""
     var addNote = ""
 
-    fun loadRecordList(context: Context, passwordList: ArrayList<RecordList>, adapter: PasswordsAdapter): LiveData<String> {
+    fun loadRecordList(context: Context, passwordList: ArrayList<RecordList>,progressBar:ProgressBar, adapter: PasswordsAdapter): LiveData<String> {
         val responseLoadRecordList: MutableLiveData<String> = MutableLiveData()
         val api = RetrofitClient.apiService
         val call = api.allRecords(JWTUtils.userId)
@@ -36,11 +38,13 @@ class HomeRepository {
         call.enqueue(object : Callback<Records> {
             override fun onFailure(call: Call<Records>, t: Throwable) {
                 context.toast("Something went wrong")
+                progressBar.hide()
             }
 
             override fun onResponse(call: Call<Records>, response: Response<Records>) {
                 context.toast("Record Load Successfully")
                 if (response.isSuccessful) {
+                    progressBar.hide()
                     val record = response.body()!!.recordDetail
                     for (i in record) {
                         passwordList.add(i)
