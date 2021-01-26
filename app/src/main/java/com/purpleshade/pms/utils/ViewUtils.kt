@@ -26,7 +26,7 @@ fun View.show(){
     visibility = View.VISIBLE
 }
 
-fun View.Gone(){
+fun View.gone(){
     visibility = View.GONE
 }
 

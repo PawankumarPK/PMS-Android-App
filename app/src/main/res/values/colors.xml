@@ -11,4 +11,7 @@
     <color name="colorGrey">#cccccc</color>
     <color name="colorDarkGrey">#6C6B6B</color>>
     <color name="colorBlue">#3F51B5</color>>
+    <color name="colorWarning">#fe9f00</color>
+    <color name="colorWarningText">#724701</color>
+    <color name="colorGreen">#00c24e</color>
 </resources>

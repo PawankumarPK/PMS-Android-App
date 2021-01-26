@@ -4,6 +4,7 @@ import com.purpleshade.pms.model.SignUpModel
 import com.purpleshade.pms.model.Records
 import com.purpleshade.pms.model.UpdateRecord
 import com.purpleshade.pms.utils.Helper
+import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -49,6 +50,8 @@ interface ApiService {
 
     @GET("records/recordDetail")
     fun recordDetail(@Query("id") id: String): Call<Records>
+
+
 
     /*companion object {
         operator fun invoke(): ApiService {

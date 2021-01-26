@@ -41,6 +41,29 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mNetworkCheckLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size50"
+        android:background="@color/colorWarning"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/mToolbar">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginStart="@dimen/size20"
+            android:textColor="@color/colorWarningText"
+            android:fontFamily="@font/raleway_bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="Could not connect to internet"
+            android:drawablePadding="@dimen/size10"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/size20" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <fragment
         android:id="@+id/hostFragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
@@ -50,7 +73,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mToolbar"
+        app:layout_constraintTop_toBottomOf="@+id/mNetworkCheckLayout"
         app:navGraph="@navigation/nav_graph" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

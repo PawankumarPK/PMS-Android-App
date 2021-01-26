@@ -15,6 +15,7 @@ import com.purpleshade.pms.repository.LoginRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
 import kotlinx.android.synthetic.main.activity_base.*
 
+
 class LoginFragment : BaseFragment(), AuthListener {
     private lateinit var viewModel: LoginViewModel
     lateinit var binding: LoginFragmentBinding
@@ -26,6 +27,7 @@ class LoginFragment : BaseFragment(), AuthListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        NetworkConnectionIntercepter(baseActivity)
         val repository = LoginRepository()
         binding.lifecycleOwner = this
         val factory = AuthViewModelFactory(baseActivity, repository)
@@ -40,6 +42,5 @@ class LoginFragment : BaseFragment(), AuthListener {
         responseSuccess.observe(this, Observer {
         })
     }
-
 
 }

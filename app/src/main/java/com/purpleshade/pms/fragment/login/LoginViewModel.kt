@@ -17,6 +17,7 @@ class LoginViewModel(val context: Context, private val repository: LoginReposito
     var authListener: AuthListener? = null
 
     val progressBar: MutableLiveData<Boolean> = MutableLiveData()
+    val network : NetworkConnectionIntercepter? = null
 
     fun onLoginButtonClick(view: View) {
         progressBar.postValue(true)
@@ -25,9 +26,9 @@ class LoginViewModel(val context: Context, private val repository: LoginReposito
             Toast.makeText(context, "Field Empty", Toast.LENGTH_SHORT).show()
             return
         }
+
         val repo = repository.doLogin(email.toString(), password.toString(), progressBar, context, view)
         authListener!!.onSuccess(repo)
-
     }
 
     fun onRegisterClick(view : View){
