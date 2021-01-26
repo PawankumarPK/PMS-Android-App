@@ -127,18 +127,6 @@
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
-
-        <ProgressBar
-            android:id="@+id/mProgressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="@dimen/size50"
-            app:layout_constraintTop_toBottomOf="@+id/mLinearLayout"
-            android:visibility="@{viewModel.progressBar ? View.VISIBLE : View.GONE}" />
-
-
         <com.google.android.material.button.MaterialButton
             android:id="@+id/mUpdate"
             android:layout_width="match_parent"

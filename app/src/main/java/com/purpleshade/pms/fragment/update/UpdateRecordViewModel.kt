@@ -3,13 +3,15 @@ package com.purpleshade.pms.fragment.update
 import android.content.Context
 import android.view.View
 import android.widget.EditText
+import android.widget.ProgressBar
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.purpleshade.pms.repository.UpdateRecordRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
+import com.purpleshade.pms.utils.show
 
 
-class UpdateRecordViewModel(val context: Context, val repository: UpdateRecordRepository) : ViewModel() {
+class UpdateRecordViewModel(val context: Context, val repository: UpdateRecordRepository,val progressBar: ProgressBar) : ViewModel() {
 
     var title: String? = null
     var webAddress: String? = null
@@ -17,12 +19,11 @@ class UpdateRecordViewModel(val context: Context, val repository: UpdateRecordRe
     var password: String? = null
     var addNote: String? = null
 
-    var progressBar: MutableLiveData<Boolean> = MutableLiveData()
     var authListener: AuthListener? = null
 
     fun onUpdateButtonClick(view: View) {
-        progressBar.postValue(true)
-        val repo = repository.updateRecord(context, progressBar, title!!, webAddress!!, email!!, password!!, addNote!!)
+        progressBar.show()
+        val repo = repository.updateRecord(context,progressBar, title!!, webAddress!!, email!!, password!!, addNote!!)
         authListener!!.onSuccess(repo)
         repository.view = view
 

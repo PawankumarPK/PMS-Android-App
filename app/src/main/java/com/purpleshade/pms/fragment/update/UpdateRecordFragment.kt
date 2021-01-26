@@ -30,7 +30,7 @@ class UpdateRecordFragment : BaseFragment(), AuthListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = this
-        val factory = UpdateViewModelFactory(baseActivity, repository)
+        val factory = UpdateViewModelFactory(baseActivity, repository, baseActivity.mProgressBar)
         viewModel = ViewModelProvider(this, factory).get(UpdateRecordViewModel::class.java)
         viewModel.authListener = this
         binding.viewModel = viewModel
@@ -38,7 +38,7 @@ class UpdateRecordFragment : BaseFragment(), AuthListener {
         baseActivity.mFragmentTitle.text = getString(R.string.updateRecord)
         baseActivity.mBackButton.visibility = View.VISIBLE
 
-        viewModel.getRecordDetails(mTitle,mWebAddress,mEmail,mPassword,mAddNote)
+        viewModel.getRecordDetails(mTitle, mWebAddress, mEmail, mPassword, mAddNote)
 
         baseActivity.mBackButton.setOnClickListener {
             findNavController().navigate(R.id.homeFragment)
