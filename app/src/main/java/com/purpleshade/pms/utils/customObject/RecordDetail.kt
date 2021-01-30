@@ -6,4 +6,5 @@ package com.purpleshade.pms.utils.customObject
 object RecordDetail {
 
     var recordId  = ""
+    var userId = ""
 }

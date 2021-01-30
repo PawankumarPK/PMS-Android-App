@@ -12,6 +12,7 @@ import com.purpleshade.pms.model.Records
 import com.purpleshade.pms.model.SignUpModel
 import com.purpleshade.pms.network.RetrofitClient
 import com.purpleshade.pms.utils.JWTUtils
+import com.purpleshade.pms.utils.customObject.RecordDetail
 import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.toast
 import kotlinx.android.synthetic.main.password_detail_bottomsheet.*
@@ -33,7 +34,7 @@ class HomeRepository {
     fun loadRecordList(context: Context, passwordList: ArrayList<RecordList>,progressBar:ProgressBar, adapter: PasswordsAdapter): LiveData<String> {
         val responseLoadRecordList: MutableLiveData<String> = MutableLiveData()
         val api = RetrofitClient.apiService
-        val call = api.allRecords(JWTUtils.userId)
+        val call = api.allRecords(RecordDetail.userId)
 
         call.enqueue(object : Callback<Records> {
             override fun onFailure(call: Call<Records>, t: Throwable) {

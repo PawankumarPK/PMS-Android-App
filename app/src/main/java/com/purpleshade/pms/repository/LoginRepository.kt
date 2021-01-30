@@ -1,6 +1,5 @@
 package com.purpleshade.pms.repository
 
-import android.content.Context
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
@@ -9,9 +8,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import com.purpleshade.pms.R
+import com.purpleshade.pms.activity.BaseActivity
+import com.purpleshade.pms.db.User
 import com.purpleshade.pms.model.SignUpModel
 import com.purpleshade.pms.network.RetrofitClient
 import com.purpleshade.pms.utils.JWTUtils
+import com.purpleshade.pms.utils.customObject.RecordDetail
 import com.purpleshade.pms.utils.customObject.UserResponse
 import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.snackbar
@@ -24,7 +26,7 @@ import retrofit2.Response
  */
 class LoginRepository {
 
-    fun doLogin(email: String, password: String, context: Context, view: View, progressBar:ProgressBar): LiveData<String> {
+    fun doLogin(email: String, password: String, user: User, view: View, progressBar: ProgressBar): LiveData<String> {
         val loginResponse = MutableLiveData<String>()
         val api = RetrofitClient.apiService
         val call = api.login(email, password)
@@ -32,6 +34,7 @@ class LoginRepository {
         call.enqueue(object : Callback<SignUpModel> {
             override fun onFailure(call: Call<SignUpModel>?, t: Throwable?) {
                 loginResponse.value = t?.message
+                view.snackbar("Oops! Something went wrong")
                 progressBar.hide()
             }
 
@@ -42,6 +45,14 @@ class LoginRepository {
                     val token = response.body()!!.token.toString()
                     JWTUtils.decoded(token)
                     JWTUtils.parseUserDetail()
+
+                    user.userId = JWTUtils.userId
+                    user.username = JWTUtils.userName
+                    user.email = JWTUtils.userEmail
+
+                    //insert data into table
+                    BaseActivity.INSTANCE!!.myDao().addUser(user)
+
                     if (UserResponse.response.equals("User Found")) {
                         progressBar.hide()
                         view.findNavController().navigate(R.id.action_loginFragment_to_homeFragment)

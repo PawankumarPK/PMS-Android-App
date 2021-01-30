@@ -13,6 +13,8 @@ object JWTUtils {
     val charset: Charset = Charsets.UTF_8
     var tokenDetail = ""
     var userId = ""
+    var userName = ""
+    var userEmail = ""
 
     @Throws(Exception::class)
     fun decoded(JWTEncoded: String) {
@@ -34,7 +36,8 @@ object JWTUtils {
 
     fun parseUserDetail() {
         val reader = JSONObject(tokenDetail)
-        val userDetail = reader.getString("userId")
-        userId = userDetail
+        userId = reader.getString("userId")
+        userName = reader.getString("username")
+        userEmail = reader.getString("email")
     }
 }

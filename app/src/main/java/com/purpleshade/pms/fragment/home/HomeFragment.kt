@@ -1,6 +1,7 @@
 package com.purpleshade.pms.fragment.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,12 +14,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.purpleshade.pms.R
+import com.purpleshade.pms.activity.BaseActivity
 import com.purpleshade.pms.databinding.HomeFragmentBinding
 import com.purpleshade.pms.fragment.BaseFragment
 import com.purpleshade.pms.fragment.home.adapter.PasswordsAdapter
 import com.purpleshade.pms.model.RecordList
 import com.purpleshade.pms.repository.HomeRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
+import com.purpleshade.pms.utils.customObject.RecordDetail
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.home_fragment.*
 
@@ -36,6 +39,9 @@ class HomeFragment : BaseFragment(),AuthListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val listData = BaseActivity.INSTANCE!!.myDao().user
+        RecordDetail.userId = listData.userId.toString()
 
         val repository = HomeRepository()
         val factory = HomeViewModelFactory(baseActivity,baseActivity,repository,baseActivity.mProgressBar)

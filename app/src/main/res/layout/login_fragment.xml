@@ -48,7 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/audiowide_regular"
-                    android:text="@string/password_management_system"
+                    android:text="@={viewModel.username}"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/size16"
                     android:textStyle="bold"
