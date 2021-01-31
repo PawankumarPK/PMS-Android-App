@@ -1,13 +1,11 @@
 package com.purpleshade.pms.repository
 
 import android.content.Context
-import android.util.Log
 import android.widget.ProgressBar
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.purpleshade.pms.activity.BaseActivity
-import com.purpleshade.pms.db.User
+import com.purpleshade.pms.db.RoomUser
 import com.purpleshade.pms.fragment.home.adapter.PasswordsAdapter
 import com.purpleshade.pms.model.RecordList
 import com.purpleshade.pms.model.Records
@@ -34,7 +32,7 @@ class HomeRepository {
 
     fun loadRecordList(
         context: Context, passwordList: ArrayList<RecordList>, progressBar: ProgressBar,
-        adapter: PasswordsAdapter, user: User
+        adapter: PasswordsAdapter, user: RoomUser
     ): LiveData<String> {
         val responseLoadRecordList: MutableLiveData<String> = MutableLiveData()
         val api = RetrofitClient.apiService

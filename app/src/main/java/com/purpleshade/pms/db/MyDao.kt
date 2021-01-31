@@ -13,15 +13,19 @@ interface MyDao {
 
     //Save particular details
     @get:Query("select * from userDB")
-    val user: User
+    val user: RoomUser
 
     //Save full detail of user in the list
     @get:Query("select * from userDB")
-    val userFullDetail: List<User>
+    val userFullDetail: List<RoomUser>
 
     //Insert Data into DB
     @Insert
-    fun userDetails(user: User)
+    fun userDetails(user: RoomUser)
+
+    //Insert data into record table
+    @Insert
+    fun userRecords(record: RoomRecord)
 
     @Query("DELETE FROM userDB")
     fun clearTable()

@@ -2,29 +2,26 @@ package com.purpleshade.pms.fragment.home
 
 import android.app.Activity
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.purpleshade.pms.R
-import com.purpleshade.pms.db.User
+import com.purpleshade.pms.db.RoomUser
 import com.purpleshade.pms.fragment.home.adapter.PasswordsAdapter
 import com.purpleshade.pms.model.RecordList
 import com.purpleshade.pms.repository.HomeRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
 import com.purpleshade.pms.utils.customObject.RecordDetail
-import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.show
 import kotlinx.android.synthetic.main.password_detail_bottomsheet.view.*
 
-class HomeViewModel(val context: Context, val actvity: Activity, val repository: HomeRepository, val progressBar: ProgressBar, val user: User) : ViewModel(), PasswordsAdapter.OnEventListener {
+class HomeViewModel(val context: Context, val actvity: Activity, val repository: HomeRepository, val progressBar: ProgressBar, val user: RoomUser) : ViewModel(), PasswordsAdapter.OnEventListener {
 
     lateinit var adapter: PasswordsAdapter
     var authListener: AuthListener? = null

@@ -1,19 +1,20 @@
 package com.purpleshade.pms.repository
 
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.purpleshade.pms.R
+import com.purpleshade.pms.activity.BaseActivity
+import com.purpleshade.pms.db.RoomRecord
 import com.purpleshade.pms.model.SignUpModel
 import com.purpleshade.pms.network.RetrofitClient
 import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.toast
-import kotlinx.android.synthetic.main.create_record_fragment.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,7 +24,9 @@ import retrofit2.Response
  */
 class CreateRecordRepository : ViewModel() {
 
-    fun fillRecordDetails(context: Context, view: View, progressBar: ProgressBar ,title: String, webAddress: String, email: String, password: String, addNote: String): LiveData<String> {
+    val roomRecord = RoomRecord()
+
+    fun fillRecordDetails(context: Context, view: View, progressBar: ProgressBar, title: String, webAddress: String, email: String, password: String, addNote: String): LiveData<String> {
         val responseAddData: MutableLiveData<String> = MutableLiveData()
 
         val api = RetrofitClient.apiService
@@ -38,6 +41,18 @@ class CreateRecordRepository : ViewModel() {
             override fun onResponse(call: Call<SignUpModel>, response: Response<SignUpModel>) {
                 progressBar.hide()
                 context.toast("Add Record Successfully")
+
+                val roomUser = BaseActivity.INSTANCE!!.myDao().user
+
+                roomRecord.title = title
+                roomRecord.email = email
+                roomRecord.password = password
+                roomRecord.addNote = addNote
+                roomRecord.websiteAddress = webAddress
+                roomRecord.loginId = roomUser.userId
+
+                BaseActivity.INSTANCE!!.myDao().userRecords(roomRecord)
+
                 view.findNavController().navigate(R.id.action_createRecordFragment_to_homeFragment)
 
             }

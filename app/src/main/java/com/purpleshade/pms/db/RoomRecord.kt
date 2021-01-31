@@ -10,7 +10,7 @@ import com.purpleshade.pms.model.RecordList
  */
 
 @Entity(tableName = "records")
-class Record {
+class RoomRecord {
 
     @PrimaryKey
     var id: Int? = null

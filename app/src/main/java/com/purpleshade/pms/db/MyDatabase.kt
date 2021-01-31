@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase
  */
 
 //@Database(entities={User::class}, version = 1)
-@Database(entities = [User::class, Record::class], version = 1)
+@Database(entities = [RoomUser::class, RoomRecord::class], version = 1)
 
 abstract class MyDatabase : RoomDatabase() {
     abstract fun myDao(): MyDao

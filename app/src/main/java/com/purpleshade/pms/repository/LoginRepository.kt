@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import com.purpleshade.pms.R
 import com.purpleshade.pms.activity.BaseActivity
-import com.purpleshade.pms.db.User
+import com.purpleshade.pms.db.RoomUser
 import com.purpleshade.pms.model.SignUpModel
 import com.purpleshade.pms.network.RetrofitClient
 import com.purpleshade.pms.utils.JWTUtils
@@ -23,7 +23,7 @@ import retrofit2.Response
  */
 class LoginRepository {
 
-    fun doLogin(email: String, password: String, user: User, view: View, progressBar: ProgressBar): LiveData<String> {
+    fun doLogin(email: String, password: String, user: RoomUser, view: View, progressBar: ProgressBar): LiveData<String> {
         val loginResponse = MutableLiveData<String>()
         val api = RetrofitClient.apiService
         val call = api.login(email, password)

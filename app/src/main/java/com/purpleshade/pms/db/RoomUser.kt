@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
  */
 
 @Entity(tableName = "userDB")
-class User {
+class RoomUser {
 
     @PrimaryKey
     var id: Int? = null
