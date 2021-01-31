@@ -32,6 +32,7 @@ class HomeViewModel(val context: Context, val actvity: Activity, val repository:
     fun loadAdapterList(view: RecyclerView) {
         progressBar.show()
         loadAdapter(view)
+
         val repo = repository.loadRecordList(context, passwordList,progressBar,adapter, user)
         authListener!!.onSuccess(repo)
     }

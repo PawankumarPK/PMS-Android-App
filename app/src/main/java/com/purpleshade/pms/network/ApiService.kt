@@ -29,6 +29,10 @@ interface ApiService {
     @GET("/records/allRecords")
     fun allRecords(@Query("id") id: String): Call<Records>
 
+    @GET("records/recordDetail")
+    fun recordDetail(@Query("id") id: String): Call<Records>
+
+
     @FormUrlEncoded
     @POST("records/inputRecord")
     fun addRecordDetail(
@@ -46,11 +50,6 @@ interface ApiService {
     fun updateRecord(
         @Query("id") id: String, @Body post: UpdateRecord
     ): Call<SignUpModel>
-
-
-    @GET("records/recordDetail")
-    fun recordDetail(@Query("id") id: String): Call<Records>
-
 
 
     /*companion object {

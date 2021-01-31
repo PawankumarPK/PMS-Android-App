@@ -40,18 +40,18 @@ class CreateRecordRepository : ViewModel() {
 
             override fun onResponse(call: Call<SignUpModel>, response: Response<SignUpModel>) {
                 progressBar.hide()
-                context.toast("Add Record Successfully")
 
-                val roomUser = BaseActivity.INSTANCE!!.myDao().user
-
+                /*val roomUser = BaseActivity.INSTANCE!!.myDao().user
                 roomRecord.title = title
                 roomRecord.email = email
                 roomRecord.password = password
                 roomRecord.addNote = addNote
                 roomRecord.websiteAddress = webAddress
-                roomRecord.loginId = roomUser.userId
+                roomRecord.loginId = roomUser.userId*/
 
                 BaseActivity.INSTANCE!!.myDao().userRecords(roomRecord)
+
+                context.toast("Add Record Successfully")
 
                 view.findNavController().navigate(R.id.action_createRecordFragment_to_homeFragment)
 

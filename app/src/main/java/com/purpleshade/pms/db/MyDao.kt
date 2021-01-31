@@ -2,6 +2,7 @@ package com.purpleshade.pms.db
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
 /**
@@ -15,16 +16,15 @@ interface MyDao {
     @get:Query("select * from userDB")
     val user: RoomUser
 
-    //Save full detail of user in the list
-    @get:Query("select * from userDB")
-    val userFullDetail: List<RoomUser>
+    @Query("SELECT * FROM records WHERE loginId=:id ")
+    fun loadSingle(id: String): List<RoomRecord>
 
     //Insert Data into DB
     @Insert
     fun userDetails(user: RoomUser)
 
     //Insert data into record table
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun userRecords(record: RoomRecord)
 
     @Query("DELETE FROM userDB")

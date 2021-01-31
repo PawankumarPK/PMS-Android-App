@@ -1,16 +1,20 @@
 package com.purpleshade.pms.repository
 
 import android.content.Context
+import android.util.Log
 import android.widget.ProgressBar
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.purpleshade.pms.activity.BaseActivity
+import com.purpleshade.pms.db.RoomRecord
 import com.purpleshade.pms.db.RoomUser
 import com.purpleshade.pms.fragment.home.adapter.PasswordsAdapter
 import com.purpleshade.pms.model.RecordList
 import com.purpleshade.pms.model.Records
 import com.purpleshade.pms.model.SignUpModel
 import com.purpleshade.pms.network.RetrofitClient
+import com.purpleshade.pms.utils.JWTUtils
 import com.purpleshade.pms.utils.customObject.RecordDetail
 import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.toast
@@ -24,16 +28,14 @@ import retrofit2.Response
  */
 class HomeRepository {
 
+    var _id = ""
     var title = ""
     var webAddress = ""
     var email = ""
     var password = ""
     var addNote = ""
 
-    fun loadRecordList(
-        context: Context, passwordList: ArrayList<RecordList>, progressBar: ProgressBar,
-        adapter: PasswordsAdapter, user: RoomUser
-    ): LiveData<String> {
+    fun loadRecordList(context: Context, passwordList: ArrayList<RecordList>, progressBar: ProgressBar, adapter: PasswordsAdapter, user: RoomUser): LiveData<String> {
         val responseLoadRecordList: MutableLiveData<String> = MutableLiveData()
         val api = RetrofitClient.apiService
         val call = api.allRecords(RecordDetail.userId)
@@ -41,23 +43,34 @@ class HomeRepository {
         call.enqueue(object : Callback<Records> {
             override fun onFailure(call: Call<Records>, t: Throwable) {
                 context.toast("Something went wrong")
-                progressBar.hide()
             }
 
             override fun onResponse(call: Call<Records>, response: Response<Records>) {
-                context.toast("Record Load Successfully")
                 if (response.isSuccessful) {
                     progressBar.hide()
-                    val record = response.body()!!.recordDetail
-                    for (i in record) {
+                    val recordDetail = response.body()!!.recordDetail
+                    val roomRecord = RoomRecord()
+                    for (i in recordDetail) {
+                        roomRecord.recordId = i._id
+                        roomRecord.title = i.title
+                        roomRecord.websiteAddress = i.websiteAddress.toString()
+                        roomRecord.email = i.email
+                        roomRecord.password = i.password
+                        roomRecord.addNote = i.addNote
+                        roomRecord.loginId = RecordDetail.userId
+
+                        BaseActivity.INSTANCE!!.myDao().userRecords(roomRecord)
+
+                        Log.d("---->>GetRoomDB", roomRecord.recordId.toString())
                         passwordList.add(i).toString()
                         adapter.notifyDataSetChanged()
-                    }
 
+                    }
                 }
             }
 
         })
+
 
         return responseLoadRecordList
     }

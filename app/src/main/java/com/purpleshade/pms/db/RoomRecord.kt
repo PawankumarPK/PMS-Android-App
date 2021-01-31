@@ -2,6 +2,7 @@ package com.purpleshade.pms.db
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.purpleshade.pms.model.RecordList
 
@@ -9,11 +10,15 @@ import com.purpleshade.pms.model.RecordList
  * Created by pawan on 26,January,2021
  */
 
-@Entity(tableName = "records")
+@Entity(tableName = "records",indices = arrayOf(Index(value = ["recordId"], unique = true)))
+
 class RoomRecord {
 
     @PrimaryKey
     var id: Int? = null
+
+    @ColumnInfo(name = "recordId")
+    var recordId: String? = null
 
     @ColumnInfo(name = "title")
     var title: String? = null
