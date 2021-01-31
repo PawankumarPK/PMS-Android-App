@@ -23,5 +23,4 @@ class User {
     @ColumnInfo(name = "email")
     var email:String? = null
 
-
 }

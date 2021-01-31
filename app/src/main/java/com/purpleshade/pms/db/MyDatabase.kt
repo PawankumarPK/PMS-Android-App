@@ -8,9 +8,9 @@ import androidx.room.RoomDatabase
  * Created by pawan on 26,January,2021
  */
 
-@Database(entities = [User::class], version = 1)
-abstract class MyDatabase :RoomDatabase(){
+//@Database(entities={User::class}, version = 1)
+@Database(entities = [User::class, Record::class], version = 1)
 
+abstract class MyDatabase : RoomDatabase() {
     abstract fun myDao(): MyDao
-
 }

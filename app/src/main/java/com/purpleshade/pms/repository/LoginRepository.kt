@@ -1,9 +1,7 @@
 package com.purpleshade.pms.repository
 
-import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
@@ -13,7 +11,6 @@ import com.purpleshade.pms.db.User
 import com.purpleshade.pms.model.SignUpModel
 import com.purpleshade.pms.network.RetrofitClient
 import com.purpleshade.pms.utils.JWTUtils
-import com.purpleshade.pms.utils.customObject.RecordDetail
 import com.purpleshade.pms.utils.customObject.UserResponse
 import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.snackbar
@@ -51,7 +48,7 @@ class LoginRepository {
                     user.email = JWTUtils.userEmail
 
                     //insert data into table
-                    BaseActivity.INSTANCE!!.myDao().addUser(user)
+                    BaseActivity.INSTANCE!!.myDao().userDetails(user)
 
                     if (UserResponse.response.equals("User Found")) {
                         progressBar.hide()

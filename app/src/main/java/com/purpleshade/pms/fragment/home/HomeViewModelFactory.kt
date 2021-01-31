@@ -6,6 +6,7 @@ import android.widget.ProgressBar
 import androidx.lifecycle.GeneratedAdapter
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.purpleshade.pms.db.User
 import com.purpleshade.pms.fragment.home.adapter.PasswordsAdapter
 import com.purpleshade.pms.repository.HomeRepository
 import com.purpleshade.pms.repository.LoginRepository
@@ -14,9 +15,9 @@ import com.purpleshade.pms.repository.LoginRepository
  * Created by pawan on 04,June,2020
  */
 @Suppress("UNCHECKED_CAST")
-class HomeViewModelFactory(private val context: Context, val activity: Activity,private val repository: HomeRepository,val progressBar: ProgressBar) :
+class HomeViewModelFactory(private val context: Context, val activity: Activity,private val repository: HomeRepository,val progressBar: ProgressBar,val user: User) :
     ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return HomeViewModel(context,activity, repository,progressBar) as T
+        return HomeViewModel(context,activity, repository,progressBar,user) as T
     }
 }

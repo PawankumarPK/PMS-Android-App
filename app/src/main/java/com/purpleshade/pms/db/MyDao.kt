@@ -11,12 +11,17 @@ import androidx.room.Query
 @Dao
 interface MyDao {
 
+    //Save particular details
     @get:Query("select * from userDB")
     val user: User
 
+    //Save full detail of user in the list
+    @get:Query("select * from userDB")
+    val userFullDetail: List<User>
+
     //Insert Data into DB
     @Insert
-    fun addUser(user: User)
+    fun userDetails(user: User)
 
     @Query("DELETE FROM userDB")
     fun clearTable()

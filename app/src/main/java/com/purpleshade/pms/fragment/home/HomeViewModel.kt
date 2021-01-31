@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.purpleshade.pms.R
+import com.purpleshade.pms.db.User
 import com.purpleshade.pms.fragment.home.adapter.PasswordsAdapter
 import com.purpleshade.pms.model.RecordList
 import com.purpleshade.pms.repository.HomeRepository
@@ -23,7 +24,7 @@ import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.show
 import kotlinx.android.synthetic.main.password_detail_bottomsheet.view.*
 
-class HomeViewModel(val context: Context, val actvity: Activity, val repository: HomeRepository,val progressBar: ProgressBar) : ViewModel(), PasswordsAdapter.OnEventListener {
+class HomeViewModel(val context: Context, val actvity: Activity, val repository: HomeRepository, val progressBar: ProgressBar, val user: User) : ViewModel(), PasswordsAdapter.OnEventListener {
 
     lateinit var adapter: PasswordsAdapter
     var authListener: AuthListener? = null
@@ -34,7 +35,7 @@ class HomeViewModel(val context: Context, val actvity: Activity, val repository:
     fun loadAdapterList(view: RecyclerView) {
         progressBar.show()
         loadAdapter(view)
-        val repo = repository.loadRecordList(context, passwordList, progressBar,adapter)
+        val repo = repository.loadRecordList(context, passwordList,progressBar,adapter, user)
         authListener!!.onSuccess(repo)
     }
 

@@ -16,6 +16,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.purpleshade.pms.R
 import com.purpleshade.pms.activity.BaseActivity
 import com.purpleshade.pms.databinding.HomeFragmentBinding
+import com.purpleshade.pms.db.User
 import com.purpleshade.pms.fragment.BaseFragment
 import com.purpleshade.pms.fragment.home.adapter.PasswordsAdapter
 import com.purpleshade.pms.model.RecordList
@@ -25,27 +26,28 @@ import com.purpleshade.pms.utils.customObject.RecordDetail
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.home_fragment.*
 
-class HomeFragment : BaseFragment(),AuthListener {
+class HomeFragment : BaseFragment(), AuthListener {
 
     lateinit var fabButton: FloatingActionButton
 
     private lateinit var viewModel: HomeViewModel
-    lateinit var binding : HomeFragmentBinding
+    lateinit var binding: HomeFragmentBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater,R.layout.home_fragment,container,false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.home_fragment, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val user = User()
         val listData = BaseActivity.INSTANCE!!.myDao().user
         RecordDetail.userId = listData.userId.toString()
 
         val repository = HomeRepository()
-        val factory = HomeViewModelFactory(baseActivity,baseActivity,repository,baseActivity.mProgressBar)
-        viewModel = ViewModelProvider(this,factory).get(HomeViewModel::class.java)
+        val factory = HomeViewModelFactory(baseActivity, baseActivity, repository, baseActivity.mProgressBar, user)
+        viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
         viewModel.authListener = this
         binding.viewModel = viewModel
 

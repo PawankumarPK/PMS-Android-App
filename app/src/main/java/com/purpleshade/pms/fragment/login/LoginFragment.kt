@@ -33,6 +33,7 @@ class LoginFragment : BaseFragment(), AuthListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val user = User()
         try {
             val listData = BaseActivity.INSTANCE!!.myDao().user
@@ -43,8 +44,6 @@ class LoginFragment : BaseFragment(), AuthListener {
         }
 
         val repository = LoginRepository()
-
-
         binding.lifecycleOwner = this
         val factory = AuthViewModelFactory(baseActivity, repository,baseActivity.mProgressBar,user)
 

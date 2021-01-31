@@ -6,12 +6,13 @@ import android.widget.ProgressBar
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.purpleshade.pms.activity.BaseActivity
+import com.purpleshade.pms.db.User
 import com.purpleshade.pms.fragment.home.adapter.PasswordsAdapter
 import com.purpleshade.pms.model.RecordList
 import com.purpleshade.pms.model.Records
 import com.purpleshade.pms.model.SignUpModel
 import com.purpleshade.pms.network.RetrofitClient
-import com.purpleshade.pms.utils.JWTUtils
 import com.purpleshade.pms.utils.customObject.RecordDetail
 import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.toast
@@ -31,7 +32,10 @@ class HomeRepository {
     var password = ""
     var addNote = ""
 
-    fun loadRecordList(context: Context, passwordList: ArrayList<RecordList>,progressBar:ProgressBar, adapter: PasswordsAdapter): LiveData<String> {
+    fun loadRecordList(
+        context: Context, passwordList: ArrayList<RecordList>, progressBar: ProgressBar,
+        adapter: PasswordsAdapter, user: User
+    ): LiveData<String> {
         val responseLoadRecordList: MutableLiveData<String> = MutableLiveData()
         val api = RetrofitClient.apiService
         val call = api.allRecords(RecordDetail.userId)
@@ -48,9 +52,10 @@ class HomeRepository {
                     progressBar.hide()
                     val record = response.body()!!.recordDetail
                     for (i in record) {
-                        passwordList.add(i)
+                        passwordList.add(i).toString()
                         adapter.notifyDataSetChanged()
                     }
+
                 }
             }
 
@@ -94,7 +99,7 @@ class HomeRepository {
         })
     }
 
-     fun deleteRecordItem(context: Context,id: String) {
+    fun deleteRecordItem(context: Context, id: String) {
         val api = RetrofitClient.apiService
         val call = api.deleteRecord(id)
 
