@@ -7,4 +7,5 @@ object RecordDetail {
 
     var recordId  = ""
     var userId = ""
+    var roomDbEnable = true
 }

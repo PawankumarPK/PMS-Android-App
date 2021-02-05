@@ -36,11 +36,11 @@ class HomeFragment : BaseFragment(), AuthListener {
         super.onViewCreated(view, savedInstanceState)
 
         val user = RoomUser()
-        val listData = BaseActivity.INSTANCE!!.myDao().user
-        RecordDetail.userId = listData.userId.toString()
+        val roomuserId = BaseActivity.INSTANCE!!.myDao().user
+        RecordDetail.userId = roomuserId.userId.toString()
 
         val repository = HomeRepository()
-        val factory = HomeViewModelFactory(baseActivity, baseActivity, repository, baseActivity.mProgressBar, user)
+        val factory = HomeViewModelFactory(baseActivity, baseActivity, repository, baseActivity.mProgressBar,user)
         viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
         viewModel.authListener = this
         binding.viewModel = viewModel

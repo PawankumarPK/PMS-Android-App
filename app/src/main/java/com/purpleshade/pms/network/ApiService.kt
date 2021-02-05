@@ -40,16 +40,15 @@ interface ApiService {
         @Field("webAddress") webAddress: String,
         @Field("email") email: String,
         @Field("password") password: String,
-        @Field("addNote") addNote: String
+        @Field("addNote") addNote: String,
+        @Field("loginId") loginId: String
     ): Call<SignUpModel>
 
     @DELETE("records/deleteRecord")
     fun deleteRecord(@Query("id") id: String): Call<SignUpModel>
 
     @PATCH("records/updateDetails")
-    fun updateRecord(
-        @Query("id") id: String, @Body post: UpdateRecord
-    ): Call<SignUpModel>
+    fun updateRecord(@Query("id") id: String, @Body post: UpdateRecord): Call<SignUpModel>
 
 
     /*companion object {

@@ -27,15 +27,15 @@ import retrofit2.Response
  * Created by pawan on 17,January,2021
  */
 class HomeRepository {
-
-    var _id = ""
     var title = ""
     var webAddress = ""
     var email = ""
     var password = ""
     var addNote = ""
 
-    fun loadRecordList(context: Context, passwordList: ArrayList<RecordList>, progressBar: ProgressBar, adapter: PasswordsAdapter, user: RoomUser): LiveData<String> {
+    //private var listDB: ArrayList<RoomRecord> = ArrayList()
+
+    fun loadRecordList(context: Context, passwordList: ArrayList<RecordList>, progressBar: ProgressBar, adapter: PasswordsAdapter): LiveData<String> {
         val responseLoadRecordList: MutableLiveData<String> = MutableLiveData()
         val api = RetrofitClient.apiService
         val call = api.allRecords(RecordDetail.userId)
@@ -59,20 +59,33 @@ class HomeRepository {
                         roomRecord.addNote = i.addNote
                         roomRecord.loginId = RecordDetail.userId
 
+                        Log.d("----->>RoomId",roomRecord.title.toString())
+
                         BaseActivity.INSTANCE!!.myDao().userRecords(roomRecord)
 
-                        Log.d("---->>GetRoomDB", roomRecord.recordId.toString())
                         passwordList.add(i).toString()
-                        adapter.notifyDataSetChanged()
-
                     }
+                    adapter.notifyDataSetChanged()
+
                 }
             }
 
         })
 
+        return responseLoadRecordList
+    }
+
+    fun loadRecordListFromRoom(listDB: ArrayList<RoomRecord> ):LiveData<String>{
+        val responseLoadRecordList: MutableLiveData<String> = MutableLiveData()
+        val recordList = BaseActivity.INSTANCE!!.myDao().records
+        listDB.addAll(recordList)
+        for (i in listDB.indices) {
+            val title = listDB[i].title
+            Log.d("---->>",title.toString())
+        }
 
         return responseLoadRecordList
+
     }
 
 
