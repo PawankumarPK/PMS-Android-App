@@ -21,6 +21,7 @@ import com.purpleshade.pms.model.RecordList
 import com.purpleshade.pms.repository.HomeRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
 import com.purpleshade.pms.utils.customObject.RoomRecordDetail
+import com.purpleshade.pms.utils.customObject.ViewVisibility
 import com.purpleshade.pms.utils.show
 import kotlinx.android.synthetic.main.password_detail_bottomsheet.*
 import kotlinx.android.synthetic.main.password_detail_bottomsheet.view.*
@@ -40,7 +41,7 @@ class HomeViewModel(val context: Context, val actvity: Activity, val repository:
     fun loadAdapterList(view: RecyclerView) {
         progressBar.show()
 
-        if (RoomRecordDetail.roomDbEnable) {
+        if (RoomRecordDetail.roomDbEnable || ViewVisibility.networkProblem) {
             roomDbLoadAdapter(view)
             val roomRepo = repository.loadRecordListFromRoom(roomPasswordList, progressBar)
             authListener!!.onSuccess(roomRepo)

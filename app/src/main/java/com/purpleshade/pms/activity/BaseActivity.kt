@@ -11,6 +11,7 @@ import com.purpleshade.pms.db.MyDatabase
 import com.purpleshade.pms.db.RoomUser
 import com.purpleshade.pms.network.RetrofitClient
 import com.purpleshade.pms.utils.*
+import com.purpleshade.pms.utils.customObject.ViewVisibility
 import kotlinx.android.synthetic.main.activity_base.*
 
 class BaseActivity : AppCompatActivity() {
@@ -27,12 +28,6 @@ class BaseActivity : AppCompatActivity() {
         RetrofitClient.initRosAPI(Helper.getConfigValue(this, "api_url")!!)
         INSTANCE = getAppDataBase(applicationContext)!!
 
-        /*val listData = INSTANCE!!.myDao().user
-        if (listData.isEmpty())
-            toast("Empty DB")
-        else
-            toast("User Added")
-        */
         checkConnection()
 
     }
@@ -42,8 +37,10 @@ class BaseActivity : AppCompatActivity() {
         val activeNetwork = manager.activeNetworkInfo
         if (activeNetwork == null) {
             mNetworkCheckLayout.show()
+            ViewVisibility.networkProblem = true
             mProgressBar.hide()
         } else {
+            ViewVisibility.networkProblem = false
             mNetworkCheckLayout.gone()
         }
         Handler().postDelayed({

@@ -12,6 +12,8 @@ import com.purpleshade.pms.R
 import com.purpleshade.pms.databinding.RoomPasswordViewholderBinding
 import com.purpleshade.pms.db.RoomRecord
 import com.purpleshade.pms.utils.customObject.RoomRecordDetail
+import com.purpleshade.pms.utils.customObject.ViewVisibility
+import com.purpleshade.pms.utils.toast
 
 
 /**
@@ -37,27 +39,33 @@ class RoomPasswordsAdapter(val view: View, val context: Context, val passwordLis
 
     inner class ViewHolder(val binding: RoomPasswordViewholderBinding) : RecyclerView.ViewHolder(binding.root) {
 
-
         fun onBind(list: ArrayList<RoomRecord>, pos: Int) {
             binding.roomViewModelAdapter = list[pos]
             binding.executePendingBindings()
 
             binding.mPasswordView.setOnClickListener {
                 RoomRecordDetail.recordId = passwordList[pos].recordId!!
-                Log.d("---->>RecordId",passwordList[pos].title.toString())
                 onEventListener!!.viewRecordDetailsByRoom()
             }
 
 
             binding.mEdit.setOnClickListener {
-                RoomRecordDetail.recordId = passwordList[pos].recordId!!
-                view.findNavController().navigate(R.id.action_homeFragment_to_updateRecordFragment)
+                if (ViewVisibility.networkProblem) {
+                    context.toast("No internet connection")
+                } else {
+                    RoomRecordDetail.recordId = passwordList[pos].recordId!!
+                    view.findNavController().navigate(R.id.action_homeFragment_to_updateRecordFragment)
+                }
             }
 
             binding.mDelete.setOnClickListener {
-                onEventListener!!.deleteRecord(passwordList[pos].recordId!!)
-                passwordList.removeAt(pos)
-                notifyItemRemoved(pos)
+                if (ViewVisibility.networkProblem) {
+                    context.toast("No internet connection")
+                } else {
+                    onEventListener!!.deleteRecord(passwordList[pos].recordId!!)
+                    passwordList.removeAt(pos)
+                    notifyItemRemoved(pos)
+                }
             }
         }
     }
