@@ -3,6 +3,7 @@ package com.purpleshade.pms.repository
 import android.content.Context
 import android.util.Log
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -31,6 +32,8 @@ class HomeRepository {
     var password = ""
     var addNote = ""
 
+    val roomRecord = RoomRecord()
+
     fun loadRecordList(context: Context, passwordList: ArrayList<RecordList>, progressBar: ProgressBar, adapter: PasswordsAdapter): LiveData<String> {
         val responseLoadRecordList: MutableLiveData<String> = MutableLiveData()
         val api = RetrofitClient.apiService
@@ -45,7 +48,6 @@ class HomeRepository {
                 if (response.isSuccessful) {
                     progressBar.hide()
                     val recordDetail = response.body()!!.recordDetail
-                    val roomRecord = RoomRecord()
                     for (i in recordDetail) {
                         roomRecord.recordId = i._id
                         roomRecord.title = i.title
@@ -79,8 +81,6 @@ class HomeRepository {
         for (i in listDB.indices) {
             val title = listDB[i].title
         }
-
-
         return responseLoadRecordList
 
     }
@@ -120,6 +120,10 @@ class HomeRepository {
         })
     }
 
+    fun deleteRoomRecordItem(context: Context,id:String){
+
+    }
+
     fun deleteRecordItem(context: Context, id: String) {
         val api = RetrofitClient.apiService
         val call = api.deleteRecord(id)
@@ -130,6 +134,9 @@ class HomeRepository {
             }
 
             override fun onResponse(call: Call<SignUpModel>, response: Response<SignUpModel>) {
+                roomRecord.recordId = id
+                BaseActivity.INSTANCE!!.myDao().deleteByRecordId(id)
+
                 context.toast("Delete Record Successfully")
             }
 

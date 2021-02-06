@@ -48,16 +48,16 @@ class RoomPasswordsAdapter(val view: View, val context: Context, val passwordLis
                 view.findNavController().navigate(R.id.action_homeFragment_to_updateRecordFragment)
             }
 
-            /*binding.mPasswordView.setOnClickListener {
-                RoomRecordDetail.recordId = binding.viewModelAdapter!!._id
+            binding.mPasswordView.setOnClickListener {
+                RoomRecordDetail.recordId = passwordList[pos].recordId!!
                 onEventListener!!.viewRecordDetails()
             }
 
             binding.mDelete.setOnClickListener {
-                onEventListener!!.deleteRecord(binding.viewModelAdapter!!._id)
+                onEventListener!!.deleteRecord(passwordList[pos].recordId!!)
                 passwordList.removeAt(pos)
                 notifyItemRemoved(pos)
-            }*/
+            }
         }
     }
 

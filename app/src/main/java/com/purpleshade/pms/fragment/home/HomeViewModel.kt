@@ -92,7 +92,8 @@ class HomeViewModel(val context: Context, val actvity: Activity, val repository:
 
     override fun deleteRecord(id: String) {
         repository.deleteRecordItem(context, id)
-
     }
+
+
 
 }
