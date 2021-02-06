@@ -37,7 +37,7 @@ class CreateRecordRepository : ViewModel() {
             override fun onResponse(call: Call<SignUpModel>, response: Response<SignUpModel>) {
                 progressBar.hide()
 
-                RoomRecordDetail.roomDbEnable = false
+                RoomRecordDetail.roomDbEnable = true
                 context.toast("Add Record Successfully")
                 view.findNavController().navigate(R.id.action_createRecordFragment_to_homeFragment)
 
