@@ -1,19 +1,16 @@
 package com.purpleshade.pms.fragment.home.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil.inflate
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.purpleshade.pms.R
 import com.purpleshade.pms.databinding.PasswordViewholderBinding
 import com.purpleshade.pms.model.RecordList
-import com.purpleshade.pms.utils.customObject.RecordDetail
+import com.purpleshade.pms.utils.customObject.RoomRecordDetail
 
 
 /**
@@ -45,12 +42,12 @@ class PasswordsAdapter(val view: View, val context: Context, val passwordList: A
             binding.executePendingBindings()
 
             binding.mEdit.setOnClickListener {
-                RecordDetail.recordId = binding.viewModelAdapter!!._id
+                RoomRecordDetail.recordId = binding.viewModelAdapter!!._id
                 view.findNavController().navigate(R.id.action_homeFragment_to_updateRecordFragment)
             }
 
             binding.mPasswordView.setOnClickListener {
-                RecordDetail.recordId = binding.viewModelAdapter!!._id
+                RoomRecordDetail.recordId = binding.viewModelAdapter!!._id
                 onEventListener!!.viewRecordDetails()
             }
 

@@ -19,7 +19,7 @@ import com.purpleshade.pms.fragment.home.adapter.RoomPasswordsAdapter
 import com.purpleshade.pms.model.RecordList
 import com.purpleshade.pms.repository.HomeRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
-import com.purpleshade.pms.utils.customObject.RecordDetail
+import com.purpleshade.pms.utils.customObject.RoomRecordDetail
 import com.purpleshade.pms.utils.show
 import kotlinx.android.synthetic.main.password_detail_bottomsheet.view.*
 
@@ -37,9 +37,9 @@ class HomeViewModel(val context: Context, val actvity: Activity, val repository:
     fun loadAdapterList(view: RecyclerView) {
         progressBar.show()
 
-        if (RecordDetail.roomDbEnable) {
+        if (RoomRecordDetail.roomDbEnable) {
             roomDbLoadAdapter(view)
-            val roomRepo = repository.loadRecordListFromRoom(roomPasswordList)
+            val roomRepo = repository.loadRecordListFromRoom(roomPasswordList,progressBar)
             authListener!!.onSuccess(roomRepo)
         } else {
             loadAdapter(view)
@@ -58,7 +58,7 @@ class HomeViewModel(val context: Context, val actvity: Activity, val repository:
         adapter.onEventListener = this
         view.adapter = adapter
         view.layoutManager = LinearLayoutManager(context)
-        RecordDetail.roomDbEnable = true
+        RoomRecordDetail.roomDbEnable = true
 
     }
 
@@ -86,7 +86,7 @@ class HomeViewModel(val context: Context, val actvity: Activity, val repository:
 
     override fun viewRecordDetails() {
         bottomSheetDialog = BottomSheetDialog(context)
-        repository.getRecordDetails(RecordDetail.recordId, context, bottomSheetDialog)
+        repository.getRecordDetails(RoomRecordDetail.recordId, context, bottomSheetDialog)
         bottomSheetVisible(actvity)
     }
 

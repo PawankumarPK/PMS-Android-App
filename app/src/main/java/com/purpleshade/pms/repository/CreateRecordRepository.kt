@@ -1,7 +1,6 @@
 package com.purpleshade.pms.repository
 
 import android.content.Context
-import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import androidx.lifecycle.LiveData
@@ -9,12 +8,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.purpleshade.pms.R
-import com.purpleshade.pms.activity.BaseActivity
-import com.purpleshade.pms.db.RoomRecord
-import com.purpleshade.pms.db.RoomUser
 import com.purpleshade.pms.model.SignUpModel
 import com.purpleshade.pms.network.RetrofitClient
-import com.purpleshade.pms.utils.customObject.RecordDetail
+import com.purpleshade.pms.utils.customObject.RoomRecordDetail
 import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.toast
 import retrofit2.Call
@@ -41,7 +37,7 @@ class CreateRecordRepository : ViewModel() {
             override fun onResponse(call: Call<SignUpModel>, response: Response<SignUpModel>) {
                 progressBar.hide()
 
-                RecordDetail.roomDbEnable = false
+                RoomRecordDetail.roomDbEnable = false
                 context.toast("Add Record Successfully")
                 view.findNavController().navigate(R.id.action_createRecordFragment_to_homeFragment)
 

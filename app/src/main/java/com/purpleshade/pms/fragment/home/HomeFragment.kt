@@ -16,7 +16,7 @@ import com.purpleshade.pms.db.RoomUser
 import com.purpleshade.pms.fragment.BaseFragment
 import com.purpleshade.pms.repository.HomeRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
-import com.purpleshade.pms.utils.customObject.RecordDetail
+import com.purpleshade.pms.utils.customObject.RoomRecordDetail
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.home_fragment.*
 
@@ -37,7 +37,7 @@ class HomeFragment : BaseFragment(), AuthListener {
 
         val user = RoomUser()
         val roomuserId = BaseActivity.INSTANCE!!.myDao().user
-        RecordDetail.userId = roomuserId.userId.toString()
+        RoomRecordDetail.userId = roomuserId.userId.toString()
 
         val repository = HomeRepository()
         val factory = HomeViewModelFactory(baseActivity, baseActivity, repository, baseActivity.mProgressBar,user)

@@ -1,21 +1,18 @@
 package com.purpleshade.pms.repository
 
 import android.content.Context
-import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import com.purpleshade.pms.R
-import com.purpleshade.pms.fragment.update.UpdateRecordViewModel
 import com.purpleshade.pms.model.Records
 import com.purpleshade.pms.model.SignUpModel
 import com.purpleshade.pms.model.UpdateRecord
 import com.purpleshade.pms.network.RetrofitClient
-import com.purpleshade.pms.utils.customObject.RecordDetail
+import com.purpleshade.pms.utils.customObject.RoomRecordDetail
 import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.toast
 import retrofit2.Call
@@ -36,7 +33,7 @@ class UpdateRecordRepository {
     fun getRecordDetails(context: Context, progressBar: ProgressBar): LiveData<String> {
         val responseGetRecordDetail = MutableLiveData<String>()
         val api = RetrofitClient.apiService
-        val call = api.recordDetail(RecordDetail.recordId)
+        val call = api.recordDetail(RoomRecordDetail.recordId)
 
         call.enqueue(object : Callback<Records> {
             override fun onFailure(call: Call<Records>, t: Throwable) {
@@ -70,7 +67,7 @@ class UpdateRecordRepository {
         val update = UpdateRecord(title, webAddress, email, password, addNote)
 
         val api = RetrofitClient.apiService
-        val call = api.updateRecord(RecordDetail.recordId, update)
+        val call = api.updateRecord(RoomRecordDetail.recordId, update)
 
         call.enqueue(object : Callback<SignUpModel> {
             override fun onFailure(call: Call<SignUpModel>, t: Throwable) {

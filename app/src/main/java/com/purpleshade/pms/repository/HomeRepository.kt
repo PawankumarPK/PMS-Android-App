@@ -8,14 +8,12 @@ import androidx.lifecycle.MutableLiveData
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.purpleshade.pms.activity.BaseActivity
 import com.purpleshade.pms.db.RoomRecord
-import com.purpleshade.pms.db.RoomUser
 import com.purpleshade.pms.fragment.home.adapter.PasswordsAdapter
 import com.purpleshade.pms.model.RecordList
 import com.purpleshade.pms.model.Records
 import com.purpleshade.pms.model.SignUpModel
 import com.purpleshade.pms.network.RetrofitClient
-import com.purpleshade.pms.utils.JWTUtils
-import com.purpleshade.pms.utils.customObject.RecordDetail
+import com.purpleshade.pms.utils.customObject.RoomRecordDetail
 import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.toast
 import kotlinx.android.synthetic.main.password_detail_bottomsheet.*
@@ -33,12 +31,10 @@ class HomeRepository {
     var password = ""
     var addNote = ""
 
-    //private var listDB: ArrayList<RoomRecord> = ArrayList()
-
     fun loadRecordList(context: Context, passwordList: ArrayList<RecordList>, progressBar: ProgressBar, adapter: PasswordsAdapter): LiveData<String> {
         val responseLoadRecordList: MutableLiveData<String> = MutableLiveData()
         val api = RetrofitClient.apiService
-        val call = api.allRecords(RecordDetail.userId)
+        val call = api.allRecords(RoomRecordDetail.userId)
 
         call.enqueue(object : Callback<Records> {
             override fun onFailure(call: Call<Records>, t: Throwable) {
@@ -57,7 +53,7 @@ class HomeRepository {
                         roomRecord.email = i.email
                         roomRecord.password = i.password
                         roomRecord.addNote = i.addNote
-                        roomRecord.loginId = RecordDetail.userId
+                        roomRecord.loginId = RoomRecordDetail.userId
 
                         Log.d("----->>RoomId",roomRecord.title.toString())
 
@@ -75,14 +71,15 @@ class HomeRepository {
         return responseLoadRecordList
     }
 
-    fun loadRecordListFromRoom(listDB: ArrayList<RoomRecord> ):LiveData<String>{
+    fun loadRecordListFromRoom(listDB: ArrayList<RoomRecord>,progressBar: ProgressBar ):LiveData<String>{
+        progressBar.hide()
         val responseLoadRecordList: MutableLiveData<String> = MutableLiveData()
         val recordList = BaseActivity.INSTANCE!!.myDao().records
         listDB.addAll(recordList)
         for (i in listDB.indices) {
             val title = listDB[i].title
-            Log.d("---->>",title.toString())
         }
+
 
         return responseLoadRecordList
 

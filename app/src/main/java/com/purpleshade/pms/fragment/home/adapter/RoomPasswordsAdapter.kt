@@ -5,17 +5,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil.inflate
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.purpleshade.pms.R
-import com.purpleshade.pms.databinding.PasswordViewholderBinding
 import com.purpleshade.pms.databinding.RoomPasswordViewholderBinding
 import com.purpleshade.pms.db.RoomRecord
-import com.purpleshade.pms.model.RecordList
-import com.purpleshade.pms.utils.customObject.RecordDetail
+import com.purpleshade.pms.utils.customObject.RoomRecordDetail
 
 
 /**
@@ -46,13 +42,14 @@ class RoomPasswordsAdapter(val view: View, val context: Context, val passwordLis
             binding.roomViewModelAdapter = list[pos]
             binding.executePendingBindings()
 
-          /*  binding.mEdit.setOnClickListener {
-                RecordDetail.recordId = binding.viewModelAdapter!!._id
+            binding.mEdit.setOnClickListener {
+                RoomRecordDetail.recordId = passwordList[pos].recordId!!
+                Log.d("---->>RecordId",RoomRecordDetail.recordId)
                 view.findNavController().navigate(R.id.action_homeFragment_to_updateRecordFragment)
             }
 
-            binding.mPasswordView.setOnClickListener {
-                RecordDetail.recordId = binding.viewModelAdapter!!._id
+            /*binding.mPasswordView.setOnClickListener {
+                RoomRecordDetail.recordId = binding.viewModelAdapter!!._id
                 onEventListener!!.viewRecordDetails()
             }
 
