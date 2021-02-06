@@ -13,7 +13,7 @@ interface MyDao {
     @get:Query("select * from userDB")
     val user: RoomUser
 
-    @Query("SELECT * FROM records WHERE loginId=:id ")
+    @Query("SELECT * FROM records WHERE recordId=:id ")
     fun loadSingle(id: String): List<RoomRecord>
 
     @get:Query("select * from records")
@@ -29,10 +29,6 @@ interface MyDao {
 
     @Query("DELETE FROM userDB")
     fun clearTable()
-
-    //delete record from RecordDB
-    @Delete
-    fun deleteRecord(roomRecord: RoomRecord)
 
     @Query("DELETE FROM records WHERE recordId = :recordId")
     fun deleteByRecordId(recordId: String)

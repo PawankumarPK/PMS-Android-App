@@ -42,15 +42,16 @@ class RoomPasswordsAdapter(val view: View, val context: Context, val passwordLis
             binding.roomViewModelAdapter = list[pos]
             binding.executePendingBindings()
 
-            binding.mEdit.setOnClickListener {
-                RoomRecordDetail.recordId = passwordList[pos].recordId!!
-                Log.d("---->>RecordId",RoomRecordDetail.recordId)
-                view.findNavController().navigate(R.id.action_homeFragment_to_updateRecordFragment)
-            }
-
             binding.mPasswordView.setOnClickListener {
                 RoomRecordDetail.recordId = passwordList[pos].recordId!!
-                onEventListener!!.viewRecordDetails()
+                Log.d("---->>RecordId",passwordList[pos].title.toString())
+                onEventListener!!.viewRecordDetailsByRoom()
+            }
+
+
+            binding.mEdit.setOnClickListener {
+                RoomRecordDetail.recordId = passwordList[pos].recordId!!
+                view.findNavController().navigate(R.id.action_homeFragment_to_updateRecordFragment)
             }
 
             binding.mDelete.setOnClickListener {
@@ -62,7 +63,7 @@ class RoomPasswordsAdapter(val view: View, val context: Context, val passwordLis
     }
 
     interface RoomOnEventListener {
-        fun viewRecordDetails()
+        fun viewRecordDetailsByRoom()
         fun deleteRecord(id: String)
     }
 

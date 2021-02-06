@@ -57,8 +57,6 @@ class HomeRepository {
                         roomRecord.addNote = i.addNote
                         roomRecord.loginId = RoomRecordDetail.userId
 
-                        Log.d("----->>RoomId",roomRecord.title.toString())
-
                         BaseActivity.INSTANCE!!.myDao().userRecords(roomRecord)
 
                         passwordList.add(i).toString()
@@ -73,7 +71,7 @@ class HomeRepository {
         return responseLoadRecordList
     }
 
-    fun loadRecordListFromRoom(listDB: ArrayList<RoomRecord>,progressBar: ProgressBar ):LiveData<String>{
+    fun loadRecordListFromRoom(listDB: ArrayList<RoomRecord>, progressBar: ProgressBar): LiveData<String> {
         progressBar.hide()
         val responseLoadRecordList: MutableLiveData<String> = MutableLiveData()
         val recordList = BaseActivity.INSTANCE!!.myDao().records
@@ -82,7 +80,6 @@ class HomeRepository {
             val title = listDB[i].title
         }
         return responseLoadRecordList
-
     }
 
 
@@ -118,10 +115,18 @@ class HomeRepository {
             }
 
         })
+
     }
 
-    fun deleteRoomRecordItem(context: Context,id:String){
-
+    fun getRecordDetailsByRoom(id: String, bottomSheetDialog: BottomSheetDialog) {
+         val recordList = BaseActivity.INSTANCE!!.myDao().loadSingle(id)
+         for (i in recordList.indices){
+             bottomSheetDialog.mTitle.text = recordList[i].title
+             bottomSheetDialog.mWebAddress.text = recordList[i].websiteAddress
+             bottomSheetDialog.mEmail.text = recordList[i].email
+             bottomSheetDialog.mPassword.text = recordList[i].password
+             bottomSheetDialog.mAddNote.text = recordList[i].addNote
+         }
     }
 
     fun deleteRecordItem(context: Context, id: String) {
@@ -136,7 +141,6 @@ class HomeRepository {
             override fun onResponse(call: Call<SignUpModel>, response: Response<SignUpModel>) {
                 roomRecord.recordId = id
                 BaseActivity.INSTANCE!!.myDao().deleteByRecordId(id)
-
                 context.toast("Delete Record Successfully")
             }
 

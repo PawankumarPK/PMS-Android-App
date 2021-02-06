@@ -2,6 +2,7 @@ package com.purpleshade.pms.fragment.home
 
 import android.app.Activity
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
@@ -21,7 +22,9 @@ import com.purpleshade.pms.repository.HomeRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
 import com.purpleshade.pms.utils.customObject.RoomRecordDetail
 import com.purpleshade.pms.utils.show
+import kotlinx.android.synthetic.main.password_detail_bottomsheet.*
 import kotlinx.android.synthetic.main.password_detail_bottomsheet.view.*
+
 
 class HomeViewModel(val context: Context, val actvity: Activity, val repository: HomeRepository, val progressBar: ProgressBar, val user: RoomUser) : ViewModel(), PasswordsAdapter.OnEventListener, RoomPasswordsAdapter.RoomOnEventListener {
 
@@ -39,7 +42,7 @@ class HomeViewModel(val context: Context, val actvity: Activity, val repository:
 
         if (RoomRecordDetail.roomDbEnable) {
             roomDbLoadAdapter(view)
-            val roomRepo = repository.loadRecordListFromRoom(roomPasswordList,progressBar)
+            val roomRepo = repository.loadRecordListFromRoom(roomPasswordList, progressBar)
             authListener!!.onSuccess(roomRepo)
         } else {
             loadAdapter(view)
@@ -72,28 +75,32 @@ class HomeViewModel(val context: Context, val actvity: Activity, val repository:
     }
 
     private fun bottomSheetVisible(actvity: Activity) {
-        val bottomSheetView = LayoutInflater.from(context).inflate(
-            R.layout.password_detail_bottomsheet, actvity.findViewById<View>(R.id.bottomSheetContainer) as LinearLayout?
-        )
+        val bottomSheetView = LayoutInflater.from(context).inflate(R.layout.password_detail_bottomsheet, actvity.findViewById<View>(R.id.bottomSheetContainer) as LinearLayout?)
+        bottomSheetDialog.setContentView(bottomSheetView)
 
         bottomSheetView.mClose.setOnClickListener {
             bottomSheetDialog.dismiss()
         }
 
-        bottomSheetDialog.setContentView(bottomSheetView)
-        bottomSheetDialog.show()
     }
 
     override fun viewRecordDetails() {
         bottomSheetDialog = BottomSheetDialog(context)
-        repository.getRecordDetails(RoomRecordDetail.recordId, context, bottomSheetDialog)
         bottomSheetVisible(actvity)
+        repository.getRecordDetails(RoomRecordDetail.recordId, context, bottomSheetDialog)
+        bottomSheetDialog.show()
+    }
+
+    override fun viewRecordDetailsByRoom() {
+        bottomSheetDialog = BottomSheetDialog(context)
+        bottomSheetVisible(actvity)
+        repository.getRecordDetailsByRoom(RoomRecordDetail.recordId, bottomSheetDialog)
+        bottomSheetDialog.show()
     }
 
     override fun deleteRecord(id: String) {
         repository.deleteRecordItem(context, id)
     }
-
 
 
 }
