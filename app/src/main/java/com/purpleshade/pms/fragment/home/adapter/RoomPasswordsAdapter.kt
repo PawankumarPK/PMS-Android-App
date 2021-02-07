@@ -62,7 +62,7 @@ class RoomPasswordsAdapter(val view: View, val context: Context, val passwordLis
                 if (ViewVisibility.networkProblem) {
                     context.toast("No internet connection")
                 } else {
-                    onEventListener!!.deleteRecord(passwordList[pos].recordId!!)
+                    onEventListener!!.deleteRecord(passwordList[pos].recordId!!,pos)
                     passwordList.removeAt(pos)
                     notifyItemRemoved(pos)
                 }
@@ -72,7 +72,7 @@ class RoomPasswordsAdapter(val view: View, val context: Context, val passwordLis
 
     interface RoomOnEventListener {
         fun viewRecordDetailsByRoom()
-        fun deleteRecord(id: String)
+        fun deleteRecord(id: String,pos:Int)
     }
 
 }

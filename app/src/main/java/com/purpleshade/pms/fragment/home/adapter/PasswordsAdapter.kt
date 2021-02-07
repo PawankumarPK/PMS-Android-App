@@ -52,16 +52,16 @@ class PasswordsAdapter(val view: View, val context: Context, val passwordList: A
             }
 
             binding.mDelete.setOnClickListener {
-                onEventListener!!.deleteRecord(binding.viewModelAdapter!!._id)
-                passwordList.removeAt(pos)
-                notifyItemRemoved(pos)
+                onEventListener!!.deleteRecord(binding.viewModelAdapter!!._id,pos)
+               /* passwordList.removeAt(pos)
+                notifyItemRemoved(pos)*/
             }
         }
     }
 
     interface OnEventListener {
         fun viewRecordDetails()
-        fun deleteRecord(id: String)
+        fun deleteRecord(id: String,pos:Int)
     }
 
 }
