@@ -1,7 +1,10 @@
 package com.purpleshade.pms.fragment.login
 
 import android.content.Context
+import android.text.method.PasswordTransformationMethod
 import android.view.View
+import android.widget.EditText
+import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
@@ -13,12 +16,14 @@ import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.show
 import com.purpleshade.pms.utils.toast
 
-class LoginViewModel(val context: Context, private val repository: LoginRepository, val progressBar: ProgressBar, val user: RoomUser) : ViewModel() {
+class LoginViewModel(val context: Context, private val repository: LoginRepository, val progressBar: ProgressBar, val user: RoomUser, val imageView: ImageView, val editText: EditText) : ViewModel() {
 
     var email: String? = null
     var password: String? = null
     var authListener: AuthListener? = null
     var username: String? = null
+    var visiblity = true
+
 
     fun onLoginButtonClick(view: View) {
 /*
@@ -44,4 +49,20 @@ class LoginViewModel(val context: Context, private val repository: LoginReposito
         view.findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
 
     }
+
+    fun passwordVisibilityOnClick(view: View) {
+        if (visiblity) {
+            visiblity = false
+            editText.transformationMethod = null
+            imageView.setImageResource(R.drawable.ic_visibilty_off)
+        } else {
+            visiblity = true
+            editText.transformationMethod = PasswordTransformationMethod()
+            imageView.setImageResource(R.drawable.ic_visible)
+
+        }
+
+
+    }
+
 }

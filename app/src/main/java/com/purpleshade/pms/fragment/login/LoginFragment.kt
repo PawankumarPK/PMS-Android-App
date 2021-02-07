@@ -18,6 +18,7 @@ import com.purpleshade.pms.fragment.BaseFragment
 import com.purpleshade.pms.repository.LoginRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
 import kotlinx.android.synthetic.main.activity_base.*
+import kotlinx.android.synthetic.main.login_fragment.*
 import java.lang.Exception
 
 
@@ -44,7 +45,7 @@ class LoginFragment : BaseFragment(), AuthListener {
 
         val repository = LoginRepository()
         binding.lifecycleOwner = this
-        val factory = AuthViewModelFactory(baseActivity, repository,baseActivity.mProgressBar,user)
+        val factory = AuthViewModelFactory(baseActivity, repository,baseActivity.mProgressBar,user,mPasswordVisiblity,mUserPassword)
 
         viewModel = ViewModelProvider(this, factory).get(LoginViewModel::class.java)
 

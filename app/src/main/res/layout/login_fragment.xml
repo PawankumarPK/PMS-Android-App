@@ -85,23 +85,48 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/size20"
-                        android:hint="@string/password">
+                        android:layout_marginStart="@dimen/size20"
+                        android:layout_marginTop="@dimen/size10"
+                        android:layout_marginEnd="@dimen/size20"
+                        android:orientation="horizontal"
+                        android:weightSum="10">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/mUserPassword"
-                            android:layout_width="match_parent"
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/raleway_medium"
-                            android:inputType="textPassword"
-                            android:text="@={viewModel.password}"
-                            android:textStyle="bold" />
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="8"
+                            android:hint="@string/password">
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/mUserPassword"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/raleway_medium"
+                                android:inputType="textPassword"
+                                android:text="@={viewModel.password}"
+                                android:textStyle="bold" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <ImageView
+                            android:id="@+id/mPasswordVisiblity"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="2"
+                            android:background="@drawable/border"
+                            android:contentDescription="@null"
+                            android:onClick="@{viewModel.passwordVisibilityOnClick}"
+                            android:padding="15dp"
+                            android:src="@drawable/ic_visible" />
+
+                    </LinearLayout>
+
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/mLogin"
