@@ -79,6 +79,12 @@ class SignUpViewModel(val context: Context, private val repository: SignupReposi
 
         }
 
+<<<<<<< HEAD
+=======
+        val repo = repository.signUp(username!!, email!!, password!!, confirmPassword!!, context, progressBar)
+        authListener!!.onSuccess(repo)
+        repository.view = view
+>>>>>>> 2c4610f... Snackbar updated when signup
 
     }
 

@@ -24,6 +24,7 @@
     <string name="something_went_wrong">Oops! Something went wrong</string>
     <string name="invalid_credential">Invalid Credential</string>
     <string name="register_successful">User register successful</string>
+<<<<<<< HEAD
     <string name="update_profile">Update Profile</string>
     <string name="update_profile_successful">Update Profile Successful</string>
     <string name="edit_profile">Edit Profile</string>
@@ -31,5 +32,7 @@
     <string name="email_address">Email Address</string>
     <string name="emergency_number">Emergency Number</string>
     <string name="username">Username</string>
+=======
+>>>>>>> 2c4610f... Snackbar updated when signup
 
 </resources>
