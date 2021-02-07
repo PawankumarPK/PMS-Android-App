@@ -39,7 +39,7 @@ class SignUpFragment : BaseFragment(), AuthListener {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = this
         val repository = SignupRepository()
-        val factory = SignUpViewModelFactory(baseActivity,repository,baseActivity.mProgressBar)
+        val factory = SignUpViewModelFactory(baseActivity,repository,baseActivity.mProgressBar,mPasswordVisiblity,mPassword)
         viewModel = ViewModelProvider(this,factory).get(SignUpViewModel::class.java)
         viewModel.authListener = this
         binding.viewModel = viewModel

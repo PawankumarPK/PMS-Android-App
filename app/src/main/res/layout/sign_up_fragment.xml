@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
-        <import type="android.view.View"/>
+        <import type="android.view.View" />
 
         <variable
             name="viewModel"
@@ -11,8 +11,7 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -69,8 +68,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/raleway_medium"
                     android:inputType="textEmailAddress"
-                    android:textStyle="bold"
-                    android:text="@={viewModel.username}"/>
+                    android:text="@={viewModel.username}"
+                    android:textStyle="bold" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -90,32 +89,52 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/raleway_medium"
                     android:inputType="textEmailAddress"
-                    android:textStyle="bold"
-                    android:text="@={viewModel.email}"/>
+                    android:text="@={viewModel.email}"
+                    android:textStyle="bold" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/size20"
                 android:layout_marginTop="@dimen/size10"
                 android:layout_marginEnd="@dimen/size20"
-                android:hint="@string/password">
+                android:orientation="horizontal"
+                android:weightSum="10">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/mPassword"
-                    android:layout_width="match_parent"
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/raleway_medium"
-                    android:inputType="textPassword"
-                    android:textStyle="bold"
-                    android:text="@={viewModel.password}"/>
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="8"
+                    android:hint="@string/password">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/mPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/raleway_medium"
+                        android:inputType="textPassword"
+                        android:text="@={viewModel.password}"
+                        android:textStyle="bold" />
+                </com.google.android.material.textfield.TextInputLayout>
 
+                <ImageView
+                    android:id="@+id/mPasswordVisiblity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="2"
+                    android:background="@drawable/border"
+                    android:contentDescription="@null"
+                    android:onClick="@{viewModel.passwordVisibilityOnClick}"
+                    android:padding="15dp"
+                    android:src="@drawable/ic_visible" />
+
+            </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -132,8 +151,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/raleway_medium"
                     android:inputType="textPassword"
-                    android:textStyle="bold"
-                    android:text="@={viewModel.confirmPassword}"/>
+                    android:text="@={viewModel.confirmPassword}"
+                    android:textStyle="bold" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -144,14 +163,13 @@
                 android:layout_margin="@dimen/size20"
                 android:background="@drawable/gradient"
                 android:fontFamily="@font/raleway_medium"
+                android:onClick="@{viewModel.signUpButtonClick}"
                 android:text="@string/register"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/size16"
-                android:onClick="@{viewModel.signUpButtonClick}"/>
+                android:textSize="@dimen/size16" />
 
         </LinearLayout>
-
 
 
         <TextView
@@ -160,10 +178,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/size20"
             android:fontFamily="@font/raleway_medium"
+            android:onClick="@{viewModel.onLoginClick}"
             android:padding="@dimen/size10"
             android:text="@string/login_now"
             android:textColor="@color/colorBlue"
-            android:onClick="@{viewModel.onLoginClick}"
             android:textSize="@dimen/size14"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
