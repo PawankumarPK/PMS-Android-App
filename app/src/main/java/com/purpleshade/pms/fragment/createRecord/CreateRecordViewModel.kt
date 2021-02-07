@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.purpleshade.pms.repository.CreateRecordRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
 import com.purpleshade.pms.utils.customObject.RoomRecordDetail
+import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.show
 import com.purpleshade.pms.utils.toast
 
@@ -26,6 +27,7 @@ class CreateRecordViewModel(val context: Context, val repository: CreateRecordRe
             authListener!!.onSuccess(repo)
 
         } else {
+            progressBar.hide()
             context.toast("Title is missing")
         }
     }

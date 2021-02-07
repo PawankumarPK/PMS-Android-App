@@ -32,12 +32,12 @@ class CreateRecordRepository : ViewModel() {
         call.enqueue(object : Callback<SignUpModel> {
             override fun onFailure(call: Call<SignUpModel>, t: Throwable) {
                 progressBar.hide()
-                view.snackbar(context,"Something went wrong",R.color.colorWarning)
+                view.snackbar(context,"Oops! Something went wrong",R.color.colorWarning)
             }
 
             override fun onResponse(call: Call<SignUpModel>, response: Response<SignUpModel>) {
                 progressBar.hide()
-                RoomRecordDetail.roomDbEnable = "Record Added"
+                RoomRecordDetail.roomDbEnable = "List Update"
                 view.snackbar(context,"Add record successfully",R.color.colorGreen)
                 view.findNavController().navigate(R.id.action_createRecordFragment_to_homeFragment)
 

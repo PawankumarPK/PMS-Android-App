@@ -14,6 +14,7 @@ import com.purpleshade.pms.model.UpdateRecord
 import com.purpleshade.pms.network.RetrofitClient
 import com.purpleshade.pms.utils.customObject.RoomRecordDetail
 import com.purpleshade.pms.utils.hide
+import com.purpleshade.pms.utils.snackbar
 import com.purpleshade.pms.utils.toast
 import retrofit2.Call
 import retrofit2.Callback
@@ -72,12 +73,13 @@ class UpdateRecordRepository {
         call.enqueue(object : Callback<SignUpModel> {
             override fun onFailure(call: Call<SignUpModel>, t: Throwable) {
                 progressBar.hide()
-                context.toast("Something went wrong")
+                view!!.snackbar(context,"Oops! Something went wrong",R.color.colorWarning)
             }
 
             override fun onResponse(call: Call<SignUpModel>, response: Response<SignUpModel>) {
+                RoomRecordDetail.roomDbEnable = "List Update"
                 progressBar.hide()
-                context.toast("Record Update Successfully")
+                view!!.snackbar(context,"Record update successfully",R.color.colorGreen)
                 view!!.findNavController().navigate(R.id.action_updateRecordFragment_to_homeFragment)
             }
 

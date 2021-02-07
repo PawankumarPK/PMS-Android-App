@@ -44,7 +44,7 @@ class HomeViewModel(val context: Context, val actvity: Activity, val repository:
             roomDbLoadAdapter(view)
             val roomRepo = repository.loadRecordListFromRoom(roomPasswordList, progressBar)
             authListener!!.onSuccess(roomRepo)
-        } else if (RoomRecordDetail.roomDbEnable == "Record Added" || RoomRecordDetail.roomDbEnable == "with Internet") {
+        } else if (RoomRecordDetail.roomDbEnable == "List Update" || RoomRecordDetail.roomDbEnable == "with Internet") {
             loadAdapter(view)
             val repo = repository.loadRecordList(context, passwordList, progressBar, adapter)
             authListener!!.onSuccess(repo)
