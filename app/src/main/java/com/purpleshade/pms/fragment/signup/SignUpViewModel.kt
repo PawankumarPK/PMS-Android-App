@@ -31,8 +31,9 @@ class SignUpViewModel(val context: Context, private val repository: SignupReposi
             return
         }
 
-        val repository = repository.signUp(username!!, email!!, password!!, confirmPassword!!, context, progressBar)
-        authListener!!.onSuccess(repository)
+        val repo = repository.signUp(username!!, email!!, password!!, confirmPassword!!, context, progressBar)
+        authListener!!.onSuccess(repo)
+        repository.view = view
 
     }
 

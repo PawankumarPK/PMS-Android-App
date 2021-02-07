@@ -32,7 +32,7 @@ class LoginRepository {
         call.enqueue(object : Callback<SignUpModel> {
             override fun onFailure(call: Call<SignUpModel>?, t: Throwable?) {
                 loginResponse.value = t?.message
-                view.snackbar(context,"Oops! Something went wrong",R.color.colorWarning)
+                view.snackbar(context,context.getString(R.string.something_went_wrong), R.color.colorWarning)
                 progressBar.hide()
             }
 
@@ -57,7 +57,7 @@ class LoginRepository {
                     }
                 } else {
                     progressBar.hide()
-                    view.snackbar(context,"Invalid Credential",R.color.colorWarning)
+                    view.snackbar(context,context.getString(R.string.invalid_credential),R.color.colorWarning)
                 }
             }
         })

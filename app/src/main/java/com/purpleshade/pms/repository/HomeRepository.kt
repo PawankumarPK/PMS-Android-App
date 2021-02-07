@@ -2,11 +2,13 @@ package com.purpleshade.pms.repository
 
 import android.content.Context
 import android.util.Log
+import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.purpleshade.pms.R
 import com.purpleshade.pms.activity.BaseActivity
 import com.purpleshade.pms.db.RoomRecord
 import com.purpleshade.pms.fragment.home.adapter.PasswordsAdapter
@@ -16,6 +18,7 @@ import com.purpleshade.pms.model.SignUpModel
 import com.purpleshade.pms.network.RetrofitClient
 import com.purpleshade.pms.utils.customObject.RoomRecordDetail
 import com.purpleshade.pms.utils.hide
+import com.purpleshade.pms.utils.snackbar
 import com.purpleshade.pms.utils.toast
 import kotlinx.android.synthetic.main.password_detail_bottomsheet.*
 import retrofit2.Call
@@ -31,6 +34,7 @@ class HomeRepository {
     var email = ""
     var password = ""
     var addNote = ""
+    var view : View? = null
 
     val roomRecord = RoomRecord()
 
@@ -135,13 +139,13 @@ class HomeRepository {
 
         call.enqueue(object : Callback<SignUpModel> {
             override fun onFailure(call: Call<SignUpModel>, t: Throwable) {
-                context.toast("Something went wrong")
+                view!!.snackbar(context,context.getString(R.string.something_went_wrong), R.color.colorWarning)
             }
 
             override fun onResponse(call: Call<SignUpModel>, response: Response<SignUpModel>) {
                 roomRecord.recordId = id
                 BaseActivity.INSTANCE!!.myDao().deleteByRecordId(id)
-                context.toast("Delete Record Successfully")
+//                view!!.snackbar(context,context.getString(R.string.delete_record_successfully), R.color.colorGreen)
             }
 
         })
