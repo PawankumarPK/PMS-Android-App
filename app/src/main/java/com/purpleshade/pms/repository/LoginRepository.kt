@@ -1,5 +1,6 @@
 package com.purpleshade.pms.repository
 
+import android.content.Context
 import android.view.View
 import android.widget.ProgressBar
 import androidx.lifecycle.LiveData
@@ -23,7 +24,7 @@ import retrofit2.Response
  */
 class LoginRepository {
 
-    fun doLogin(email: String, password: String, user: RoomUser, view: View, progressBar: ProgressBar): LiveData<String> {
+    fun doLogin(context:Context,email: String, password: String, user: RoomUser, view: View, progressBar: ProgressBar): LiveData<String> {
         val loginResponse = MutableLiveData<String>()
         val api = RetrofitClient.apiService
         val call = api.login(email, password)
@@ -31,7 +32,7 @@ class LoginRepository {
         call.enqueue(object : Callback<SignUpModel> {
             override fun onFailure(call: Call<SignUpModel>?, t: Throwable?) {
                 loginResponse.value = t?.message
-                view.snackbar("Oops! Something went wrong")
+                view.snackbar(context,"Oops! Something went wrong",R.color.colorWarning)
                 progressBar.hide()
             }
 
@@ -56,7 +57,7 @@ class LoginRepository {
                     }
                 } else {
                     progressBar.hide()
-                    view.snackbar("Invalid Credential")
+                    view.snackbar(context,"Invalid Credential",R.color.colorWarning)
                 }
             }
         })

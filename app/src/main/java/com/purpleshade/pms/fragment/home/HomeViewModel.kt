@@ -23,7 +23,6 @@ import com.purpleshade.pms.utils.customInterface.AuthListener
 import com.purpleshade.pms.utils.customObject.RoomRecordDetail
 import com.purpleshade.pms.utils.customObject.ViewVisibility
 import com.purpleshade.pms.utils.show
-import kotlinx.android.synthetic.main.password_detail_bottomsheet.*
 import kotlinx.android.synthetic.main.password_detail_bottomsheet.view.*
 
 
@@ -41,11 +40,11 @@ class HomeViewModel(val context: Context, val actvity: Activity, val repository:
     fun loadAdapterList(view: RecyclerView) {
         progressBar.show()
 
-        if (RoomRecordDetail.roomDbEnable || ViewVisibility.networkProblem) {
+        if (RoomRecordDetail.roomDbEnable == "without Internet" || ViewVisibility.networkProblem) {
             roomDbLoadAdapter(view)
             val roomRepo = repository.loadRecordListFromRoom(roomPasswordList, progressBar)
             authListener!!.onSuccess(roomRepo)
-        } else {
+        } else if (RoomRecordDetail.roomDbEnable == "Record Added" || RoomRecordDetail.roomDbEnable == "with Internet") {
             loadAdapter(view)
             val repo = repository.loadRecordList(context, passwordList, progressBar, adapter)
             authListener!!.onSuccess(repo)
@@ -62,7 +61,7 @@ class HomeViewModel(val context: Context, val actvity: Activity, val repository:
         adapter.onEventListener = this
         view.adapter = adapter
         view.layoutManager = LinearLayoutManager(context)
-        RoomRecordDetail.roomDbEnable = true
+        RoomRecordDetail.roomDbEnable = "without Internet"
 
     }
 

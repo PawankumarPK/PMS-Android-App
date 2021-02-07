@@ -12,6 +12,7 @@ import com.purpleshade.pms.model.SignUpModel
 import com.purpleshade.pms.network.RetrofitClient
 import com.purpleshade.pms.utils.customObject.RoomRecordDetail
 import com.purpleshade.pms.utils.hide
+import com.purpleshade.pms.utils.snackbar
 import com.purpleshade.pms.utils.toast
 import retrofit2.Call
 import retrofit2.Callback
@@ -31,14 +32,13 @@ class CreateRecordRepository : ViewModel() {
         call.enqueue(object : Callback<SignUpModel> {
             override fun onFailure(call: Call<SignUpModel>, t: Throwable) {
                 progressBar.hide()
-                context.toast("Something went wrong")
+                view.snackbar(context,"Something went wrong",R.color.colorWarning)
             }
 
             override fun onResponse(call: Call<SignUpModel>, response: Response<SignUpModel>) {
                 progressBar.hide()
-
-                RoomRecordDetail.roomDbEnable = true
-                context.toast("Add Record Successfully")
+                RoomRecordDetail.roomDbEnable = "Record Added"
+                view.snackbar(context,"Add record successfully",R.color.colorGreen)
                 view.findNavController().navigate(R.id.action_createRecordFragment_to_homeFragment)
 
             }

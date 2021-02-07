@@ -36,7 +36,7 @@ class LoginViewModel(val context: Context, private val repository: LoginReposito
             return
         }
 
-        val repo = repository.doLogin(email.toString(), password.toString(), user, view, progressBar)
+        val repo = repository.doLogin(context,email.toString(), password.toString(), user, view, progressBar)
         authListener!!.onSuccess(repo)
     }
 
