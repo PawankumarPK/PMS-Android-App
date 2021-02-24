@@ -43,6 +43,8 @@ class RoomPasswordsAdapter(val view: View, val context: Context, val passwordLis
             binding.roomViewModelAdapter = list[pos]
             binding.executePendingBindings()
 
+            Log.d("===>>Done","====>>Room")
+
             binding.mPasswordView.setOnClickListener {
                 RoomRecordDetail.recordId = passwordList[pos].recordId!!
                 onEventListener!!.viewRecordDetailsByRoom()
@@ -63,8 +65,8 @@ class RoomPasswordsAdapter(val view: View, val context: Context, val passwordLis
                     context.toast("No internet connection")
                 } else {
                     onEventListener!!.deleteRecord(passwordList[pos].recordId!!,pos)
-                    passwordList.removeAt(pos)
-                    notifyItemRemoved(pos)
+                    /*passwordList.removeAt(pos)
+                    notifyItemRemoved(pos)*/
                 }
             }
         }

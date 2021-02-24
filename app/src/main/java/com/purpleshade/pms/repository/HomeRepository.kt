@@ -38,7 +38,7 @@ class HomeRepository {
 
     val roomRecord = RoomRecord()
 
-    fun loadRecordList(context: Context, passwordList: ArrayList<RecordList>, progressBar: ProgressBar, adapter: PasswordsAdapter): LiveData<String> {
+    fun loadRecordList(context: Context, passwordList: ArrayList<RecordList>, listDB: ArrayList<RoomRecord>,progressBar: ProgressBar, adapter: PasswordsAdapter): LiveData<String> {
         val responseLoadRecordList: MutableLiveData<String> = MutableLiveData()
         val api = RetrofitClient.apiService
         val call = api.allRecords(RoomRecordDetail.userId)
@@ -70,7 +70,14 @@ class HomeRepository {
                 }
             }
 
+
         })
+
+        val recordList = BaseActivity.INSTANCE!!.myDao().records
+        listDB.addAll(recordList)
+        for (i in listDB.indices) {
+            val title = listDB[i].title
+        }
 
         return responseLoadRecordList
     }
@@ -145,10 +152,13 @@ class HomeRepository {
             override fun onResponse(call: Call<SignUpModel>, response: Response<SignUpModel>) {
                 roomRecord.recordId = id
                 BaseActivity.INSTANCE!!.myDao().deleteByRecordId(id)
-//                view!!.snackbar(context,context.getString(R.string.delete_record_successfully), R.color.colorGreen)
+                view!!.snackbar(context,context.getString(R.string.delete_record_successfully), R.color.colorGreen)
             }
 
         })
     }
 
 }
+
+
+//
