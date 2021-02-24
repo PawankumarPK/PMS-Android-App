@@ -31,24 +31,18 @@ class PasswordsAdapter(val view: View, val context: Context, var passwordList: A
     }
 
     override fun getItemCount(): Int {
-        if (RoomRecordDetail.roomDbEnable == "without Internet" || ViewVisibility.networkProblem) {
-            return roomPasswordList.size
-        } else if (RoomRecordDetail.roomDbEnable == "List Update" || RoomRecordDetail.roomDbEnable == "with Internet") {
-            return passwordList.size
-        }
-        return 0
+        return if (ViewVisibility.networkProblem)
+            roomPasswordList.size
+        else
+            passwordList.size
+
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        if (ViewVisibility.networkProblem) {
-            Log.d("===>>DoneRoom","Room On")
+        if (ViewVisibility.networkProblem)
             holder.onBindRoom(roomPasswordList, position)
-        }
-        else {
-            Log.d("===>>Done","Data On")
+        else
             holder.onBind(passwordList, position)
-        }
-
     }
 
     inner class ViewHolder(val binding: PasswordViewholderBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -71,8 +65,6 @@ class PasswordsAdapter(val view: View, val context: Context, var passwordList: A
 
             binding.mDelete.setOnClickListener {
                 onEventListener!!.deleteRecord(binding.viewModelAdapter!!._id, pos)
-                //passwordList.removeAt(pos)
-                //notifyItemRemoved(pos)
             }
         }
 
@@ -85,7 +77,6 @@ class PasswordsAdapter(val view: View, val context: Context, var passwordList: A
             binding.mPasswordView.setOnClickListener {
                 RoomRecordDetail.recordId = roomPasswordList[pos].recordId!!
                 onEventListener!!.viewRecordDetailsUsingRoom()
-                //onEventListener!!.viewRecordDetails()
             }
 
 
@@ -102,9 +93,7 @@ class PasswordsAdapter(val view: View, val context: Context, var passwordList: A
                 if (ViewVisibility.networkProblem) {
                     context.toast("No internet connection")
                 } else {
-                    onEventListener!!.deleteRecord(roomPasswordList[pos].recordId!!,pos)
-                    /*passwordList.removeAt(pos)
-                    notifyItemRemoved(pos)*/
+                    onEventListener!!.deleteRecord(roomPasswordList[pos].recordId!!, pos)
                 }
             }
 

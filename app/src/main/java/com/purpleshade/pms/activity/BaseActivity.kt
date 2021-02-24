@@ -36,8 +36,8 @@ class BaseActivity : AppCompatActivity() {
         val manager = applicationContext.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork = manager.activeNetworkInfo
         if (activeNetwork == null) {
-            mNetworkCheckLayout.show()
             ViewVisibility.networkProblem = true
+            mNetworkCheckLayout.show()
             mProgressBar.hide()
         } else {
             ViewVisibility.networkProblem = false

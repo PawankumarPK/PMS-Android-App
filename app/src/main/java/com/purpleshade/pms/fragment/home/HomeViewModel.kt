@@ -2,7 +2,6 @@ package com.purpleshade.pms.fragment.home
 
 import android.app.Activity
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
@@ -16,12 +15,10 @@ import com.purpleshade.pms.R
 import com.purpleshade.pms.db.RoomRecord
 import com.purpleshade.pms.db.RoomUser
 import com.purpleshade.pms.fragment.home.adapter.PasswordsAdapter
-import com.purpleshade.pms.fragment.home.adapter.RoomPasswordsAdapter
 import com.purpleshade.pms.model.RecordList
 import com.purpleshade.pms.repository.HomeRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
 import com.purpleshade.pms.utils.customObject.RoomRecordDetail
-import com.purpleshade.pms.utils.customObject.ViewVisibility
 import com.purpleshade.pms.utils.show
 import kotlinx.android.synthetic.main.delete_warning_dialog.view.*
 import kotlinx.android.synthetic.main.password_detail_bottomsheet.view.*
@@ -30,7 +27,6 @@ import kotlinx.android.synthetic.main.password_detail_bottomsheet.view.*
 class HomeViewModel(val context: Context, val actvity: Activity, val repository: HomeRepository, val progressBar: ProgressBar, val user: RoomUser) : ViewModel(), PasswordsAdapter.OnEventListener {
 
     lateinit var adapter: PasswordsAdapter
-    lateinit var roomAdapter: RoomPasswordsAdapter
     var authListener: AuthListener? = null
 
     var passwordList: ArrayList<RecordList> = ArrayList()
@@ -42,27 +38,11 @@ class HomeViewModel(val context: Context, val actvity: Activity, val repository:
     //Insert list into recycleView
     fun loadAdapterList(view: RecyclerView) {
         progressBar.show()
-        RoomRecordDetail.roomDbEnable = "with Internet"
 
         loadAdapter(view)
         val repo = repository.loadRecordList(context, passwordList, roomPasswordList, progressBar, adapter)
         authListener!!.onSuccess(repo)
         repository.view = view
-
-        /*if (RoomRecordDetail.roomDbEnable == "without Internet" || ViewVisibility.networkProblem) {
-            //loadAdapter(view)
-            //roomDbLoadAdapter(view)
-            *//*val roomRepo = repository.loadRecordListFromRoom(roomPasswordList, progressBar)
-            authListener!!.onSuccess(roomRepo)
-            repository.view = view*//*
-        } else if (RoomRecordDetail.roomDbEnable == "List Update" || RoomRecordDetail.roomDbEnable == "with Internet") {
-            loadAdapter(view)
-            val repo = repository.loadRecordList(context, passwordList, roomPasswordList, progressBar, adapter)
-            authListener!!.onSuccess(repo)
-            *//*val roomRepo = repository.loadRecordListFromRoom(roomPasswordList, progressBar)
-            authListener!!.onSuccess(roomRepo)*//*
-            repository.view = view
-        }*/
     }
 
     fun fabButtonClick(view: View) {
@@ -70,23 +50,13 @@ class HomeViewModel(val context: Context, val actvity: Activity, val repository:
     }
 
     private fun loadAdapter(view: RecyclerView) {
-        adapter = PasswordsAdapter(view, context, passwordList,roomPasswordList)
+        adapter = PasswordsAdapter(view, context, passwordList, roomPasswordList)
         adapter.notifyDataSetChanged()
         adapter.onEventListener = this
         view.adapter = adapter
         view.layoutManager = LinearLayoutManager(context)
-        //RoomRecordDetail.roomDbEnable = "without Internet"
 
     }
-
-   /* private fun roomDbLoadAdapter(view: RecyclerView) {
-        roomAdapter = RoomPasswordsAdapter(view, context, roomPasswordList)
-        roomAdapter.notifyDataSetChanged()
-        //roomAdapter.onEventListener = this
-        view.adapter = roomAdapter
-        view.layoutManager = LinearLayoutManager(context)
-
-    }*/
 
     private fun bottomSheetVisible(actvity: Activity) {
         val bottomSheetView = LayoutInflater.from(context).inflate(R.layout.password_detail_bottomsheet, actvity.findViewById<View>(R.id.bottomSheetContainer) as LinearLayout?)
@@ -134,17 +104,9 @@ class HomeViewModel(val context: Context, val actvity: Activity, val repository:
         bottomSheetDialog.show()
     }
 
-    /*override fun viewRecordDetailsByRoom() {
-        bottomSheetDialog = BottomSheetDialog(context)
-        bottomSheetVisible(actvity)
-        repository.getRecordDetailsByRoom(RoomRecordDetail.recordId, bottomSheetDialog)
-        bottomSheetDialog.show()
-    }*/
-
     override fun deleteRecord(id: String, pos: Int) {
-        Log.d("--->>DeleteEvent", "roomPasswordList.size.toString()")
-         deleteBottomSheetDialog = BottomSheetDialog(context)
-         deleteBottomSheetVisible(actvity, id, pos)
+        deleteBottomSheetDialog = BottomSheetDialog(context)
+        deleteBottomSheetVisible(actvity, id, pos)
     }
 
 }
