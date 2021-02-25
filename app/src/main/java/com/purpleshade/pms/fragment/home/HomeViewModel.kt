@@ -2,10 +2,14 @@ package com.purpleshade.pms.fragment.home
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.ProgressBar
+import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -45,10 +49,6 @@ class HomeViewModel(val context: Context, val actvity: Activity, val repository:
         repository.view = view
     }
 
-    fun fabButtonClick(view: View) {
-        view.findNavController().navigate(R.id.action_homeFragment_to_createRecordFragment)
-    }
-
     private fun loadAdapter(view: RecyclerView) {
         adapter = PasswordsAdapter(view, context, passwordList, roomPasswordList)
         adapter.notifyDataSetChanged()
@@ -58,14 +58,26 @@ class HomeViewModel(val context: Context, val actvity: Activity, val repository:
 
     }
 
-    private fun bottomSheetVisible(actvity: Activity) {
+    private fun passwordDetailsBottomSheetVisible(actvity: Activity) {
         val bottomSheetView = LayoutInflater.from(context).inflate(R.layout.password_detail_bottomsheet, actvity.findViewById<View>(R.id.bottomSheetContainer) as LinearLayout?)
         bottomSheetDialog.setContentView(bottomSheetView)
 
         bottomSheetView.mClose.setOnClickListener {
             bottomSheetDialog.dismiss()
         }
+        bottomSheetView.mWebAddress.setOnClickListener {
+            openWebOnBrowser(bottomSheetView.mWebAddress)
+        }
 
+    }
+
+    private fun openWebOnBrowser(textView: TextView) {
+        var url = ""
+        if (!url.startsWith("http://") && !url.startsWith("https://"))
+            url = "http://" + textView.text.toString()
+
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(actvity, browserIntent, null)
     }
 
     private fun deleteBottomSheetVisible(actvity: Activity, id: String, pos: Int) {
@@ -92,14 +104,14 @@ class HomeViewModel(val context: Context, val actvity: Activity, val repository:
 
     override fun viewRecordDetails() {
         bottomSheetDialog = BottomSheetDialog(context)
-        bottomSheetVisible(actvity)
+        passwordDetailsBottomSheetVisible(actvity)
         repository.getRecordDetails(RoomRecordDetail.recordId, context, bottomSheetDialog)
         bottomSheetDialog.show()
     }
 
     override fun viewRecordDetailsUsingRoom() {
         bottomSheetDialog = BottomSheetDialog(context)
-        bottomSheetVisible(actvity)
+        passwordDetailsBottomSheetVisible(actvity)
         repository.getRecordDetailsByRoom(RoomRecordDetail.recordId, bottomSheetDialog)
         bottomSheetDialog.show()
     }
@@ -108,5 +120,10 @@ class HomeViewModel(val context: Context, val actvity: Activity, val repository:
         deleteBottomSheetDialog = BottomSheetDialog(context)
         deleteBottomSheetVisible(actvity, id, pos)
     }
+
+    fun fabButtonClick(view: View) {
+        view.findNavController().navigate(R.id.action_homeFragment_to_createRecordFragment)
+    }
+
 
 }

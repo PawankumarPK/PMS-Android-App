@@ -6,7 +6,7 @@
     <string name="add_note">Add Note</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
-    <string name="website_address">Website Address</string>
+    <string name="website_address">Website URL</string>
     <string name="title">Title</string>
     <string name="login">Login</string>
     <string name="pms">PMS</string>
