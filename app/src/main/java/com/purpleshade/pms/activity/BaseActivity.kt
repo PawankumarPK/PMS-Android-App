@@ -72,9 +72,10 @@ class BaseActivity : AppCompatActivity() {
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
 
-            if (ViewVisibility.backPressCount == 0)
+            if (ViewVisibility.backPressCount == 0) {
                 exitAppBottomSheetDialog = BottomSheetDialog(this)
-            exitAppBottomSheetVisible(this)
+                exitAppBottomSheetVisible(this)
+            }
             return super.onKeyDown(keyCode, event)
         }
         return true
