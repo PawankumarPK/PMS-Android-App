@@ -6,4 +6,5 @@ package com.purpleshade.pms.utils.customObject
 object ViewVisibility {
 
     var networkProblem = false
+    var backPressCount: Int? = null
 }

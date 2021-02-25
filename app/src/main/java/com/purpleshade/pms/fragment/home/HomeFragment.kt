@@ -17,6 +17,7 @@ import com.purpleshade.pms.fragment.BaseFragment
 import com.purpleshade.pms.repository.HomeRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
 import com.purpleshade.pms.utils.customObject.RoomRecordDetail
+import com.purpleshade.pms.utils.customObject.ViewVisibility
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.home_fragment.*
 
@@ -35,6 +36,7 @@ class HomeFragment : BaseFragment(), AuthListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        ViewVisibility.backPressCount = 0
         val user = RoomUser()
         val roomuserId = BaseActivity.INSTANCE!!.myDao().user
         RoomRecordDetail.userId = roomuserId.userId.toString()
@@ -58,6 +60,11 @@ class HomeFragment : BaseFragment(), AuthListener {
         responseSuccess.observe(this, Observer {
 
         })
+    }
+
+    override fun onPause() {
+        super.onPause()
+        ViewVisibility.backPressCount = 1
     }
 
 }

@@ -1,13 +1,17 @@
 package com.purpleshade.pms.activity
 
+import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.KeyEvent
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.purpleshade.pms.R
 import com.purpleshade.pms.db.MyDatabase
 import com.purpleshade.pms.db.RoomUser
@@ -15,8 +19,11 @@ import com.purpleshade.pms.network.RetrofitClient
 import com.purpleshade.pms.utils.*
 import com.purpleshade.pms.utils.customObject.ViewVisibility
 import kotlinx.android.synthetic.main.activity_base.*
+import kotlinx.android.synthetic.main.delete_warning_dialog.view.*
+import kotlin.system.exitProcess
 
 class BaseActivity : AppCompatActivity() {
+    lateinit var exitAppBottomSheetDialog: BottomSheetDialog
 
     companion object {
         var INSTANCE: MyDatabase? = null
@@ -64,12 +71,27 @@ class BaseActivity : AppCompatActivity() {
 
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            Log.d("---->>","backpress")
+
+            if (ViewVisibility.backPressCount == 0)
+                exitAppBottomSheetDialog = BottomSheetDialog(this)
+                exitAppBottomSheetVisible(this)
             return super.onKeyDown(keyCode, event)
         }
         return true
     }
+
+    private fun exitAppBottomSheetVisible(actvity: Activity) {
+        val deleteBottomSheetView = LayoutInflater.from(this).inflate(R.layout.exit_app_dialog, actvity.findViewById<View>(R.id.deleteBottomSheetContainer) as LinearLayout?)
+        exitAppBottomSheetDialog.setContentView(deleteBottomSheetView)
+
+        deleteBottomSheetView.mYes.setOnClickListener {
+            finish()
+            exitProcess(0)
+        }
+
+        exitAppBottomSheetDialog.show()
+    }
+
 
 }

@@ -71,11 +71,10 @@ class HomeRepository {
 
                 }
             }
-
-
         })
 
         val recordList = BaseActivity.INSTANCE!!.myDao().records
+        listDB.clear()
         listDB.addAll(recordList)
         for (i in listDB.indices) {
             val title = listDB[i].title
