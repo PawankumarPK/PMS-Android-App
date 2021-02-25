@@ -1,7 +1,6 @@
 package com.purpleshade.pms.activity
 
 import android.app.Activity
-import android.content.Context
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.Handler
@@ -36,7 +35,7 @@ class BaseActivity : AppCompatActivity() {
         setContentView(R.layout.activity_base)
 
         RetrofitClient.initRosAPI(Helper.getConfigValue(this, "api_url")!!)
-        INSTANCE = getAppDataBase(applicationContext)!!
+        INSTANCE = getAppDataBase()!!
 
         checkConnection()
 
@@ -59,7 +58,7 @@ class BaseActivity : AppCompatActivity() {
     }
 
 
-    fun getAppDataBase(context: Context): MyDatabase? {
+    private fun getAppDataBase(): MyDatabase? {
         if (INSTANCE == null) {
             synchronized(MyDatabase::class) {
                 INSTANCE = Room.databaseBuilder(applicationContext, MyDatabase::class.java, "myDB")
@@ -75,7 +74,7 @@ class BaseActivity : AppCompatActivity() {
 
             if (ViewVisibility.backPressCount == 0)
                 exitAppBottomSheetDialog = BottomSheetDialog(this)
-                exitAppBottomSheetVisible(this)
+            exitAppBottomSheetVisible(this)
             return super.onKeyDown(keyCode, event)
         }
         return true
