@@ -4,6 +4,8 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
+import android.view.KeyEvent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import com.purpleshade.pms.R
@@ -19,6 +21,7 @@ class BaseActivity : AppCompatActivity() {
     companion object {
         var INSTANCE: MyDatabase? = null
     }
+
     val user = RoomUser()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,5 +62,14 @@ class BaseActivity : AppCompatActivity() {
         return INSTANCE
     }
 
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Log.d("---->>","backpress")
+            return super.onKeyDown(keyCode, event)
+        }
+        return true
+    }
 
 }

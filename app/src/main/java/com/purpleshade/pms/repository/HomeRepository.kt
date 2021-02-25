@@ -34,11 +34,11 @@ class HomeRepository {
     var email = ""
     var password = ""
     var addNote = ""
-    var view : View? = null
+    var view: View? = null
 
     val roomRecord = RoomRecord()
 
-    fun loadRecordList(context: Context, passwordList: ArrayList<RecordList>, listDB: ArrayList<RoomRecord>,progressBar: ProgressBar, adapter: PasswordsAdapter): LiveData<String> {
+    fun loadRecordList(context: Context, passwordList: ArrayList<RecordList>, listDB: ArrayList<RoomRecord>, progressBar: ProgressBar, adapter: PasswordsAdapter): LiveData<String> {
         val responseLoadRecordList: MutableLiveData<String> = MutableLiveData()
         val api = RetrofitClient.apiService
         val call = api.allRecords(RoomRecordDetail.userId)
@@ -52,6 +52,7 @@ class HomeRepository {
                 if (response.isSuccessful) {
                     progressBar.hide()
                     val recordDetail = response.body()!!.recordDetail
+                    passwordList.clear()
                     for (i in recordDetail) {
                         roomRecord.recordId = i._id
                         roomRecord.title = i.title
@@ -64,6 +65,7 @@ class HomeRepository {
                         BaseActivity.INSTANCE!!.myDao().userRecords(roomRecord)
 
                         passwordList.add(i).toString()
+
                     }
                     adapter.notifyDataSetChanged()
 
@@ -130,14 +132,14 @@ class HomeRepository {
     }
 
     fun getRecordDetailsByRoom(id: String, bottomSheetDialog: BottomSheetDialog) {
-         val recordList = BaseActivity.INSTANCE!!.myDao().loadSingle(id)
-         for (i in recordList.indices){
-             bottomSheetDialog.mTitle.text = recordList[i].title
-             bottomSheetDialog.mWebAddress.text = recordList[i].websiteAddress
-             bottomSheetDialog.mEmail.text = recordList[i].email
-             bottomSheetDialog.mPassword.text = recordList[i].password
-             bottomSheetDialog.mAddNote.text = recordList[i].addNote
-         }
+        val recordList = BaseActivity.INSTANCE!!.myDao().loadSingle(id)
+        for (i in recordList.indices) {
+            bottomSheetDialog.mTitle.text = recordList[i].title
+            bottomSheetDialog.mWebAddress.text = recordList[i].websiteAddress
+            bottomSheetDialog.mEmail.text = recordList[i].email
+            bottomSheetDialog.mPassword.text = recordList[i].password
+            bottomSheetDialog.mAddNote.text = recordList[i].addNote
+        }
     }
 
     fun deleteRecordItem(context: Context, id: String) {
@@ -146,13 +148,13 @@ class HomeRepository {
 
         call.enqueue(object : Callback<SignUpModel> {
             override fun onFailure(call: Call<SignUpModel>, t: Throwable) {
-                view!!.snackbar(context,context.getString(R.string.something_went_wrong), R.color.colorWarning)
+                view!!.snackbar(context, context.getString(R.string.something_went_wrong), R.color.colorWarning)
             }
 
             override fun onResponse(call: Call<SignUpModel>, response: Response<SignUpModel>) {
                 roomRecord.recordId = id
                 BaseActivity.INSTANCE!!.myDao().deleteByRecordId(id)
-                view!!.snackbar(context,context.getString(R.string.delete_record_successfully), R.color.colorGreen)
+                view!!.snackbar(context, context.getString(R.string.delete_record_successfully), R.color.colorGreen)
             }
 
         })

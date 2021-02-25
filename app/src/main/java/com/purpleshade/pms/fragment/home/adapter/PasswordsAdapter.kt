@@ -41,7 +41,7 @@ class PasswordsAdapter(val view: View, val context: Context, var passwordList: A
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if (ViewVisibility.networkProblem)
             holder.onBindRoom(roomPasswordList, position)
-        else
+        else if (!ViewVisibility.networkProblem)
             holder.onBind(passwordList, position)
     }
 
