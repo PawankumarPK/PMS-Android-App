@@ -14,22 +14,25 @@ import com.purpleshade.pms.utils.customInterface.AuthListener
 import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.show
 import com.purpleshade.pms.utils.snackbar
-import com.purpleshade.pms.utils.toast
 
 
 class SignUpViewModel(val context: Context, private val repository: SignupRepository, val progressBar: ProgressBar, val imageView: ImageView, val editText: EditText) : ViewModel() {
 
+    var regex: Regex? = null
     var username: String? = null
     var email: String? = null
     var password: String? = null
     var confirmPassword: String? = null
     var visiblity = true
+    var emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+
 
     var authListener: AuthListener? = null
 
 
     fun registerButtonClick(view: View) {
         progressBar.show()
+        regex = Regex(emailPattern)
 
         when {
             username.isNullOrEmpty() -> {
@@ -39,6 +42,11 @@ class SignUpViewModel(val context: Context, private val repository: SignupReposi
             }
             email.isNullOrEmpty() -> {
                 view.snackbar(context, "Email is required", R.color.colorBlackGrey)
+                progressBar.hide()
+                return
+            }
+            !email!!.matches(regex!!) -> {
+                view.snackbar(context, "Address should be example@gmail.com", R.color.colorBlackGrey)
                 progressBar.hide()
                 return
             }
@@ -54,9 +62,9 @@ class SignUpViewModel(val context: Context, private val repository: SignupReposi
             }
         }
 
-        val repo = repository.signUp(username!!, email!!, password!!, confirmPassword!!, context, progressBar)
-        authListener!!.onSuccess(repo)
-        repository.view = view
+        /* val repo = repository.signUp(username!!, email!!, password!!, confirmPassword!!, context, progressBar)
+         authListener!!.onSuccess(repo)
+         repository.view = view*/
     }
 
     fun passwordVisibilityOnClick(view: View) {

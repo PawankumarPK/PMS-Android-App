@@ -7,4 +7,5 @@ object ViewVisibility {
 
     var networkProblem = false
     var backPressCount: Int? = null
+    var backPressString: String? = null
 }

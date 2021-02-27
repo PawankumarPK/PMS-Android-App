@@ -20,6 +20,7 @@ import com.purpleshade.pms.model.SignUpModel
 import com.purpleshade.pms.network.RetrofitClient
 import com.purpleshade.pms.repository.SignupRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
+import com.purpleshade.pms.utils.customObject.ViewVisibility
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.sign_up_fragment.*
 import retrofit2.Call
@@ -38,6 +39,7 @@ class SignUpFragment : BaseFragment(), AuthListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        ViewVisibility.backPressString = "signUp"
         binding.lifecycleOwner = this
         val repository = SignupRepository()
         val factory = SignUpViewModelFactory(baseActivity,repository,baseActivity.mProgressBar,mPasswordVisiblity,mPassword)
