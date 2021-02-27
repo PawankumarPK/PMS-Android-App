@@ -8,4 +8,6 @@
     <dimen name="size10">10dp</dimen>
     <dimen name="size15">15dp</dimen>
     <dimen name="size50">50dp</dimen>
+    <dimen name="size22">22sp</dimen>
+    <dimen name="size17">17sp</dimen>
 </resources>

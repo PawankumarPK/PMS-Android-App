@@ -1,157 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.profile.ProfileFragment">
+<layout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/mConstraintLayout"
+    <data>
+        <variable
+            name="viewModel"
+            type="com.purpleshade.pms.fragment.profile.ProfileViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        tools:context=".fragment.profile.ProfileFragment">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/mUserName"
+        <LinearLayout
+            android:id="@+id/mConstraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:fontFamily="@font/raleway_bold"
-            android:text="Pawan Yadav"
-            android:textColor="@color/colorBlack"
-            android:textSize="22sp"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:orientation="horizontal"
+            android:weightSum="10"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:layout_weight="7"
+                android:orientation="vertical"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="@+id/mImageView"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/mUserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/raleway_bold"
+                    android:gravity="start"
+                    android:text="@={viewModel.username}"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/size22"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/mUserMailId"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/mUserMailId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/raleway_medium"
+                    android:text="@={viewModel.email}"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/size20"
+                    app:layout_constraintTop_toBottomOf="@+id/mUserName" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/mImageView"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_margin="@dimen/size20"
+                android:layout_weight="3"
+                android:src="@drawable/ic_launcher_background" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/mConstraintLayout">
+
+            <ImageView
+                android:id="@+id/mUserIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size20"
+                android:src="@drawable/ic_user" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size20"
+                android:orientation="vertical">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/mNickNameLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/raleway_bold"
+                    android:text="Nickname"
+                    android:textColor="@color/colorDarkGrey"
+                    android:textSize="@dimen/size17" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/mNickName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/raleway_bold"
+                    android:text="Pawan Yadav"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/size20" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/mLinearLayout">
+
+            <ImageView
+                android:id="@+id/mobileIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size20"
+                android:src="@drawable/ic_phone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size20"
+                android:orientation="vertical">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/mNumberLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/raleway_bold"
+                    android:text="Emergency Number"
+                    android:textColor="@color/colorDarkGrey"
+                    android:textSize="@dimen/size17" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/mEmergencyNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/raleway_bold"
+                    android:text="9999911199"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/size20" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/mDone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size20"
+            android:background="@drawable/gradient"
             android:fontFamily="@font/raleway_medium"
-            android:text="pawan@gmail.com"
-            android:textColor="@color/colorBlack"
-            android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@+id/mUserName"
-            android:layout_marginLeft="20dp" />
-
-        <ImageView
-            android:id="@+id/mImageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_margin="20dp"
-            android:src="@drawable/ic_launcher_background"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="@string/edit_profile"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/size16"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
-        android:id="@+id/mLinearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/mConstraintLayout">
-
-        <ImageView
-            android:id="@+id/mUserIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:src="@drawable/ic_user" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:orientation="vertical">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/mNickNameLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/raleway_bold"
-                android:text="Nickname"
-                android:textColor="@color/colorDarkGrey"
-                android:textSize="17sp" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/mNickName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/raleway_bold"
-                android:text="Pawan Yadav"
-                android:textColor="@color/colorBlack"
-                android:textSize="20sp" />
-
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/mLinearLayout">
-
-        <ImageView
-            android:id="@+id/mobileIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:src="@drawable/ic_phone" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:orientation="vertical">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/mNumberLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/raleway_bold"
-                android:text="Emergency Number"
-                android:textColor="@color/colorDarkGrey"
-                android:textSize="17sp" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/mEmergencyNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/raleway_bold"
-                android:text="9999911199"
-                android:textColor="@color/colorBlack"
-                android:textSize="20sp" />
-
-        </LinearLayout>
-    </LinearLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/mDone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/size20"
-        android:background="@drawable/gradient"
-        android:fontFamily="@font/raleway_medium"
-        android:text="@string/edit_profile"
-        android:textAllCaps="false"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/size16"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
