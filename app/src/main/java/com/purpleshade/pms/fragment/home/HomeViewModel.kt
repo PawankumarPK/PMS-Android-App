@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -123,6 +124,10 @@ class HomeViewModel(val context: Context, val actvity: Activity, val repository:
 
     fun fabButtonClick(view: View) {
         view.findNavController().navigate(R.id.action_homeFragment_to_createRecordFragment)
+    }
+
+    fun profileImageClick(view:View){
+        view.findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
     }
 
 

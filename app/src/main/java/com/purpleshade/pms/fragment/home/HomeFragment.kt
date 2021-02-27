@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.purpleshade.pms.R
 import com.purpleshade.pms.activity.BaseActivity
@@ -18,6 +19,8 @@ import com.purpleshade.pms.repository.HomeRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
 import com.purpleshade.pms.utils.customObject.RoomRecordDetail
 import com.purpleshade.pms.utils.customObject.ViewVisibility
+import com.purpleshade.pms.utils.gone
+import com.purpleshade.pms.utils.show
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.home_fragment.*
 
@@ -42,14 +45,19 @@ class HomeFragment : BaseFragment(), AuthListener {
         RoomRecordDetail.userId = roomuserId.userId.toString()
 
         val repository = HomeRepository()
-        val factory = HomeViewModelFactory(baseActivity, baseActivity, repository, baseActivity.mProgressBar,user)
+        val factory = HomeViewModelFactory(baseActivity, baseActivity, repository, baseActivity.mProgressBar, user)
         viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
         viewModel.authListener = this
         binding.viewModel = viewModel
 
-        baseActivity.mToolbar.visibility = View.VISIBLE
+        baseActivity.mToolbar.show()
         baseActivity.mFragmentTitle.text = getString(R.string.allPassword)
-        baseActivity.mBackButton.visibility = View.GONE
+        baseActivity.mBackButton.gone()
+        baseActivity.mProfileImageView.show()
+        baseActivity.mProfileImageView.setOnClickListener {
+            viewModel.profileImageClick(view)
+        }
+
         fabButton = view.findViewById(R.id.mFabButton)
 
         viewModel.loadAdapterList(mRecyclerView)

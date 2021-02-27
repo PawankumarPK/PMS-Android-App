@@ -38,6 +38,17 @@
                 android:textColor="@color/colorWhite"
                 android:textSize="18sp" />
 
+            <ImageView
+                android:id="@+id/mProfileImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_profile"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="@dimen/size20"
+                android:layout_marginRight="@dimen/size20" />
+
+
         </RelativeLayout>
 
     </androidx.appcompat.widget.Toolbar>

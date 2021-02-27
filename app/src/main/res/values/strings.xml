@@ -26,5 +26,6 @@
     <string name="register_successful">User register successful</string>
     <string name="update_profile">Update Profile</string>
     <string name="edit_profile">Edit Profile</string>
+    <string name="user_profile">Profile</string>
 
 </resources>
