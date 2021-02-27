@@ -144,7 +144,7 @@
         android:layout_margin="@dimen/size20"
         android:background="@drawable/gradient"
         android:fontFamily="@font/raleway_medium"
-        android:text="Edit Profile"
+        android:text="@string/edit_profile"
         android:textAllCaps="false"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/size16"
