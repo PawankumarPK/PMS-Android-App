@@ -1,20 +1,16 @@
-package com.purpleshade.pms.fragment.profile
+package com.purpleshade.pms.fragment.profileSection.userProfile
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.purpleshade.pms.R
 import com.purpleshade.pms.databinding.ProfileFragmentBinding
 import com.purpleshade.pms.db.RoomUser
 import com.purpleshade.pms.fragment.BaseFragment
-import com.purpleshade.pms.utils.customInterface.AuthListener
 import com.purpleshade.pms.utils.gone
 import com.purpleshade.pms.utils.show
 import kotlinx.android.synthetic.main.activity_base.*
@@ -45,6 +41,9 @@ class ProfileFragment : BaseFragment() {
         baseActivity.mProfileImageView.gone()
         baseActivity.mBackButton.setOnClickListener {
             findNavController().navigate(R.id.homeFragment)
+        }
+        baseActivity.mEditProfile.setOnClickListener {
+            viewModel.onEditButtonClick()
         }
         viewModel.profileDetail()
     }

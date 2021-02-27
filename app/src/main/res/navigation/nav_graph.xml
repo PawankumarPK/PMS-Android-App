@@ -61,7 +61,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.purpleshade.pms.fragment.profile.ProfileFragment"
+        android:name="com.purpleshade.pms.fragment.profileSection.userProfile.ProfileFragment"
         android:label="profile_fragment"
         tools:layout="@layout/profile_fragment" >
         <action
@@ -70,7 +70,7 @@
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
-        android:name="com.purpleshade.pms.fragment.profile.editProfile.EditProfileFragment"
+        android:name="com.purpleshade.pms.fragment.profileSection.editProfile.EditProfileFragment"
         android:label="edit_profile_fragment"
         tools:layout="@layout/edit_profile_fragment" />
 </navigation>

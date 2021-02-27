@@ -1,4 +1,4 @@
-package com.purpleshade.pms.fragment.profile
+package com.purpleshade.pms.fragment.profileSection.userProfile
 
 import android.content.Context
 import android.view.View

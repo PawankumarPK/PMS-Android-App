@@ -1,4 +1,4 @@
-package com.purpleshade.pms.fragment.profile.editProfile
+package com.purpleshade.pms.fragment.profileSection.editProfile
 
 import androidx.lifecycle.ViewModel
 

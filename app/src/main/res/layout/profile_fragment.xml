@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.purpleshade.pms.fragment.profile.ProfileViewModel" />
+            type="com.purpleshade.pms.fragment.profileSection.userProfile.ProfileViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,7 +12,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragment.profile.ProfileFragment">
+        tools:context=".fragment.profileSection.userProfile.ProfileFragment">
 
         <LinearLayout
             android:id="@+id/mConstraintLayout"
@@ -157,7 +157,7 @@
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/mDone"
+            android:id="@+id/mEditProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/size20"

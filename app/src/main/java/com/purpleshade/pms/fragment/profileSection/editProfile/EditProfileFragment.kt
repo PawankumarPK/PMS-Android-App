@@ -1,8 +1,7 @@
-package com.purpleshade.pms.fragment.profile.editProfile
+package com.purpleshade.pms.fragment.profileSection.editProfile
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
