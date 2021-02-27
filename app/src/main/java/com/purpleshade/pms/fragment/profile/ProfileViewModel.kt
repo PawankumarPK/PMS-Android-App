@@ -11,7 +11,7 @@ class ProfileViewModel(val context: Context, val view: View, val user: RoomUser)
 
     var username: String? = null
     var email: String? = null
-    var authListener: AuthListener? = null
+   // var authListener: AuthListener? = null
 
 
     fun profileDetail() {

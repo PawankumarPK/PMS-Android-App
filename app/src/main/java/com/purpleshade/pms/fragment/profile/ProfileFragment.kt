@@ -20,7 +20,7 @@ import com.purpleshade.pms.utils.show
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.profile_fragment.*
 
-class ProfileFragment : BaseFragment(), AuthListener {
+class ProfileFragment : BaseFragment() {
 
     private lateinit var viewModel: ProfileViewModel
     lateinit var binding: ProfileFragmentBinding
@@ -36,7 +36,7 @@ class ProfileFragment : BaseFragment(), AuthListener {
 
         val factory = ProfileViewModelFactory(baseActivity, view, user)
         viewModel = ViewModelProvider(this, factory).get(ProfileViewModel::class.java)
-        viewModel.authListener = this
+       // viewModel.authListener = this
         binding.viewModel = viewModel
 
         baseActivity.mToolbar.show()
@@ -49,10 +49,10 @@ class ProfileFragment : BaseFragment(), AuthListener {
         viewModel.profileDetail()
     }
 
-    override fun onSuccess(responseSuccess: LiveData<String>) {
+    /*override fun onSuccess(responseSuccess: LiveData<String>) {
         responseSuccess.observe(this, Observer {
 
         })
-    }
+    }*/
 
 }
