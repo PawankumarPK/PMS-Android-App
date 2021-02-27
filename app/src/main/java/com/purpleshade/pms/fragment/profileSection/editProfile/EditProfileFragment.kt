@@ -6,15 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.purpleshade.pms.R
 import com.purpleshade.pms.databinding.EditProfileFragmentBinding
 import com.purpleshade.pms.fragment.BaseFragment
+import com.purpleshade.pms.repository.EditProfileRepository
+import com.purpleshade.pms.utils.customInterface.AuthListener
 import com.purpleshade.pms.utils.gone
 import com.purpleshade.pms.utils.show
 import kotlinx.android.synthetic.main.activity_base.*
 
-class EditProfileFragment : BaseFragment() {
+class EditProfileFragment : BaseFragment(), AuthListener {
 
     private lateinit var viewModel: EditProfileViewModel
     lateinit var binding: EditProfileFragmentBinding
@@ -26,8 +30,10 @@ class EditProfileFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val factory = EditProfileViewModelFactory()
+        val repository = EditProfileRepository()
+        val factory = EditProfileViewModelFactory(baseActivity, repository)
         viewModel = ViewModelProvider(this, factory).get(EditProfileViewModel::class.java)
+        viewModel.authListener = this
         binding.viewModel = viewModel
 
         baseActivity.mToolbar.show()
@@ -39,6 +45,13 @@ class EditProfileFragment : BaseFragment() {
         }
 
         viewModel.getUserDetailForUpdate()
+    }
+
+
+    override fun onSuccess(responseSuccess: LiveData<String>) {
+        responseSuccess.observe(this, Observer {
+
+        })
     }
 
 }

@@ -2,6 +2,7 @@ package com.purpleshade.pms.network
 
 import com.purpleshade.pms.model.SignUpModel
 import com.purpleshade.pms.model.Records
+import com.purpleshade.pms.model.UpdateProfile
 import com.purpleshade.pms.model.UpdateRecord
 import com.purpleshade.pms.utils.Helper
 import okhttp3.OkHttpClient
@@ -49,6 +50,9 @@ interface ApiService {
 
     @PATCH("records/updateDetails")
     fun updateRecord(@Query("id") id: String, @Body post: UpdateRecord): Call<SignUpModel>
+
+    @PATCH("user/updateProfile")
+    fun updateProfile(@Query("id") id: String, @Body post: UpdateProfile): Call<SignUpModel>
 
 
     /*companion object {
