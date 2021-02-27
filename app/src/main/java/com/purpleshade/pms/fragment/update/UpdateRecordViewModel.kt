@@ -6,12 +6,15 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.purpleshade.pms.R
 import com.purpleshade.pms.repository.UpdateRecordRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
+import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.show
+import com.purpleshade.pms.utils.snackbar
 
 
-class UpdateRecordViewModel(val context: Context, val repository: UpdateRecordRepository,val progressBar: ProgressBar) : ViewModel() {
+class UpdateRecordViewModel(val context: Context, val repository: UpdateRecordRepository, val progressBar: ProgressBar) : ViewModel() {
 
     var title: String? = null
     var webAddress: String? = null
@@ -22,10 +25,16 @@ class UpdateRecordViewModel(val context: Context, val repository: UpdateRecordRe
     var authListener: AuthListener? = null
 
     fun onUpdateButtonClick(view: View) {
-        progressBar.show()
-        val repo = repository.updateRecord(context,progressBar, title!!, webAddress!!, email!!, password!!, addNote!!)
-        authListener!!.onSuccess(repo)
-        repository.view = view
+        if (title.isNullOrEmpty()) {
+            view.snackbar(context, "Please enter a title for this record", R.color.colorBlackGrey)
+            progressBar.hide()
+            return
+        } else {
+            progressBar.show()
+            val repo = repository.updateRecord(context, progressBar, title!!, webAddress!!, email!!, password!!, addNote!!)
+            authListener!!.onSuccess(repo)
+            repository.view = view
+        }
 
     }
 

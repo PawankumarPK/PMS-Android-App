@@ -4,11 +4,13 @@ import android.content.Context
 import android.view.View
 import android.widget.ProgressBar
 import androidx.lifecycle.ViewModel
+import com.purpleshade.pms.R
 import com.purpleshade.pms.repository.CreateRecordRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
 import com.purpleshade.pms.utils.customObject.RoomRecordDetail
 import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.show
+import com.purpleshade.pms.utils.snackbar
 import com.purpleshade.pms.utils.toast
 
 class CreateRecordViewModel(val context: Context, val repository: CreateRecordRepository, val progressBar: ProgressBar) : ViewModel() {
@@ -27,8 +29,8 @@ class CreateRecordViewModel(val context: Context, val repository: CreateRecordRe
             authListener!!.onSuccess(repo)
 
         } else {
+            view.snackbar(context, "Please enter a title for this record", R.color.colorBlackGrey)
             progressBar.hide()
-            context.toast("Title is missing")
         }
     }
 
