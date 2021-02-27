@@ -62,6 +62,7 @@ class LoginFragment : BaseFragment(), AuthListener {
 
     override fun onSuccess(responseSuccess: LiveData<String>) {
         responseSuccess.observe(this, Observer {
+
         })
     }
 
