@@ -3,7 +3,6 @@ package com.purpleshade.pms.fragment.signup
 import android.content.Context
 import android.text.method.PasswordTransformationMethod
 import android.view.View
-import android.view.View.OnFocusChangeListener
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -14,6 +13,7 @@ import com.purpleshade.pms.repository.SignupRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
 import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.show
+import com.purpleshade.pms.utils.snackbar
 import com.purpleshade.pms.utils.toast
 
 
@@ -28,18 +28,35 @@ class SignUpViewModel(val context: Context, private val repository: SignupReposi
     var authListener: AuthListener? = null
 
 
-    fun signUpButtonClick(view: View) {
+    fun registerButtonClick(view: View) {
         progressBar.show()
-        if (username.isNullOrEmpty() || email.isNullOrEmpty() || password.isNullOrEmpty() || confirmPassword.isNullOrEmpty()) {
-            progressBar.hide()
-            context.toast("Field Empty")
-            return
+
+        when {
+            username.isNullOrEmpty() -> {
+                view.snackbar(context, "Name is required", R.color.colorBlackGrey)
+                progressBar.hide()
+                return
+            }
+            email.isNullOrEmpty() -> {
+                view.snackbar(context, "Email is required", R.color.colorBlackGrey)
+                progressBar.hide()
+                return
+            }
+            password.isNullOrEmpty() -> {
+                view.snackbar(context, "Please enter a password", R.color.colorBlackGrey)
+                progressBar.hide()
+                return
+            }
+            confirmPassword.isNullOrEmpty() || confirmPassword != password -> {
+                view.snackbar(context, "Password did not match", R.color.colorBlackGrey)
+                progressBar.hide()
+                return
+            }
         }
 
         val repo = repository.signUp(username!!, email!!, password!!, confirmPassword!!, context, progressBar)
         authListener!!.onSuccess(repo)
         repository.view = view
-
     }
 
     fun passwordVisibilityOnClick(view: View) {

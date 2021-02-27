@@ -10,6 +10,7 @@
     <color name="colorShadowEnd">#88333333</color>
     <color name="colorGrey">#cccccc</color>
     <color name="colorDarkGrey">#6C6B6B</color>>
+    <color name="colorBlackGrey">#333333</color>>
     <color name="colorBlue">#3F51B5</color>>
     <color name="colorWarning">#fe9f00</color>
     <color name="colorWarningText">#724701</color>

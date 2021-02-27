@@ -67,7 +67,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/raleway_medium"
-                    android:inputType="textEmailAddress"
+                    android:inputType="textPersonName"
                     android:text="@={viewModel.username}"
                     android:textStyle="bold" />
 
@@ -163,7 +163,7 @@
                 android:layout_margin="@dimen/size20"
                 android:background="@drawable/gradient"
                 android:fontFamily="@font/raleway_medium"
-                android:onClick="@{viewModel.signUpButtonClick}"
+                android:onClick="@{viewModel.registerButtonClick}"
                 android:text="@string/register"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
