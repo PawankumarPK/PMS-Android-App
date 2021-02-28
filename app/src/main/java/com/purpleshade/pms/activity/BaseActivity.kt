@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
 import androidx.room.Room
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.purpleshade.pms.R
@@ -17,7 +16,7 @@ import com.purpleshade.pms.db.MyDatabase
 import com.purpleshade.pms.db.RoomUser
 import com.purpleshade.pms.network.RetrofitClient
 import com.purpleshade.pms.utils.Helper
-import com.purpleshade.pms.utils.customObject.ViewVisibility
+import com.purpleshade.pms.utils.customObject.Flag
 import com.purpleshade.pms.utils.gone
 import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.show
@@ -49,11 +48,13 @@ class BaseActivity : AppCompatActivity() {
         val manager = applicationContext.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork = manager.activeNetworkInfo
         if (activeNetwork == null) {
-            ViewVisibility.networkProblem = true
+            Flag.networkProblem = true
+            Flag.profileDetails = "Room"
             mNetworkCheckLayout.show()
             mProgressBar.hide()
         } else {
-            ViewVisibility.networkProblem = false
+            Flag.networkProblem = false
+            Flag.profileDetails = "Data"
             mNetworkCheckLayout.gone()
         }
         Handler().postDelayed({
@@ -75,7 +76,7 @@ class BaseActivity : AppCompatActivity() {
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (ViewVisibility.backPressCount == 0 && ViewVisibility.backPressString == "login") {
+            if (Flag.backPressCount == 0 && Flag.backPressString == "login") {
                 exitAppBottomSheetDialog = BottomSheetDialog(this)
                 exitAppBottomSheetVisible(this)
             }

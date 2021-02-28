@@ -15,12 +15,13 @@ import com.purpleshade.pms.db.RoomUser
 import com.purpleshade.pms.fragment.BaseFragment
 import com.purpleshade.pms.repository.ProfileRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
+import com.purpleshade.pms.utils.customObject.Flag
 import com.purpleshade.pms.utils.gone
 import com.purpleshade.pms.utils.show
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.profile_fragment.*
 
-class ProfileFragment : BaseFragment(),AuthListener {
+class ProfileFragment : BaseFragment(), AuthListener {
 
     private lateinit var viewModel: ProfileViewModel
     lateinit var binding: ProfileFragmentBinding
@@ -35,7 +36,7 @@ class ProfileFragment : BaseFragment(),AuthListener {
         val user = RoomUser()
 
         val repository = ProfileRepository()
-        val factory = ProfileViewModelFactory(baseActivity, view, user,mUserName,mUserMailId,mNickName, repository)
+        val factory = ProfileViewModelFactory(baseActivity, view, user, mUserName, mUserMailId, mNickName, repository)
         viewModel = ViewModelProvider(this, factory).get(ProfileViewModel::class.java)
         viewModel.authListener = this
         binding.viewModel = viewModel
@@ -47,10 +48,11 @@ class ProfileFragment : BaseFragment(),AuthListener {
         baseActivity.mBackButton.setOnClickListener {
             findNavController().navigate(R.id.homeFragment)
         }
-        baseActivity.mEditProfile.setOnClickListener {
-            viewModel.onEditButtonClick()
-        }
-        viewModel.profileDetail()
+
+        if (Flag.profileDetails == "Data")
+            viewModel.profileDetail()
+        else
+            viewModel.profileDetailUsingRoomDb()
     }
 
 

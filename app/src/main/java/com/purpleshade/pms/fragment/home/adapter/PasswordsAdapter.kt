@@ -1,7 +1,6 @@
 package com.purpleshade.pms.fragment.home.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,7 @@ import com.purpleshade.pms.databinding.PasswordViewholderBinding
 import com.purpleshade.pms.db.RoomRecord
 import com.purpleshade.pms.model.RecordList
 import com.purpleshade.pms.utils.customObject.RoomRecordDetail
-import com.purpleshade.pms.utils.customObject.ViewVisibility
+import com.purpleshade.pms.utils.customObject.Flag
 import com.purpleshade.pms.utils.toast
 
 
@@ -31,7 +30,7 @@ class PasswordsAdapter(val view: View, val context: Context, var passwordList: A
     }
 
     override fun getItemCount(): Int {
-        return if (ViewVisibility.networkProblem)
+        return if (Flag.networkProblem)
             roomPasswordList.size
         else
             passwordList.size
@@ -39,9 +38,9 @@ class PasswordsAdapter(val view: View, val context: Context, var passwordList: A
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        if (ViewVisibility.networkProblem)
+        if (Flag.networkProblem)
             holder.onBindRoom(roomPasswordList, position)
-        else if (!ViewVisibility.networkProblem)
+        else if (!Flag.networkProblem)
             holder.onBind(passwordList, position)
     }
 
@@ -81,7 +80,7 @@ class PasswordsAdapter(val view: View, val context: Context, var passwordList: A
 
 
             binding.mEdit.setOnClickListener {
-                if (ViewVisibility.networkProblem) {
+                if (Flag.networkProblem) {
                     context.toast("No internet connection")
                 } else {
                     RoomRecordDetail.recordId = roomPasswordList[pos].recordId!!
@@ -90,7 +89,7 @@ class PasswordsAdapter(val view: View, val context: Context, var passwordList: A
             }
 
             binding.mDelete.setOnClickListener {
-                if (ViewVisibility.networkProblem) {
+                if (Flag.networkProblem) {
                     context.toast("No internet connection")
                 } else {
                     onEventListener!!.deleteRecord(roomPasswordList[pos].recordId!!, pos)

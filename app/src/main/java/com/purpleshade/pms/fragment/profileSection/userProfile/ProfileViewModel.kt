@@ -11,7 +11,7 @@ import com.purpleshade.pms.db.RoomUser
 import com.purpleshade.pms.repository.ProfileRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
 
-class ProfileViewModel(val context: Context, val view: View, val user: RoomUser, private val usernameTextView: TextView, private val emailTextView: TextView,private val nicknameTextView: TextView ,val repository: ProfileRepository) : ViewModel() {
+class ProfileViewModel(val context: Context, val view: View, val user: RoomUser, private val usernameTextView: TextView, private val emailTextView: TextView, private val nicknameTextView: TextView, val repository: ProfileRepository) : ViewModel() {
 
     var username: String? = null
     var email: String? = null
@@ -19,15 +19,18 @@ class ProfileViewModel(val context: Context, val view: View, val user: RoomUser,
 
 
     fun profileDetail() {
-        val repo = repository.profileDetails(context, usernameTextView, emailTextView,nicknameTextView)
+        val repo = repository.profileDetails(context, view, usernameTextView, emailTextView, nicknameTextView)
         authListener!!.onSuccess(repo)
 
-        /*val roomUser = BaseActivity.INSTANCE!!.myDao().user
-        username = roomUser.username
-        email = roomUser.email*/
     }
 
-    fun onEditButtonClick() {
+    fun profileDetailUsingRoomDb(){
+        val roomUser = BaseActivity.INSTANCE!!.myDao().user
+        username = roomUser.username
+        email = roomUser.email
+    }
+
+    fun onEditButtonClick(view: View) {
         view.findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
     }
 }

@@ -17,6 +17,7 @@ import com.purpleshade.pms.utils.customInterface.AuthListener
 import com.purpleshade.pms.utils.gone
 import com.purpleshade.pms.utils.show
 import kotlinx.android.synthetic.main.activity_base.*
+import kotlinx.android.synthetic.main.edit_profile_fragment.*
 
 class EditProfileFragment : BaseFragment(), AuthListener {
 
@@ -31,7 +32,7 @@ class EditProfileFragment : BaseFragment(), AuthListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val repository = EditProfileRepository()
-        val factory = EditProfileViewModelFactory(baseActivity, repository)
+        val factory = EditProfileViewModelFactory(baseActivity,view, mUserName,mEmailAddress,repository)
         viewModel = ViewModelProvider(this, factory).get(EditProfileViewModel::class.java)
         viewModel.authListener = this
         binding.viewModel = viewModel
@@ -41,7 +42,7 @@ class EditProfileFragment : BaseFragment(), AuthListener {
         baseActivity.mBackButton.show()
         baseActivity.mProfileImageView.gone()
         baseActivity.mBackButton.setOnClickListener {
-            findNavController().navigate(R.id.homeFragment)
+            findNavController().navigate(R.id.profileFragment)
         }
 
         viewModel.getUserDetailForUpdate()

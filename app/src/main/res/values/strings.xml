@@ -25,6 +25,7 @@
     <string name="invalid_credential">Invalid Credential</string>
     <string name="register_successful">User register successful</string>
     <string name="update_profile">Update Profile</string>
+    <string name="update_profile_successful">Update Profile Successful</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="user_profile">Profile</string>
     <string name="email_address">Email Address</string>

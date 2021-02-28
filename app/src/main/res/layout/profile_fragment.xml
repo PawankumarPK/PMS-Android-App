@@ -165,6 +165,7 @@
             android:fontFamily="@font/raleway_medium"
             android:text="@string/edit_profile"
             android:textAllCaps="false"
+            android:onClick="@{viewModel.onEditButtonClick}"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/size16"
             app:layout_constraintBottom_toBottomOf="parent" />

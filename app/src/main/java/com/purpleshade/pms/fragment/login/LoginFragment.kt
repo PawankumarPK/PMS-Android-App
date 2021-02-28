@@ -17,7 +17,7 @@ import com.purpleshade.pms.db.RoomUser
 import com.purpleshade.pms.fragment.BaseFragment
 import com.purpleshade.pms.repository.LoginRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
-import com.purpleshade.pms.utils.customObject.ViewVisibility
+import com.purpleshade.pms.utils.customObject.Flag
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.login_fragment.*
 import java.lang.Exception
@@ -35,7 +35,7 @@ class LoginFragment : BaseFragment(), AuthListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        ViewVisibility.backPressString = "login"
+        Flag.backPressString = "login"
         val user = RoomUser()
         try {
             val listData = BaseActivity.INSTANCE!!.myDao().user

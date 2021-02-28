@@ -8,7 +8,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.purpleshade.pms.R
 import com.purpleshade.pms.activity.BaseActivity
@@ -18,7 +17,7 @@ import com.purpleshade.pms.fragment.BaseFragment
 import com.purpleshade.pms.repository.HomeRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
 import com.purpleshade.pms.utils.customObject.RoomRecordDetail
-import com.purpleshade.pms.utils.customObject.ViewVisibility
+import com.purpleshade.pms.utils.customObject.Flag
 import com.purpleshade.pms.utils.gone
 import com.purpleshade.pms.utils.show
 import kotlinx.android.synthetic.main.activity_base.*
@@ -39,7 +38,7 @@ class HomeFragment : BaseFragment(), AuthListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        ViewVisibility.backPressCount = 0
+        Flag.backPressCount = 0
         val user = RoomUser()
         val roomuserId = BaseActivity.INSTANCE!!.myDao().user
         RoomRecordDetail.userId = roomuserId.userId.toString()
@@ -72,7 +71,7 @@ class HomeFragment : BaseFragment(), AuthListener {
 
     override fun onPause() {
         super.onPause()
-        ViewVisibility.backPressCount = 1
+        Flag.backPressCount = 1
     }
 
 }
