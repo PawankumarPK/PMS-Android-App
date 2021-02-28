@@ -1,9 +1,6 @@
 package com.purpleshade.pms.network
 
-import com.purpleshade.pms.model.SignUpModel
-import com.purpleshade.pms.model.Records
-import com.purpleshade.pms.model.UpdateProfile
-import com.purpleshade.pms.model.UpdateRecord
+import com.purpleshade.pms.model.*
 import com.purpleshade.pms.utils.Helper
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -32,6 +29,9 @@ interface ApiService {
 
     @GET("records/recordDetail")
     fun recordDetail(@Query("id") id: String): Call<Records>
+
+    @GET("user/userProfile")
+    fun userProfile(@Query("id") id: String): Call<Profile>
 
 
     @FormUrlEncoded

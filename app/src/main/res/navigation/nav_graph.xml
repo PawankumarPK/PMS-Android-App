@@ -72,5 +72,9 @@
         android:id="@+id/editProfileFragment"
         android:name="com.purpleshade.pms.fragment.profileSection.editProfile.EditProfileFragment"
         android:label="edit_profile_fragment"
-        tools:layout="@layout/edit_profile_fragment" />
+        tools:layout="@layout/edit_profile_fragment" >
+        <action
+            android:id="@+id/action_editProfileFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
 </navigation>

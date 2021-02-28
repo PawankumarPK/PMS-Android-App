@@ -6,17 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.purpleshade.pms.R
 import com.purpleshade.pms.databinding.ProfileFragmentBinding
 import com.purpleshade.pms.db.RoomUser
 import com.purpleshade.pms.fragment.BaseFragment
+import com.purpleshade.pms.repository.ProfileRepository
+import com.purpleshade.pms.utils.customInterface.AuthListener
 import com.purpleshade.pms.utils.gone
 import com.purpleshade.pms.utils.show
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.profile_fragment.*
 
-class ProfileFragment : BaseFragment() {
+class ProfileFragment : BaseFragment(),AuthListener {
 
     private lateinit var viewModel: ProfileViewModel
     lateinit var binding: ProfileFragmentBinding
@@ -30,9 +34,10 @@ class ProfileFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         val user = RoomUser()
 
-        val factory = ProfileViewModelFactory(baseActivity, view, user)
+        val repository = ProfileRepository()
+        val factory = ProfileViewModelFactory(baseActivity, view, user,mUserName,mUserMailId,mNickName, repository)
         viewModel = ViewModelProvider(this, factory).get(ProfileViewModel::class.java)
-       // viewModel.authListener = this
+        viewModel.authListener = this
         binding.viewModel = viewModel
 
         baseActivity.mToolbar.show()
@@ -48,10 +53,11 @@ class ProfileFragment : BaseFragment() {
         viewModel.profileDetail()
     }
 
-    /*override fun onSuccess(responseSuccess: LiveData<String>) {
+
+    override fun onSuccess(responseSuccess: LiveData<String>) {
         responseSuccess.observe(this, Observer {
 
         })
-    }*/
+    }
 
 }

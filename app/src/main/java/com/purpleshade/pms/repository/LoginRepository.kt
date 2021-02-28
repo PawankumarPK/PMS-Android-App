@@ -1,7 +1,6 @@
 package com.purpleshade.pms.repository
 
 import android.content.Context
-import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import androidx.lifecycle.LiveData
@@ -46,7 +45,6 @@ class LoginRepository {
                     JWTUtils.parseUserDetail()
 
                     user.userId = JWTUtils.userId
-                    Log.d("---->>>",user.userId.toString())
                     user.username = JWTUtils.userName
                     user.email = JWTUtils.userEmail
 

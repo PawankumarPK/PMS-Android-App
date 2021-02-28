@@ -7,5 +7,7 @@ object RoomRecordDetail {
 
     var recordId  = ""
     var userId = ""
+    var username = ""
+    var userEmail = ""
     var roomDbEnable = "with Internet"
 }
