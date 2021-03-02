@@ -6,11 +6,12 @@ import android.widget.TextView
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.purpleshade.pms.R
+import com.purpleshade.pms.db.RoomUser
 import com.purpleshade.pms.repository.EditProfileRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
 import com.purpleshade.pms.utils.customObject.Flag
 
-class EditProfileViewModel(val context: Context, val view: View, val usernameTextView: TextView, val emailTextView: TextView, val repository: EditProfileRepository) : ViewModel() {
+class EditProfileViewModel(val context: Context, val view: View, val user:RoomUser,val usernameTextView: TextView, val emailTextView: TextView, val repository: EditProfileRepository) : ViewModel() {
 
     var username: String? = null
     var email: String? = null
@@ -18,7 +19,7 @@ class EditProfileViewModel(val context: Context, val view: View, val usernameTex
 
 
     fun onUpdateProfileButtonClick(view: View) {
-        val repo = repository.updateProfile(context,view, username!!, email!!)
+        val repo = repository.updateProfile(context,view, username!!, email!!,user)
         authListener!!.onSuccess(repo)
         Flag.profileDetails = "Data"
     }

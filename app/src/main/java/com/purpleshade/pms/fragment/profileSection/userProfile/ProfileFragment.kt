@@ -10,6 +10,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.purpleshade.pms.R
+import com.purpleshade.pms.activity.BaseActivity
 import com.purpleshade.pms.databinding.ProfileFragmentBinding
 import com.purpleshade.pms.db.RoomUser
 import com.purpleshade.pms.fragment.BaseFragment
@@ -33,10 +34,10 @@ class ProfileFragment : BaseFragment(), AuthListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val user = RoomUser()
+        val roomUser = BaseActivity.INSTANCE!!.myDao().user
 
         val repository = ProfileRepository()
-        val factory = ProfileViewModelFactory(baseActivity, view, user, mUserName, mUserMailId, mNickName, repository)
+        val factory = ProfileViewModelFactory(baseActivity, view, roomUser, mUserName, mUserMailId, mNickName, repository)
         viewModel = ViewModelProvider(this, factory).get(ProfileViewModel::class.java)
         viewModel.authListener = this
         binding.viewModel = viewModel
@@ -48,11 +49,7 @@ class ProfileFragment : BaseFragment(), AuthListener {
         baseActivity.mBackButton.setOnClickListener {
             findNavController().navigate(R.id.homeFragment)
         }
-
-        if (Flag.profileDetails == "Data")
-            viewModel.profileDetail()
-        else
-            viewModel.profileDetailUsingRoomDb()
+        viewModel.profileDetail()
     }
 
 

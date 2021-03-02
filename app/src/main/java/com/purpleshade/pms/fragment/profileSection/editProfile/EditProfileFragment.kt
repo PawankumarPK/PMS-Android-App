@@ -2,6 +2,7 @@ package com.purpleshade.pms.fragment.profileSection.editProfile
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.purpleshade.pms.R
+import com.purpleshade.pms.activity.BaseActivity
 import com.purpleshade.pms.databinding.EditProfileFragmentBinding
+import com.purpleshade.pms.db.RoomUser
 import com.purpleshade.pms.fragment.BaseFragment
 import com.purpleshade.pms.repository.EditProfileRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
@@ -31,8 +34,10 @@ class EditProfileFragment : BaseFragment(), AuthListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val user = RoomUser()
+
         val repository = EditProfileRepository()
-        val factory = EditProfileViewModelFactory(baseActivity,view, mUserName,mEmailAddress,repository)
+        val factory = EditProfileViewModelFactory(baseActivity, user, view, mUserName, mEmailAddress, repository)
         viewModel = ViewModelProvider(this, factory).get(EditProfileViewModel::class.java)
         viewModel.authListener = this
         binding.viewModel = viewModel

@@ -16,7 +16,6 @@ import com.purpleshade.pms.model.UpdateProfile
 import com.purpleshade.pms.network.RetrofitClient
 import com.purpleshade.pms.utils.customObject.RoomRecordDetail
 import com.purpleshade.pms.utils.snackbar
-import com.purpleshade.pms.utils.toast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -38,6 +37,7 @@ class EditProfileRepository {
 
             override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
                 if (response.isSuccessful) {
+
                     val list = response.body()!!.data
                     for (i in list.indices) {
                         username.text = list[i].username
@@ -52,7 +52,7 @@ class EditProfileRepository {
 
     }
 
-    fun updateProfile(context: Context,view: View, username: String, email: String): LiveData<String> {
+    fun updateProfile(context: Context, view: View, username: String, email: String,user:RoomUser): LiveData<String> {
         val responseForUpdateProfile = MutableLiveData<String>()
         val updateProfile = UpdateProfile(username, email)
         val api = RetrofitClient.apiService
@@ -60,15 +60,17 @@ class EditProfileRepository {
 
         call.enqueue(object : Callback<SignUpModel> {
             override fun onFailure(call: Call<SignUpModel>, t: Throwable) {
-                view.snackbar(context,"Oops! Something went wrong",R.color.colorWarning)
+                view.snackbar(context, "Oops! Something went wrong", R.color.colorWarning)
             }
 
             override fun onResponse(call: Call<SignUpModel>, response: Response<SignUpModel>) {
-                view.snackbar(context,"Profile update successfully",R.color.colorGreen)
-                view.findNavController().navigate(R.id.profileFragment)
-                val roomUser = BaseActivity.INSTANCE!!.myDao().user
-                roomUser.username = username
-                roomUser.email = email
+                view.snackbar(context, "Profile update successfully", R.color.colorGreen)
+                if (response.isSuccessful) {
+                    view.findNavController().navigate(R.id.profileFragment)
+                    //Update username is user table
+                    BaseActivity.INSTANCE!!.myDao().usernameUpdate(username,1)
+
+                }
             }
 
         })

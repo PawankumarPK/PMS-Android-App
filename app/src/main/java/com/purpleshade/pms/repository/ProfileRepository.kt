@@ -43,9 +43,6 @@ class ProfileRepository {
                         email.text = list[i].email
                         nickname.text = list[i].username
 
-           /*             val roomUser = BaseActivity.INSTANCE!!.myDao().user
-                        roomUser.username = list[i].username
-                        roomUser.email = list[i].email*/
                     }
                 }
             }
