@@ -49,12 +49,10 @@ class BaseActivity : AppCompatActivity() {
         val activeNetwork = manager.activeNetworkInfo
         if (activeNetwork == null) {
             Flag.networkProblem = true
-            Flag.profileDetails = "Room"
             mNetworkCheckLayout.show()
             mProgressBar.hide()
         } else {
             Flag.networkProblem = false
-            Flag.profileDetails = "Data"
             mNetworkCheckLayout.gone()
         }
         Handler().postDelayed({

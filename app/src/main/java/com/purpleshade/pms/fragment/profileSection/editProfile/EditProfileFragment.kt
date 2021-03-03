@@ -37,7 +37,7 @@ class EditProfileFragment : BaseFragment(), AuthListener {
         val user = RoomUser()
 
         val repository = EditProfileRepository()
-        val factory = EditProfileViewModelFactory(baseActivity, user, view, mUserName, mEmailAddress, repository)
+        val factory = EditProfileViewModelFactory(baseActivity, baseActivity.mProgressBar, view, mUserName, mEmailAddress, repository)
         viewModel = ViewModelProvider(this, factory).get(EditProfileViewModel::class.java)
         viewModel.authListener = this
         binding.viewModel = viewModel

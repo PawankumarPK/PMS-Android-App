@@ -46,6 +46,7 @@ class HomeRepository {
         call.enqueue(object : Callback<Records> {
             override fun onFailure(call: Call<Records>, t: Throwable) {
                 context.toast("Something went wrong")
+                progressBar.hide()
             }
 
             override fun onResponse(call: Call<Records>, response: Response<Records>) {
