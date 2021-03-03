@@ -3,6 +3,7 @@ package com.purpleshade.pms.fragment.profileSection.userProfile
 import android.content.Context
 import android.util.Log
 import android.view.View
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
@@ -12,8 +13,9 @@ import com.purpleshade.pms.db.RoomUser
 import com.purpleshade.pms.repository.ProfileRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
 import com.purpleshade.pms.utils.customObject.Flag
+import com.purpleshade.pms.utils.show
 
-class ProfileViewModel(val context: Context, val view: View, val user: RoomUser, private val usernameTextView: TextView, private val emailTextView: TextView, private val nicknameTextView: TextView, val repository: ProfileRepository) : ViewModel() {
+class ProfileViewModel(val context: Context, val view: View,val progressBar: ProgressBar, val user: RoomUser, private val usernameTextView: TextView, private val emailTextView: TextView, private val nicknameTextView: TextView, val repository: ProfileRepository) : ViewModel() {
 
     var username: String? = null
     var email: String? = null
@@ -22,7 +24,8 @@ class ProfileViewModel(val context: Context, val view: View, val user: RoomUser,
 
     fun profileDetail() {
         if (!Flag.networkProblem) {
-            val repo = repository.profileDetails(context, view, usernameTextView, emailTextView, nicknameTextView)
+            progressBar.show()
+            val repo = repository.profileDetails(context, view,progressBar, usernameTextView, emailTextView, nicknameTextView)
             authListener!!.onSuccess(repo)
         } else {
             profileDetailUsingRoomDb()
@@ -32,7 +35,7 @@ class ProfileViewModel(val context: Context, val view: View, val user: RoomUser,
 
     private fun profileDetailUsingRoomDb() {
         username = user.username
-        //email = user.email
+        email = user.email
     }
 
     fun onEditButtonClick(view: View) {

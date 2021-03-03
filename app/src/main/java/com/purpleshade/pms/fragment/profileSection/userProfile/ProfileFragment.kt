@@ -37,7 +37,7 @@ class ProfileFragment : BaseFragment(), AuthListener {
         val roomUser = BaseActivity.INSTANCE!!.myDao().user
 
         val repository = ProfileRepository()
-        val factory = ProfileViewModelFactory(baseActivity, view, roomUser, mUserName, mUserMailId, mNickName, repository)
+        val factory = ProfileViewModelFactory(baseActivity, view, baseActivity.mProgressBar,roomUser, mUserName, mUserMailId, mNickName, repository)
         viewModel = ViewModelProvider(this, factory).get(ProfileViewModel::class.java)
         viewModel.authListener = this
         binding.viewModel = viewModel
