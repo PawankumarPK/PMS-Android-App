@@ -40,7 +40,7 @@ class LoginFragment : BaseFragment(), AuthListener {
         try {
             val listData = BaseActivity.INSTANCE!!.myDao().user
             if (listData.userId != null)
-                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                findNavController().navigate(R.id.action_loginFragment_to_appPasswordFragment)
         }catch (e:Exception){
             Log.d("exception",e.message.toString())
         }

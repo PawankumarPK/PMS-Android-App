@@ -8,8 +8,11 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.purpleshade.pms.R
+import com.purpleshade.pms.databinding.AppPasswordFragmentBinding
+import com.purpleshade.pms.db.RoomUser
 import com.purpleshade.pms.fragment.BaseFragment
 import com.purpleshade.pms.utils.gone
 import kotlinx.android.synthetic.main.activity_base.*
@@ -19,22 +22,22 @@ import kotlinx.android.synthetic.main.app_password_fragment.*
 class AppPasswordFragment : BaseFragment() {
 
     private lateinit var viewModel: AppPasswordViewModel
+    lateinit var binding : AppPasswordFragmentBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.app_password_fragment, container, false)
+        binding = DataBindingUtil.inflate(inflater,R.layout.app_password_fragment, container, false)
+        return binding.root
     }
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(AppPasswordViewModel::class.java)
+        val user = RoomUser()
+        val factory = AppPasswordViewModelFactory(mEditText,user)
+        viewModel = ViewModelProvider(this,factory).get(AppPasswordViewModel::class.java)
+        binding.viewModel  = viewModel
+
       //  baseActivity.window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
 
         baseActivity.mToolbar.gone()
-
-/*        mEditText.requestFocus()
-        val imm = baseActivity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
-        imm!!.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)*/
 
     }
 }

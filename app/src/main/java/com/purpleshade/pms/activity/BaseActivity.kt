@@ -9,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.room.Room
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.purpleshade.pms.R
@@ -27,6 +29,8 @@ import kotlin.system.exitProcess
 class BaseActivity : AppCompatActivity() {
     lateinit var exitAppBottomSheetDialog: BottomSheetDialog
 
+    lateinit var view: View
+
     companion object {
         var INSTANCE: MyDatabase? = null
     }
@@ -37,6 +41,7 @@ class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base)
 
+        view = View(this)
         RetrofitClient.initRosAPI(Helper.getConfigValue(this, "api_url")!!)
         INSTANCE = getAppDataBase()!!
 
