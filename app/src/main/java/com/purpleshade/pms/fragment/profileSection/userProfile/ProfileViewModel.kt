@@ -14,8 +14,9 @@ import com.purpleshade.pms.repository.ProfileRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
 import com.purpleshade.pms.utils.customObject.Flag
 import com.purpleshade.pms.utils.show
+import com.purpleshade.pms.utils.toast
 
-class ProfileViewModel(val context: Context, val view: View,val progressBar: ProgressBar, val user: RoomUser, private val usernameTextView: TextView, private val emailTextView: TextView, private val nicknameTextView: TextView, val repository: ProfileRepository) : ViewModel() {
+class ProfileViewModel(val context: Context, val view: View, val progressBar: ProgressBar, val user: RoomUser, private val usernameTextView: TextView, private val emailTextView: TextView, private val nicknameTextView: TextView, val repository: ProfileRepository) : ViewModel() {
 
     var username: String? = null
     var email: String? = null
@@ -25,7 +26,7 @@ class ProfileViewModel(val context: Context, val view: View,val progressBar: Pro
     fun profileDetail() {
         if (!Flag.networkProblem) {
             progressBar.show()
-            val repo = repository.profileDetails(context, view,progressBar, usernameTextView, emailTextView, nicknameTextView)
+            val repo = repository.profileDetails(context, view, progressBar, usernameTextView, emailTextView, nicknameTextView)
             authListener!!.onSuccess(repo)
         } else {
             profileDetailUsingRoomDb()
@@ -39,6 +40,9 @@ class ProfileViewModel(val context: Context, val view: View,val progressBar: Pro
     }
 
     fun onEditButtonClick(view: View) {
-        view.findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
+        if (!Flag.networkProblem)
+            view.findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
+        else
+            context.toast("Could not connect to internet")
     }
 }

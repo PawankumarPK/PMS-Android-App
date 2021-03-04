@@ -39,7 +39,7 @@ class CreateRecordRepository : ViewModel() {
                 progressBar.hide()
                 RoomRecordDetail.roomDbEnable = "List Update"
                 view.snackbar(context,"Add record successfully",R.color.colorGreen)
-                view.findNavController().navigate(R.id.action_createRecordFragment_to_homeFragment)
+                view.findNavController().navigate(R.id.homeFragment)
 
             }
 

@@ -80,7 +80,7 @@ class UpdateRecordRepository {
                 RoomRecordDetail.roomDbEnable = "List Update"
                 progressBar.hide()
                 view!!.snackbar(context,"Record update successfully",R.color.colorGreen)
-                view!!.findNavController().navigate(R.id.action_updateRecordFragment_to_homeFragment)
+                view!!.findNavController().navigate(R.id.homeFragment)
             }
 
         })

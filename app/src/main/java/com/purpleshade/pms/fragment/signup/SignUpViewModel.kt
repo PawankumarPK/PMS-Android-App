@@ -84,7 +84,7 @@ class SignUpViewModel(val context: Context, private val repository: SignupReposi
 
 
     fun onLoginClick(view: View) {
-        view.findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
+        view.findNavController().navigate(R.id.loginFragment)
 
     }
 }

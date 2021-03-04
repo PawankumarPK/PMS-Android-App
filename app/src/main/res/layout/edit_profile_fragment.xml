@@ -99,7 +99,8 @@
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
                     android:text="@={viewModel.email}"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
