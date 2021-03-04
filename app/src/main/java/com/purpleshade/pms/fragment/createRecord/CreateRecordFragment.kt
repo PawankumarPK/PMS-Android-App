@@ -17,6 +17,7 @@ import com.purpleshade.pms.model.SignUpModel
 import com.purpleshade.pms.network.RetrofitClient
 import com.purpleshade.pms.repository.CreateRecordRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
+import com.purpleshade.pms.utils.gone
 import com.purpleshade.pms.utils.show
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.create_record_fragment.*
@@ -46,6 +47,7 @@ class CreateRecordFragment : BaseFragment(),AuthListener {
         baseActivity.mFragmentTitle.text = getString(R.string.createNewRecord)
         baseActivity.mToolbar.show()
         baseActivity.mBackButton.show()
+        baseActivity.mProfileImageView.gone()
         baseActivity.mBackButton.setOnClickListener {
             findNavController().navigate(R.id.homeFragment)
         }

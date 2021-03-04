@@ -12,6 +12,8 @@ import com.purpleshade.pms.databinding.UpdateRecordFragmentBinding
 import com.purpleshade.pms.fragment.BaseFragment
 import com.purpleshade.pms.repository.UpdateRecordRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
+import com.purpleshade.pms.utils.gone
+import com.purpleshade.pms.utils.show
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.update_record_fragment.*
 
@@ -36,8 +38,8 @@ class UpdateRecordFragment : BaseFragment(), AuthListener {
         binding.viewModel = viewModel
 
         baseActivity.mFragmentTitle.text = getString(R.string.updateRecord)
-        baseActivity.mBackButton.visibility = View.VISIBLE
-
+        baseActivity.mBackButton.show()
+        baseActivity.mProfileImageView.gone()
         viewModel.getRecordDetails(mTitle, mWebAddress, mEmail, mPassword, mAddNote)
 
         baseActivity.mBackButton.setOnClickListener {

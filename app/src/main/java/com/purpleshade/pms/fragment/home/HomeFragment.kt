@@ -20,8 +20,10 @@ import com.purpleshade.pms.utils.customObject.RoomRecordDetail
 import com.purpleshade.pms.utils.customObject.Flag
 import com.purpleshade.pms.utils.gone
 import com.purpleshade.pms.utils.show
+import com.purpleshade.pms.utils.toast
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.home_fragment.*
+import java.lang.Exception
 
 class HomeFragment : BaseFragment(), AuthListener {
 
@@ -40,8 +42,12 @@ class HomeFragment : BaseFragment(), AuthListener {
 
         Flag.backPressCount = 0
         val user = RoomUser()
-        val roomuserId = BaseActivity.INSTANCE!!.myDao().user
-        RoomRecordDetail.userId = roomuserId.userId.toString()
+        try {
+            val roomuserId = BaseActivity.INSTANCE!!.myDao().user
+            RoomRecordDetail.userId = roomuserId.userId.toString()
+        } catch (e: Exception){
+            baseActivity.toast("Exception Occurred")
+        }
 
         val repository = HomeRepository()
         val factory = HomeViewModelFactory(baseActivity, baseActivity, repository, baseActivity.mProgressBar, user)
