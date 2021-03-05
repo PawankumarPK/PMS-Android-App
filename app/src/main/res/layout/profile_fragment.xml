@@ -136,6 +136,7 @@
                 android:layout_margin="@dimen/size20"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
+                android:onClick="@{viewModel.onEnableScreenLockClick}"
                 android:weightSum="10">
 
                 <com.google.android.material.textview.MaterialTextView

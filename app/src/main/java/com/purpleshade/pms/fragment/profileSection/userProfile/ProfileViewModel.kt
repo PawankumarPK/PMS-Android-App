@@ -45,4 +45,9 @@ class ProfileViewModel(val context: Context, val view: View, val progressBar: Pr
         else
             context.toast("Could not connect to internet")
     }
+
+    fun onEnableScreenLockClick(view: View){
+        view.findNavController().navigate(R.id.action_profileFragment_to_enablePasswordFragment)
+    }
+
 }
