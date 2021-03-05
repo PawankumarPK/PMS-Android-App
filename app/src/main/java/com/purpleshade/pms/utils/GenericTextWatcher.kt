@@ -9,14 +9,14 @@ import com.purpleshade.pms.R
 /**
  * Created by pawan on 05,March,2021
  */
- class GenericTextWatcher(private val view: View, private val editText: Array<EditText>) : TextWatcher {
+class GenericTextWatcher(private val view: View, private val editText: Array<EditText>) : TextWatcher {
     override fun afterTextChanged(editable: Editable) {
         val text = editable.toString()
         when (view.id) {
-            R.id.otp_edit_box1 -> if (text.length == 1) editText[1].requestFocus()
-            R.id.otp_edit_box2 -> if (text.length == 1) editText[2].requestFocus() else if (text.isEmpty()) editText[0].requestFocus()
-            R.id.otp_edit_box3 -> if (text.length == 1) editText[3].requestFocus() else if (text.isEmpty()) editText[1].requestFocus()
-            R.id.otp_edit_box4 -> if (text.isEmpty()) editText[2].requestFocus()
+            R.id.mEditTextBoxOne -> if (text.length == 1) editText[1].requestFocus()
+            R.id.mEditTextBoxTwo -> if (text.length == 1) editText[2].requestFocus() else if (text.isEmpty()) editText[0].requestFocus()
+            R.id.mEditTextBoxThree -> if (text.length == 1) editText[3].requestFocus() else if (text.isEmpty()) editText[1].requestFocus()
+            R.id.mEditTextBoxFour -> if (text.isEmpty()) editText[2].requestFocus()
         }
     }
 
