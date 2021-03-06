@@ -14,7 +14,12 @@ import com.purpleshade.pms.fragment.appLock.createLock.CreateLockViewModel
 import com.purpleshade.pms.fragment.appLock.createLock.CreateLockViewModelFactory
 import com.purpleshade.pms.utils.gone
 import kotlinx.android.synthetic.main.activity_base.*
+import kotlinx.android.synthetic.main.confirm_lock_fragment.*
 import kotlinx.android.synthetic.main.create_lock_fragment.*
+import kotlinx.android.synthetic.main.create_lock_fragment.mEditTextBoxFour
+import kotlinx.android.synthetic.main.create_lock_fragment.mEditTextBoxOne
+import kotlinx.android.synthetic.main.create_lock_fragment.mEditTextBoxThree
+import kotlinx.android.synthetic.main.create_lock_fragment.mEditTextBoxTwo
 
 class ConfirmLockFragment : BaseFragment() {
 
@@ -28,7 +33,7 @@ class ConfirmLockFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val factory = ConfirmLockViewModelFactory(view, mEditTextBoxOne, mEditTextBoxTwo, mEditTextBoxThree, mEditTextBoxFour)
+        val factory = ConfirmLockViewModelFactory(view, mEditTextBoxOne, mEditTextBoxTwo, mEditTextBoxThree, mEditTextBoxFour,mCreatePin)
         viewModel = ViewModelProvider(this, factory).get(ConfirmLockViewModel::class.java)
         binding.viewModel = viewModel
         viewModel.confirmPinBoxes()
