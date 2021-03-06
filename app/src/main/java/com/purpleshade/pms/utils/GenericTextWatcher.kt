@@ -2,8 +2,10 @@ package com.purpleshade.pms.utils
 
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.EditText
+import androidx.navigation.findNavController
 import com.purpleshade.pms.R
 
 /**
@@ -16,7 +18,11 @@ class GenericTextWatcher(private val view: View, private val editText: Array<Edi
             R.id.mEditTextBoxOne -> if (text.length == 1) editText[1].requestFocus()
             R.id.mEditTextBoxTwo -> if (text.length == 1) editText[2].requestFocus() else if (text.isEmpty()) editText[0].requestFocus()
             R.id.mEditTextBoxThree -> if (text.length == 1) editText[3].requestFocus() else if (text.isEmpty()) editText[1].requestFocus()
-            R.id.mEditTextBoxFour -> if (text.isEmpty()) editText[2].requestFocus()
+            R.id.mEditTextBoxFour -> if (text.length == 1 || text.isNotEmpty()) {
+                Log.d("=====>>", "====>>>")
+                view.findNavController().navigate(R.id.action_createLockFragment_to_confirmLockFragment)
+            } else if (text.isEmpty())
+                editText[2].requestFocus()
         }
     }
 

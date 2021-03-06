@@ -1,4 +1,4 @@
-package com.purpleshade.pms.fragment.createLock
+package com.purpleshade.pms.fragment.appLock.confirmLock
 
 import android.text.Editable
 import android.text.TextWatcher
@@ -7,11 +7,12 @@ import android.widget.EditText
 import androidx.lifecycle.ViewModel
 import com.purpleshade.pms.utils.GenericTextWatcher
 
-class CreateLockViewModel(val view: View, val box1: EditText, val box2: EditText, val box3: EditText, val box4: EditText) : ViewModel(), TextWatcher {
+class ConfirmLockViewModel(val view: View, val box1: EditText, val box2: EditText, val box3: EditText, val box4: EditText) : ViewModel(), TextWatcher {
+
 
     private val editText: Array<EditText>? = null
 
-    fun password() {
+    fun confirmPinBoxes() {
         val edit = arrayOf<EditText>(box1, box2, box3, box4)
 
         box1.addTextChangedListener(GenericTextWatcher(box1, edit))
@@ -21,13 +22,10 @@ class CreateLockViewModel(val view: View, val box1: EditText, val box2: EditText
 
     }
 
-    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-        TODO("Not yet implemented")
-    }
 
-    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-        TODO("Not yet implemented")
-    }
+    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
     override fun afterTextChanged(editable: Editable?) {
         val text = editable.toString()
@@ -38,4 +36,5 @@ class CreateLockViewModel(val view: View, val box1: EditText, val box2: EditText
             box4 -> if (text.isEmpty()) editText!![2].requestFocus()
         }
     }
+
 }

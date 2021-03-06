@@ -66,7 +66,7 @@
             app:destination="@id/editProfileFragment" />
         <action
             android:id="@+id/action_profileFragment_to_enablePasswordFragment"
-            app:destination="@id/enablePasswordFragment" />
+            app:destination="@id/createLockFragment" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
@@ -83,8 +83,17 @@
             app:destination="@id/homeFragment" />
     </fragment>
     <fragment
-        android:id="@+id/enablePasswordFragment"
-        android:name="com.purpleshade.pms.fragment.createLock.CreateLockFragment"
+        android:id="@+id/createLockFragment"
+        android:name="com.purpleshade.pms.fragment.appLock.createLock.CreateLockFragment"
         android:label="EnablePasswordFragment"
-        tools:layout="@layout/enable_password_fragment"/>
+        tools:layout="@layout/create_lock_fragment">
+        <action
+            android:id="@+id/action_createLockFragment_to_confirmLockFragment"
+            app:destination="@id/confirmLockFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/confirmLockFragment"
+        android:name="com.purpleshade.pms.fragment.appLock.confirmLock.ConfirmLockFragment"
+        android:label="ConfirmLockFragment"
+        tools:layout="@layout/confirm_lock_fragment"/>
 </navigation>

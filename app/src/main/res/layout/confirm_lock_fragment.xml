@@ -1,22 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout>
 
     <data>
-
         <variable
             name="viewModel"
-            type="com.purpleshade.pms.fragment.createLock.CreateLockViewModel" />
+            type="com.purpleshade.pms.fragment.appLock.confirmLock.ConfirmLockViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp">
+        tools:context=".fragment.appLock.confirmLock.ConfirmLockFragment">
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size30"
+            android:fontFamily="@font/raleway_bold"
+            android:gravity="center_horizontal"
+            android:text="Confirm your lock screen PIN"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/size25"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-            android:id="@+id/root_otp_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
@@ -98,7 +112,8 @@
                  android:textSize="20sp" />
 
          </RelativeLayout>
- -->
+    -->
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </layout>

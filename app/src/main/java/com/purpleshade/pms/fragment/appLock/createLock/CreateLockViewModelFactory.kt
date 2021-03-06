@@ -1,4 +1,4 @@
-package com.purpleshade.pms.fragment.createLock
+package com.purpleshade.pms.fragment.appLock.createLock
 
 import android.view.View
 import android.widget.EditText

@@ -10,4 +10,5 @@
     <dimen name="size50">50dp</dimen>
     <dimen name="size22">22sp</dimen>
     <dimen name="size17">17sp</dimen>
+    <dimen name="size25">25sp</dimen>
 </resources>
