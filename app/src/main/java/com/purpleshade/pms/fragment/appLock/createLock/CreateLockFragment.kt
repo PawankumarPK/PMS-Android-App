@@ -26,7 +26,7 @@ class CreateLockFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val factory = CreateLockViewModelFactory(view, mEditTextBoxOne, mEditTextBoxTwo, mEditTextBoxThree, mEditTextBoxFour)
+        val factory = CreateLockViewModelFactory(baseActivity,view, mEditTextBoxOne, mEditTextBoxTwo, mEditTextBoxThree, mEditTextBoxFour)
         viewModel = ViewModelProvider(this, factory).get(CreateLockViewModel::class.java)
         binding.viewModel = viewModel
         viewModel.createPinBoxes()

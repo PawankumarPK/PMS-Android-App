@@ -9,4 +9,5 @@ object Flag {
     var backPressCount: Int? = null
     var backPressString: String? = null
     var profileDetails: String? = null
+    var enableScreenLock = false
 }

@@ -9,6 +9,7 @@ import android.widget.EditText
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.purpleshade.pms.R
+import com.purpleshade.pms.utils.customObject.Flag
 import com.purpleshade.pms.utils.snackbar
 
 class ConfirmLockViewModel(val context: Context, val view: View, val box1: EditText, val box2: EditText, val box3: EditText, val box4: EditText, val button: Button) : ViewModel() {
@@ -27,6 +28,7 @@ class ConfirmLockViewModel(val context: Context, val view: View, val box1: EditT
 
     fun onCreatePinButtonClick(view: View) {
         view.snackbar(context, "PIN is created", R.color.colorGreen)
+        Flag.enableScreenLock = true
         view.findNavController().navigate(R.id.profileFragment)
     }
 

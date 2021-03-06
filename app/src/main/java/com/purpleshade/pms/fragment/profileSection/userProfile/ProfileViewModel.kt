@@ -20,6 +20,7 @@ class ProfileViewModel(val context: Context, val view: View, val progressBar: Pr
 
     var username: String? = null
     var email: String? = null
+    var screenLock: String? = null
     var authListener: AuthListener? = null
 
 
@@ -31,6 +32,9 @@ class ProfileViewModel(val context: Context, val view: View, val progressBar: Pr
         } else {
             profileDetailUsingRoomDb()
         }
+
+        if (Flag.enableScreenLock) screenLock = "Disable Screen Lock"
+        else screenLock = "Enable Screen Lock"
 
     }
 
@@ -46,7 +50,7 @@ class ProfileViewModel(val context: Context, val view: View, val progressBar: Pr
             context.toast("Could not connect to internet")
     }
 
-    fun onEnableScreenLockClick(view: View){
+    fun onEnableScreenLockClick(view: View) {
         view.findNavController().navigate(R.id.action_profileFragment_to_enablePasswordFragment)
     }
 
