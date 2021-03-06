@@ -103,6 +103,7 @@
             android:fontFamily="@font/raleway_medium"
             android:padding="@dimen/size15"
             android:text="Create PIN"
+            android:onClick="@{viewModel.onCreatePinButtonClick}"
             android:textAllCaps="false"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/size16"

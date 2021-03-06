@@ -33,7 +33,7 @@ class ConfirmLockFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val factory = ConfirmLockViewModelFactory(view, mEditTextBoxOne, mEditTextBoxTwo, mEditTextBoxThree, mEditTextBoxFour,mCreatePin)
+        val factory = ConfirmLockViewModelFactory(baseActivity,view, mEditTextBoxOne, mEditTextBoxTwo, mEditTextBoxThree, mEditTextBoxFour,mCreatePin)
         viewModel = ViewModelProvider(this, factory).get(ConfirmLockViewModel::class.java)
         binding.viewModel = viewModel
         viewModel.confirmPinBoxes()

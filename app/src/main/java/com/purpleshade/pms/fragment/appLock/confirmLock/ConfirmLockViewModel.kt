@@ -1,14 +1,17 @@
 package com.purpleshade.pms.fragment.appLock.confirmLock
 
+import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.lifecycle.ViewModel
+import androidx.navigation.findNavController
 import com.purpleshade.pms.R
+import com.purpleshade.pms.utils.snackbar
 
-class ConfirmLockViewModel(val view: View, val box1: EditText, val box2: EditText, val box3: EditText, val box4: EditText, val button: Button) : ViewModel() {
+class ConfirmLockViewModel(val context: Context, val view: View, val box1: EditText, val box2: EditText, val box3: EditText, val box4: EditText, val button: Button) : ViewModel() {
 
 
     fun confirmPinBoxes() {
@@ -20,6 +23,11 @@ class ConfirmLockViewModel(val view: View, val box1: EditText, val box2: EditTex
         box3.addTextChangedListener(GenericTextWatcher(box3, edit))
         box4.addTextChangedListener(GenericTextWatcher(box4, edit))
 
+    }
+
+    fun onCreatePinButtonClick(view: View) {
+        view.snackbar(context, "PIN is created", R.color.colorGreen)
+        view.findNavController().navigate(R.id.profileFragment)
     }
 
     inner class GenericTextWatcher(private val view: View, private val editText: Array<EditText>) : TextWatcher {
