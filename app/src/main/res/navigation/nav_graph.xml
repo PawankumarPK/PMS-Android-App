@@ -84,7 +84,7 @@
     </fragment>
     <fragment
         android:id="@+id/enablePasswordFragment"
-        android:name="com.purpleshade.pms.fragment.enablePassword.EnablePasswordFragment"
+        android:name="com.purpleshade.pms.fragment.createLock.CreateLockFragment"
         android:label="EnablePasswordFragment"
         tools:layout="@layout/enable_password_fragment"/>
 </navigation>

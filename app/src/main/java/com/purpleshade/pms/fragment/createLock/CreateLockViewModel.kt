@@ -1,4 +1,4 @@
-package com.purpleshade.pms.fragment.enablePassword
+package com.purpleshade.pms.fragment.createLock
 
 import android.text.Editable
 import android.text.TextWatcher
@@ -7,7 +7,7 @@ import android.widget.EditText
 import androidx.lifecycle.ViewModel
 import com.purpleshade.pms.utils.GenericTextWatcher
 
-class EnablePasswordViewModel(val view: View, val box1: EditText, val box2: EditText, val box3: EditText, val box4: EditText) : ViewModel(), TextWatcher {
+class CreateLockViewModel(val view: View, val box1: EditText, val box2: EditText, val box3: EditText, val box4: EditText) : ViewModel(), TextWatcher {
 
     private val editText: Array<EditText>? = null
 
