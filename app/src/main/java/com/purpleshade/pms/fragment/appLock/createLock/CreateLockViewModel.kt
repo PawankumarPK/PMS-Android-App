@@ -9,6 +9,7 @@ import android.widget.EditText
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.purpleshade.pms.R
+import com.purpleshade.pms.activity.BaseActivity
 import com.purpleshade.pms.utils.customObject.Flag
 import com.purpleshade.pms.utils.snackbar
 
@@ -17,7 +18,8 @@ class CreateLockViewModel(val context: Context, val view: View, val box1: EditTe
     var lockStatus: String? = null
 
     fun createPinBoxes() {
-        if (Flag.enableScreenLock)
+        val listData = BaseActivity.INSTANCE!!.myDao().user
+        if (listData.lockAppStatus == "on")
             lockStatus = "Please enter your PIN"
         else
             lockStatus = "Create your lock screen PIN"
@@ -34,19 +36,21 @@ class CreateLockViewModel(val context: Context, val view: View, val box1: EditTe
 
     inner class GenericTextWatcher(private val view: View, private val editText: Array<EditText>) : TextWatcher {
         override fun afterTextChanged(editable: Editable) {
+            val listData = BaseActivity.INSTANCE!!.myDao().user
             val text = editable.toString()
             when (view.id) {
                 R.id.mEditTextBoxOne -> if (text.length == 1) editText[1].requestFocus()
                 R.id.mEditTextBoxTwo -> if (text.length == 1) editText[2].requestFocus() else if (text.isEmpty()) editText[0].requestFocus()
                 R.id.mEditTextBoxThree -> if (text.length == 1) editText[3].requestFocus() else if (text.isEmpty()) editText[1].requestFocus()
                 R.id.mEditTextBoxFour ->
-                    if (text.length == 1 && !Flag.enableScreenLock)
+                    if (text.length == 1 && listData.lockAppStatus == "off")
                         view.findNavController().navigate(R.id.action_createLockFragment_to_confirmLockFragment)
                     else if (text.isEmpty())
                         editText[2].requestFocus()
-                    else if (text.length == 1 && Flag.enableScreenLock) {
+                    else if (text.length == 1 && listData.lockAppStatus == "on") {
                         Flag.enableScreenLock = false
                         view.snackbar(context, "Disable Screen Lock", R.color.colorBlackGrey)
+                        BaseActivity.INSTANCE!!.myDao().lockAppStatus("off",1)
                         view.findNavController().navigate(R.id.profileFragment)
                     }
             }

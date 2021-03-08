@@ -26,4 +26,7 @@ class RoomUser {
     @ColumnInfo(name = "appPassword")
     var appPassword:String? = null
 
+    @ColumnInfo(name = "lockAppStatus")
+    var lockAppStatus:String? = null
+
 }

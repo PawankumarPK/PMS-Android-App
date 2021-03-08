@@ -33,8 +33,11 @@ class ProfileViewModel(val context: Context, val view: View, val progressBar: Pr
             profileDetailUsingRoomDb()
         }
 
-        if (Flag.enableScreenLock) screenLock = "Disable Screen Lock"
-        else screenLock = "Enable Screen Lock"
+        val listData = BaseActivity.INSTANCE!!.myDao().user
+        if (listData.lockAppStatus == "on")
+            screenLock = "Disable Screen Lock"
+        else
+            screenLock = "Enable Screen Lock"
 
     }
 

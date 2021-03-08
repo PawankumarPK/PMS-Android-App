@@ -39,15 +39,17 @@ class LoginFragment : BaseFragment(), AuthListener {
         val user = RoomUser()
         try {
             val listData = BaseActivity.INSTANCE!!.myDao().user
-            if (listData.userId != null)
+            if (listData.userId != null && listData.lockAppStatus == "off")
                 findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-        }catch (e:Exception){
-            Log.d("exception",e.message.toString())
+            else if (listData.userId != null && listData.lockAppStatus == "on")
+                findNavController().navigate(R.id.action_loginFragment_to_appPasswordFragment)
+        } catch (e: Exception) {
+            Log.d("exception", e.message.toString())
         }
 
         val repository = LoginRepository()
         binding.lifecycleOwner = this
-        val factory = AuthViewModelFactory(baseActivity, repository,baseActivity.mProgressBar,user,mPasswordVisiblity,mUserPassword)
+        val factory = AuthViewModelFactory(baseActivity, repository, baseActivity.mProgressBar, user, mPasswordVisiblity, mUserPassword)
 
         viewModel = ViewModelProvider(this, factory).get(LoginViewModel::class.java)
 
@@ -55,7 +57,6 @@ class LoginFragment : BaseFragment(), AuthListener {
         viewModel.authListener = this
         binding.viewModel = viewModel
         baseActivity.mToolbar.visibility = View.GONE
-
 
 
     }
