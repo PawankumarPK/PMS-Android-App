@@ -23,4 +23,7 @@ class RoomUser {
     @ColumnInfo(name = "email")
     var email:String? = null
 
+    @ColumnInfo(name = "appPassword")
+    var appPassword:String? = null
+
 }

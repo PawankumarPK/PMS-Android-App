@@ -24,6 +24,11 @@ interface MyDao {
     @Query("UPDATE userDB SET username = :username WHERE id =:id")
     fun usernameUpdate(username: String?, id: Int)
 
+    //Update app pin column in user table
+    @Query("UPDATE userDB SET appPassword = :appPin WHERE id =:id")
+    fun pinUpdate(appPin: String?, id: Int)
+
+
     @Query("SELECT * FROM records WHERE recordId=:id ")
     fun loadSingle(id: String): List<RoomRecord>
 
