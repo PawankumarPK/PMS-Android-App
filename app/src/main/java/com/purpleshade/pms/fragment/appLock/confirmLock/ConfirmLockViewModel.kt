@@ -40,7 +40,6 @@ class ConfirmLockViewModel(val context: Context, val view: View, val box1: EditT
             return
         }
         roomUser.appPassword = sb.toString()
-        Log.d("----->>>",roomUser.appPassword.toString())
         //update pin into table
         BaseActivity.INSTANCE!!.myDao().pinUpdate(sb.toString(), 1)
         BaseActivity.INSTANCE!!.myDao().lockAppStatus("on", 1)

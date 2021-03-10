@@ -31,7 +31,7 @@ class AppPasswordFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val user = RoomUser()
-        val factory = AppPasswordViewModelFactory(mEditText,user)
+        val factory = AppPasswordViewModelFactory(baseActivity,mEditText,user)
         viewModel = ViewModelProvider(this,factory).get(AppPasswordViewModel::class.java)
         binding.viewModel  = viewModel
 

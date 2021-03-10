@@ -19,7 +19,6 @@ class CreateLockViewModel(val context: Context, val view: View, val box1: EditTe
 
     var lockStatus: String? = null
     val sb = StringBuilder()
-    val roomUser = RoomUser()
 
     fun createPinBoxes() {
         val listData = BaseActivity.INSTANCE!!.myDao().user
@@ -50,7 +49,6 @@ class CreateLockViewModel(val context: Context, val view: View, val box1: EditTe
                 R.id.mEditTextBoxFour ->
                     if (text.length == 1 && listData.lockAppStatus == "off") {
                         Flag.appPassword = sb.toString()
-                        Log.d("----->>>", sb.toString())
                         view.findNavController().navigate(R.id.action_createLockFragment_to_confirmLockFragment)
                     } else if (text.isEmpty())
                         editText[2].requestFocus()
