@@ -10,4 +10,5 @@ object Flag {
     var backPressString: String? = null
     var profileDetails: String? = null
     var enableScreenLock = false
+    var appPassword = ""
 }

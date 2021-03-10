@@ -33,13 +33,21 @@ class ConfirmLockViewModel(val context: Context, val view: View, val box1: EditT
     }
 
     fun onCreatePinButtonClick(view: View) {
-        view.snackbar(context, "PIN is created", R.color.colorGreen)
-        Flag.enableScreenLock = true
+
+        /**to be continued
+        if create Password != confirm password */
+
+        if (Flag.appPassword != sb.toString()) {
+            view.snackbar(context, "PIN not matched", R.color.colorAccent)
+            sb.clear()
+            return
+        }
         roomUser.appPassword = sb.toString()
         //update pin into table
-        BaseActivity.INSTANCE!!.myDao().pinUpdate(sb.toString(),1)
-        BaseActivity.INSTANCE!!.myDao().lockAppStatus("on",1)
+        BaseActivity.INSTANCE!!.myDao().pinUpdate(sb.toString(), 1)
+        BaseActivity.INSTANCE!!.myDao().lockAppStatus("on", 1)
         view.findNavController().navigate(R.id.profileFragment)
+        view.snackbar(context, "PIN is created", R.color.colorGreen)
     }
 
     inner class GenericTextWatcher(private val view: View, private val editText: Array<EditText>) : TextWatcher {

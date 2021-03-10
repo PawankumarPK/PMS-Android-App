@@ -12,10 +12,12 @@ import com.purpleshade.pms.R
 import com.purpleshade.pms.activity.BaseActivity
 import com.purpleshade.pms.utils.customObject.Flag
 import com.purpleshade.pms.utils.snackbar
+import java.lang.StringBuilder
 
 class CreateLockViewModel(val context: Context, val view: View, val box1: EditText, val box2: EditText, val box3: EditText, val box4: EditText) : ViewModel() {
 
     var lockStatus: String? = null
+    val sb = StringBuilder()
 
     fun createPinBoxes() {
         val listData = BaseActivity.INSTANCE!!.myDao().user
@@ -38,13 +40,17 @@ class CreateLockViewModel(val context: Context, val view: View, val box1: EditTe
         override fun afterTextChanged(editable: Editable) {
             val listData = BaseActivity.INSTANCE!!.myDao().user
             val text = editable.toString()
+            sb.append(text)
             when (view.id) {
                 R.id.mEditTextBoxOne -> if (text.length == 1) editText[1].requestFocus()
                 R.id.mEditTextBoxTwo -> if (text.length == 1) editText[2].requestFocus() else if (text.isEmpty()) editText[0].requestFocus()
                 R.id.mEditTextBoxThree -> if (text.length == 1) editText[3].requestFocus() else if (text.isEmpty()) editText[1].requestFocus()
                 R.id.mEditTextBoxFour ->
-                    if (text.length == 1 && listData.lockAppStatus == "off")
+                    if (text.length == 1 && listData.lockAppStatus == "off") {
+                        Flag.appPassword = sb.toString()
+                        Log.d("----->>>",sb.toString())
                         view.findNavController().navigate(R.id.action_createLockFragment_to_confirmLockFragment)
+                    }
                     else if (text.isEmpty())
                         editText[2].requestFocus()
                     else if (text.length == 1 && listData.lockAppStatus == "on") {
