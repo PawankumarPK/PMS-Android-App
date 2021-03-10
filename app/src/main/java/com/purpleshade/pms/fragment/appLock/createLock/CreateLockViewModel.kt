@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.purpleshade.pms.R
 import com.purpleshade.pms.activity.BaseActivity
+import com.purpleshade.pms.db.RoomUser
 import com.purpleshade.pms.utils.customObject.Flag
 import com.purpleshade.pms.utils.snackbar
 import java.lang.StringBuilder
@@ -18,6 +19,7 @@ class CreateLockViewModel(val context: Context, val view: View, val box1: EditTe
 
     var lockStatus: String? = null
     val sb = StringBuilder()
+    val roomUser = RoomUser()
 
     fun createPinBoxes() {
         val listData = BaseActivity.INSTANCE!!.myDao().user
@@ -48,15 +50,18 @@ class CreateLockViewModel(val context: Context, val view: View, val box1: EditTe
                 R.id.mEditTextBoxFour ->
                     if (text.length == 1 && listData.lockAppStatus == "off") {
                         Flag.appPassword = sb.toString()
-                        Log.d("----->>>",sb.toString())
+                        Log.d("----->>>", sb.toString())
                         view.findNavController().navigate(R.id.action_createLockFragment_to_confirmLockFragment)
-                    }
-                    else if (text.isEmpty())
+                    } else if (text.isEmpty())
                         editText[2].requestFocus()
                     else if (text.length == 1 && listData.lockAppStatus == "on") {
-                        Flag.enableScreenLock = false
+                        if (listData.appPassword != sb.toString()) {
+                            view.snackbar(context, "Incorrect PIN", R.color.colorAccent)
+                            sb.clear()
+                            return
+                        }
                         view.snackbar(context, "Disable Screen Lock", R.color.colorBlackGrey)
-                        BaseActivity.INSTANCE!!.myDao().lockAppStatus("off",1)
+                        BaseActivity.INSTANCE!!.myDao().lockAppStatus("off", 1)
                         view.findNavController().navigate(R.id.profileFragment)
                     }
             }
