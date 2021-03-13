@@ -16,8 +16,12 @@ interface MyDao {
     @get:Query("select * from userDB")
     val user: RoomUser
 
+    //Update user details column in user table
+    @Query("UPDATE userDB SET userId=:userId, username = :username, email= :userEmail WHERE id =:id")
+    fun userDetailsUpdate(userId: String, username: String?, userEmail: String, id: Int)
+
     //Insert Data into User table
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun userDetails(user: RoomUser)
 
     //Update username column in user table

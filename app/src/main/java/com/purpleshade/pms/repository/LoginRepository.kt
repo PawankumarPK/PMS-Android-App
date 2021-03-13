@@ -1,6 +1,7 @@
 package com.purpleshade.pms.repository
 
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import androidx.lifecycle.LiveData
@@ -18,13 +19,16 @@ import com.purpleshade.pms.utils.snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.Exception
 
 /**
  * Created by pawan on 02,January,2021
  */
 class LoginRepository {
 
-    fun doLogin(context:Context,email: String, password: String, user: RoomUser, view: View, progressBar: ProgressBar): LiveData<String> {
+    var id :Int?=null
+
+    fun doLogin(context: Context, email: String, password: String, user: RoomUser, view: View, progressBar: ProgressBar): LiveData<String> {
         val loginResponse = MutableLiveData<String>()
         val api = RetrofitClient.apiService
         val call = api.login(email, password)
@@ -32,7 +36,7 @@ class LoginRepository {
         call.enqueue(object : Callback<SignUpModel> {
             override fun onFailure(call: Call<SignUpModel>?, t: Throwable?) {
                 loginResponse.value = t?.message
-                view.snackbar(context,context.getString(R.string.something_went_wrong), R.color.colorWarning)
+                view.snackbar(context, context.getString(R.string.something_went_wrong), R.color.colorWarning)
                 progressBar.hide()
             }
 
@@ -47,9 +51,19 @@ class LoginRepository {
                     user.userId = JWTUtils.userId
                     user.username = JWTUtils.userName
                     user.email = JWTUtils.userEmail
-
                     //insert data into table
-                    BaseActivity.INSTANCE!!.myDao().userDetails(user)
+
+                    try {
+                        id = BaseActivity.INSTANCE!!.myDao().user.id!!
+                    }catch (e:Exception){
+
+                    }
+                    Log.d("=====>>",id.toString())
+                    if (id == null) {
+                        BaseActivity.INSTANCE!!.myDao().userDetails(user)
+                    }
+                    else
+                        BaseActivity.INSTANCE!!.myDao().userDetailsUpdate(JWTUtils.userId, JWTUtils.userName, JWTUtils.userEmail, 1)
 
                     if (UserResponse.response.equals("User Found")) {
                         progressBar.hide()
@@ -57,7 +71,7 @@ class LoginRepository {
                     }
                 } else {
                     progressBar.hide()
-                    view.snackbar(context,context.getString(R.string.invalid_credential),R.color.colorWarning)
+                    view.snackbar(context, context.getString(R.string.invalid_credential), R.color.colorWarning)
                 }
             }
         })

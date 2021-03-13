@@ -38,8 +38,4 @@ class RoomRecord {
     @ColumnInfo(name = "loginId")
     var loginId: String? = null
 
-    @ColumnInfo(name = "recordPin")
-    var recordPin: String? = null
-
-
 }
