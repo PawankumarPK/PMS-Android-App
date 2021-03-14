@@ -19,9 +19,9 @@ class CreateLockViewModel(val context: Context, val view: View, val box1: EditTe
 
     var lockStatus: String? = null
     val sb = StringBuilder()
+    val listData = BaseActivity.INSTANCE!!.myDao().user
 
     fun createPinBoxes() {
-        val listData = BaseActivity.INSTANCE!!.myDao().user
         if (listData.lockAppStatus == "on")
             lockStatus = "Please enter your PIN"
         else
@@ -38,10 +38,11 @@ class CreateLockViewModel(val context: Context, val view: View, val box1: EditTe
     }
 
     inner class GenericTextWatcher(private val view: View, private val editText: Array<EditText>) : TextWatcher {
+        val listData = BaseActivity.INSTANCE!!.myDao().user
         override fun afterTextChanged(editable: Editable) {
-            val listData = BaseActivity.INSTANCE!!.myDao().user
             val text = editable.toString()
             sb.append(text)
+           Log.d("---->>",listData.lockAppStatus.toString())
             when (view.id) {
                 R.id.mEditTextBoxOne -> if (text.length == 1) editText[1].requestFocus()
                 R.id.mEditTextBoxTwo -> if (text.length == 1) editText[2].requestFocus() else if (text.isEmpty()) editText[0].requestFocus()

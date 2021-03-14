@@ -22,7 +22,7 @@ class ProfileViewModel(val context: Context, val view: View, val progressBar: Pr
     var email: String? = null
     var screenLock: String? = null
     var authListener: AuthListener? = null
-
+    val lockStatus = BaseActivity.INSTANCE!!.myDao().user
 
     fun profileDetail() {
         if (!Flag.networkProblem) {
@@ -33,11 +33,14 @@ class ProfileViewModel(val context: Context, val view: View, val progressBar: Pr
             profileDetailUsingRoomDb()
         }
 
-        val listData = BaseActivity.INSTANCE!!.myDao().user
-        if (listData.lockAppStatus == "on")
+        if (lockStatus.lockAppStatus == "on") {
             screenLock = "Disable Screen Lock"
-        else
+        } else {
+            lockStatus.lockAppStatus = "off"
+            BaseActivity.INSTANCE!!.myDao().userDetails(lockStatus)
+            Log.d("---->>",lockStatus.lockAppStatus.toString())
             screenLock = "Enable Screen Lock"
+        }
 
     }
 
@@ -47,8 +50,10 @@ class ProfileViewModel(val context: Context, val view: View, val progressBar: Pr
     }
 
     fun onEditButtonClick(view: View) {
-        if (!Flag.networkProblem)
+        if (!Flag.networkProblem) {
+            Log.d("---->>", lockStatus.lockAppStatus.toString())
             view.findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
+        }
         else
             context.toast("Could not connect to internet")
     }

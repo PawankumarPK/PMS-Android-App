@@ -34,11 +34,7 @@ class HomeRepository {
     var email = ""
     var password = ""
     var addNote = ""
-<<<<<<< HEAD
     var view: View? = null
-=======
-    var view : View? = null
->>>>>>> 2c4610f... Snackbar updated when signup
 
     val roomRecord = RoomRecord()
 
@@ -152,21 +148,14 @@ class HomeRepository {
 
         call.enqueue(object : Callback<SignUpModel> {
             override fun onFailure(call: Call<SignUpModel>, t: Throwable) {
-<<<<<<< HEAD
                 view!!.snackbar(context, context.getString(R.string.something_went_wrong), R.color.colorWarning)
-=======
-                view!!.snackbar(context,context.getString(R.string.something_went_wrong), R.color.colorWarning)
->>>>>>> 2c4610f... Snackbar updated when signup
             }
 
             override fun onResponse(call: Call<SignUpModel>, response: Response<SignUpModel>) {
                 roomRecord.recordId = id
                 BaseActivity.INSTANCE!!.myDao().deleteByRecordId(id)
-<<<<<<< HEAD
                 view!!.snackbar(context, context.getString(R.string.delete_record_successfully), R.color.colorGreen)
-=======
 //                view!!.snackbar(context,context.getString(R.string.delete_record_successfully), R.color.colorGreen)
->>>>>>> 2c4610f... Snackbar updated when signup
             }
 
         })

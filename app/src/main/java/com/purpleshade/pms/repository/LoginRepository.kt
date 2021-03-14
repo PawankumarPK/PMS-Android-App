@@ -58,7 +58,6 @@ class LoginRepository {
                     }catch (e:Exception){
 
                     }
-                    Log.d("=====>>",id.toString())
                     if (id == null) {
                         BaseActivity.INSTANCE!!.myDao().userDetails(user)
                     }
