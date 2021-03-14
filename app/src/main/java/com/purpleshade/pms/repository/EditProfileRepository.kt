@@ -18,6 +18,7 @@ import com.purpleshade.pms.network.RetrofitClient
 import com.purpleshade.pms.utils.customObject.RoomRecordDetail
 import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.snackbar
+import com.purpleshade.pms.utils.toast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,7 +35,8 @@ class EditProfileRepository {
 
         call.enqueue(object : Callback<Profile> {
             override fun onFailure(call: Call<Profile>, t: Throwable) {
-                view.snackbar(context, "Oops! Something went wrong", R.color.colorWarning)
+                //view.snackbar(context, "Oops! Something went wrong", R.color.colorWarning)
+                context.toast("Oops! Something went wrong")
                 progressBar.hide()
             }
 
