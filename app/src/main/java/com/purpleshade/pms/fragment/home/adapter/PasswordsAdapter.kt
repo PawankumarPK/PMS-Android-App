@@ -49,7 +49,6 @@ class PasswordsAdapter(val view: View, val context: Context, var passwordList: A
         fun onBind(list: ArrayList<RecordList>, pos: Int) {
             binding.viewModelAdapter = list[pos]
             binding.executePendingBindings()
-
             binding.mTitle.text = binding.viewModelAdapter!!.title
 
             binding.mEdit.setOnClickListener {

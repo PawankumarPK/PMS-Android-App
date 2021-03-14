@@ -26,7 +26,7 @@ import java.lang.Exception
  */
 class LoginRepository {
 
-    var id :Int?=null
+    var id: Int? = null
 
     fun doLogin(context: Context, email: String, password: String, user: RoomUser, view: View, progressBar: ProgressBar): LiveData<String> {
         val loginResponse = MutableLiveData<String>()
@@ -55,12 +55,11 @@ class LoginRepository {
 
                     try {
                         id = BaseActivity.INSTANCE!!.myDao().user.id!!
-                    }catch (e:Exception){
+                    } catch (e: Exception) {
 
                     }
-                    if (id == null) {
+                    if (id == null)
                         BaseActivity.INSTANCE!!.myDao().userDetails(user)
-                    }
                     else
                         BaseActivity.INSTANCE!!.myDao().userDetailsUpdate(JWTUtils.userId, JWTUtils.userName, JWTUtils.userEmail, 1)
 
