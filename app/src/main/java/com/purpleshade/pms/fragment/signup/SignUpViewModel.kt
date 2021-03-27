@@ -62,9 +62,9 @@ class SignUpViewModel(val context: Context, private val repository: SignupReposi
             }
         }
 
-        /* val repo = repository.signUp(username!!, email!!, password!!, confirmPassword!!, context, progressBar)
+         val repo = repository.signUp(username!!, email!!, password!!, confirmPassword!!, context, progressBar)
          authListener!!.onSuccess(repo)
-         repository.view = view*/
+         repository.view = view
     }
 
     fun passwordVisibilityOnClick(view: View) {
