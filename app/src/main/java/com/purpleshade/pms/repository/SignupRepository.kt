@@ -37,9 +37,9 @@ class SignupRepository {
             }
 
             override fun onResponse(call: Call<SignUpModel>, response: Response<SignUpModel>) {
-                view!!.snackbar(context,context.getString(R.string.register_successful), R.color.colorGreen)
+              //  view!!.snackbar(context,context.getString(R.string.register_successful), R.color.colorGreen)
                 progressBar.hide()
-                view!!.findNavController().navigate(R.id.loginFragment)
+                view!!.findNavController().navigate(R.id.action_signUpFragment_to_verificationFragment)
             }
         })
         return signUpResponse

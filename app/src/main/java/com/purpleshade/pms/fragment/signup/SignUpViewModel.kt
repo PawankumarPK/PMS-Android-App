@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import com.purpleshade.pms.R
 import com.purpleshade.pms.repository.SignupRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
+import com.purpleshade.pms.utils.gone
 import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.show
 import com.purpleshade.pms.utils.snackbar
@@ -31,10 +32,10 @@ class SignUpViewModel(val context: Context, private val repository: SignupReposi
 
 
     fun registerButtonClick(view: View) {
-        progressBar.show()
+        progressBar.gone()
         regex = Regex(emailPattern)
 
-        when {
+       /* when {
             username.isNullOrEmpty() -> {
                 view.snackbar(context, "Name is required", R.color.colorBlackGrey)
                 progressBar.hide()
@@ -60,11 +61,13 @@ class SignUpViewModel(val context: Context, private val repository: SignupReposi
                 progressBar.hide()
                 return
             }
-        }
+        }*/
 
-         val repo = repository.signUp(username!!, email!!, password!!, confirmPassword!!, context, progressBar)
-         authListener!!.onSuccess(repo)
-         repository.view = view
+        /* val repo = repository.signUp(username!!, email!!, password!!, confirmPassword!!, context, progressBar)
+         authListener!!.onSuccess(repo)*/
+        view!!.findNavController().navigate(R.id.action_signUpFragment_to_verificationFragment)
+
+        repository.view = view
     }
 
     fun passwordVisibilityOnClick(view: View) {

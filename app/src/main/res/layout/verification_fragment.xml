@@ -12,8 +12,7 @@
     </data>
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".fragment.signup.verification.VerificationFragment">
@@ -23,12 +22,13 @@
             android:id="@+id/mLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size30"
+            android:fontFamily="@font/raleway_medium"
             android:text="just one more step "
+            android:textAllCaps="true"
             android:textColor="@color/colorDarkGrey"
             android:textSize="@dimen/size16"
             android:textStyle="bold"
-            android:layout_marginTop="@dimen/size30"
-            android:textAllCaps="true"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -38,32 +38,173 @@
             android:id="@+id/mLabel2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Let's verify your email "
-            android:textColor="@color/colorDarkGrey"
-            android:textSize="18dp"
             android:layout_marginTop="5dp"
-            android:textStyle="bold"
+            android:fontFamily="@font/raleway_bold"
+            android:text="Let's verify your email "
             android:textAllCaps="true"
+            android:textColor="@color/colorDarkGrey"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mLabel" />
 
 
         <TextView
+            android:id="@+id/mLabel3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size20"
+            android:fontFamily="@font/raleway_regular"
+            android:gravity="center_horizontal"
+            android:paddingStart="@dimen/size30"
+            android:paddingEnd="@dimen/size30"
             android:text="@string/emailVerification"
+            android:textAlignment="center"
             android:textColor="@color/colorBlack"
             android:textSize="12dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_margin="@dimen/size20"
-            android:textAlignment="center"
-            android:paddingStart="@dimen/size30"
-            android:paddingEnd="@dimen/size30"
-            android:fontFamily="@font/raleway_regular"
-            app:layout_constraintTop_toBottomOf="@+id/mLabel2"
-            android:gravity="center_horizontal" />
+            app:layout_constraintTop_toBottomOf="@+id/mLabel2" />
+
+
+        <TextView
+            android:id="@+id/mVerifyLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size50"
+            android:fontFamily="@font/raleway_bold"
+            android:padding="@dimen/size20"
+            android:text="Please enter 6 digit code sent to pawan@gmail.com"
+            android:textColor="@color/colorDarkGrey"
+            android:textSize="@dimen/size18"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mLabel3"/>
+
+
+        <LinearLayout
+            android:id="@+id/mPinRootLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/size20"
+            android:weightSum="6"
+            app:layout_constraintTop_toBottomOf="@+id/mVerifyLabel">
+
+            <EditText
+                android:id="@+id/mEditTextBoxOne"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="@dimen/size5"
+                android:layout_marginRight="@dimen/size5"
+                android:layout_weight="1"
+                android:background="@drawable/edittext_curve_bg"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textSize="30sp" />
+
+            <EditText
+                android:id="@+id/mEditTextBoxTwo"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="@dimen/size5"
+                android:layout_marginRight="@dimen/size5"
+                android:layout_weight="1"
+                android:background="@drawable/edittext_curve_bg"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textSize="30sp" />
+
+            <EditText
+                android:id="@+id/mEditTextBoxThree"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="@dimen/size5"
+                android:layout_marginRight="@dimen/size5"
+                android:layout_weight="1"
+                android:background="@drawable/edittext_curve_bg"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textSize="30sp" />
+
+            <EditText
+                android:id="@+id/mEditTextBoxFour"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="@dimen/size5"
+                android:layout_marginRight="@dimen/size5"
+                android:layout_weight="1"
+                android:background="@drawable/edittext_curve_bg"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textSize="30sp" />
+
+            <EditText
+                android:id="@+id/mEditTextBoxFive"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="@dimen/size5"
+                android:layout_marginRight="@dimen/size5"
+                android:layout_weight="1"
+                android:background="@drawable/edittext_curve_bg"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textSize="30sp" />
+
+
+            <EditText
+                android:id="@+id/mEditTextBoxSix"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="@dimen/size5"
+                android:layout_marginRight="@dimen/size5"
+                android:layout_weight="1"
+                android:background="@drawable/edittext_curve_bg"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textSize="30sp" />
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size10"
+            android:fontFamily="@font/raleway_bold"
+            android:text="resend code"
+            android:textAllCaps="true"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:textColor="@color/colorBlue"
+            android:textSize="@dimen/size18"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/mPinRootLayout" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size10"
+            android:fontFamily="@font/raleway_bold"
+            android:text="Change email"
+            android:textAllCaps="true"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:textColor="@color/colorBlue"
+            android:textSize="@dimen/size18"
+            android:textStyle="bold"
+            android:layout_marginBottom="@dimen/size30"
+            app:layout_constraintBottom_toTopOf="@+id/mRegister"/>
 
 
         <com.google.android.material.button.MaterialButton
@@ -73,12 +214,11 @@
             android:layout_margin="@dimen/size20"
             android:background="@drawable/gradient"
             android:fontFamily="@font/raleway_medium"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:text="Continue"
-            android:drawableRight="@drawable/ic_right_arrow_white"
+            android:text="Confirm"
             android:textAllCaps="false"
             android:textColor="@color/colorWhite"
-            android:textSize="@dimen/size16" />
+            android:textSize="@dimen/size16"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

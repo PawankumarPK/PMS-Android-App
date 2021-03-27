@@ -26,6 +26,9 @@
         android:label="sign_up_fragment"
         tools:layout="@layout/sign_up_fragment">
 
+        <action
+            android:id="@+id/action_signUpFragment_to_verificationFragment"
+            app:destination="@id/verificationFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -96,4 +99,9 @@
         android:name="com.purpleshade.pms.fragment.appLock.confirmLock.ConfirmLockFragment"
         android:label="ConfirmLockFragment"
         tools:layout="@layout/confirm_lock_fragment"/>
+    <fragment
+        android:id="@+id/verificationFragment"
+        android:name="com.purpleshade.pms.fragment.signup.verification.VerificationFragment"
+        android:label="VerificationFragment"
+        tools:layout="@layout/verification_fragment"/>
 </navigation>
