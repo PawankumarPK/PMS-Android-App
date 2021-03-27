@@ -11,4 +11,6 @@ object Flag {
     var profileDetails: String? = null
     var enableScreenLock = false
     var appPassword = ""
+    var userSignUpEmail = ""
+    var signUpToken = ""
 }

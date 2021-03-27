@@ -32,12 +32,13 @@ class SignupRepository {
 
         call.enqueue(object : Callback<SignUpModel> {
             override fun onFailure(call: Call<SignUpModel>?, t: Throwable?) {
-                view!!.snackbar(context,context.getString(R.string.something_went_wrong), R.color.colorWarning)
+              //  view!!.snackbar(context,context.getString(R.string.something_went_wrong), R.color.colorWarning)
+                context.toast(R.string.something_went_wrong.toString())
                 progressBar.hide()
             }
 
             override fun onResponse(call: Call<SignUpModel>, response: Response<SignUpModel>) {
-              //  view!!.snackbar(context,context.getString(R.string.register_successful), R.color.colorGreen)
+                view!!.snackbar(context,context.getString(R.string.register_successful), R.color.colorGreen)
                 progressBar.hide()
                 view!!.findNavController().navigate(R.id.action_signUpFragment_to_verificationFragment)
             }

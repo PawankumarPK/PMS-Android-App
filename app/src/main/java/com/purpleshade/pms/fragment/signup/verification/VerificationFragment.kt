@@ -5,13 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.purpleshade.pms.R
 import com.purpleshade.pms.databinding.VerificationFragmentBinding
 import com.purpleshade.pms.fragment.BaseFragment
+import com.purpleshade.pms.repository.SignupVerificationRepository
+import com.purpleshade.pms.utils.customInterface.AuthListener
 import kotlinx.android.synthetic.main.verification_fragment.*
 
-class VerificationFragment : BaseFragment() {
+class VerificationFragment : BaseFragment(), AuthListener {
 
     private lateinit var viewModel: VerificationViewModel
     private lateinit var binding: VerificationFragmentBinding
@@ -25,13 +29,20 @@ class VerificationFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        val factory = VerificationViewModelFactory(mEditTextBoxOne, mEditTextBoxTwo, mEditTextBoxThree, mEditTextBoxFour, mEditTextBoxFive, mEditTextBoxSix)
+        val repository = SignupVerificationRepository()
+        val factory = VerificationViewModelFactory(baseActivity,mEditTextBoxOne, mEditTextBoxTwo, mEditTextBoxThree, mEditTextBoxFour, mEditTextBoxFive, mEditTextBoxSix,repository)
         viewModel = ViewModelProvider(this, factory).get(VerificationViewModel::class.java)
         binding.viewModel = viewModel
+        viewModel.authListener = this
         viewModel.createPinBoxes()
 
 
+    }
+
+    override fun onSuccess(responseSuccess: LiveData<String>) {
+        responseSuccess.observe(this, Observer {
+
+        })
     }
 
 

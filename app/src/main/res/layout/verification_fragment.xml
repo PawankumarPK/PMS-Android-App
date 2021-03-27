@@ -177,6 +177,7 @@
 
 
         <TextView
+            android:id="@+id/mResendPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/size10"
@@ -192,6 +193,7 @@
 
 
         <TextView
+            android:id="@+id/mChangeEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/size10"
@@ -204,11 +206,12 @@
             android:textSize="@dimen/size18"
             android:textStyle="bold"
             android:layout_marginBottom="@dimen/size30"
-            app:layout_constraintBottom_toTopOf="@+id/mRegister"/>
+            app:layout_constraintBottom_toTopOf="@+id/mConfirm"
+            android:onClick="@{viewModel.changeEmailOnClick}"/>
 
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/mRegister"
+            android:id="@+id/mConfirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/size20"
@@ -218,6 +221,7 @@
             android:textAllCaps="false"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/size16"
+            android:onClick="@{viewModel.onConfirmButtonClick}"
             app:layout_constraintBottom_toBottomOf="parent" />
 
 

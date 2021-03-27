@@ -2,6 +2,7 @@ package com.purpleshade.pms.fragment.signup
 
 import android.content.Context
 import android.text.method.PasswordTransformationMethod
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
@@ -11,6 +12,7 @@ import androidx.navigation.findNavController
 import com.purpleshade.pms.R
 import com.purpleshade.pms.repository.SignupRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
+import com.purpleshade.pms.utils.customObject.Flag
 import com.purpleshade.pms.utils.gone
 import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.show
@@ -32,7 +34,7 @@ class SignUpViewModel(val context: Context, private val repository: SignupReposi
 
 
     fun registerButtonClick(view: View) {
-        progressBar.gone()
+        progressBar.show()
         regex = Regex(emailPattern)
 
        /* when {
@@ -63,9 +65,10 @@ class SignUpViewModel(val context: Context, private val repository: SignupReposi
             }
         }*/
 
-        /* val repo = repository.signUp(username!!, email!!, password!!, confirmPassword!!, context, progressBar)
-         authListener!!.onSuccess(repo)*/
-        view!!.findNavController().navigate(R.id.action_signUpFragment_to_verificationFragment)
+         val repo = repository.signUp(username!!, email!!, password!!, confirmPassword!!, context, progressBar)
+         authListener!!.onSuccess(repo)
+
+        Flag.userSignUpEmail = email!!
 
         repository.view = view
     }

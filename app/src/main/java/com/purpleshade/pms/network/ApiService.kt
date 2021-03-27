@@ -54,6 +54,9 @@ interface ApiService {
     @PATCH("user/updateProfile")
     fun updateProfile(@Query("id") id: String, @Body post: UpdateProfile): Call<SignUpModel>
 
+    @GET("user/signUpVerify")
+    fun verifySignUp(@Query("email") email: String, @Query("token") token: String): Call<SignUpModel>
+
 
     /*companion object {
         operator fun invoke(): ApiService {
