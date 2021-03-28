@@ -20,12 +20,12 @@ import java.lang.StringBuilder
 
 class VerificationViewModel(
     val context: Context,
-    val box1: EditText,
-    val box2: EditText,
-    val box3: EditText,
-    val box4: EditText,
-    val box5: EditText,
-    val box6: EditText,
+    private val box1: EditText,
+    private val box2: EditText,
+    private val box3: EditText,
+    private val box4: EditText,
+    private val box5: EditText,
+    private val box6: EditText,
     val repository: SignupVerificationRepository
 ) : ViewModel() {
 
