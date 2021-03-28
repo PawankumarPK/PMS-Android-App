@@ -11,8 +11,7 @@
     </data>
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".fragment.login.forgotPassword.createNewPassword.CreateNewPassFragment">
@@ -22,16 +21,16 @@
             android:id="@+id/mLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size20"
+            android:layout_marginLeft="@dimen/size20"
             android:layout_marginTop="@dimen/size30"
             android:fontFamily="@font/raleway_bold"
             android:text="Create new password "
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/size25"
-            android:layout_marginStart="@dimen/size20"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginLeft="@dimen/size20" />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <TextView
@@ -76,6 +75,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/raleway_medium"
                     android:inputType="textPassword"
+                    android:text="@={viewModel.password}"
                     android:textStyle="bold" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -109,21 +109,22 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/raleway_medium"
                 android:inputType="textPassword"
+                android:text="@={viewModel.confirmPassword}"
                 android:textStyle="bold" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/mRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size20"
+            android:layout_marginTop="@dimen/size50"
+            android:layout_marginEnd="@dimen/size20"
             android:background="@drawable/gradient"
             android:fontFamily="@font/raleway_medium"
+            android:onClick="@{viewModel.resetButtonOnClick}"
             android:text="Reset Password"
             android:textAllCaps="false"
-            android:layout_marginStart="@dimen/size20"
-            android:layout_marginEnd="@dimen/size20"
-            android:layout_marginTop="@dimen/size50"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/size16"
             app:layout_constraintTop_toBottomOf="@+id/mConfirmPasswordLayout" />

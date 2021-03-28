@@ -1,7 +1,17 @@
 package com.purpleshade.pms.fragment.login.forgotPassword.createNewPassword
 
+import android.content.Context
+import android.widget.EditText
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.purpleshade.pms.fragment.login.forgotPassword.ForgotPasswordViewModel
+import com.purpleshade.pms.repository.CreateNewPassRepository
+import com.purpleshade.pms.repository.ForgotPasswordRepository
 
-class CreateNewPassViewModelFactory : ViewModel() {
-    // TODO: Implement the ViewModel
+@Suppress("UNCHECKED_CAST")
+class CreateNewPassViewModelFactory(val context: Context, val editText: EditText,val repository: CreateNewPassRepository) : ViewModelProvider.NewInstanceFactory() {
+
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        return CreateNewPassViewModel(context, editText,repository) as T
+    }
 }
