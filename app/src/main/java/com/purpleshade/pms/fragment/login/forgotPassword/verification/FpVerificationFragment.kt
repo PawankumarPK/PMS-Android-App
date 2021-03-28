@@ -6,27 +6,30 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import com.purpleshade.pms.R
+import com.purpleshade.pms.databinding.ForgotPasswordFragmentBinding
+import com.purpleshade.pms.databinding.FpVerificationFragmentBinding
+import com.purpleshade.pms.fragment.BaseFragment
+import com.purpleshade.pms.fragment.login.forgotPassword.ForgotPasswordViewModel
+import com.purpleshade.pms.fragment.login.forgotPassword.ForgotPasswordViewModelFactory
 
-class FpVerificationFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = FpVerificationFragment()
-    }
+class FpVerificationFragment : BaseFragment() {
 
     private lateinit var viewModel: FpVerificationViewModel
+    lateinit var binding : FpVerificationFragmentBinding
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fp_verification_fragment, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fp_verification_fragment, container, false)
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(FpVerificationViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val factory = FpVerificationViewModelFactory()
+        viewModel = ViewModelProvider(this,factory).get(FpVerificationViewModel::class.java)
+        binding.viewModel  = viewModel
+
     }
 
 }

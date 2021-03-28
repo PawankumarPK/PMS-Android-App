@@ -34,7 +34,6 @@ interface ApiService {
     @GET("user/userProfile")
     fun userProfile(@Query("id") id: String): Call<Profile>
 
-
     @FormUrlEncoded
     @POST("records/inputRecord")
     fun addRecordDetail(
@@ -57,6 +56,10 @@ interface ApiService {
 
     @GET("user/signUpVerify")
     fun verifySignUp(@Query("email") email: String, @Query("token") token: String): Call<ResponseBody>
+
+    @FormUrlEncoded
+    @POST("user/forgotPassword")
+    fun forgotPassword(@Field("email") email: String): Call<ResponseBody>
 
 
     /*companion object {

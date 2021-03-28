@@ -111,5 +111,23 @@
         android:id="@+id/forgotPasswordFragment"
         android:name="com.purpleshade.pms.fragment.login.forgotPassword.ForgotPasswordFragment"
         android:label="ForgotPasswordFragment"
-        tools:layout="@layout/forgot_password_fragment"/>
+        tools:layout="@layout/forgot_password_fragment">
+        <action
+            android:id="@+id/action_forgotPasswordFragment_to_fpVerificationFragment"
+            app:destination="@id/fpVerificationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fpVerificationFragment"
+        android:name="com.purpleshade.pms.fragment.login.forgotPassword.verification.FpVerificationFragment"
+        android:label="FpVerificationFragment"
+        tools:layout="@layout/fp_verification_fragment">
+        <action
+            android:id="@+id/action_fpVerificationFragment_to_createNewPassFragment"
+            app:destination="@id/createNewPassFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createNewPassFragment"
+        android:name="com.purpleshade.pms.fragment.login.forgotPassword.createNewPassword.CreateNewPassFragment"
+        android:label="CreateNewPassFragment"
+        tools:layout="@layout/create_new_pass_fragment"/>
 </navigation>
