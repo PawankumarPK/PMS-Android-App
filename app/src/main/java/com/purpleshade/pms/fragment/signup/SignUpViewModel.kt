@@ -37,7 +37,7 @@ class SignUpViewModel(val context: Context, private val repository: SignupReposi
         progressBar.show()
         regex = Regex(emailPattern)
 
-       /* when {
+      /*  when {
             username.isNullOrEmpty() -> {
                 view.snackbar(context, "Name is required", R.color.colorBlackGrey)
                 progressBar.hide()
@@ -65,10 +65,11 @@ class SignUpViewModel(val context: Context, private val repository: SignupReposi
             }
         }*/
 
-         val repo = repository.signUp(username!!, email!!, password!!, confirmPassword!!, context, progressBar)
-         authListener!!.onSuccess(repo)
-
         Flag.userSignUpEmail = email!!
+
+       /* val repo = repository.signUp(username!!, email!!, password!!, confirmPassword!!, context, progressBar)
+        authListener!!.onSuccess(repo)*/
+        view!!.findNavController().navigate(R.id.action_signUpFragment_to_verificationFragment)
 
         repository.view = view
     }
@@ -85,9 +86,9 @@ class SignUpViewModel(val context: Context, private val repository: SignupReposi
 
         }
 
-        val repo = repository.signUp(username!!, email!!, password!!, confirmPassword!!, context, progressBar)
+       /* val repo = repository.signUp(username!!, email!!, password!!, confirmPassword!!, context, progressBar)
         authListener!!.onSuccess(repo)
-        repository.view = view
+        repository.view = view*/
 
     }
 

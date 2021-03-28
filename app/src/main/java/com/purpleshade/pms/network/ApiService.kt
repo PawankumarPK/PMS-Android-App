@@ -3,6 +3,7 @@ package com.purpleshade.pms.network
 import com.purpleshade.pms.model.*
 import com.purpleshade.pms.utils.Helper
 import okhttp3.OkHttpClient
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -21,8 +22,8 @@ interface ApiService {
     @POST("/user/signup")
     fun signUp(
         @Field("username") username: String, @Field("email") email: String,
-        @Field("password") password: String, @Field("confirmPassword") confmPass: String
-    ): Call<SignUpModel>
+        @Field("password") password: String, @Field("confirmPassword") confirmPass: String
+    ): Call<ResponseBody>
 
     @GET("/records/allRecords")
     fun allRecords(@Query("id") id: String): Call<Records>
@@ -55,7 +56,7 @@ interface ApiService {
     fun updateProfile(@Query("id") id: String, @Body post: UpdateProfile): Call<SignUpModel>
 
     @GET("user/signUpVerify")
-    fun verifySignUp(@Query("email") email: String, @Query("token") token: String): Call<SignUpModel>
+    fun verifySignUp(@Query("email") email: String, @Query("token") token: String): Call<ResponseBody>
 
 
     /*companion object {

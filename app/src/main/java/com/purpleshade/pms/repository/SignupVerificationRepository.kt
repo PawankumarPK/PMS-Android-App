@@ -10,6 +10,7 @@ import com.purpleshade.pms.model.SignUpModel
 import com.purpleshade.pms.network.RetrofitClient
 import com.purpleshade.pms.utils.customObject.Flag
 import com.purpleshade.pms.utils.snackbar
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,13 +26,13 @@ class SignupVerificationRepository {
         val api = RetrofitClient.apiService
         val call = api.verifySignUp(Flag.userSignUpEmail, Flag.signUpToken)
 
-        call.enqueue(object : Callback<SignUpModel> {
+        call.enqueue(object : Callback<ResponseBody> {
 
-            override fun onFailure(call: Call<SignUpModel>, t: Throwable) {
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 view!!.snackbar(context, context.getString(R.string.something_went_wrong), R.color.colorWarning)
             }
 
-            override fun onResponse(call: Call<SignUpModel>, response: Response<SignUpModel>) {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 Log.d("======>>>",Flag.userSignUpEmail +" " +  Flag.signUpToken)
                 view!!.snackbar(context, context.getString(R.string.register_successful), R.color.colorGreen)
 
