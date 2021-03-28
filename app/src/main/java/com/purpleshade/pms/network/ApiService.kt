@@ -61,6 +61,10 @@ interface ApiService {
     @POST("user/forgotPassword")
     fun forgotPassword(@Field("email") email: String): Call<ResponseBody>
 
+    @GET("user/forgotPassVerify")
+    fun forgotPassVerify(@Query("email") email: String, @Query("token") token: String): Call<ResponseBody>
+
+
 
     /*companion object {
         operator fun invoke(): ApiService {

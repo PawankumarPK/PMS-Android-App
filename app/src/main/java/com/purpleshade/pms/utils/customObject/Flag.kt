@@ -12,6 +12,7 @@ object Flag {
     var enableScreenLock = false
     var appPassword = ""
     var userSignUpEmail = ""
-    var forgotPassEmail = ""
     var signUpToken = ""
+    var forgotPassEmail = ""
+    var forgotPassToken = ""
 }
