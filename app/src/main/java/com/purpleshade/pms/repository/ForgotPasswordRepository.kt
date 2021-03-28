@@ -38,7 +38,7 @@ class ForgotPasswordRepository {
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 progressBar.hide()
-                view!!.snackbar(context, "Check email", R.color.colorGreen)
+               // view!!.snackbar(context, "Check your email", R.color.colorGreen)
                 view!!.findNavController().navigate(R.id.action_forgotPasswordFragment_to_fpVerificationFragment)
 
             }

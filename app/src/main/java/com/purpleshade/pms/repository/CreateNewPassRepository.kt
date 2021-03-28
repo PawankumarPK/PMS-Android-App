@@ -39,8 +39,8 @@ class CreateNewPassRepository {
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 progressBar.hide()
-                view!!.snackbar(context, context.getString(R.string.register_successful), R.color.colorGreen)
-                //  view!!.findNavController().navigate(R.id.action_fpVerificationFragment_to_createNewPassFragment)
+                view!!.snackbar(context, context.getString(R.string.password_change_successfully), R.color.colorGreen)
+                view!!.findNavController().navigate(R.id.loginFragment)
 
             }
 

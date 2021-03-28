@@ -31,6 +31,7 @@
     <string name="email_address">Email Address</string>
     <string name="emergency_number">Emergency Number</string>
     <string name="username">Username</string>
+    <string name="password_change_successfully">Password change successfully</string>
     <string name="emailVerification">We already send the code in pawan@gmail.com. Please check your inbox and insert the
     code in form below to verify your email</string>
     <string name="verified">Verified</string>
