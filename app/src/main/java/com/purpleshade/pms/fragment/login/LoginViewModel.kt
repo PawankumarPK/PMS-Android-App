@@ -50,6 +50,11 @@ class LoginViewModel(val context: Context, private val repository: LoginReposito
 
     }
 
+    fun forgotPasswordOnClick(view: View){
+        view.findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
+
+    }
+
     fun passwordVisibilityOnClick(view: View) {
         if (visiblity) {
             visiblity = false

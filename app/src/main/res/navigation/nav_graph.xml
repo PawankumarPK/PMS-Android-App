@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/verificationFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_loginFragment_to_appPasswordFragment"
             app:destination="@id/appPasswordFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -104,4 +107,9 @@
         android:name="com.purpleshade.pms.fragment.signup.verification.VerificationFragment"
         android:label="VerificationFragment"
         tools:layout="@layout/verification_fragment"/>
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.purpleshade.pms.fragment.login.forgotPassword.ForgotPasswordFragment"
+        android:label="ForgotPasswordFragment"
+        tools:layout="@layout/forgot_password_fragment"/>
 </navigation>

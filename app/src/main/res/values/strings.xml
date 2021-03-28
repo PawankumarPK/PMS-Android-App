@@ -35,5 +35,7 @@
     code in form below to verify your email</string>
     <string name="verified">Verified</string>
     <string name="yor_are_successfully_verified_the_account">Yor are successfully verified the account</string>
+    <string name="enter_email">Enter the Email associated with your account and we will send an email with instruction
+    to reset your password</string>
 
 </resources>
