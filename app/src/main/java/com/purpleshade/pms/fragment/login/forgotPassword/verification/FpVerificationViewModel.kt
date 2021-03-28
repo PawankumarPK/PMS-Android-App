@@ -5,12 +5,15 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
+import android.widget.ProgressBar
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.purpleshade.pms.R
 import com.purpleshade.pms.repository.FpVerificationRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
 import com.purpleshade.pms.utils.customObject.Flag
+import com.purpleshade.pms.utils.hide
+import com.purpleshade.pms.utils.show
 import java.lang.StringBuilder
 
 class FpVerificationViewModel(
@@ -21,6 +24,7 @@ class FpVerificationViewModel(
     private val box4: EditText,
     private val box5: EditText,
     private val box6: EditText,
+    var progressBar: ProgressBar,
     val repository: FpVerificationRepository
 ) : ViewModel() {
 
@@ -29,8 +33,9 @@ class FpVerificationViewModel(
 
 
     fun verifyOnClick(view: View) {
+        progressBar.show()
         Flag.forgotPassToken = sb.toString()
-        val repo = repository.verifyForgetPasswordCode(context)
+        val repo = repository.verifyForgetPasswordCode(context, progressBar)
         authListener!!.onSuccess(repo)
         repository.view = view
     }

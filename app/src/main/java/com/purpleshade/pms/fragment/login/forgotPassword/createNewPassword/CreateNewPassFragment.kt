@@ -18,6 +18,7 @@ import com.purpleshade.pms.fragment.login.forgotPassword.ForgotPasswordViewModel
 import com.purpleshade.pms.repository.CreateNewPassRepository
 import com.purpleshade.pms.repository.ForgotPasswordRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
+import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.create_new_pass_fragment.*
 
 class CreateNewPassFragment : BaseFragment(), AuthListener {
@@ -33,7 +34,7 @@ class CreateNewPassFragment : BaseFragment(), AuthListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val repository = CreateNewPassRepository()
-        val factory = CreateNewPassViewModelFactory(baseActivity, mPassword, mPasswordVisibility,repository)
+        val factory = CreateNewPassViewModelFactory(baseActivity, mPassword, mPasswordVisibility,baseActivity.mProgressBar,repository)
         viewModel = ViewModelProvider(this, factory).get(CreateNewPassViewModel::class.java)
         binding.viewModel = viewModel
         viewModel.authListener = this

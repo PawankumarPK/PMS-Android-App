@@ -17,6 +17,7 @@ import com.purpleshade.pms.fragment.login.forgotPassword.ForgotPasswordViewModel
 import com.purpleshade.pms.fragment.login.forgotPassword.ForgotPasswordViewModelFactory
 import com.purpleshade.pms.repository.FpVerificationRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
+import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.verification_fragment.*
 
 class FpVerificationFragment : BaseFragment(), AuthListener {
@@ -33,7 +34,7 @@ class FpVerificationFragment : BaseFragment(), AuthListener {
         super.onViewCreated(view, savedInstanceState)
 
         val repository = FpVerificationRepository()
-        val factory = FpVerificationViewModelFactory(baseActivity,mEditTextBoxOne, mEditTextBoxTwo, mEditTextBoxThree, mEditTextBoxFour, mEditTextBoxFive, mEditTextBoxSix,repository)
+        val factory = FpVerificationViewModelFactory(baseActivity,mEditTextBoxOne, mEditTextBoxTwo, mEditTextBoxThree, mEditTextBoxFour, mEditTextBoxFive, mEditTextBoxSix,baseActivity.mProgressBar,repository)
         viewModel = ViewModelProvider(this, factory).get(FpVerificationViewModel::class.java)
         binding.viewModel = viewModel
         viewModel.authListener = this

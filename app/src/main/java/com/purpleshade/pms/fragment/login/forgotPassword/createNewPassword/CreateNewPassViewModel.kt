@@ -5,14 +5,17 @@ import android.text.method.PasswordTransformationMethod
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.ProgressBar
 import androidx.lifecycle.ViewModel
 import com.purpleshade.pms.R
 import com.purpleshade.pms.repository.CreateNewPassRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
 import com.purpleshade.pms.utils.customObject.Flag
+import com.purpleshade.pms.utils.hide
+import com.purpleshade.pms.utils.show
 import com.purpleshade.pms.utils.snackbar
 
-class CreateNewPassViewModel(val context: Context, val editText: EditText, val imageView: ImageView, val repository: CreateNewPassRepository) : ViewModel() {
+class CreateNewPassViewModel(val context: Context, val editText: EditText, val imageView: ImageView, val progressBar: ProgressBar, val repository: CreateNewPassRepository) : ViewModel() {
 
     var password: String? = null
     var confirmPassword: String? = null
@@ -21,21 +24,21 @@ class CreateNewPassViewModel(val context: Context, val editText: EditText, val i
 
 
     fun resetButtonOnClick(view: View) {
-
+        progressBar.show()
         when {
             password.isNullOrEmpty() -> {
                 view.snackbar(context, "Please enter a password", R.color.colorBlackGrey)
-                //progressBar.hide()
+                progressBar.hide()
                 return
             }
             confirmPassword.isNullOrEmpty() || confirmPassword != password -> {
                 view.snackbar(context, "Password did not match", R.color.colorBlackGrey)
-                // progressBar.hide()
+                progressBar.hide()
                 return
             }
         }
 
-        val repo = repository.createNewPassword(context, editText)
+        val repo = repository.createNewPassword(context, editText, progressBar)
         authListener!!.onSuccess(repo)
 
         repository.view = view
