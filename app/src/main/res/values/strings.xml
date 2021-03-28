@@ -33,5 +33,7 @@
     <string name="username">Username</string>
     <string name="emailVerification">We already send the code in pawan@gmail.com. Please check your inbox and insert the
     code in form below to verify your email</string>
+    <string name="verified">Verified</string>
+    <string name="yor_are_successfully_verified_the_account">Yor are successfully verified the account</string>
 
 </resources>

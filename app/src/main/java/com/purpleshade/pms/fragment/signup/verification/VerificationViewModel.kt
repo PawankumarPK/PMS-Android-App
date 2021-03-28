@@ -1,17 +1,21 @@
 package com.purpleshade.pms.fragment.signup.verification
 
+import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.purpleshade.pms.R
-import com.purpleshade.pms.repository.ProfileRepository
 import com.purpleshade.pms.repository.SignupVerificationRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
 import com.purpleshade.pms.utils.customObject.Flag
+import kotlinx.android.synthetic.main.verified_dialog.*
 import java.lang.StringBuilder
 
 class VerificationViewModel(
@@ -27,6 +31,7 @@ class VerificationViewModel(
 
     var authListener: AuthListener? = null
     val sb = StringBuilder()
+    lateinit var mDialog: Dialog
 
 
     fun createPinBoxes() {
@@ -50,10 +55,27 @@ class VerificationViewModel(
     fun onConfirmButtonClick(view: View) {
         Flag.signUpToken = sb.toString()
         sb.clear()
+        successfullyVerifiedDialog(view)
         /*val repo = repository.verifySignUp(context)
         authListener!!.onSuccess(repo)*/
 
         repository.view = view
+
+    }
+
+    private fun successfullyVerifiedDialog(view: View) {
+        mDialog = Dialog(context)
+        val layout = LayoutInflater.from(context).inflate(R.layout.verified_dialog, null, false)
+        mDialog.setContentView(layout)
+
+        mDialog.mGoToLogin.setOnClickListener {
+            mDialog.dismiss()
+            view.findNavController().navigate(R.id.loginFragment)
+
+        }
+        mDialog.setCanceledOnTouchOutside(false)
+        mDialog.show()
+        mDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
     }
 
