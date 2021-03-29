@@ -68,6 +68,9 @@ interface ApiService {
     @POST("user/updatePassword")
     fun updatePassword(@Field("email") email: String, @Field("password") password: String): Call<ResponseBody>
 
+    @PATCH("user/logout")
+    fun logout(@Query("id") id: String): Call<ResponseBody>
+
 
     /*companion object {
         operator fun invoke(): ApiService {

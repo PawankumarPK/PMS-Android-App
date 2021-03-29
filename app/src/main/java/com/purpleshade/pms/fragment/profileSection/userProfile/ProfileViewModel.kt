@@ -44,6 +44,12 @@ class ProfileViewModel(val context: Context, val view: View, val progressBar: Pr
 
     }
 
+    fun logoutOnClick(view: View){
+        progressBar.show()
+        val repo = repository.logout(context,view,progressBar)
+        authListener!!.onSuccess(repo)
+    }
+
     private fun profileDetailUsingRoomDb() {
         username = user.username
         email = user.email

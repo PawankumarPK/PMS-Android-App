@@ -7,6 +7,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.findNavController
 import com.purpleshade.pms.R
 import com.purpleshade.pms.activity.BaseActivity
 import com.purpleshade.pms.model.Profile
@@ -17,6 +18,7 @@ import com.purpleshade.pms.utils.customObject.RoomRecordDetail
 import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.snackbar
 import com.purpleshade.pms.utils.toast
+import okhttp3.ResponseBody
 import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
@@ -27,7 +29,7 @@ import retrofit2.Response
  */
 class ProfileRepository {
 
-    fun profileDetails(context: Context, view: View, progressBar: ProgressBar,username: TextView, email: TextView, nickname: TextView): LiveData<String> {
+    fun profileDetails(context: Context, view: View, progressBar: ProgressBar, username: TextView, email: TextView, nickname: TextView): LiveData<String> {
         val responseForProfileDetails = MutableLiveData<String>()
         val api = RetrofitClient.apiService
         val call = api.userProfile(RoomRecordDetail.userId)
@@ -48,6 +50,31 @@ class ProfileRepository {
                         nickname.text = list[i].username
 
                     }
+                }
+            }
+
+        })
+
+        return responseForProfileDetails
+
+    }
+
+
+    fun logout(context: Context, view: View, progressBar: ProgressBar): LiveData<String> {
+        val responseForProfileDetails = MutableLiveData<String>()
+        val api = RetrofitClient.apiService
+        val call = api.logout(RoomRecordDetail.userId)
+
+        call.enqueue(object : Callback<ResponseBody> {
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                view.snackbar(context, R.string.something_went_wrong.toString(), R.color.colorWarning)
+                progressBar.hide()
+            }
+
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                if (response.isSuccessful) {
+                    progressBar.hide()
+                    view.findNavController().navigate(R.id.loginFragment)
                 }
             }
 

@@ -135,17 +135,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/size20"
-                android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:onClick="@{viewModel.onEnableScreenLockClick}"
+                android:orientation="horizontal"
                 android:weightSum="10">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/mNumberLabel"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/raleway_bold"
                     android:layout_weight="9"
+                    android:fontFamily="@font/raleway_bold"
                     android:text="@={viewModel.screenLock}"
                     android:textColor="@color/colorDarkGrey"
                     android:textSize="@dimen/size17" />
@@ -161,11 +161,12 @@
         </LinearLayout>
 
 
-
         <LinearLayout
+            android:id="@+id/mLogoutLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
+            android:onClick="@{viewModel.logoutOnClick}"
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@+id/mScreenLockStatus">
 
@@ -193,7 +194,6 @@
 
 
         </LinearLayout>
-
 
 
         <com.google.android.material.button.MaterialButton
