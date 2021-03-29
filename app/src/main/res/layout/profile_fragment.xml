@@ -166,7 +166,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:onClick="@{viewModel.logoutOnClick}"
+            android:onClick="@{viewModel.logoutDialog}"
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@+id/mScreenLockStatus">
 

@@ -1,7 +1,11 @@
 package com.purpleshade.pms.fragment.profileSection.userProfile
 
+import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -15,6 +19,8 @@ import com.purpleshade.pms.utils.customInterface.AuthListener
 import com.purpleshade.pms.utils.customObject.Flag
 import com.purpleshade.pms.utils.show
 import com.purpleshade.pms.utils.toast
+import kotlinx.android.synthetic.main.logout_msg_dialog.*
+import kotlinx.android.synthetic.main.verified_dialog.*
 
 class ProfileViewModel(val context: Context, val view: View, val progressBar: ProgressBar, val user: RoomUser, private val usernameTextView: TextView, private val emailTextView: TextView, private val nicknameTextView: TextView, val repository: ProfileRepository) : ViewModel() {
 
@@ -23,6 +29,7 @@ class ProfileViewModel(val context: Context, val view: View, val progressBar: Pr
     var screenLock: String? = null
     var authListener: AuthListener? = null
     val lockStatus = BaseActivity.INSTANCE!!.myDao().user
+    lateinit var mDialog: Dialog
 
     fun profileDetail() {
         if (!Flag.networkProblem) {
@@ -38,29 +45,46 @@ class ProfileViewModel(val context: Context, val view: View, val progressBar: Pr
         } else {
             lockStatus.lockAppStatus = "off"
             BaseActivity.INSTANCE!!.myDao().userDetails(lockStatus)
-            Log.d("---->>",lockStatus.lockAppStatus.toString())
+            Log.d("---->>", lockStatus.lockAppStatus.toString())
             screenLock = "Enable Screen Lock"
         }
 
     }
 
-    fun logoutOnClick(view: View){
-        progressBar.show()
-        val repo = repository.logout(context,view,progressBar)
-        authListener!!.onSuccess(repo)
-    }
 
     private fun profileDetailUsingRoomDb() {
         username = user.username
         email = user.email
     }
 
+     fun logoutDialog(view: View) {
+        mDialog = Dialog(context)
+        val layout = LayoutInflater.from(context).inflate(R.layout.logout_msg_dialog, null, false)
+        mDialog.setContentView(layout)
+
+        mDialog.mYes.setOnClickListener {
+            mDialog.dismiss()
+            logoutOnClick(view)
+        }
+        mDialog.mNo.setOnClickListener {
+            mDialog.dismiss()
+        }
+        mDialog.show()
+
+    }
+
+    private fun logoutOnClick(view: View) {
+        progressBar.show()
+        val repo = repository.logout(context, view, progressBar)
+        authListener!!.onSuccess(repo)
+    }
+
+
     fun onEditButtonClick(view: View) {
         if (!Flag.networkProblem) {
             Log.d("---->>", lockStatus.lockAppStatus.toString())
             view.findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
-        }
-        else
+        } else
             context.toast("Could not connect to internet")
     }
 

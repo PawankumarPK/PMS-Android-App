@@ -21,6 +21,7 @@
     <string name="update">Update</string>
     <string name="updateRecord">Update Record</string>
     <string name="delete_record_successfully">Delete record successfully</string>
+    <string name="logout_successfully">Logout successful</string>
     <string name="something_went_wrong">Oops! Something went wrong</string>
     <string name="invalid_credential">Invalid Credential</string>
     <string name="register_successful">User register successful</string>

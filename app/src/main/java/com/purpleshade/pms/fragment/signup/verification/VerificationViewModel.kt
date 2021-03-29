@@ -55,9 +55,9 @@ class VerificationViewModel(
     fun onConfirmButtonClick(view: View) {
         Flag.signUpToken = sb.toString()
         sb.clear()
+        val repo = repository.verifySignUp(context)
+        authListener!!.onSuccess(repo)
         successfullyVerifiedDialog(view)
-        /*val repo = repository.verifySignUp(context)
-        authListener!!.onSuccess(repo)*/
 
         repository.view = view
 

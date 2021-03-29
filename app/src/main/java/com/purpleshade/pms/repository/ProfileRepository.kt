@@ -74,6 +74,7 @@ class ProfileRepository {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 if (response.isSuccessful) {
                     progressBar.hide()
+                    view.snackbar(context, R.string.logout_successfully.toString(), R.color.colorGreen)
                     view.findNavController().navigate(R.id.loginFragment)
                 }
             }
