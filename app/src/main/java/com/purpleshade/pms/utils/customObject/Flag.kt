@@ -15,4 +15,5 @@ object Flag {
     var signUpToken = ""
     var forgotPassEmail = ""
     var forgotPassToken = ""
+    var token = ""
 }

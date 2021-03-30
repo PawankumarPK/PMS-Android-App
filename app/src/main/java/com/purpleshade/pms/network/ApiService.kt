@@ -71,6 +71,14 @@ interface ApiService {
     @PATCH("user/logout")
     fun logout(@Query("id") id: String): Call<ResponseBody>
 
+    @FormUrlEncoded
+    @POST("user/forgotAppPin")
+    fun forgotAppPin(@Field("email") email: String): Call<ResponseBody>
+
+    @GET("user/forgotPinVerify")
+    fun forgotPinVerify(@Query("email") email: String, @Query("token") token: String): Call<ResponseBody>
+
+
 
     /*companion object {
         operator fun invoke(): ApiService {

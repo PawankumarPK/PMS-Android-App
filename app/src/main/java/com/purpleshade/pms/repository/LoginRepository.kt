@@ -13,6 +13,7 @@ import com.purpleshade.pms.db.RoomUser
 import com.purpleshade.pms.model.SignUpModel
 import com.purpleshade.pms.network.RetrofitClient
 import com.purpleshade.pms.utils.JWTUtils
+import com.purpleshade.pms.utils.customObject.Flag
 import com.purpleshade.pms.utils.customObject.UserResponse
 import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.snackbar
@@ -49,6 +50,7 @@ class LoginRepository {
                     JWTUtils.parseUserDetail()
 
                     user.userId = JWTUtils.userId
+                    user.token = token
                     user.username = JWTUtils.userName
                     user.email = JWTUtils.userEmail
                     //insert data into table

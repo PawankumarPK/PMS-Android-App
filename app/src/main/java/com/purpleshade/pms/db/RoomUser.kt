@@ -21,12 +21,16 @@ class RoomUser {
     var username: String? = null
 
     @ColumnInfo(name = "email")
-    var email:String? = null
+    var email: String? = null
 
     @ColumnInfo(name = "appPassword")
-    var appPassword:String? = null
+    var appPassword: String? = null
 
     @ColumnInfo(name = "lockAppStatus")
-    var lockAppStatus:String? = null
+    var lockAppStatus: String? = null
+
+    @ColumnInfo(name = "token")
+    var token: String? = null
+
 
 }
