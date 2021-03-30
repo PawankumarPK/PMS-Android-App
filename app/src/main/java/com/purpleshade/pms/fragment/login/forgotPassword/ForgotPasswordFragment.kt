@@ -32,6 +32,7 @@ class ForgotPasswordFragment : BaseFragment(), AuthListener {
         viewModel = ViewModelProvider(this, factory).get(ForgotPasswordViewModel::class.java)
         binding.viewModel = viewModel
         viewModel.authListener = this
+        viewModel.appPinEvent()
 
     }
 

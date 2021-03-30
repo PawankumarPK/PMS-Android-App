@@ -12,8 +12,9 @@ import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.show
 import com.purpleshade.pms.utils.snackbar
 
-class ForgotPasswordViewModel(val context: Context, val progressBar:ProgressBar,val repository: ForgotPasswordRepository) : ViewModel() {
+class ForgotPasswordViewModel(val context: Context, val progressBar: ProgressBar, val repository: ForgotPasswordRepository) : ViewModel() {
 
+    var label: String? = null
     var email: String? = null
     var authListener: AuthListener? = null
     var regex: Regex? = null
@@ -36,10 +37,18 @@ class ForgotPasswordViewModel(val context: Context, val progressBar:ProgressBar,
         }
 
         Flag.forgotPassEmail = email!!
-        val repo = repository.sendEmail(context,progressBar)
+        val repo = repository.sendEmail(context, progressBar)
         authListener!!.onSuccess(repo)
 
         repository.view = view
+
+    }
+
+    fun appPinEvent() {
+        if (Flag.appPin)
+            label = "Forgot Pin"
+        else
+            label = "Forgot Password"
 
     }
 

@@ -9,6 +9,7 @@ import androidx.navigation.findNavController
 import com.purpleshade.pms.R
 import com.purpleshade.pms.activity.BaseActivity
 import com.purpleshade.pms.db.RoomUser
+import com.purpleshade.pms.utils.customObject.Flag
 import com.purpleshade.pms.utils.customObject.RoomRecordDetail
 import com.purpleshade.pms.utils.snackbar
 import com.purpleshade.pms.utils.toast
@@ -24,5 +25,10 @@ class AppPasswordViewModel(val context: Context, val editText: EditText, val use
             return
         }
         view.findNavController().navigate(R.id.action_appPasswordFragment_to_homeFragment)
+    }
+
+    fun forgotPasswordOnClick(view: View){
+        Flag.appPin = true
+        view.findNavController().navigate(R.id.action_appPasswordFragment_to_forgotPasswordFragment)
     }
 }

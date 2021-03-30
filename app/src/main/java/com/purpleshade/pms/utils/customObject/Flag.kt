@@ -16,4 +16,5 @@ object Flag {
     var forgotPassEmail = ""
     var forgotPassToken = ""
     var token = ""
+    var appPin  = false
 }
