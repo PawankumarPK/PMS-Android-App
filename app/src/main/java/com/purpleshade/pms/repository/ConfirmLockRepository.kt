@@ -30,7 +30,7 @@ class ConfirmLockRepository {
     fun updatePin(context: Context, progressBar: ProgressBar): LiveData<String> {
         val updateLockResponse = MutableLiveData<String>()
         val api = RetrofitClient.apiService
-        val call = api.updateAppPin(RoomRecordDetail.userId,confirmPin!!)
+        val call = api.updateAppPin(Flag.profileEmail,confirmPin!!)
 
         call.enqueue(object : Callback<ResponseBody> {
 

@@ -79,8 +79,8 @@ interface ApiService {
     fun forgotPinVerify(@Query("email") email: String, @Query("token") token: String): Call<ResponseBody>
 
     @FormUrlEncoded
-    @PATCH("user/updateAppPin")
-    fun updateAppPin(@Query("id") email: String, @Field("pin") pin: String): Call<ResponseBody>
+    @POST("user/updateAppPin")
+    fun updateAppPin(@Field("email") id: String, @Field("pin") pin: String): Call<ResponseBody>
 
 
 

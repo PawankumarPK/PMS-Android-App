@@ -2,12 +2,15 @@ package com.purpleshade.pms.fragment.login.forgotPassword.createNewPassword
 
 import android.content.Context
 import android.text.method.PasswordTransformationMethod
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.lifecycle.ViewModel
 import com.purpleshade.pms.R
+import com.purpleshade.pms.activity.BaseActivity
+import com.purpleshade.pms.db.RoomUser
 import com.purpleshade.pms.repository.CreateNewPassRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
 import com.purpleshade.pms.utils.customObject.Flag
@@ -23,6 +26,8 @@ class CreateNewPassViewModel(val context: Context, val editText: EditText, val i
     var confirmEditext: String? = null
     var authListener: AuthListener? = null
     var visiblity = true
+    val roomUser = RoomUser()
+
 
 
     fun resetButtonOnClick(view: View) {
@@ -38,6 +43,18 @@ class CreateNewPassViewModel(val context: Context, val editText: EditText, val i
                 progressBar.hide()
                 return
             }
+        }
+
+        if (Flag.appPin) {
+            roomUser.appPassword = confirmEditext.toString()
+            BaseActivity.INSTANCE!!.myDao().pinUpdate(confirmEditext.toString(), 1)
+
+            repository.confirmPin = confirmEditext
+            val repo = repository.updatePin(context, progressBar)
+            authListener!!.onSuccess(repo)
+            repository.view = view
+
+            return
         }
 
         val repo = repository.createNewPassword(context, editText, progressBar)
@@ -66,8 +83,7 @@ class CreateNewPassViewModel(val context: Context, val editText: EditText, val i
             confirmEditext = "Confirm Pin"
             buttonText = "Reset Pin"
             label = "Create new pin"
-        }
-        else {
+        } else {
             editTextText = "Password"
             confirmEditext = "Confirm Password"
             buttonText = "Reset Password"

@@ -14,6 +14,7 @@ object Flag {
     var userSignUpEmail = ""
     var signUpToken = ""
     var forgotPassEmail = ""
+    var profileEmail  = ""
     var forgotPassToken = ""
     var token = ""
     var appPin  = false

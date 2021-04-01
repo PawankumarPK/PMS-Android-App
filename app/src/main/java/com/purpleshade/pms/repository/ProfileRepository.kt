@@ -14,6 +14,7 @@ import com.purpleshade.pms.model.Profile
 import com.purpleshade.pms.model.SignUpModel
 import com.purpleshade.pms.model.UpdateProfile
 import com.purpleshade.pms.network.RetrofitClient
+import com.purpleshade.pms.utils.customObject.Flag
 import com.purpleshade.pms.utils.customObject.RoomRecordDetail
 import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.snackbar
@@ -48,6 +49,7 @@ class ProfileRepository {
                         username.text = list[i].username
                         email.text = list[i].email
                         nickname.text = list[i].username
+                        Flag.profileEmail = list[i].email.toString()
 
                     }
                 }

@@ -58,8 +58,6 @@ class ConfirmLockViewModel(val context: Context, val view: View, val box1: EditT
         authListener!!.onSuccess(repo)
         repository.view = view
 
-       // view.findNavController().navigate(R.id.profileFragment)
-      //  view.snackbar(context, "PIN is created", R.color.colorGreen)
     }
 
     inner class GenericTextWatcher(private val view: View, private val editText: Array<EditText>) : TextWatcher {
