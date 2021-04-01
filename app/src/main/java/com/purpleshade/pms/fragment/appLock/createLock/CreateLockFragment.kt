@@ -32,14 +32,6 @@ class CreateLockFragment : BaseFragment() {
         viewModel.createPinBoxes()
         baseActivity.mToolbar.gone()
 
-
-        /* val edit = arrayOf<EditText>(otp_edit_box1, otp_edit_box2, otp_edit_box3, otp_edit_box4)
-
-         otp_edit_box1.addTextChangedListener(GenericTextWatcher(otp_edit_box1, edit))
-         otp_edit_box2.addTextChangedListener(GenericTextWatcher(otp_edit_box2, edit))
-         otp_edit_box3.addTextChangedListener(GenericTextWatcher(otp_edit_box3, edit))
-         otp_edit_box4.addTextChangedListener(GenericTextWatcher(otp_edit_box4, edit))*/
-
     }
 
 }

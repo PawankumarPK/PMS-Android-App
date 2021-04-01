@@ -38,6 +38,7 @@ class CreateNewPassFragment : BaseFragment(), AuthListener {
         viewModel = ViewModelProvider(this, factory).get(CreateNewPassViewModel::class.java)
         binding.viewModel = viewModel
         viewModel.authListener = this
+        viewModel.appPinEvent()
     }
 
 

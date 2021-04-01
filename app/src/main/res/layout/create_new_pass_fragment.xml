@@ -25,7 +25,7 @@
             android:layout_marginLeft="@dimen/size20"
             android:layout_marginTop="@dimen/size30"
             android:fontFamily="@font/raleway_bold"
-            android:text="Create new password "
+            android:text="@={viewModel.label}"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/size25"
             android:textStyle="bold"
@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/raleway_medium"
                     android:inputType="textPassword"
-                    android:text="@={viewModel.password}"
+                    android:text="@={viewModel.editTextText}"
                     android:textStyle="bold" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -110,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/raleway_medium"
                 android:inputType="textPassword"
-                android:text="@={viewModel.confirmPassword}"
+                android:text="@={viewModel.confirmEditext}"
                 android:textStyle="bold" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -124,7 +124,7 @@
             android:background="@drawable/gradient"
             android:fontFamily="@font/raleway_medium"
             android:onClick="@{viewModel.resetButtonOnClick}"
-            android:text="Reset Password"
+            android:text="@={viewModel.buttonText}"
             android:textAllCaps="false"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/size16"

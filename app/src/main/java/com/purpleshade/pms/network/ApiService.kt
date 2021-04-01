@@ -78,6 +78,10 @@ interface ApiService {
     @GET("user/forgotPinVerify")
     fun forgotPinVerify(@Query("email") email: String, @Query("token") token: String): Call<ResponseBody>
 
+    @FormUrlEncoded
+    @PATCH("user/updateAppPin")
+    fun updateAppPin(@Query("id") email: String, @Field("pin") pin: String): Call<ResponseBody>
+
 
 
     /*companion object {

@@ -17,8 +17,10 @@ import com.purpleshade.pms.utils.snackbar
 
 class CreateNewPassViewModel(val context: Context, val editText: EditText, val imageView: ImageView, val progressBar: ProgressBar, val repository: CreateNewPassRepository) : ViewModel() {
 
-    var password: String? = null
-    var confirmPassword: String? = null
+    var label: String? = null
+    var buttonText: String? = null
+    var editTextText: String? = null
+    var confirmEditext: String? = null
     var authListener: AuthListener? = null
     var visiblity = true
 
@@ -26,12 +28,12 @@ class CreateNewPassViewModel(val context: Context, val editText: EditText, val i
     fun resetButtonOnClick(view: View) {
         progressBar.show()
         when {
-            password.isNullOrEmpty() -> {
+            editTextText.isNullOrEmpty() -> {
                 view.snackbar(context, "Please enter a password", R.color.colorBlackGrey)
                 progressBar.hide()
                 return
             }
-            confirmPassword.isNullOrEmpty() || confirmPassword != password -> {
+            confirmEditext.isNullOrEmpty() || confirmEditext != editTextText -> {
                 view.snackbar(context, "Password did not match", R.color.colorBlackGrey)
                 progressBar.hide()
                 return
@@ -56,6 +58,22 @@ class CreateNewPassViewModel(val context: Context, val editText: EditText, val i
             imageView.setImageResource(R.drawable.ic_visible)
 
         }
+    }
+
+    fun appPinEvent() {
+        if (Flag.appPin) {
+            editTextText = "Pin"
+            confirmEditext = "Confirm Pin"
+            buttonText = "Reset Pin"
+            label = "Create new pin"
+        }
+        else {
+            editTextText = "Password"
+            confirmEditext = "Confirm Password"
+            buttonText = "Reset Password"
+            label = "Create new password"
+        }
+
     }
 
 }
