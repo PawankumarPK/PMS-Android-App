@@ -110,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/raleway_medium"
                 android:inputType="textPassword"
-                android:text="@={viewModel.confirmEditext}"
+                android:text="@={viewModel.confirmEditText}"
                 android:textStyle="bold" />
 
         </com.google.android.material.textfield.TextInputLayout>

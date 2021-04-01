@@ -9,9 +9,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.purpleshade.pms.repository.CreateNewPassRepository
 
 @Suppress("UNCHECKED_CAST")
-class CreateNewPassViewModelFactory(val context: Context, val editText: EditText, val imageView: ImageView, val progressBar: ProgressBar, val repository: CreateNewPassRepository) : ViewModelProvider.NewInstanceFactory() {
+class CreateNewPassViewModelFactory(val context: Context, val editText: EditText, val confirmEditText: EditText, val imageView: ImageView, val progressBar: ProgressBar, val repository: CreateNewPassRepository) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return CreateNewPassViewModel(context, editText, imageView, progressBar, repository) as T
+        return CreateNewPassViewModel(context, editText, confirmEditText, imageView, progressBar, repository) as T
     }
 }
