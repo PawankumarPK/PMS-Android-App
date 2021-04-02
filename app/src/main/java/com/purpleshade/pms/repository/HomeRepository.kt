@@ -49,7 +49,7 @@ class HomeRepository {
             override fun onFailure(call: Call<Records>, t: Throwable) {
                 context.toast("Something went wrong")
                 progressBar.hide()
-                textView.gone()
+
 
             }
 
@@ -87,16 +87,6 @@ class HomeRepository {
                 }
             }
         })
-
-       /* recordList = BaseActivity.INSTANCE!!.myDao().getUserRecords
-        listDB.clear()
-        listDB.addAll(recordList)
-
-        for (i in listDB.indices) {
-            val title = listDB[i].title
-            Log.d("------->>", title.toString())
-
-        }*/
 
         progressBar.hide()
 

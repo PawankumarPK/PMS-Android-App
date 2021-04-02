@@ -27,6 +27,7 @@ import com.purpleshade.pms.repository.HomeRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
 import com.purpleshade.pms.utils.customObject.Flag
 import com.purpleshade.pms.utils.customObject.RoomRecordDetail
+import com.purpleshade.pms.utils.gone
 import com.purpleshade.pms.utils.show
 import kotlinx.android.synthetic.main.delete_warning_dialog.view.*
 import kotlinx.android.synthetic.main.password_detail_bottomsheet.view.*
@@ -112,6 +113,10 @@ class HomeViewModel(val context: Context, val textView: TextView, val actvity: A
             roomPasswordList.removeAt(pos)
             adapter.notifyItemRemoved(pos)
             adapter.notifyDataSetChanged()
+
+            if (passwordList.size == 0){
+                textView.show()
+            }
 
             repository.deleteRecordItem(context, id)
             deleteBottomSheetDialog.dismiss()
