@@ -73,18 +73,15 @@ class ProfileRepository {
 
         call.enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                view.snackbar(context, R.string.something_went_wrong.toString(), R.color.colorWarning)
+                view.snackbar(context,"Oops! Something went wrong", R.color.colorWarning)
                 progressBar.hide()
             }
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 if (response.isSuccessful) {
-                    val listData = BaseActivity.INSTANCE!!.myDao().user
                     progressBar.hide()
                     BaseActivity.INSTANCE!!.myDao().logout("", 1)
-
-                    Log.d("=======>>",listData.token.toString())
-                    context.toast(R.string.logout_successfully.toString())
+                    context.toast("Logout successful")
                     //view.snackbar(context, R.string.logout_successfully.toString(), R.color.colorGreen)
                     view.findNavController().navigate(R.id.loginFragment)
                 }
