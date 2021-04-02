@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.purpleshade.pms.R
 import com.purpleshade.pms.databinding.CreateLockFragmentBinding
 import com.purpleshade.pms.fragment.BaseFragment
@@ -30,7 +31,10 @@ class CreateLockFragment : BaseFragment() {
         viewModel = ViewModelProvider(this, factory).get(CreateLockViewModel::class.java)
         binding.viewModel = viewModel
         viewModel.createPinBoxes()
-        baseActivity.mToolbar.gone()
+        baseActivity.mBackButton.setOnClickListener {
+            findNavController().navigate(R.id.profileFragment)
+        }
+        baseActivity.mFragmentTitle.text = getString(R.string.create_pin)
 
     }
 

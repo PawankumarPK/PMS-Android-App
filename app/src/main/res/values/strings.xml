@@ -29,6 +29,7 @@
     <string name="update_profile_successful">Update Profile Successful</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="user_profile">Profile</string>
+    <string name="create_pin">Create Pin</string>
     <string name="email_address">Email Address</string>
     <string name="emergency_number">Emergency Number</string>
     <string name="username">Username</string>
