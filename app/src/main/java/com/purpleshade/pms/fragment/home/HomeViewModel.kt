@@ -107,10 +107,11 @@ class HomeViewModel(val context: Context, val textView: TextView, val actvity: A
         }
 
         deleteBottomSheetView.mYes.setOnClickListener {
+
             passwordList.removeAt(pos)
             roomPasswordList.removeAt(pos)
-
             adapter.notifyItemRemoved(pos)
+            adapter.notifyDataSetChanged()
 
             repository.deleteRecordItem(context, id)
             deleteBottomSheetDialog.dismiss()
