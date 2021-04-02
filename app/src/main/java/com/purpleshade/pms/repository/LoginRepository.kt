@@ -55,6 +55,9 @@ class LoginRepository {
                     user.email = JWTUtils.userEmail
                     //insert data into table
 
+
+                    Log.d("----->>",user.token.toString())
+
                     try {
                         id = BaseActivity.INSTANCE!!.myDao().user.id!!
                     } catch (e: Exception) {
@@ -63,7 +66,7 @@ class LoginRepository {
                     if (id == null)
                         BaseActivity.INSTANCE!!.myDao().userDetails(user)
                     else
-                        BaseActivity.INSTANCE!!.myDao().userDetailsUpdate(JWTUtils.userId, JWTUtils.userName, JWTUtils.userEmail, 1)
+                        BaseActivity.INSTANCE!!.myDao().userDetailsUpdate(JWTUtils.userId, JWTUtils.userName, JWTUtils.userEmail,token, 1)
 
                     if (UserResponse.response.equals("User Found")) {
                         progressBar.hide()

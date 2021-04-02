@@ -17,8 +17,8 @@ interface MyDao {
     val user: RoomUser
 
     //Update user details column in user table
-    @Query("UPDATE userDB SET userId=:userId, username = :username, email= :userEmail WHERE id =:id")
-    fun userDetailsUpdate(userId: String, username: String?, userEmail: String, id: Int)
+    @Query("UPDATE userDB SET userId=:userId, username = :username, email= :userEmail, token=:token WHERE id =:id")
+    fun userDetailsUpdate(userId: String, username: String?, userEmail: String, token: String, id: Int)
 
     //Insert Data into User table
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -31,6 +31,10 @@ interface MyDao {
     //Update app pin column in user table
     @Query("UPDATE userDB SET appPassword = :appPin WHERE id =:id")
     fun pinUpdate(appPin: String?, id: Int)
+
+    //Update app pin column in user table
+    @Query("UPDATE userDB SET token = :token WHERE id =:id")
+    fun logout(token: String?, id: Int)
 
     //Update lock app status column in user table
     @Query("UPDATE userDB SET lockAppStatus = :lockAppStatus WHERE id =:id")

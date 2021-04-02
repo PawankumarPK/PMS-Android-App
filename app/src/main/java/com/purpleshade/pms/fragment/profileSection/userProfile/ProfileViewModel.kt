@@ -45,7 +45,6 @@ class ProfileViewModel(val context: Context, val view: View, val progressBar: Pr
         } else {
             lockStatus.lockAppStatus = "off"
             BaseActivity.INSTANCE!!.myDao().userDetails(lockStatus)
-            Log.d("---->>", lockStatus.lockAppStatus.toString())
             screenLock = "Enable Screen Lock"
         }
 
@@ -63,8 +62,8 @@ class ProfileViewModel(val context: Context, val view: View, val progressBar: Pr
         mDialog.setContentView(layout)
 
         mDialog.mYes.setOnClickListener {
-            mDialog.dismiss()
             logoutOnClick(view)
+            mDialog.dismiss()
         }
         mDialog.mNo.setOnClickListener {
             mDialog.dismiss()
@@ -82,7 +81,6 @@ class ProfileViewModel(val context: Context, val view: View, val progressBar: Pr
 
     fun onEditButtonClick(view: View) {
         if (!Flag.networkProblem) {
-            Log.d("---->>", lockStatus.lockAppStatus.toString())
             view.findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
         } else
             context.toast("Could not connect to internet")

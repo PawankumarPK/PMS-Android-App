@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import com.purpleshade.pms.R
 import com.purpleshade.pms.activity.BaseActivity
+import com.purpleshade.pms.db.RoomUser
 import com.purpleshade.pms.model.Profile
 import com.purpleshade.pms.model.SignUpModel
 import com.purpleshade.pms.model.UpdateProfile
@@ -29,6 +30,9 @@ import retrofit2.Response
  * Created by pawan on 28,February,2021
  */
 class ProfileRepository {
+
+    val roomUser = RoomUser()
+
 
     fun profileDetails(context: Context, view: View, progressBar: ProgressBar, username: TextView, email: TextView, nickname: TextView): LiveData<String> {
         val responseForProfileDetails = MutableLiveData<String>()
@@ -75,8 +79,13 @@ class ProfileRepository {
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 if (response.isSuccessful) {
+                    val listData = BaseActivity.INSTANCE!!.myDao().user
                     progressBar.hide()
-                    view.snackbar(context, R.string.logout_successfully.toString(), R.color.colorGreen)
+                    BaseActivity.INSTANCE!!.myDao().logout("", 1)
+
+                    Log.d("=======>>",listData.token.toString())
+                    context.toast(R.string.logout_successfully.toString())
+                    //view.snackbar(context, R.string.logout_successfully.toString(), R.color.colorGreen)
                     view.findNavController().navigate(R.id.loginFragment)
                 }
             }

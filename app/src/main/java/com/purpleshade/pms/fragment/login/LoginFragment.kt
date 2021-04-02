@@ -41,11 +41,12 @@ class LoginFragment : BaseFragment(), AuthListener {
 
         try {
             val listData = BaseActivity.INSTANCE!!.myDao().user
-            Log.d("------>>",listData.token.toString())
+            Log.d("------>>", listData.token.toString())
             if (listData.userId != null && listData.lockAppStatus == "off" && listData.token!!.isNotBlank())
                 findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-            else if (listData.userId != null && listData.lockAppStatus == "on" &&  listData.token!!.isNotBlank())
+            else if (listData.userId != null && listData.lockAppStatus == "on" && listData.token!!.isNotBlank())
                 findNavController().navigate(R.id.action_loginFragment_to_appPasswordFragment)
+
         } catch (e: Exception) {
             Log.d("exception", e.message.toString())
         }
