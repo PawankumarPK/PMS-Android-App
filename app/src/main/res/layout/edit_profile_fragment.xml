@@ -27,7 +27,9 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_margin="20dp"
+                android:contentDescription="@null"
                 android:src="@drawable/ic_launcher_background"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -39,7 +41,7 @@
             android:id="@+id/mLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="@dimen/size30"
             android:gravity="center_vertical"
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/mConstraintLayout">
@@ -48,8 +50,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
+                android:layout_marginStart="@dimen/size15"
+                android:layout_marginEnd="@dimen/size15"
                 android:hint="@string/username"
                 app:errorEnabled="true"
                 app:layout_constraintTop_toBottomOf="@+id/mRelativeLayout">
@@ -67,8 +69,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
+                android:layout_marginStart="@dimen/size15"
+                android:layout_marginEnd="@dimen/size15"
                 android:hint="@string/emergency_number"
                 app:errorEnabled="true"
                 app:layout_constraintTop_toBottomOf="@+id/mRelativeLayout">
@@ -87,8 +89,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
+                android:layout_marginStart="@dimen/size15"
+                android:layout_marginEnd="@dimen/size15"
                 android:hint="@string/email_address"
                 app:errorEnabled="true"
                 app:layout_constraintTop_toBottomOf="@+id/mRelativeLayout">
@@ -100,7 +102,7 @@
                     android:inputType="textEmailAddress"
                     android:text="@={viewModel.email}"
                     android:textStyle="bold"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
@@ -112,11 +114,11 @@
             android:layout_margin="@dimen/size20"
             android:background="@drawable/gradient"
             android:fontFamily="@font/raleway_medium"
+            android:onClick="@{viewModel.onUpdateProfileButtonClick}"
             android:text="@string/update_profile"
             android:textAllCaps="false"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/size16"
-            android:onClick="@{viewModel.onUpdateProfileButtonClick}"
             app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

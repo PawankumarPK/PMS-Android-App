@@ -63,6 +63,7 @@ class HomeViewModel(val context: Context, val textView: TextView, val actvity: A
         } else {
             val repo = repository.loadRecordList(context, textView, passwordList, roomPasswordList, progressBar, adapter)
             authListener!!.onSuccess(repo)
+            adapter.notifyDataSetChanged()
         }
 
         repository.view = view
