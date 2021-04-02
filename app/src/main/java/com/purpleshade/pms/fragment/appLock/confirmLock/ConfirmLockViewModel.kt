@@ -50,15 +50,23 @@ class ConfirmLockViewModel(val context: Context, val view: View, val box1: EditT
             progressBar.gone()
             return
         }
-        roomUser.appPassword = sb.toString()
-        //update pin into table
-        BaseActivity.INSTANCE!!.myDao().pinUpdate(sb.toString(), 1)
-        BaseActivity.INSTANCE!!.myDao().lockAppStatus("on", 1)
 
-        repository.confirmPin = sb.toString()
-        val repo = repository.updatePin(context, progressBar)
-        authListener!!.onSuccess(repo)
-        repository.view = view
+        if (!Flag.networkProblem) {
+            repository.confirmPin = sb.toString()
+            val repo = repository.updatePin(context, progressBar)
+            authListener!!.onSuccess(repo)
+            repository.view = view
+
+            roomUser.appPassword = sb.toString()
+            //update pin into table
+            BaseActivity.INSTANCE!!.myDao().pinUpdate(sb.toString(), 1)
+            BaseActivity.INSTANCE!!.myDao().lockAppStatus("on", 1)
+
+
+        }else{
+            context.toast("Internet connection required")
+        }
+
 
     }
 
