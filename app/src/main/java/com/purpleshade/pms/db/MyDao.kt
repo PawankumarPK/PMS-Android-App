@@ -41,11 +41,11 @@ interface MyDao {
     fun loadSingle(id: String): List<RoomRecord>
 
     @get:Query("select * from records")
-    val records: List<RoomRecord>
+    val getUserRecords: List<RoomRecord>
 
     //Insert data into Record table
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun userRecords(record: RoomRecord)
+    fun insertUserRecords(record: RoomRecord)
 
     @Query("DELETE FROM userDB")
     fun clearTable()

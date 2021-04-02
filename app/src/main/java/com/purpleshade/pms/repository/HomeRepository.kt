@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -17,6 +17,7 @@ import com.purpleshade.pms.model.Records
 import com.purpleshade.pms.model.SignUpModel
 import com.purpleshade.pms.network.RetrofitClient
 import com.purpleshade.pms.utils.customObject.RoomRecordDetail
+import com.purpleshade.pms.utils.gone
 import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.snackbar
 import com.purpleshade.pms.utils.toast
@@ -37,8 +38,9 @@ class HomeRepository {
     var view: View? = null
 
     val roomRecord = RoomRecord()
+    var recordList: List<RoomRecord> = ArrayList()
 
-    fun loadRecordList(context: Context, passwordList: ArrayList<RecordList>, listDB: ArrayList<RoomRecord>, progressBar: ProgressBar, adapter: PasswordsAdapter): LiveData<String> {
+    fun loadRecordList(context: Context, textView: TextView, passwordList: ArrayList<RecordList>, listDB: ArrayList<RoomRecord>, progressBar: ProgressBar, adapter: PasswordsAdapter): LiveData<String> {
         val responseLoadRecordList: MutableLiveData<String> = MutableLiveData()
         val api = RetrofitClient.apiService
         val call = api.allRecords(RoomRecordDetail.userId)
@@ -47,12 +49,16 @@ class HomeRepository {
             override fun onFailure(call: Call<Records>, t: Throwable) {
                 context.toast("Something went wrong")
                 progressBar.hide()
+                textView.gone()
+
             }
 
             override fun onResponse(call: Call<Records>, response: Response<Records>) {
                 if (response.isSuccessful) {
-                    progressBar.hide()
                     val recordDetail = response.body()!!.recordDetail
+                    if (recordDetail.size > 0) {
+                        textView.gone()
+                    }
                     passwordList.clear()
                     for (i in recordDetail) {
                         roomRecord.recordId = i._id
@@ -63,23 +69,36 @@ class HomeRepository {
                         roomRecord.addNote = i.addNote
                         roomRecord.loginId = RoomRecordDetail.userId
 
-                        BaseActivity.INSTANCE!!.myDao().userRecords(roomRecord)
-
+                        BaseActivity.INSTANCE!!.myDao().insertUserRecords(roomRecord)
                         passwordList.add(i).toString()
 
                     }
+
+                    recordList = BaseActivity.INSTANCE!!.myDao().getUserRecords
+                    listDB.addAll(recordList)
+/*
+                    for (i in listDB.indices) {
+                        val title = listDB[i].title
+
+                    }*/
                     adapter.notifyDataSetChanged()
+                    return
 
                 }
             }
         })
 
-        val recordList = BaseActivity.INSTANCE!!.myDao().records
+       /* recordList = BaseActivity.INSTANCE!!.myDao().getUserRecords
         listDB.clear()
         listDB.addAll(recordList)
+
         for (i in listDB.indices) {
             val title = listDB[i].title
-        }
+            Log.d("------->>", title.toString())
+
+        }*/
+
+        progressBar.hide()
 
         return responseLoadRecordList
     }
@@ -87,7 +106,7 @@ class HomeRepository {
     fun loadRecordListFromRoom(listDB: ArrayList<RoomRecord>, progressBar: ProgressBar): LiveData<String> {
         progressBar.hide()
         val responseLoadRecordList: MutableLiveData<String> = MutableLiveData()
-        val recordList = BaseActivity.INSTANCE!!.myDao().records
+        val recordList = BaseActivity.INSTANCE!!.myDao().getUserRecords
         listDB.addAll(recordList)
         for (i in listDB.indices) {
             val title = listDB[i].title

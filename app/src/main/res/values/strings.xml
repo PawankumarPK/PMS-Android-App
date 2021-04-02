@@ -40,5 +40,6 @@
     <string name="yor_are_successfully_verified_the_account">Yor are successfully verified the account</string>
     <string name="enter_email">Enter the Email associated with your account and we will send an email with instruction
     to reset your password</string>
+    <string name="you_don_t_have_any_records_right_now">You do not have any records right now</string>
 
 </resources>

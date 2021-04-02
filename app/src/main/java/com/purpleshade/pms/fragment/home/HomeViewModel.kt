@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
@@ -17,19 +18,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.purpleshade.pms.R
+import com.purpleshade.pms.activity.BaseActivity
 import com.purpleshade.pms.db.RoomRecord
 import com.purpleshade.pms.db.RoomUser
 import com.purpleshade.pms.fragment.home.adapter.PasswordsAdapter
 import com.purpleshade.pms.model.RecordList
 import com.purpleshade.pms.repository.HomeRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
+import com.purpleshade.pms.utils.customObject.Flag
 import com.purpleshade.pms.utils.customObject.RoomRecordDetail
 import com.purpleshade.pms.utils.show
 import kotlinx.android.synthetic.main.delete_warning_dialog.view.*
 import kotlinx.android.synthetic.main.password_detail_bottomsheet.view.*
 
 
-class HomeViewModel(val context: Context, val actvity: Activity, val repository: HomeRepository, val progressBar: ProgressBar, val user: RoomUser) : ViewModel(), PasswordsAdapter.OnEventListener {
+class HomeViewModel(val context: Context, val textView: TextView, val actvity: Activity, val repository: HomeRepository, val progressBar: ProgressBar, val user: RoomUser) : ViewModel(), PasswordsAdapter.OnEventListener {
 
     lateinit var adapter: PasswordsAdapter
     var authListener: AuthListener? = null
@@ -45,8 +48,22 @@ class HomeViewModel(val context: Context, val actvity: Activity, val repository:
         progressBar.show()
 
         loadAdapter(view)
-        val repo = repository.loadRecordList(context, passwordList, roomPasswordList, progressBar, adapter)
-        authListener!!.onSuccess(repo)
+
+        if (Flag.networkProblem) {
+            val roomList = BaseActivity.INSTANCE!!.myDao().getUserRecords as ArrayList<RoomRecord>
+            roomPasswordList.clear()
+            roomPasswordList.addAll(roomList)
+
+            /*
+            for (i in roomList.indices) {
+                val title = roomList[i].title
+            }*/
+            return
+        } else {
+            val repo = repository.loadRecordList(context, textView, passwordList, roomPasswordList, progressBar, adapter)
+            authListener!!.onSuccess(repo)
+        }
+
         repository.view = view
     }
 
@@ -90,8 +107,8 @@ class HomeViewModel(val context: Context, val actvity: Activity, val repository:
         }
 
         deleteBottomSheetView.mYes.setOnClickListener {
-            roomPasswordList.removeAt(pos)
             passwordList.removeAt(pos)
+            roomPasswordList.removeAt(pos)
 
             adapter.notifyItemRemoved(pos)
 
@@ -126,7 +143,7 @@ class HomeViewModel(val context: Context, val actvity: Activity, val repository:
         view.findNavController().navigate(R.id.action_homeFragment_to_createRecordFragment)
     }
 
-    fun profileImageClick(view:View){
+    fun profileImageClick(view: View) {
         view.findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
     }
 

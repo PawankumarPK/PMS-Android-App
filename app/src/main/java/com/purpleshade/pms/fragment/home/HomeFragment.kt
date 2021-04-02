@@ -23,6 +23,7 @@ import com.purpleshade.pms.utils.show
 import com.purpleshade.pms.utils.toast
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.home_fragment.*
+import kotlinx.android.synthetic.main.password_viewholder.*
 import java.lang.Exception
 
 class HomeFragment : BaseFragment(), AuthListener {
@@ -45,12 +46,12 @@ class HomeFragment : BaseFragment(), AuthListener {
         try {
             val roomuserId = BaseActivity.INSTANCE!!.myDao().user
             RoomRecordDetail.userId = roomuserId.userId.toString()
-        } catch (e: Exception){
+        } catch (e: Exception) {
             baseActivity.toast("Exception Occurred")
         }
 
         val repository = HomeRepository()
-        val factory = HomeViewModelFactory(baseActivity, baseActivity, repository, baseActivity.mProgressBar, user)
+        val factory = HomeViewModelFactory(baseActivity, mBlankPageMsg, baseActivity, repository, baseActivity.mProgressBar, user)
         viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
         viewModel.authListener = this
         binding.viewModel = viewModel

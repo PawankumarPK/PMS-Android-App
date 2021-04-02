@@ -1,6 +1,7 @@
 package com.purpleshade.pms.fragment.home.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -63,6 +64,8 @@ class PasswordsAdapter(val view: View, val context: Context, var passwordList: A
 
             binding.mDelete.setOnClickListener {
                 onEventListener!!.deleteRecord(binding.viewModelAdapter!!._id, pos)
+                notifyDataSetChanged()
+                notifyItemRemoved(adapterPosition);
             }
         }
 
@@ -92,6 +95,9 @@ class PasswordsAdapter(val view: View, val context: Context, var passwordList: A
                     context.toast("No internet connection")
                 } else {
                     onEventListener!!.deleteRecord(roomPasswordList[pos].recordId!!, pos)
+                    notifyDataSetChanged()
+                    notifyItemRemoved(adapterPosition);
+
                 }
             }
 
