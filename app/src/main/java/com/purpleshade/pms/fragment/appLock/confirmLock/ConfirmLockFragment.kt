@@ -1,22 +1,23 @@
 package com.purpleshade.pms.fragment.appLock.confirmLock
 
-import androidx.lifecycle.ViewModelProvider
+import android.R.attr
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.purpleshade.pms.R
 import com.purpleshade.pms.databinding.ConfirmLockFragmentBinding
 import com.purpleshade.pms.fragment.BaseFragment
-import com.purpleshade.pms.fragment.appLock.createLock.CreateLockViewModel
-import com.purpleshade.pms.fragment.appLock.createLock.CreateLockViewModelFactory
 import com.purpleshade.pms.repository.ConfirmLockRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
-import com.purpleshade.pms.utils.gone
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.confirm_lock_fragment.*
 import kotlinx.android.synthetic.main.create_lock_fragment.*
@@ -25,7 +26,8 @@ import kotlinx.android.synthetic.main.create_lock_fragment.mEditTextBoxOne
 import kotlinx.android.synthetic.main.create_lock_fragment.mEditTextBoxThree
 import kotlinx.android.synthetic.main.create_lock_fragment.mEditTextBoxTwo
 
-class ConfirmLockFragment : BaseFragment() ,AuthListener{
+
+class ConfirmLockFragment : BaseFragment(), AuthListener {
 
     private lateinit var viewModel: ConfirmLockViewModel
     lateinit var binding: ConfirmLockFragmentBinding
@@ -51,5 +53,6 @@ class ConfirmLockFragment : BaseFragment() ,AuthListener{
 
         })
     }
+
 
 }

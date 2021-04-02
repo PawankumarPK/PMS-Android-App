@@ -19,6 +19,7 @@ import com.purpleshade.pms.utils.customObject.Flag
 import com.purpleshade.pms.utils.gone
 import com.purpleshade.pms.utils.show
 import com.purpleshade.pms.utils.snackbar
+import com.purpleshade.pms.utils.toast
 import java.lang.StringBuilder
 
 class ConfirmLockViewModel(val context: Context, val view: View, val box1: EditText, val box2: EditText, val box3: EditText, val box4: EditText, val button: Button, val progressBar: ProgressBar, val repository: ConfirmLockRepository) : ViewModel() {
@@ -43,7 +44,8 @@ class ConfirmLockViewModel(val context: Context, val view: View, val box1: EditT
         progressBar.show()
 
         if (Flag.appPassword != sb.toString()) {
-            view.snackbar(context, "PIN not matched", R.color.colorAccent)
+            //view.snackbar(context, "PIN not matched", R.color.colorAccent)
+            context.toast("PIN not matched")
             sb.clear()
             progressBar.gone()
             return

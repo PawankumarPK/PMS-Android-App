@@ -13,6 +13,7 @@ import com.purpleshade.pms.activity.BaseActivity
 import com.purpleshade.pms.db.RoomUser
 import com.purpleshade.pms.utils.customObject.Flag
 import com.purpleshade.pms.utils.snackbar
+import com.purpleshade.pms.utils.toast
 import java.lang.StringBuilder
 
 class CreateLockViewModel(val context: Context, val view: View, val box1: EditText, val box2: EditText, val box3: EditText, val box4: EditText) : ViewModel() {
@@ -48,12 +49,14 @@ class CreateLockViewModel(val context: Context, val view: View, val box1: EditTe
                 R.id.mEditTextBoxFour ->
                     if (text.length == 1 && listData.lockAppStatus == "off") {
                         Flag.appPassword = sb.toString()
+                        editText.isEmpty()
+                        editText[3].requestFocus()
                         view.findNavController().navigate(R.id.action_createLockFragment_to_confirmLockFragment)
                     } else if (text.isEmpty())
                         editText[2].requestFocus()
                     else if (text.length == 1 && listData.lockAppStatus == "on") {
                         if (listData.appPassword != sb.toString()) {
-                            view.snackbar(context, "Incorrect PIN", R.color.colorAccent)
+                            context.toast("Incorrect PIN")
                             sb.clear()
                             return
                         }
