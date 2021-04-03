@@ -43,5 +43,6 @@
     to reset your password</string>
     <string name="you_don_t_have_any_records_right_now">You do not have any records right now</string>
     <string name="verification_failed">OTP not matched</string>
+    <string name="back">Back</string>
 
 </resources>

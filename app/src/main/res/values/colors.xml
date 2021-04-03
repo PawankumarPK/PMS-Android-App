@@ -15,4 +15,5 @@
     <color name="colorWarning">#fe9f00</color>
     <color name="colorWarningText">#724701</color>
     <color name="colorGreen">#00c24e</color>
+    <color name="colorBlackLessOpecity">#D3000000</color>
 </resources>

@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.View
 import android.widget.ProgressBar
 import androidx.lifecycle.ViewModel
+import androidx.navigation.findNavController
 import com.purpleshade.pms.R
 import com.purpleshade.pms.repository.ForgotPasswordRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
@@ -41,6 +42,10 @@ class ForgotPasswordViewModel(val context: Context, val progressBar: ProgressBar
         authListener!!.onSuccess(repo)
         repository.view = view
 
+    }
+
+    fun backOnClick(view:View){
+        view.findNavController().navigate(R.id.loginFragment)
     }
 
     fun appPinEvent() {

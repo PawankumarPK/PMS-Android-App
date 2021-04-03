@@ -34,6 +34,12 @@ class ProfileFragment : BaseFragment(), AuthListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        baseActivity.mToolbar.show()
+        baseActivity.mFragmentTitle.text = getString(R.string.user_profile)
+        baseActivity.mBackButton.show()
+        baseActivity.mProfileImageView.gone()
+
         val roomUser = BaseActivity.INSTANCE!!.myDao().user
 
         val repository = ProfileRepository()
@@ -42,10 +48,6 @@ class ProfileFragment : BaseFragment(), AuthListener {
         viewModel.authListener = this
         binding.viewModel = viewModel
 
-        baseActivity.mToolbar.show()
-        baseActivity.mFragmentTitle.text = getString(R.string.user_profile)
-        baseActivity.mBackButton.show()
-        baseActivity.mProfileImageView.gone()
         baseActivity.mBackButton.setOnClickListener {
             findNavController().navigate(R.id.homeFragment)
         }
