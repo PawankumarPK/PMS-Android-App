@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ProgressBar
 import androidx.lifecycle.ViewModel
+import androidx.navigation.findNavController
 import com.purpleshade.pms.R
 import com.purpleshade.pms.repository.FpVerificationRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
@@ -69,6 +70,9 @@ class FpVerificationViewModel(
 
     }
 
+    fun backOnClick(view:View){
+        view.findNavController().navigate(R.id.forgotPasswordFragment)
+    }
 
     inner class GenericTextWatcher(private val view: View, private val editText: Array<EditText>) : TextWatcher {
 
