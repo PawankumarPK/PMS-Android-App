@@ -39,8 +39,6 @@ class ForgotPasswordViewModel(val context: Context, val progressBar: ProgressBar
         Flag.forgotPassEmail = email!!
         val repo = repository.sendEmail(context, progressBar)
         authListener!!.onSuccess(repo)
-
-
         repository.view = view
 
     }

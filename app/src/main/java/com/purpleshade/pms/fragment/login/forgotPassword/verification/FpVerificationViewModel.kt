@@ -3,11 +3,11 @@ package com.purpleshade.pms.fragment.login.forgotPassword.verification
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ProgressBar
 import androidx.lifecycle.ViewModel
-import androidx.navigation.findNavController
 import com.purpleshade.pms.R
 import com.purpleshade.pms.repository.FpVerificationRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
@@ -15,7 +15,6 @@ import com.purpleshade.pms.utils.customObject.Flag
 import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.show
 import com.purpleshade.pms.utils.toast
-import java.lang.StringBuilder
 
 class FpVerificationViewModel(
     val context: Context,
@@ -36,18 +35,23 @@ class FpVerificationViewModel(
     fun verifyOnClick(view: View) {
         progressBar.show()
 
-        if (Flag.forgotPassToken != sb.toString()){
+        if (Flag.forgotPassToken != sb.toString()) {
             context.toast(context.getString(R.string.verification_failed))
             progressBar.hide()
+            sb.clear()
             return
         }
+
+        Log.d("----->>>", sb.toString())
 
         val repo = repository.verifyForgetPasswordCode(context, progressBar)
         authListener!!.onSuccess(repo)
         repository.view = view
+
+        sb.clear()
     }
 
-     fun getVerificationToken(){
+    fun getVerificationToken() {
         val repo = repository.verificationToken(context, progressBar)
         authListener!!.onSuccess(repo)
     }
@@ -67,6 +71,7 @@ class FpVerificationViewModel(
 
 
     inner class GenericTextWatcher(private val view: View, private val editText: Array<EditText>) : TextWatcher {
+
         override fun afterTextChanged(editable: Editable) {
             val text = editable.toString()
             sb.append(text)
@@ -76,17 +81,36 @@ class FpVerificationViewModel(
                 R.id.mEditTextBoxTwo -> if (text.length == 1) editText[2].requestFocus() else if (text.isEmpty()) editText[0].requestFocus()
                 R.id.mEditTextBoxThree -> if (text.length == 1) editText[3].requestFocus() else if (text.isEmpty()) editText[1].requestFocus()
                 R.id.mEditTextBoxFour -> if (text.length == 1) editText[4].requestFocus() else if (text.isEmpty()) editText[2].requestFocus()
-                R.id.mEditTextBoxFive -> if (text.length == 1) editText[5].requestFocus() else if (text.isEmpty()) editText[3].requestFocus()
-                R.id.mEditTextBoxSix -> if (text.length == 1) editText[5].requestFocus() else if (text.isEmpty()) editText[4].requestFocus()
+                R.id.mEditTextBoxFive ->
+                    if (text.length == 1)
+                        editText[5].requestFocus()
+                    else if (text.isEmpty())
+                        editText[3].requestFocus()
 
+                R.id.mEditTextBoxSix ->
+                    if (text.length == 1)
+                        editText[5].requestFocus()
+                    else if (text.isEmpty()) {
+                        editText[4].requestFocus()
+                    }
 
                 // view.findNavController().navigate(R.id.profileFragment)
-
 
             }
         }
 
-        override fun beforeTextChanged(arg0: CharSequence, arg1: Int, arg2: Int, arg3: Int) {}
-        override fun onTextChanged(arg0: CharSequence, arg1: Int, arg2: Int, arg3: Int) {}
+        override fun beforeTextChanged(arg0: CharSequence, arg1: Int, arg2: Int, arg3: Int) {
+            /*if (sb.length == 1)
+                sb.deleteCharAt(0)*/
+        }
+
+        override fun onTextChanged(s: CharSequence, arg1: Int, arg2: Int, arg3: Int) {
+            /*if (box6.length() == 0) {
+                sb.append(s)
+                //box6.clearFocus()
+                box5.requestFocus()
+                box4.isCursorVisible = true
+            }*/
+        }
     }
 }
