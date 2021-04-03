@@ -156,6 +156,7 @@
             android:text="resend code"
             android:textAllCaps="true"
             android:textColor="@color/colorBlue"
+            android:onClick="@{viewModel.resendVerificationCodeOnClick}"
             android:textSize="@dimen/size18"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"

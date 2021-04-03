@@ -30,8 +30,6 @@ class ForgotPasswordRepository {
         val api = RetrofitClient.apiService
         val call = api.forgotPassword(Flag.forgotPassEmail)
 
-        Log.d("----->>Forgot",Flag.forgotPassEmail)
-
         call.enqueue(object : Callback<ResponseBody> {
 
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {

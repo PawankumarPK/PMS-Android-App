@@ -43,8 +43,6 @@ class FpVerificationViewModel(
             return
         }
 
-        Log.d("----->>>", sb.toString())
-
         val repo = repository.verifyForgetPasswordCode(context, progressBar)
         authListener!!.onSuccess(repo)
         repository.view = view
@@ -53,6 +51,7 @@ class FpVerificationViewModel(
     }
 
     fun getVerificationToken() {
+        progressBar.show()
         val repo = repository.verificationToken(context, progressBar)
         authListener!!.onSuccess(repo)
     }
@@ -72,6 +71,15 @@ class FpVerificationViewModel(
 
     fun backOnClick(view:View){
         view.findNavController().navigate(R.id.forgotPasswordFragment)
+    }
+
+    fun resendVerificationCodeOnClick(view:View){
+        progressBar.show()
+        val repo = repository.resendVerificationCode(context, progressBar)
+        authListener!!.onSuccess(repo)
+
+        view.findNavController().navigate(R.id.fpVerificationFragment)
+        repository.view = view
     }
 
     inner class GenericTextWatcher(private val view: View, private val editText: Array<EditText>) : TextWatcher {
