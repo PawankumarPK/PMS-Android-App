@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.lifecycle.ViewModel
+import androidx.navigation.findNavController
 import com.purpleshade.pms.R
 import com.purpleshade.pms.activity.BaseActivity
 import com.purpleshade.pms.db.RoomUser
@@ -99,6 +100,10 @@ class CreateNewPassViewModel(val context: Context, val editText: EditText, val c
             label = "Create new password"
         }
 
+    }
+
+    fun backOnClick(view:View){
+        view.findNavController().navigate(R.id.loginFragment)
     }
 
 }
