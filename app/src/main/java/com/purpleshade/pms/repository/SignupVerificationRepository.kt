@@ -33,7 +33,9 @@ class SignupVerificationRepository {
             }
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                Log.d("======>>>",Flag.userSignUpEmail +" " +  Flag.signUpToken)
+
+
+
                 view!!.snackbar(context, context.getString(R.string.register_successful), R.color.colorGreen)
 
             }

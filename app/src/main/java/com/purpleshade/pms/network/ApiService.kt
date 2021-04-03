@@ -61,6 +61,10 @@ interface ApiService {
     @POST("user/forgotPassword")
     fun forgotPassword(@Field("email") email: String): Call<ResponseBody>
 
+    @FormUrlEncoded
+    @POST("user/verificationToken")
+    fun verificationToken(@Field("email") email: String): Call<VerificationModel>
+
     @GET("user/forgotPassVerify")
     fun forgotPassVerify(@Query("email") email: String, @Query("token") token: String): Call<ResponseBody>
 
