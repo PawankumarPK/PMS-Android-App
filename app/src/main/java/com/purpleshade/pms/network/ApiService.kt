@@ -49,7 +49,7 @@ interface ApiService {
     fun deleteRecord(@Query("id") id: String): Call<SignUpModel>
 
     @PATCH("records/updateDetails")
-    fun updateRecord(@Query("id") id: String, @Body post: UpdateRecord): Call<SignUpModel>
+    fun updateRecord(@Query("id") id: String, @Body post: UpdateRecord): Call<ResponseBody>
 
     @PATCH("user/updateProfile")
     fun updateProfile(@Query("id") id: String, @Body post: UpdateProfile): Call<SignUpModel>

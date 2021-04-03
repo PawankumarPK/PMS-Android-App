@@ -31,9 +31,6 @@ import retrofit2.Response
  */
 class ProfileRepository {
 
-    val roomUser = RoomUser()
-
-
     fun profileDetails(context: Context, view: View, progressBar: ProgressBar, username: TextView, email: TextView, nickname: TextView): LiveData<String> {
         val responseForProfileDetails = MutableLiveData<String>()
         val api = RetrofitClient.apiService
@@ -82,7 +79,6 @@ class ProfileRepository {
                     progressBar.hide()
                     BaseActivity.INSTANCE!!.myDao().logout("", 1)
                     context.toast("Logout successful")
-                    //view.snackbar(context, R.string.logout_successfully.toString(), R.color.colorGreen)
                     view.findNavController().navigate(R.id.loginFragment)
                 }
             }

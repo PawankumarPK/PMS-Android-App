@@ -1,6 +1,7 @@
 package com.purpleshade.pms.repository
 
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ProgressBar
@@ -16,6 +17,7 @@ import com.purpleshade.pms.utils.customObject.RoomRecordDetail
 import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.snackbar
 import com.purpleshade.pms.utils.toast
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -63,22 +65,24 @@ class UpdateRecordRepository {
         return responseGetRecordDetail
     }
 
-    fun updateRecord(context: Context, progressBar: ProgressBar, title: String, webAddress: String, email: String, password: String, addNote: String): LiveData<String> {
+    fun updateRecord(context: Context, progressBar: ProgressBar, title: String, websiteAddress: String, email: String, password: String, addNote: String): LiveData<String> {
         val recordResponse = MutableLiveData<String>()
-        val update = UpdateRecord(title, webAddress, email, password, addNote)
+        val update = UpdateRecord(title, websiteAddress, email, password, addNote)
 
         val api = RetrofitClient.apiService
         val call = api.updateRecord(RoomRecordDetail.recordId, update)
 
-        call.enqueue(object : Callback<SignUpModel> {
-            override fun onFailure(call: Call<SignUpModel>, t: Throwable) {
+        call.enqueue(object : Callback<ResponseBody> {
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 progressBar.hide()
                 view!!.snackbar(context,"Oops! Something went wrong",R.color.colorWarning)
             }
 
-            override fun onResponse(call: Call<SignUpModel>, response: Response<SignUpModel>) {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 RoomRecordDetail.roomDbEnable = "List Update"
                 progressBar.hide()
+
+
                 view!!.snackbar(context,"Record update successfully",R.color.colorGreen)
                 view!!.findNavController().navigate(R.id.homeFragment)
             }

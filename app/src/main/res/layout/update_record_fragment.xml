@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout>
+
     <data>
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.purpleshade.pms.fragment.update.UpdateRecordViewModel" />
@@ -40,7 +43,7 @@
                     android:drawableRight="@drawable/ic_title"
                     android:fontFamily="@font/raleway_medium"
                     android:inputType="textPersonName"
-                    android:text="@={viewModel.title}"/>
+                    android:text="@={viewModel.title}" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -62,7 +65,7 @@
                     android:drawableRight="@drawable/ic_website"
                     android:fontFamily="@font/raleway_medium"
                     android:inputType="textMultiLine"
-                    android:text="@={viewModel.webAddress}"/>
+                    android:text="@={viewModel.webAddress}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -82,7 +85,7 @@
                     android:drawableEnd="@drawable/ic_email"
                     android:drawableRight="@drawable/ic_email"
                     android:inputType="textEmailAddress"
-                    android:text="@={viewModel.email}"/>
+                    android:text="@={viewModel.email}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -102,7 +105,7 @@
                     android:drawableEnd="@drawable/ic_password"
                     android:drawableRight="@drawable/ic_password"
                     android:inputType="textVisiblePassword"
-                    android:text="@={viewModel.password}"/>
+                    android:text="@={viewModel.password}" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -123,7 +126,7 @@
                     android:drawableEnd="@drawable/ic_note"
                     android:drawableRight="@drawable/ic_password"
                     android:inputType="textMultiLine"
-                    android:text="@={viewModel.addNote}"/>
+                    android:text="@={viewModel.addNote}" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
@@ -134,11 +137,11 @@
             android:layout_margin="@dimen/size20"
             android:background="@drawable/gradient"
             android:fontFamily="@font/raleway_medium"
+            android:onClick="@{viewModel.onUpdateButtonClick}"
             android:text="@string/update"
             android:textAllCaps="false"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/size16"
-            android:onClick="@{viewModel.onUpdateButtonClick}"
             app:layout_constraintBottom_toBottomOf="parent" />
 
 
