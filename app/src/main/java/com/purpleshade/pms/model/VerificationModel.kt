@@ -9,6 +9,6 @@ class VerificationModel {
     @SerializedName("message")
     var message: String? = null
 
-    @SerializedName("user")
-    var user: UserVerificationDetailModel? = null
+    @SerializedName("token")
+    var token: UserVerificationDetailModel = UserVerificationDetailModel()
 }

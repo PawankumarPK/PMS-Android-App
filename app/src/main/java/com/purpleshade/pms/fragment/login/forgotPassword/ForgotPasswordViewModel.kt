@@ -40,8 +40,6 @@ class ForgotPasswordViewModel(val context: Context, val progressBar: ProgressBar
         val repo = repository.sendEmail(context, progressBar)
         authListener!!.onSuccess(repo)
 
-        val getVerificationTokenRepo = repository.verificationToken(context,progressBar)
-        authListener!!.onSuccess(getVerificationTokenRepo)
 
         repository.view = view
 

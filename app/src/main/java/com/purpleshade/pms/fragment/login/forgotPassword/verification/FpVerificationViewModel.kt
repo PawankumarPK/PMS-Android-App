@@ -14,6 +14,7 @@ import com.purpleshade.pms.utils.customInterface.AuthListener
 import com.purpleshade.pms.utils.customObject.Flag
 import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.show
+import com.purpleshade.pms.utils.toast
 import java.lang.StringBuilder
 
 class FpVerificationViewModel(
@@ -34,10 +35,21 @@ class FpVerificationViewModel(
 
     fun verifyOnClick(view: View) {
         progressBar.show()
-        Flag.forgotPassToken = sb.toString()
+
+        if (Flag.forgotPassToken != sb.toString()){
+            context.toast(context.getString(R.string.verification_failed))
+            progressBar.hide()
+            return
+        }
+
         val repo = repository.verifyForgetPasswordCode(context, progressBar)
         authListener!!.onSuccess(repo)
         repository.view = view
+    }
+
+     fun getVerificationToken(){
+        val repo = repository.verificationToken(context, progressBar)
+        authListener!!.onSuccess(repo)
     }
 
     fun createPinBoxes() {

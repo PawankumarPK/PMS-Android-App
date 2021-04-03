@@ -40,35 +40,6 @@ class ForgotPasswordRepository {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 progressBar.hide()
                // view!!.snackbar(context, "Check your email", R.color.colorGreen)
-                //view!!.findNavController().navigate(R.id.action_forgotPasswordFragment_to_fpVerificationFragment)
-
-            }
-
-
-        })
-
-        return verificationResponse
-    }
-
-    fun verificationToken(context: Context,progressBar: ProgressBar): LiveData<String> {
-        val verificationResponse = MutableLiveData<String>()
-        val api = RetrofitClient.apiService
-        val call = api.verificationToken(Flag.forgotPassEmail)
-
-        call.enqueue(object : Callback<VerificationModel> {
-
-            override fun onFailure(call: Call<VerificationModel>, t: Throwable) {
-                progressBar.hide()
-                view!!.snackbar(context, context.getString(R.string.something_went_wrong), R.color.colorWarning)
-            }
-
-            override fun onResponse(call: Call<VerificationModel>, response: Response<VerificationModel>) {
-                progressBar.hide()
-
-                val res = response.body()!!.user!!.forgotPassToken
-                Log.d("----->>",res.toString())
-
-                // view!!.snackbar(context, "Check your email", R.color.colorGreen)
                 view!!.findNavController().navigate(R.id.action_forgotPasswordFragment_to_fpVerificationFragment)
 
             }
@@ -78,5 +49,6 @@ class ForgotPasswordRepository {
 
         return verificationResponse
     }
+
 
 }
