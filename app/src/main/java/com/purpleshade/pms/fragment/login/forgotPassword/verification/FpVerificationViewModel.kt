@@ -3,7 +3,6 @@ package com.purpleshade.pms.fragment.login.forgotPassword.verification
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ProgressBar
@@ -32,6 +31,9 @@ class FpVerificationViewModel(
     var authListener: AuthListener? = null
     val sb = StringBuilder()
 
+    fun backOnClick(view:View){
+        view.findNavController().navigate(R.id.forgotPasswordFragment)
+    }
 
     fun verifyOnClick(view: View) {
         progressBar.show()
@@ -52,8 +54,23 @@ class FpVerificationViewModel(
 
     fun getVerificationToken() {
         progressBar.show()
-        val repo = repository.verificationToken(context, progressBar)
+        val repo = repository.getVerificationTokenForMatch(context, progressBar)
         authListener!!.onSuccess(repo)
+    }
+
+    fun resendVerificationCodeOnClick(view:View){
+        progressBar.show()
+
+        val removeForgotPassFieldRepo = repository.removeForgotPassField(context, progressBar)
+        authListener!!.onSuccess(removeForgotPassFieldRepo)
+
+
+        val repo = repository.resendVerificationCode(context, progressBar)
+        authListener!!.onSuccess(repo)
+
+        view.findNavController().navigate(R.id.fpVerificationFragment)
+        repository.view = view
+
     }
 
     fun createPinBoxes() {
@@ -67,19 +84,6 @@ class FpVerificationViewModel(
         box6.addTextChangedListener(GenericTextWatcher(box6, edit))
 
 
-    }
-
-    fun backOnClick(view:View){
-        view.findNavController().navigate(R.id.forgotPasswordFragment)
-    }
-
-    fun resendVerificationCodeOnClick(view:View){
-        progressBar.show()
-        val repo = repository.resendVerificationCode(context, progressBar)
-        authListener!!.onSuccess(repo)
-
-        view.findNavController().navigate(R.id.fpVerificationFragment)
-        repository.view = view
     }
 
     inner class GenericTextWatcher(private val view: View, private val editText: Array<EditText>) : TextWatcher {

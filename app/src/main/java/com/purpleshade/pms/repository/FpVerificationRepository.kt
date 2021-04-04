@@ -26,7 +26,7 @@ class FpVerificationRepository {
 
     var view: View? = null
 
-    fun verificationToken(context: Context,progressBar: ProgressBar): LiveData<String> {
+    fun getVerificationTokenForMatch(context: Context, progressBar: ProgressBar): LiveData<String> {
         val verificationResponse = MutableLiveData<String>()
         val api = RetrofitClient.apiService
         val call = api.verificationToken(Flag.forgotPassEmail)
@@ -101,6 +101,31 @@ class FpVerificationRepository {
         })
 
         return verificationResponse
+    }
+
+
+    fun removeForgotPassField(context: Context,progressBar: ProgressBar): LiveData<String> {
+        val removeForgotPassField = MutableLiveData<String>()
+        val api = RetrofitClient.apiService
+        val call = api.removeForgotPassField(Flag.forgotPassEmail)
+
+        call.enqueue(object : Callback<ResponseBody> {
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                progressBar.hide()
+                view!!.snackbar(context, context.getString(R.string.something_went_wrong), R.color.colorWarning)
+            }
+
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                progressBar.hide()
+               // context.toast("Resend code successful")
+
+            }
+
+
+        })
+
+        return removeForgotPassField
     }
 
 

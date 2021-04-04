@@ -15,6 +15,7 @@ import com.purpleshade.pms.utils.customObject.RoomRecordDetail
 import com.purpleshade.pms.utils.gone
 import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.snackbar
+import com.purpleshade.pms.utils.toast
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -79,4 +80,29 @@ class CreateNewPassRepository {
 
         return updateLockResponse
     }
+
+    fun removeForgotPassField(context: Context,progressBar: ProgressBar): LiveData<String> {
+        val removeForgotPassField = MutableLiveData<String>()
+        val api = RetrofitClient.apiService
+        val call = api.removeForgotPassField(Flag.forgotPassEmail)
+
+        call.enqueue(object : Callback<ResponseBody> {
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                progressBar.hide()
+                view!!.snackbar(context, context.getString(R.string.something_went_wrong), R.color.colorWarning)
+            }
+
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                progressBar.hide()
+             //   context.toast("Resend code successful")
+
+            }
+
+
+        })
+
+        return removeForgotPassField
+    }
+
 }

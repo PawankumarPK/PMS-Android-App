@@ -92,6 +92,7 @@ class CreateNewPassViewModel(val context: Context, val editText: EditText, val c
 
     fun appPinEvent() {
         editText.requestFocus()
+        removeForgotPassField()
 
         if (Flag.appPin) {
             buttonText = "Reset Pin"
@@ -108,7 +109,12 @@ class CreateNewPassViewModel(val context: Context, val editText: EditText, val c
 
     }
 
-    fun backOnClick(view: View){
+    fun removeForgotPassField() {
+        val repo = repository.removeForgotPassField(context, progressBar)
+        authListener!!.onSuccess(repo)
+    }
+
+    fun backOnClick(view: View) {
         view.findNavController().navigate(R.id.loginFragment)
     }
 
