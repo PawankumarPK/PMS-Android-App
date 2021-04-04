@@ -1,5 +1,6 @@
 package com.purpleshade.pms.fragment.login.forgotPassword.createNewPassword
 
+import android.R.attr.password
 import android.content.Context
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
@@ -20,9 +21,10 @@ import com.purpleshade.pms.utils.customObject.Flag
 import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.show
 import com.purpleshade.pms.utils.snackbar
+import kotlinx.android.synthetic.main.create_new_pass_fragment.*
 
 
-class CreateNewPassViewModel(val context: Context, val editText: EditText, val confirmPassword :EditText,val imageView: ImageView, val progressBar: ProgressBar, val repository: CreateNewPassRepository) : ViewModel() {
+class CreateNewPassViewModel(val context: Context, val editText: EditText, val confirmPassword: EditText, val imageView: ImageView, val progressBar: ProgressBar, val repository: CreateNewPassRepository) : ViewModel() {
 
     var label: String? = null
     var buttonText: String? = null
@@ -89,20 +91,24 @@ class CreateNewPassViewModel(val context: Context, val editText: EditText, val c
     }
 
     fun appPinEvent() {
+        editText.requestFocus()
+
         if (Flag.appPin) {
             buttonText = "Reset Pin"
-            editText.inputType = InputType.TYPE_NUMBER_VARIATION_PASSWORD
-            confirmPassword.inputType = InputType.TYPE_NUMBER_VARIATION_PASSWORD
             editTextMaxLength()
+            editText.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_VARIATION_PASSWORD
+            confirmPassword.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_VARIATION_PASSWORD
             label = "Create new pin"
         } else {
+            editText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            confirmPassword.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
             buttonText = "Reset Password"
             label = "Create new password"
         }
 
     }
 
-    fun backOnClick(view:View){
+    fun backOnClick(view: View){
         view.findNavController().navigate(R.id.loginFragment)
     }
 
