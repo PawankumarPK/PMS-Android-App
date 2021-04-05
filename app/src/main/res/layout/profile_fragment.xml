@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -8,8 +8,7 @@
             type="com.purpleshade.pms.fragment.profileSection.userProfile.ProfileViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -64,8 +63,8 @@
                 android:layout_height="80dp"
                 android:layout_margin="@dimen/size20"
                 android:layout_weight="3"
-                android:visibility="gone"
-                android:src="@drawable/ic_launcher_background" />
+                android:src="@drawable/ic_launcher_background"
+                android:visibility="gone" />
 
 
         </LinearLayout>
@@ -74,8 +73,9 @@
             android:id="@+id/mLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="@dimen/size30"
             android:gravity="center_vertical"
+            android:padding="@dimen/size10"
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@+id/mConstraintLayout">
 
@@ -83,32 +83,38 @@
                 android:id="@+id/mUserIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/size20"
-                android:src="@drawable/ic_user" />
+                android:layout_marginStart="@dimen/size20"
+                android:src="@drawable/ic_user"
+                android:layout_marginLeft="@dimen/size20" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/size20"
-                android:orientation="vertical">
+                android:layout_marginStart="@dimen/size20"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/size20">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/mNickNameLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/raleway_bold"
-                    android:text="Nickname"
+                    android:text="@string/nickname"
+                    android:layout_marginStart="@dimen/size20"
                     android:textColor="@color/colorDarkGrey"
-                    android:textSize="@dimen/size17" />
+                    android:textSize="@dimen/size17"
+                    android:layout_marginLeft="@dimen/size20" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/mNickName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size20"
                     android:fontFamily="@font/raleway_bold"
                     android:text="@={viewModel.username}"
                     android:textColor="@color/colorBlack"
-                    android:textSize="@dimen/size20" />
+                    android:textSize="@dimen/size20"
+                    android:layout_marginLeft="@dimen/size20" />
 
 
             </LinearLayout>
@@ -122,6 +128,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
+            android:padding="@dimen/size10"
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@+id/mLinearLayout">
 
@@ -129,27 +136,31 @@
                 android:id="@+id/mobileIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/size20"
-                android:src="@drawable/ic_security" />
+                android:layout_marginStart="@dimen/size20"
+                android:src="@drawable/ic_security"
+                android:layout_marginLeft="@dimen/size20" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/size20"
+                android:layout_marginStart="@dimen/size20"
                 android:gravity="center_vertical"
                 android:onClick="@{viewModel.onEnableScreenLockClick}"
                 android:orientation="horizontal"
-                android:weightSum="10">
+                android:weightSum="10"
+                android:layout_marginLeft="@dimen/size20">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/mNumberLabel"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="9"
+                    android:layout_marginStart="@dimen/size20"
                     android:fontFamily="@font/raleway_bold"
                     android:text="@={viewModel.screenLock}"
                     android:textColor="@color/colorDarkGrey"
-                    android:textSize="@dimen/size17" />
+                    android:textSize="@dimen/size17"
+                    android:layout_marginLeft="@dimen/size20" />
 
                 <ImageView
                     android:layout_width="0dp"
@@ -163,13 +174,49 @@
 
 
         <LinearLayout
+            android:id="@+id/mPrivacyPolicy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="@dimen/size10"
+            android:onClick="@{viewModel.openWebOnBrowser}"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/mScreenLockStatus">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size20"
+                android:src="@drawable/ic_policy" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size20"
+                android:orientation="vertical">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/raleway_bold"
+                    android:text="@string/privacy_amp_policy"
+                    android:textColor="@color/colorDarkGrey"
+                    android:textSize="@dimen/size17" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
             android:id="@+id/mLogoutLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:onClick="@{viewModel.logoutDialog}"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/mScreenLockStatus">
+            android:padding="@dimen/size10"
+            app:layout_constraintTop_toBottomOf="@+id/mPrivacyPolicy">
 
             <ImageView
                 android:layout_width="wrap_content"

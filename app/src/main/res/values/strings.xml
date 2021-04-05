@@ -46,5 +46,7 @@
     <string name="back">Back</string>
     <string name="resend_code">resend code</string>
     <string name="change_email">Change email</string>
+    <string name="privacy_amp_policy"><![CDATA[Privacy & Policy]]></string>
+    <string name="nickname">Nickname</string>
 
 </resources>

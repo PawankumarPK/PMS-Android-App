@@ -1,14 +1,18 @@
 package com.purpleshade.pms.fragment.profileSection.userProfile
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.purpleshade.pms.R
@@ -22,7 +26,7 @@ import com.purpleshade.pms.utils.toast
 import kotlinx.android.synthetic.main.logout_msg_dialog.*
 import kotlinx.android.synthetic.main.verified_dialog.*
 
-class ProfileViewModel(val context: Context, val view: View, val progressBar: ProgressBar, val user: RoomUser, private val usernameTextView: TextView, private val emailTextView: TextView, private val nicknameTextView: TextView, val repository: ProfileRepository) : ViewModel() {
+class ProfileViewModel(val context: Context, val view: View, val progressBar: ProgressBar, val user: RoomUser, private val usernameTextView: TextView, private val emailTextView: TextView, private val nicknameTextView: TextView, val repository: ProfileRepository, val actvity: Activity) : ViewModel() {
 
     var username: String? = null
     var email: String? = null
@@ -48,6 +52,15 @@ class ProfileViewModel(val context: Context, val view: View, val progressBar: Pr
             screenLock = "Enable Screen Lock"
         }
 
+    }
+
+     fun openWebOnBrowser(view:View) {
+        var url = ""
+        if (!url.startsWith("http://") && !url.startsWith("https://"))
+            url = "http://" + "www.privacypolicies.com/live/38c499a8-cbb8-40ff-a761-9669d10b7358"
+
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        ContextCompat.startActivity(actvity, browserIntent, null)
     }
 
 
