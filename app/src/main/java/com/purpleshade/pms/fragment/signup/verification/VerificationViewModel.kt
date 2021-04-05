@@ -16,7 +16,9 @@ import com.purpleshade.pms.R
 import com.purpleshade.pms.repository.SignupVerificationRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
 import com.purpleshade.pms.utils.customObject.Flag
+import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.show
+import com.purpleshade.pms.utils.toast
 import kotlinx.android.synthetic.main.verified_dialog.*
 import java.lang.StringBuilder
 
@@ -51,17 +53,31 @@ class VerificationViewModel(
     }
 
     fun changeEmailOnClick(view: View) {
+        progressBar.show()
+
+        sb.clear()
+        val removeSignUpFieldRepo = repository.removeSignUp(context, progressBar)
+        authListener!!.onSuccess(removeSignUpFieldRepo)
+
         view.findNavController().navigate(R.id.signUpFragment)
 
     }
 
     fun onConfirmButtonClick(view: View) {
-        Flag.signUpToken = sb.toString()
-        sb.clear()
-        val repo = repository.verifySignUp(context)
-        authListener!!.onSuccess(repo)
-        successfullyVerifiedDialog(view)
+        progressBar.show()
 
+        if (Flag.signUpToken != sb.toString()) {
+            context.toast(context.getString(R.string.verification_failed))
+            progressBar.hide()
+            sb.clear()
+            return
+        }
+
+        val repo = repository.verifySignUp(context,progressBar)
+        authListener!!.onSuccess(repo)
+        sb.clear()
+
+        successfullyVerifiedDialog(view)
         repository.view = view
 
     }
@@ -85,12 +101,19 @@ class VerificationViewModel(
     fun resendVerificationCodeOnClick(view:View){
         progressBar.show()
 
+        sb.clear()
         val removeSignUpFieldRepo = repository.removeSignUp(context, progressBar)
         authListener!!.onSuccess(removeSignUpFieldRepo)
 
         view.findNavController().navigate(R.id.signUpFragment)
         repository.view = view
 
+    }
+
+    fun getVerificationToken() {
+        progressBar.show()
+        val repo = repository.getVerificationSignUpToken(context, progressBar)
+        authListener!!.onSuccess(repo)
     }
 
 

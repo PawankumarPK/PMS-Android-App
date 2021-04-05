@@ -65,6 +65,11 @@ interface ApiService {
     @POST("/user/verificationToken")
     fun verificationToken(@Field("email") email: String): Call<VerificationModel>
 
+    @FormUrlEncoded
+    @POST("/user/verificationSignUpToken")
+    fun verificationSignUpToken(@Field("email") email: String): Call<SignUpVerificationModel>
+
+
     @GET("/user/forgotPassVerify")
     fun forgotPassVerify(@Query("email") email: String, @Query("token") token: String): Call<ResponseBody>
 
@@ -82,13 +87,6 @@ interface ApiService {
 
     @PATCH("/user/logout")
     fun logout(@Query("id") id: String): Call<ResponseBody>
-
-    @FormUrlEncoded
-    @POST("/user/forgotAppPin")
-    fun forgotAppPin(@Field("email") email: String): Call<ResponseBody>
-
-    @GET("/user/forgotPinVerify")
-    fun forgotPinVerify(@Query("email") email: String, @Query("token") token: String): Call<ResponseBody>
 
     @FormUrlEncoded
     @POST("/user/updateAppPin")
