@@ -28,14 +28,14 @@ interface ApiService {
     @GET("/records/allRecords")
     fun allRecords(@Query("id") id: String): Call<Records>
 
-    @GET("records/recordDetail")
+    @GET("/records/recordDetail")
     fun recordDetail(@Query("id") id: String): Call<Records>
 
-    @GET("user/userProfile")
+    @GET("/user/userProfile")
     fun userProfile(@Query("id") id: String): Call<Profile>
 
     @FormUrlEncoded
-    @POST("records/inputRecord")
+    @POST("/records/inputRecord")
     fun addRecordDetail(
         @Field("title") title: String,
         @Field("webAddress") webAddress: String,
@@ -45,49 +45,49 @@ interface ApiService {
         @Field("loginId") loginId: String
     ): Call<SignUpModel>
 
-    @DELETE("records/deleteRecord")
+    @DELETE("/records/deleteRecord")
     fun deleteRecord(@Query("id") id: String): Call<SignUpModel>
 
-    @PATCH("records/updateDetails")
+    @PATCH("/records/updateDetails")
     fun updateRecord(@Query("id") id: String, @Body post: UpdateRecord): Call<ResponseBody>
 
-    @PATCH("user/updateProfile")
+    @PATCH("/user/updateProfile")
     fun updateProfile(@Query("id") id: String, @Body post: UpdateProfile): Call<SignUpModel>
 
-    @GET("user/signUpVerify")
+    @GET("/user/signUpVerify")
     fun verifySignUp(@Query("email") email: String, @Query("token") token: String): Call<ResponseBody>
 
     @FormUrlEncoded
-    @POST("user/forgotPassword")
+    @POST("/user/forgotPassword")
     fun forgotPassword(@Field("email") email: String): Call<ResponseBody>
 
     @FormUrlEncoded
-    @POST("user/verificationToken")
+    @POST("/user/verificationToken")
     fun verificationToken(@Field("email") email: String): Call<VerificationModel>
 
-    @GET("user/forgotPassVerify")
+    @GET("/user/forgotPassVerify")
     fun forgotPassVerify(@Query("email") email: String, @Query("token") token: String): Call<ResponseBody>
 
     @FormUrlEncoded
-    @POST("user/removeForgotPassField")
+    @POST("/user/removeForgotPassField")
     fun removeForgotPassField(@Field("email") email: String): Call<ResponseBody>
 
     @FormUrlEncoded
-    @POST("user/updatePassword")
+    @POST("/user/updatePassword")
     fun updatePassword(@Field("email") email: String, @Field("password") password: String): Call<ResponseBody>
 
-    @PATCH("user/logout")
+    @PATCH("/user/logout")
     fun logout(@Query("id") id: String): Call<ResponseBody>
 
     @FormUrlEncoded
-    @POST("user/forgotAppPin")
+    @POST("/user/forgotAppPin")
     fun forgotAppPin(@Field("email") email: String): Call<ResponseBody>
 
-    @GET("user/forgotPinVerify")
+    @GET("/user/forgotPinVerify")
     fun forgotPinVerify(@Query("email") email: String, @Query("token") token: String): Call<ResponseBody>
 
     @FormUrlEncoded
-    @POST("user/updateAppPin")
+    @POST("/user/updateAppPin")
     fun updateAppPin(@Field("email") id: String, @Field("pin") pin: String): Call<ResponseBody>
 
 
