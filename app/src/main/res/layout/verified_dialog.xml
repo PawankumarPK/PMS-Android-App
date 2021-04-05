@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="20dp"
     android:background="@drawable/white_radius_gradients">
 
@@ -16,25 +17,23 @@
             android:gravity="center_vertical"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:gravity="center"
-                android:text="@string/verified"
-                android:textColor="@color/colorBlack"
-                android:textSize="30sp" />
+           <ImageView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:src="@drawable/ic_success"
+               android:layout_gravity="center_horizontal"/>
 
             <TextView
                 android:id="@+id/mIncorrectPasscode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_margin="10dp"
+                android:layout_margin="@dimen/size10"
                 android:gravity="center"
+                android:fontFamily="@font/raleway_medium"
                 android:text="@string/yor_are_successfully_verified_the_account"
-                android:textColor="@color/colorBlack"
-                android:textSize="25sp" />
+                android:textColor="@color/colorBlackLessOpecity"
+                android:textSize="@dimen/size20" />
 
         </LinearLayout>
 
@@ -46,14 +45,20 @@
             android:layout_below="@+id/mStopLayout"
             android:layout_marginBottom="20dp">
 
-            <TextView
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/mConfirm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:gravity="center"
-                android:text="Go to Login"
-                android:textColor="@color/colorPrimary"
-                android:textSize="23sp" />
+                android:layout_margin="@dimen/size20"
+                android:background="@drawable/gradient"
+                android:fontFamily="@font/raleway_medium"
+                android:text="Go to login"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/size16"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
 
 
         </LinearLayout>
