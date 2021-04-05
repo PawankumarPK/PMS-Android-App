@@ -2,6 +2,7 @@ package com.purpleshade.pms.fragment.signup.verification
 
 import android.content.Context
 import android.widget.EditText
+import android.widget.ProgressBar
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.purpleshade.pms.repository.SignupVerificationRepository
@@ -18,10 +19,11 @@ class VerificationViewModelFactory(
     val box4: EditText,
     val box5: EditText,
     val box6: EditText,
+    var progressBar: ProgressBar,
     val repository: SignupVerificationRepository
 ) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return VerificationViewModel(context,box1,box2,box3,box4,box5,box6,repository) as T
+        return VerificationViewModel(context,box1,box2,box3,box4,box5,box6,progressBar,repository) as T
     }
 }

@@ -9,12 +9,14 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
+import android.widget.ProgressBar
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.purpleshade.pms.R
 import com.purpleshade.pms.repository.SignupVerificationRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
 import com.purpleshade.pms.utils.customObject.Flag
+import com.purpleshade.pms.utils.show
 import kotlinx.android.synthetic.main.verified_dialog.*
 import java.lang.StringBuilder
 
@@ -26,6 +28,7 @@ class VerificationViewModel(
     private val box4: EditText,
     private val box5: EditText,
     private val box6: EditText,
+    var progressBar: ProgressBar,
     val repository: SignupVerificationRepository
 ) : ViewModel() {
 
@@ -76,6 +79,17 @@ class VerificationViewModel(
         mDialog.setCanceledOnTouchOutside(false)
         mDialog.show()
         mDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+    }
+
+    fun resendVerificationCodeOnClick(view:View){
+        progressBar.show()
+
+        val removeSignUpFieldRepo = repository.removeSignUp(context, progressBar)
+        authListener!!.onSuccess(removeSignUpFieldRepo)
+
+        view.findNavController().navigate(R.id.signUpFragment)
+        repository.view = view
 
     }
 

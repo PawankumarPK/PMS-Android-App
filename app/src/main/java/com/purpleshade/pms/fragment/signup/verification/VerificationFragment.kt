@@ -13,6 +13,7 @@ import com.purpleshade.pms.databinding.VerificationFragmentBinding
 import com.purpleshade.pms.fragment.BaseFragment
 import com.purpleshade.pms.repository.SignupVerificationRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
+import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.verification_fragment.*
 
 class VerificationFragment : BaseFragment(), AuthListener {
@@ -30,7 +31,7 @@ class VerificationFragment : BaseFragment(), AuthListener {
         super.onViewCreated(view, savedInstanceState)
 
         val repository = SignupVerificationRepository()
-        val factory = VerificationViewModelFactory(baseActivity,mEditTextBoxOne, mEditTextBoxTwo, mEditTextBoxThree, mEditTextBoxFour, mEditTextBoxFive, mEditTextBoxSix,repository)
+        val factory = VerificationViewModelFactory(baseActivity, mEditTextBoxOne, mEditTextBoxTwo, mEditTextBoxThree, mEditTextBoxFour, mEditTextBoxFive, mEditTextBoxSix, baseActivity.mProgressBar, repository)
         viewModel = ViewModelProvider(this, factory).get(VerificationViewModel::class.java)
         binding.viewModel = viewModel
         viewModel.authListener = this

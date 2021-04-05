@@ -35,7 +35,7 @@
     <string name="username">Username</string>
     <string name="pinCreated">PIN is created</string>
     <string name="password_change_successfully">Password change successfully</string>
-    <string name="emailVerification">We already send the code in pawan@gmail.com. Please check your inbox and insert the
+    <string name="emailVerification">We already send the code on your EMAIL. Please check your inbox and insert the
     code in form below to verify your email</string>
     <string name="verified">Verified</string>
     <string name="yor_are_successfully_verified_the_account">Yor are successfully verified the account</string>
@@ -44,5 +44,7 @@
     <string name="you_don_t_have_any_records_right_now">You do not have any records right now</string>
     <string name="verification_failed">OTP not matched</string>
     <string name="back">Back</string>
+    <string name="resend_code">resend code</string>
+    <string name="change_email">Change email</string>
 
 </resources>

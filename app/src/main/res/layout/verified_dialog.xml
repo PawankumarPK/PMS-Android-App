@@ -39,7 +39,6 @@
 
 
         <LinearLayout
-            android:id="@+id/mGoToLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/mStopLayout"
@@ -47,7 +46,7 @@
 
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/mConfirm"
+                android:id="@+id/mGoToLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/size20"
@@ -55,6 +54,7 @@
                 android:fontFamily="@font/raleway_medium"
                 android:text="Go to login"
                 android:textAllCaps="false"
+                android:onClick="@{}"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/size16"
                 app:layout_constraintBottom_toBottomOf="parent" />

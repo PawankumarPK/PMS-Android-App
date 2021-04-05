@@ -73,6 +73,10 @@ interface ApiService {
     fun removeForgotPassField(@Field("email") email: String): Call<ResponseBody>
 
     @FormUrlEncoded
+    @POST("/user/removeSignUp")
+    fun removeSignUp(@Field("email") email: String): Call<ResponseBody>
+
+    @FormUrlEncoded
     @POST("/user/updatePassword")
     fun updatePassword(@Field("email") email: String, @Field("password") password: String): Call<ResponseBody>
 

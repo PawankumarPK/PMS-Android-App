@@ -40,7 +40,7 @@ class SignupRepository {
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 if (response.isSuccessful) {
-                    view!!.snackbar(context, context.getString(R.string.register_successful), R.color.colorGreen)
+                   // view!!.snackbar(context, context.getString(R.string.register_successful), R.color.colorGreen)
                     progressBar.hide()
                     view!!.findNavController().navigate(R.id.action_signUpFragment_to_verificationFragment)
                 }
