@@ -17,7 +17,6 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
 
-        <activity android:name=".utils.DummyActivity"/>
         <activity android:name=".activity.BaseActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
