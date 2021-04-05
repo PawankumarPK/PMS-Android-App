@@ -48,6 +48,10 @@ class HomeViewModel(val context: Context, val textView: TextView, val actvity: A
     fun loadAdapterList(view: RecyclerView) {
         progressBar.show()
 
+        if (passwordList.size == 0){
+            textView.show()
+        }
+
         loadAdapter(view)
 
         if (Flag.networkProblem) {
