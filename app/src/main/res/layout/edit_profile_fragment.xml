@@ -73,6 +73,7 @@
                 android:layout_marginEnd="@dimen/size15"
                 android:hint="@string/emergency_number"
                 app:errorEnabled="true"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/mRelativeLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
