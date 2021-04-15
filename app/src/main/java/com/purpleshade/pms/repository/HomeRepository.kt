@@ -55,6 +55,7 @@ class HomeRepository {
 
             override fun onResponse(call: Call<Records>, response: Response<Records>) {
                 if (response.isSuccessful) {
+                    progressBar.hide()
                     val recordDetail = response.body()!!.recordDetail
                     if (recordDetail.size > 0) {
                         textView.gone()
@@ -88,7 +89,6 @@ class HomeRepository {
             }
         })
 
-        progressBar.hide()
 
         return responseLoadRecordList
     }
