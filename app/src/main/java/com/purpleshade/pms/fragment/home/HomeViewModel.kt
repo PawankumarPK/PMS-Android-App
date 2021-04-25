@@ -13,7 +13,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -33,12 +32,13 @@ import kotlinx.android.synthetic.main.delete_warning_dialog.view.*
 import kotlinx.android.synthetic.main.password_detail_bottomsheet.view.*
 
 
-class HomeViewModel(val context: Context, val textView: TextView, val actvity: Activity, val repository: HomeRepository, val progressBar: ProgressBar, val user: RoomUser) : ViewModel(), PasswordsAdapter.OnEventListener {
+class HomeViewModel(val context: Context, val blankPageMsg: TextView, val actvity: Activity, val repository: HomeRepository, val progressBar: ProgressBar, val user: RoomUser) : ViewModel(), PasswordsAdapter.OnEventListener {
 
     lateinit var adapter: PasswordsAdapter
     var authListener: AuthListener? = null
 
     var passwordList: ArrayList<RecordList> = ArrayList()
+
     var roomPasswordList: ArrayList<RoomRecord> = ArrayList()
 
     lateinit var bottomSheetDialog: BottomSheetDialog
@@ -49,23 +49,28 @@ class HomeViewModel(val context: Context, val textView: TextView, val actvity: A
         progressBar.show()
 
         if (passwordList.size == 0){
-            textView.show()
+            blankPageMsg.show()
         }
 
         loadAdapter(view)
 
         if (Flag.networkProblem) {
-            val roomList = BaseActivity.INSTANCE!!.myDao().getUserRecords as ArrayList<RoomRecord>
+            val roomList = BaseActivity.INSTANCE!!.myDao().getUserRecords(RoomRecordDetail.userId) as ArrayList<RoomRecord>
             roomPasswordList.clear()
             roomPasswordList.addAll(roomList)
 
-            /*
-            for (i in roomList.indices) {
+            if (roomList.size == 0){
+                blankPageMsg.show()
+            }else
+                blankPageMsg.gone()
+
+            /*for (i in roomList.indices) {
                 val title = roomList[i].title
+                Log.d("=====>>>",title.toString())
             }*/
             return
         } else {
-            val repo = repository.loadRecordList(context, textView, passwordList, roomPasswordList, progressBar, adapter)
+            val repo = repository.loadRecordList(context, blankPageMsg, passwordList, roomPasswordList, progressBar, adapter)
             authListener!!.onSuccess(repo)
             adapter.notifyDataSetChanged()
         }
@@ -120,7 +125,7 @@ class HomeViewModel(val context: Context, val textView: TextView, val actvity: A
             adapter.notifyDataSetChanged()
 
             if (passwordList.size == 0){
-                textView.show()
+                blankPageMsg.show()
             }
 
             repository.deleteRecordItem(context, id)
@@ -129,7 +134,6 @@ class HomeViewModel(val context: Context, val textView: TextView, val actvity: A
 
         deleteBottomSheetDialog.show()
     }
-
 
     override fun viewRecordDetails() {
         bottomSheetDialog = BottomSheetDialog(context)

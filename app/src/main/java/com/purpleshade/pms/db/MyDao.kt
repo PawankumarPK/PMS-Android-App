@@ -44,8 +44,8 @@ interface MyDao {
     @Query("SELECT * FROM records WHERE recordId=:id ")
     fun loadSingle(id: String): List<RoomRecord>
 
-    @get:Query("select * from records")
-    val getUserRecords: List<RoomRecord>
+    @Query("select * from records WHERE loginId=:id")
+    fun getUserRecords(id:String): List<RoomRecord>
 
     //Insert data into Record table
     @Insert(onConflict = OnConflictStrategy.REPLACE)

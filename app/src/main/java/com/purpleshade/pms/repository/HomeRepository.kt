@@ -1,7 +1,6 @@
 package com.purpleshade.pms.repository
 
 import android.content.Context
-import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -75,8 +74,9 @@ class HomeRepository {
 
                     }
 
-                    recordList = BaseActivity.INSTANCE!!.myDao().getUserRecords
+                    recordList = BaseActivity.INSTANCE!!.myDao().getUserRecords(RoomRecordDetail.userId)
                     listDB.addAll(recordList)
+
 /*
                     for (i in listDB.indices) {
                         val title = listDB[i].title
@@ -96,7 +96,7 @@ class HomeRepository {
     fun loadRecordListFromRoom(listDB: ArrayList<RoomRecord>, progressBar: ProgressBar): LiveData<String> {
         progressBar.hide()
         val responseLoadRecordList: MutableLiveData<String> = MutableLiveData()
-        val recordList = BaseActivity.INSTANCE!!.myDao().getUserRecords
+        val recordList = BaseActivity.INSTANCE!!.myDao().getUserRecords(RoomRecordDetail.userId)
         listDB.addAll(recordList)
         for (i in listDB.indices) {
             val title = listDB[i].title
@@ -171,6 +171,3 @@ class HomeRepository {
     }
 
 }
-
-
-//

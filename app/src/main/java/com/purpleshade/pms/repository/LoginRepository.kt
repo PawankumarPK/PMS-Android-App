@@ -63,6 +63,8 @@ class LoginRepository {
                     } catch (e: Exception) {
 
                     }
+
+                    //If no user is there then store user detail in room db else update user when user logged out
                     if (id == null)
                         BaseActivity.INSTANCE!!.myDao().userDetails(user)
                     else
