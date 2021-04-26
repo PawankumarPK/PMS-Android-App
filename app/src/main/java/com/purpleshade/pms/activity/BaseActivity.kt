@@ -1,7 +1,6 @@
 package com.purpleshade.pms.activity
 
 import android.app.Activity
-import android.graphics.Color
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.Handler
@@ -10,8 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.room.Room
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.purpleshade.pms.R
@@ -53,13 +50,12 @@ class BaseActivity : AppCompatActivity() {
             mProgressBar.hide()
         } else {
             Flag.networkProblem = false
-           // mNetworkCheckLayout.gone()
+            // mNetworkCheckLayout.gone()
         }
         Handler().postDelayed({
             checkConnection()
         }, 500)
     }
-
 
     private fun getAppDataBase(): MyDatabase? {
         if (INSTANCE == null) {

@@ -18,4 +18,5 @@ object Flag {
     var forgotPassToken = ""
     var token = ""
     var appPin  = false
+    var somethingWentWrong = false
 }

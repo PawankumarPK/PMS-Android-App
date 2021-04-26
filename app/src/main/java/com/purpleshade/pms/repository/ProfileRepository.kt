@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import com.purpleshade.pms.R
 import com.purpleshade.pms.activity.BaseActivity
 import com.purpleshade.pms.db.RoomUser
+import com.purpleshade.pms.fragment.profileSection.userProfile.ProfileViewModel
 import com.purpleshade.pms.model.Profile
 import com.purpleshade.pms.model.SignUpModel
 import com.purpleshade.pms.model.UpdateProfile
@@ -31,6 +32,8 @@ import retrofit2.Response
  */
 class ProfileRepository {
 
+    val user = BaseActivity.INSTANCE!!.myDao().user
+
     fun profileDetails(context: Context, view: View, progressBar: ProgressBar, username: TextView, email: TextView, nickname: TextView): LiveData<String> {
         val responseForProfileDetails = MutableLiveData<String>()
         val api = RetrofitClient.apiService
@@ -38,7 +41,10 @@ class ProfileRepository {
 
         call.enqueue(object : Callback<Profile> {
             override fun onFailure(call: Call<Profile>, t: Throwable) {
-                view.snackbar(context, R.string.something_went_wrong.toString(), R.color.colorWarning)
+                view.snackbar(context," Oops! Something went wrong", R.color.colorWarning)
+                username.text = user.username
+                email.text = user.email
+                nickname.text = user.username
                 progressBar.hide()
             }
 

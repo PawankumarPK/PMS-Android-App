@@ -31,18 +31,33 @@ class PasswordsAdapter(val view: View, val context: Context, var passwordList: A
     }
 
     override fun getItemCount(): Int {
+        Log.d("====<<",Flag.somethingWentWrong.toString())
+
         return if (Flag.networkProblem)
             roomPasswordList.size
-        else
+        else if (!Flag.networkProblem && !Flag.somethingWentWrong)
             passwordList.size
+        else if (!Flag.somethingWentWrong) {
+            roomPasswordList.size
+            Log.d("====<<","====<<")
+        }
+        else
+            roomPasswordList.size
+
 
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        Log.d("====<<",Flag.somethingWentWrong.toString())
+
         if (Flag.networkProblem)
             holder.onBindRoom(roomPasswordList, position)
-        else if (!Flag.networkProblem)
+        else if (!Flag.networkProblem && !Flag.somethingWentWrong)
             holder.onBind(passwordList, position)
+        else if (Flag.somethingWentWrong) {
+            holder.onBindRoom(roomPasswordList, position)
+            Log.d("====<<","====<<")
+        }
     }
 
     inner class ViewHolder(val binding: PasswordViewholderBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -84,7 +99,9 @@ class PasswordsAdapter(val view: View, val context: Context, var passwordList: A
             binding.mEdit.setOnClickListener {
                 if (Flag.networkProblem) {
                     context.toast("No internet connection")
-                } else {
+                }else if (Flag.somethingWentWrong)
+                    context.toast("Something went wrong internet required")
+                else {
                     RoomRecordDetail.recordId = roomPasswordList[pos].recordId!!
                     view.findNavController().navigate(R.id.action_homeFragment_to_updateRecordFragment)
                 }

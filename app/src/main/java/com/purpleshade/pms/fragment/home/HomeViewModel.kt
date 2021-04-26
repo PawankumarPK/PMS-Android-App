@@ -47,7 +47,6 @@ class HomeViewModel(val context: Context, val blankPageMsg: TextView, val actvit
 
     //Insert list into recycleView
     fun loadAdapterList(view: RecyclerView) {
-        progressBar.show()
 
         if (passwordList.size == 0)
             blankPageMsg.show()
@@ -55,6 +54,7 @@ class HomeViewModel(val context: Context, val blankPageMsg: TextView, val actvit
         loadAdapter(view)
 
         if (Flag.networkProblem) {
+            Log.d("===>>", "====>>1")
             val roomList = BaseActivity.INSTANCE!!.myDao().getUserRecords(RoomRecordDetail.userId) as ArrayList<RoomRecord>
             roomPasswordList.clear()
             roomPasswordList.addAll(roomList)
@@ -69,16 +69,34 @@ class HomeViewModel(val context: Context, val blankPageMsg: TextView, val actvit
                 Log.d("=====>>>",title.toString())
             }*/
             return
-        } else {
-            val repo = repository.loadRecordList(context, blankPageMsg, passwordList, roomPasswordList, progressBar, adapter)
-            authListener!!.onSuccess(repo)
-            adapter.notifyDataSetChanged()
+        } else if (!Flag.networkProblem && !Flag.somethingWentWrong) {
+            Log.d("===>>", "====>>2")
+            progressBar.show()
+            loadRecordList(view)
+            return
+        } else if (Flag.somethingWentWrong) {
+            Log.d("===>>", "====>>3")
+            loadRecordList(view)
+            return
         }
 
         repository.view = view
     }
 
-    private fun loadAdapter(view: RecyclerView) {
+    private fun loadRecordList(view: RecyclerView) {
+        val repo = repository.loadRecordList(context, actvity,blankPageMsg, view, passwordList, roomPasswordList, progressBar, adapter)
+        authListener!!.onSuccess(repo)
+        adapter.notifyDataSetChanged()
+
+        val roomList = BaseActivity.INSTANCE!!.myDao().getUserRecords(RoomRecordDetail.userId) as ArrayList<RoomRecord>
+        if (roomList.size == 0)
+            blankPageMsg.show()
+        else
+            blankPageMsg.gone()
+
+    }
+
+    fun loadAdapter(view: RecyclerView) {
         adapter = PasswordsAdapter(view, context, passwordList, roomPasswordList)
         adapter.notifyDataSetChanged()
         adapter.onEventListener = this
