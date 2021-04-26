@@ -36,6 +36,10 @@ class FpVerificationViewModel(
     }
 
     fun verifyOnClick(view: View) {
+        if (Flag.networkProblem) {
+            context.toast(context.getString(R.string.no_internet_connection))
+            return
+        }
         progressBar.show()
 
         if (Flag.forgotPassToken != sb.toString()) {
@@ -59,8 +63,11 @@ class FpVerificationViewModel(
     }
 
     fun resendVerificationCodeOnClick(view:View){
+        if (Flag.networkProblem) {
+            context.toast(context.getString(R.string.no_internet_connection))
+            return
+        }
         progressBar.show()
-
         val removeForgotPassFieldRepo = repository.removeForgotPassField(context, progressBar)
         authListener!!.onSuccess(removeForgotPassFieldRepo)
 

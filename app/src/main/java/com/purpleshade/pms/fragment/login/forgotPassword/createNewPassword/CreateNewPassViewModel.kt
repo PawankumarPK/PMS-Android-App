@@ -21,6 +21,7 @@ import com.purpleshade.pms.utils.customObject.Flag
 import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.show
 import com.purpleshade.pms.utils.snackbar
+import com.purpleshade.pms.utils.toast
 import kotlinx.android.synthetic.main.create_new_pass_fragment.*
 
 
@@ -37,21 +38,24 @@ class CreateNewPassViewModel(val context: Context, val editText: EditText, val c
 
 
     fun resetButtonOnClick(view: View) {
-        progressBar.show()
+        if (Flag.networkProblem) {
+            context.toast(context.getString(R.string.no_internet_connection))
+            return
+        }
         when {
             editTextText.isNullOrEmpty() -> {
                 view.snackbar(context, "Please enter a password", R.color.colorBlackGrey)
-                progressBar.hide()
                 return
             }
             confirmEditText.isNullOrEmpty() || confirmEditText != editTextText -> {
                 view.snackbar(context, "Password did not match", R.color.colorBlackGrey)
-                progressBar.hide()
                 return
             }
         }
 
         if (Flag.appPin) {
+            progressBar.show()
+
             roomUser.appPassword = confirmEditText.toString()
             BaseActivity.INSTANCE!!.myDao().pinUpdate(confirmEditText.toString(), 1)
 

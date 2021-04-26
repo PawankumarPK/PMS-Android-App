@@ -12,6 +12,7 @@ import com.purpleshade.pms.utils.customObject.Flag
 import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.show
 import com.purpleshade.pms.utils.snackbar
+import com.purpleshade.pms.utils.toast
 
 class ForgotPasswordViewModel(val context: Context, val progressBar: ProgressBar, val repository: ForgotPasswordRepository) : ViewModel() {
 
@@ -22,22 +23,24 @@ class ForgotPasswordViewModel(val context: Context, val progressBar: ProgressBar
     var emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
 
     fun sendInstructionOnClick(view: View) {
-        progressBar.show()
+        if (Flag.networkProblem) {
+            context.toast(context.getString(R.string.no_internet_connection))
+            return
+        }
         regex = Regex(emailPattern)
         when {
             email.isNullOrEmpty() -> {
                 view.snackbar(context, "Email is required", R.color.colorBlackGrey)
-                progressBar.hide()
                 return
             }
             !email!!.matches(regex!!) -> {
                 view.snackbar(context, "Address should be example@gmail.com", R.color.colorBlackGrey)
-                progressBar.hide()
                 return
             }
         }
 
         Flag.forgotPassEmail = email!!
+        progressBar.show()
         val repo = repository.sendEmail(context, progressBar)
         authListener!!.onSuccess(repo)
         repository.view = view
