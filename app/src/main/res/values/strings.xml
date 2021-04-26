@@ -54,5 +54,6 @@
     <string name="please_enter_your_pin">Please enter your PIN</string>
     <string name="disable_screen_lock">Disable Screen Lock</string>
     <string name="enable_screen_lock">Enable Screen Lock</string>
+    <string name="logout">Logout</string>
 
 </resources>
