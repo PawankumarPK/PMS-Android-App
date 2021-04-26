@@ -70,6 +70,11 @@ class ProfileViewModel(val context: Context, val view: View, val progressBar: Pr
     }
 
      fun logoutDialog(view: View) {
+         if (Flag.networkProblem) {
+             context.toast(context.getString(R.string.no_internet_connection))
+             return
+         }
+
         mDialog = Dialog(context)
         val layout = LayoutInflater.from(context).inflate(R.layout.logout_msg_dialog, null, false)
         mDialog.setContentView(layout)
@@ -86,6 +91,10 @@ class ProfileViewModel(val context: Context, val view: View, val progressBar: Pr
     }
 
     private fun logoutOnClick(view: View) {
+        if (Flag.networkProblem) {
+            context.toast(context.getString(R.string.no_internet_connection))
+            return
+        }
         progressBar.show()
         val repo = repository.logout(context, view, progressBar)
         authListener!!.onSuccess(repo)

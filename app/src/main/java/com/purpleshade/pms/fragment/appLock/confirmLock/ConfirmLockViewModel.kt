@@ -41,17 +41,23 @@ class ConfirmLockViewModel(val context: Context, val view: View, val box1: EditT
 
     fun onCreatePinButtonClick(view: View) {
 
-        progressBar.show()
+        if (Flag.networkProblem) {
+            context.toast(context.getString(R.string.no_internet_connection))
+            return
+        }
+
 
         if (Flag.appPassword != sb.toString()) {
             //view.snackbar(context, "PIN not matched", R.color.colorAccent)
             context.toast("PIN not matched")
             sb.clear()
-            progressBar.gone()
+            //progressBar.gone()
             return
         }
 
         if (!Flag.networkProblem) {
+            progressBar.show()
+
             repository.confirmPin = sb.toString()
             val repo = repository.updatePin(context, progressBar)
             authListener!!.onSuccess(repo)
@@ -63,11 +69,7 @@ class ConfirmLockViewModel(val context: Context, val view: View, val box1: EditT
             BaseActivity.INSTANCE!!.myDao().lockAppStatus("on", 1)
 
 
-        }else{
-            context.toast("Internet connection required")
         }
-
-
     }
 
     inner class GenericTextWatcher(private val view: View, private val editText: Array<EditText>) : TextWatcher {
