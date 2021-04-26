@@ -45,11 +45,11 @@ class ProfileViewModel(val context: Context, val view: View, val progressBar: Pr
         }
 
         if (lockStatus.lockAppStatus == "on") {
-            screenLock = "Disable Screen Lock"
+            screenLock = context.getString(R.string.disable_screen_lock)
         } else {
             lockStatus.lockAppStatus = "off"
             BaseActivity.INSTANCE!!.myDao().userDetails(lockStatus)
-            screenLock = "Enable Screen Lock"
+            screenLock = context.getString(R.string.enable_screen_lock)
         }
 
     }
