@@ -12,6 +12,7 @@ import com.purpleshade.pms.repository.EditProfileRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
 import com.purpleshade.pms.utils.customObject.Flag
 import com.purpleshade.pms.utils.show
+import com.purpleshade.pms.utils.toast
 
 class EditProfileViewModel(val context: Context, val view: View, val progressBar: ProgressBar, val usernameTextView: TextView, val emailTextView: TextView, val repository: EditProfileRepository) : ViewModel() {
 
@@ -21,6 +22,10 @@ class EditProfileViewModel(val context: Context, val view: View, val progressBar
 
 
     fun onUpdateProfileButtonClick(view: View) {
+        if (Flag.networkProblem) {
+            context.toast(context.getString(R.string.no_internet_connection))
+            return
+        }
         progressBar.show()
         val repo = repository.updateProfile(context, view, progressBar, username!!, email!!)
         authListener!!.onSuccess(repo)

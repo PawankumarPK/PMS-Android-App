@@ -96,7 +96,7 @@ class ProfileViewModel(val context: Context, val view: View, val progressBar: Pr
         if (!Flag.networkProblem) {
             view.findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
         } else
-            context.toast("Could not connect to internet")
+            context.toast(context.getString(R.string.no_internet_connection))
     }
 
     fun onEnableScreenLockClick(view: View) {
