@@ -12,6 +12,7 @@ import com.purpleshade.pms.R
 import com.purpleshade.pms.db.RoomUser
 import com.purpleshade.pms.repository.LoginRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
+import com.purpleshade.pms.utils.customObject.Flag
 import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.show
 import com.purpleshade.pms.utils.toast
@@ -31,16 +32,17 @@ class LoginViewModel(val context: Context, private val repository: LoginReposito
         listDataClear.clearTable()
         Log.d("---->>>",listDataClear.toString())
 */
-
-        progressBar.show()
-
+        if (Flag.networkProblem) {
+            context.toast(context.getString(R.string.no_internet_connection))
+            return
+        }
 
         if (email.isNullOrEmpty() || password.isNullOrEmpty()) {
             progressBar.hide()
             context.toast("Field Empty")
             return
         }
-
+        progressBar.show()
         val repo = repository.doLogin(context,email.toString(), password.toString(), user, view, progressBar)
         authListener!!.onSuccess(repo)
     }

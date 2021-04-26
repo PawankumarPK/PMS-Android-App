@@ -11,12 +11,9 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.purpleshade.pms.R
 import com.purpleshade.pms.repository.SignupRepository
+import com.purpleshade.pms.utils.*
 import com.purpleshade.pms.utils.customInterface.AuthListener
 import com.purpleshade.pms.utils.customObject.Flag
-import com.purpleshade.pms.utils.gone
-import com.purpleshade.pms.utils.hide
-import com.purpleshade.pms.utils.show
-import com.purpleshade.pms.utils.snackbar
 
 
 class SignUpViewModel(val context: Context, private val repository: SignupRepository, val progressBar: ProgressBar, val imageView: ImageView, val editText: EditText) : ViewModel() {
@@ -34,7 +31,11 @@ class SignUpViewModel(val context: Context, private val repository: SignupReposi
 
 
     fun registerButtonClick(view: View) {
-        progressBar.show()
+        if (Flag.networkProblem) {
+            context.toast(context.getString(R.string.no_internet_connection))
+            return
+        }
+
         regex = Regex(emailPattern)
 
         when {
@@ -67,6 +68,7 @@ class SignUpViewModel(val context: Context, private val repository: SignupReposi
 
         Flag.userSignUpEmail = email!!
 
+        progressBar.show()
         val repo = repository.signUp(username!!, email!!, password!!, confirmPassword!!, context, progressBar)
         authListener!!.onSuccess(repo)
         //view!!.findNavController().navigate(R.id.action_signUpFragment_to_verificationFragment)

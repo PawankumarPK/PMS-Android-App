@@ -52,7 +52,7 @@ class LoginFragment : BaseFragment(), AuthListener {
 
         val repository = LoginRepository()
         binding.lifecycleOwner = this
-        val factory = AuthViewModelFactory(baseActivity, repository, baseActivity.mProgressBar, user, mPasswordVisiblity, mUserPassword)
+        val factory = LoginViewModelFactory(baseActivity, repository, baseActivity.mProgressBar, user, mPasswordVisiblity, mUserPassword)
 
         viewModel = ViewModelProvider(this, factory).get(LoginViewModel::class.java)
 

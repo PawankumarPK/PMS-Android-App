@@ -13,7 +13,7 @@ import com.purpleshade.pms.repository.LoginRepository
  * Created by pawan on 04,June,2020
  */
 @Suppress("UNCHECKED_CAST")
-class AuthViewModelFactory(private val context: Context, private val repository: LoginRepository, val progress: ProgressBar, val user: RoomUser, val imageView: ImageView, val editText: EditText) :
+class LoginViewModelFactory(private val context: Context, private val repository: LoginRepository, val progress: ProgressBar, val user: RoomUser, val imageView: ImageView, val editText: EditText) :
     ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return LoginViewModel(context, repository, progress, user,imageView,editText) as T

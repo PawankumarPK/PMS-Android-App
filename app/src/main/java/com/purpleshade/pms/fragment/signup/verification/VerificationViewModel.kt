@@ -36,7 +36,6 @@ class VerificationViewModel(
 
     var authListener: AuthListener? = null
     val sb = StringBuilder()
-    lateinit var mDialog: Dialog
 
 
     fun createPinBoxes() {
@@ -53,8 +52,11 @@ class VerificationViewModel(
     }
 
     fun changeEmailOnClick(view: View) {
+        if (Flag.networkProblem) {
+            context.toast(context.getString(R.string.no_internet_connection))
+            return
+        }
         progressBar.show()
-
         sb.clear()
         val removeSignUpFieldRepo = repository.removeSignUp(context, progressBar)
         authListener!!.onSuccess(removeSignUpFieldRepo)
@@ -64,7 +66,10 @@ class VerificationViewModel(
     }
 
     fun onConfirmButtonClick(view: View) {
-        progressBar.show()
+        if (Flag.networkProblem) {
+            context.toast(context.getString(R.string.no_internet_connection))
+            return
+        }
 
         if (Flag.signUpToken != sb.toString()) {
             context.toast(context.getString(R.string.verification_failed))
@@ -73,34 +78,23 @@ class VerificationViewModel(
             return
         }
 
+        progressBar.show()
         val repo = repository.verifySignUp(context,progressBar)
         authListener!!.onSuccess(repo)
         sb.clear()
-
-        successfullyVerifiedDialog(view)
         repository.view = view
 
     }
 
-    private fun successfullyVerifiedDialog(view: View) {
-        mDialog = Dialog(context)
-        val layout = LayoutInflater.from(context).inflate(R.layout.verified_dialog, null, false)
-        mDialog.setContentView(layout)
 
-        mDialog.mGoToLogin.setOnClickListener {
-            mDialog.dismiss()
-            view.findNavController().navigate(R.id.loginFragment)
-
-        }
-        mDialog.setCanceledOnTouchOutside(false)
-        mDialog.show()
-        mDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-    }
 
     fun resendVerificationCodeOnClick(view:View){
-        progressBar.show()
+        if (Flag.networkProblem) {
+            context.toast(context.getString(R.string.no_internet_connection))
+            return
+        }
 
+        progressBar.show()
         sb.clear()
         val removeSignUpFieldRepo = repository.removeSignUp(context, progressBar)
         authListener!!.onSuccess(removeSignUpFieldRepo)
