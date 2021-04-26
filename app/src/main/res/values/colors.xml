@@ -5,10 +5,12 @@
     <color name="colorAccent">#E30425</color>
     <color name="lightPrimaryVariant">#720D5D</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorLightBlack">#BC000000</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorBackground">#f8f9fc</color>
     <color name="colorShadowEnd">#88333333</color>
     <color name="colorGrey">#cccccc</color>
+    <color name="colorLightGrey">#EDEDED</color>
     <color name="colorDarkGrey">#6C6B6B</color>>
     <color name="colorBlackGrey">#333333</color>>
     <color name="colorBlue">#3F51B5</color>>
