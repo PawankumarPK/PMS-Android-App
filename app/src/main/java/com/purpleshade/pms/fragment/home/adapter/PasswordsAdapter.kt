@@ -97,13 +97,16 @@ class PasswordsAdapter(val view: View, val context: Context, var passwordList: A
 
 
             binding.mEdit.setOnClickListener {
-                if (Flag.networkProblem) {
-                    context.toast("No internet connection")
-                }else if (Flag.somethingWentWrong)
-                    context.toast("Something went wrong internet required")
-                else {
-                    RoomRecordDetail.recordId = roomPasswordList[pos].recordId!!
-                    view.findNavController().navigate(R.id.action_homeFragment_to_updateRecordFragment)
+                when {
+                    Flag.networkProblem -> {
+                        context.toast("No internet connection")
+                    }
+                    Flag.somethingWentWrong -> context.toast(context.getString(R.string.internal_issue))
+
+                    else -> {
+                        RoomRecordDetail.recordId = roomPasswordList[pos].recordId!!
+                        view.findNavController().navigate(R.id.action_homeFragment_to_updateRecordFragment)
+                    }
                 }
             }
 

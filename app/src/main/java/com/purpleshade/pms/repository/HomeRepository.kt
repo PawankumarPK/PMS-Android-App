@@ -221,8 +221,7 @@ class HomeRepository : PasswordsAdapter.OnEventListener{
             bottomSheetDialog.dismiss()
         }
         bottomSheetView.mWebAddress.setOnClickListener {
-            context2.toast("Something went wrong internet required")
-            //openWebOnBrowser(bottomSheetView.mWebAddress)
+            context2.toast(context2.getString(R.string.internal_issue))
         }
 
     }
