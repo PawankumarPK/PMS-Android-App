@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.purpleshade.pms.R
+import com.purpleshade.pms.activity.BaseActivity
 import com.purpleshade.pms.databinding.CreateLockFragmentBinding
 import com.purpleshade.pms.fragment.BaseFragment
 import kotlinx.android.synthetic.main.activity_base.*
@@ -29,6 +30,9 @@ class CreateLockFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val listData = BaseActivity.INSTANCE!!.myDao().user
+
+
         val factory = CreateLockViewModelFactory(baseActivity, view, mEditTextBoxOne, mEditTextBoxTwo, mEditTextBoxThree, mEditTextBoxFour)
         viewModel = ViewModelProvider(this, factory).get(CreateLockViewModel::class.java)
         binding.viewModel = viewModel
@@ -40,7 +44,11 @@ class CreateLockFragment : BaseFragment() {
         baseActivity.mBackButton.setOnClickListener {
             findNavController().navigate(R.id.profileFragment)
         }
-        baseActivity.mFragmentTitle.text = getString(R.string.create_pin)
+
+        if (listData.lockAppStatus == "on")
+            baseActivity.mFragmentTitle.text = getString(R.string.disable_screen_lock)
+        else
+            baseActivity.mFragmentTitle.text = getString(R.string.create_pin)
 
     }
 
