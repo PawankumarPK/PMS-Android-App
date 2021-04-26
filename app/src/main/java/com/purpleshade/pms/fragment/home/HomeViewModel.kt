@@ -78,18 +78,6 @@ class HomeViewModel(val context: Context, val blankPageMsg: TextView, val actvit
         repository.view = view
     }
 
-    fun recyclerViewInvalidate(recyclerView: RecyclerView){
-        Handler().postDelayed({
-            if (!Flag.networkProblem){
-                val repo = repository.loadRecordList(context, blankPageMsg, passwordList, roomPasswordList, progressBar, adapter)
-                authListener!!.onSuccess(repo)
-                adapter.notifyDataSetChanged()
-            }
-            recyclerViewInvalidate(recyclerView)
-
-        }, 500)
-    }
-
     private fun loadAdapter(view: RecyclerView) {
         adapter = PasswordsAdapter(view, context, passwordList, roomPasswordList)
         adapter.notifyDataSetChanged()
@@ -102,6 +90,8 @@ class HomeViewModel(val context: Context, val blankPageMsg: TextView, val actvit
     private fun passwordDetailsBottomSheetVisible(actvity: Activity) {
         val bottomSheetView = LayoutInflater.from(context).inflate(R.layout.password_detail_bottomsheet, actvity.findViewById<View>(R.id.bottomSheetContainer) as LinearLayout?)
         bottomSheetDialog.setContentView(bottomSheetView)
+
+        bottomSheetView.mBottomSheetProgressBar.show()
 
         bottomSheetView.mClose.setOnClickListener {
             bottomSheetDialog.dismiss()

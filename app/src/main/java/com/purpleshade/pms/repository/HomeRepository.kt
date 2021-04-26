@@ -15,11 +15,8 @@ import com.purpleshade.pms.model.RecordList
 import com.purpleshade.pms.model.Records
 import com.purpleshade.pms.model.SignUpModel
 import com.purpleshade.pms.network.RetrofitClient
+import com.purpleshade.pms.utils.*
 import com.purpleshade.pms.utils.customObject.RoomRecordDetail
-import com.purpleshade.pms.utils.gone
-import com.purpleshade.pms.utils.hide
-import com.purpleshade.pms.utils.snackbar
-import com.purpleshade.pms.utils.toast
 import kotlinx.android.synthetic.main.password_detail_bottomsheet.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -38,6 +35,7 @@ class HomeRepository {
 
     val roomRecord = RoomRecord()
     var recordList: List<RoomRecord> = ArrayList()
+
 
     fun loadRecordList(context: Context, textView: TextView, passwordList: ArrayList<RecordList>, listDB: ArrayList<RoomRecord>, progressBar: ProgressBar, adapter: PasswordsAdapter): LiveData<String> {
         val responseLoadRecordList: MutableLiveData<String> = MutableLiveData()
@@ -116,6 +114,7 @@ class HomeRepository {
 
             override fun onResponse(call: Call<Records>, response: Response<Records>) {
                 if (response.isSuccessful) {
+                    bottomSheetDialog.mBottomSheetProgressBar.gone()
                     val recordDetail = response.body()!!.recordDetail
 
                     for (i in recordDetail) {
@@ -141,6 +140,7 @@ class HomeRepository {
     }
 
     fun getRecordDetailsByRoom(id: String, bottomSheetDialog: BottomSheetDialog) {
+        bottomSheetDialog.mBottomSheetProgressBar.gone()
         val recordList = BaseActivity.INSTANCE!!.myDao().loadSingle(id)
         for (i in recordList.indices) {
             bottomSheetDialog.mTitle.text = recordList[i].title
