@@ -1,6 +1,7 @@
 package com.purpleshade.pms.activity
 
 import android.app.Activity
+import android.graphics.Color
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.Handler
@@ -17,19 +18,14 @@ import com.purpleshade.pms.R
 import com.purpleshade.pms.db.MyDatabase
 import com.purpleshade.pms.db.RoomUser
 import com.purpleshade.pms.network.RetrofitClient
-import com.purpleshade.pms.utils.Helper
+import com.purpleshade.pms.utils.*
 import com.purpleshade.pms.utils.customObject.Flag
-import com.purpleshade.pms.utils.gone
-import com.purpleshade.pms.utils.hide
-import com.purpleshade.pms.utils.show
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.delete_warning_dialog.view.*
 import kotlin.system.exitProcess
 
 class BaseActivity : AppCompatActivity() {
     lateinit var exitAppBottomSheetDialog: BottomSheetDialog
-
-    lateinit var view: View
 
     companion object {
         var INSTANCE: MyDatabase? = null
@@ -41,7 +37,6 @@ class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base)
 
-        view = View(this)
         RetrofitClient.initRosAPI(Helper.getConfigValue(this, "api_url")!!)
         INSTANCE = getAppDataBase()!!
 
@@ -54,11 +49,11 @@ class BaseActivity : AppCompatActivity() {
         val activeNetwork = manager.activeNetworkInfo
         if (activeNetwork == null) {
             Flag.networkProblem = true
-            mNetworkCheckLayout.show()
+            //mNetworkCheckLayout.show()
             mProgressBar.hide()
         } else {
             Flag.networkProblem = false
-            mNetworkCheckLayout.gone()
+           // mNetworkCheckLayout.gone()
         }
         Handler().postDelayed({
             checkConnection()

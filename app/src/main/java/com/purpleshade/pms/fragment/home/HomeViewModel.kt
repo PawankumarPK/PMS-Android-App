@@ -7,6 +7,7 @@ import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.os.Handler
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -48,9 +49,8 @@ class HomeViewModel(val context: Context, val blankPageMsg: TextView, val actvit
     fun loadAdapterList(view: RecyclerView) {
         progressBar.show()
 
-        if (passwordList.size == 0){
+        if (passwordList.size == 0)
             blankPageMsg.show()
-        }
 
         loadAdapter(view)
 
@@ -59,9 +59,9 @@ class HomeViewModel(val context: Context, val blankPageMsg: TextView, val actvit
             roomPasswordList.clear()
             roomPasswordList.addAll(roomList)
 
-            if (roomList.size == 0){
+            if (roomList.size == 0)
                 blankPageMsg.show()
-            }else
+            else
                 blankPageMsg.gone()
 
             /*for (i in roomList.indices) {
@@ -76,6 +76,18 @@ class HomeViewModel(val context: Context, val blankPageMsg: TextView, val actvit
         }
 
         repository.view = view
+    }
+
+    fun recyclerViewInvalidate(recyclerView: RecyclerView){
+        Handler().postDelayed({
+            if (!Flag.networkProblem){
+                val repo = repository.loadRecordList(context, blankPageMsg, passwordList, roomPasswordList, progressBar, adapter)
+                authListener!!.onSuccess(repo)
+                adapter.notifyDataSetChanged()
+            }
+            recyclerViewInvalidate(recyclerView)
+
+        }, 500)
     }
 
     private fun loadAdapter(view: RecyclerView) {
@@ -124,7 +136,7 @@ class HomeViewModel(val context: Context, val blankPageMsg: TextView, val actvit
             adapter.notifyItemRemoved(pos)
             adapter.notifyDataSetChanged()
 
-            if (passwordList.size == 0){
+            if (passwordList.size == 0) {
                 blankPageMsg.show()
             }
 

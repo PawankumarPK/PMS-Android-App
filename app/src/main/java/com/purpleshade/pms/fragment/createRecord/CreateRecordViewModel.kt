@@ -12,6 +12,7 @@ import com.purpleshade.pms.db.RoomRecord
 import com.purpleshade.pms.repository.CreateRecordRepository
 import com.purpleshade.pms.utils.*
 import com.purpleshade.pms.utils.customInterface.AuthListener
+import com.purpleshade.pms.utils.customObject.Flag
 import com.purpleshade.pms.utils.customObject.RoomRecordDetail
 
 class CreateRecordViewModel(val context: Context, val repository: CreateRecordRepository, val progressBar: ProgressBar, private val checkBox: CheckBox, private val textInputLayout: TextInputLayout) : ViewModel() {
@@ -25,8 +26,13 @@ class CreateRecordViewModel(val context: Context, val repository: CreateRecordRe
     var authListener: AuthListener? = null
 
     fun onAddButtonClick(view: View) {
-        progressBar.show()
+        if (Flag.networkProblem){
+            context.toast(context.getString(R.string.no_internet_connection))
+            return
+        }
+
         if (title != null) {
+            progressBar.show()
             val repo = repository.fillRecordDetails(context, view, progressBar, title!!, webAddress, email, password, addNote, RoomRecordDetail.userId)
             authListener!!.onSuccess(repo)
         } else {

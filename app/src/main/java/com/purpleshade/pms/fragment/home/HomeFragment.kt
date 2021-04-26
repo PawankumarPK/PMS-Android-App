@@ -1,6 +1,7 @@
 package com.purpleshade.pms.fragment.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.purpleshade.pms.R
 import com.purpleshade.pms.activity.BaseActivity
@@ -23,7 +25,6 @@ import com.purpleshade.pms.utils.show
 import com.purpleshade.pms.utils.toast
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.home_fragment.*
-import kotlinx.android.synthetic.main.password_viewholder.*
 import java.lang.Exception
 
 class HomeFragment : BaseFragment(), AuthListener {
@@ -44,8 +45,8 @@ class HomeFragment : BaseFragment(), AuthListener {
         Flag.backPressCount = 0
         val user = RoomUser()
         try {
-            val roomuserId = BaseActivity.INSTANCE!!.myDao().user
-            RoomRecordDetail.userId = roomuserId.userId.toString()
+            val roomUserId = BaseActivity.INSTANCE!!.myDao().user
+            RoomRecordDetail.userId = roomUserId.userId.toString()
         } catch (e: Exception) {
             baseActivity.toast("Exception Occurred")
         }
@@ -67,8 +68,11 @@ class HomeFragment : BaseFragment(), AuthListener {
         fabButton = view.findViewById(R.id.mFabButton)
 
         viewModel.loadAdapterList(mRecyclerView)
+        //viewModel.recyclerViewInvalidate(mRecyclerView)
 
     }
+
+
 
     override fun onSuccess(responseSuccess: LiveData<String>) {
         responseSuccess.observe(this, Observer {
