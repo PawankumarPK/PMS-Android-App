@@ -9,9 +9,11 @@ import androidx.lifecycle.ViewModel
 import com.purpleshade.pms.R
 import com.purpleshade.pms.repository.UpdateRecordRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
+import com.purpleshade.pms.utils.customObject.Flag
 import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.show
 import com.purpleshade.pms.utils.snackbar
+import com.purpleshade.pms.utils.toast
 
 
 class UpdateRecordViewModel(val context: Context, val repository: UpdateRecordRepository, val progressBar: ProgressBar) : ViewModel() {
@@ -25,6 +27,11 @@ class UpdateRecordViewModel(val context: Context, val repository: UpdateRecordRe
     var authListener: AuthListener? = null
 
     fun onUpdateButtonClick(view: View) {
+        if (Flag.networkProblem) {
+            context.toast(context.getString(R.string.no_internet_connection))
+            return
+        }
+
         if (title.isNullOrEmpty()) {
             view.snackbar(context, "Please enter a title for this record", R.color.colorBlackGrey)
             progressBar.hide()
