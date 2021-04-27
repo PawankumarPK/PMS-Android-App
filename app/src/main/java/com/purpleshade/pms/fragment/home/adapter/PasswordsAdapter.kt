@@ -86,7 +86,6 @@ class PasswordsAdapter(val view: View, val context: Context, var passwordList: A
 
             binding.mPasswordView.setOnClickListener {
                 RoomRecordDetail.recordId = roomPasswordList[pos].recordId!!
-                Log.d("----->>>",RoomRecordDetail.recordId)
                 onEventListener!!.viewRecordDetailsUsingRoom()
             }
 

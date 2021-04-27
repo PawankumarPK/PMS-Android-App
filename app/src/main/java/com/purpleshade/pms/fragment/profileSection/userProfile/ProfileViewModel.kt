@@ -36,7 +36,7 @@ class ProfileViewModel(val context: Context, val view: View, val progressBar: Pr
     lateinit var mDialog: Dialog
 
     fun profileDetail() {
-        if (!Flag.networkProblem) {
+        if (!Flag.networkProblem && !Flag.somethingWentWrong) {
             progressBar.show()
             val repo = repository.profileDetails(context, view, progressBar, usernameTextView, emailTextView, nicknameTextView)
             authListener!!.onSuccess(repo)

@@ -26,9 +26,15 @@ class EditProfileViewModel(val context: Context, val view: View, val progressBar
             context.toast(context.getString(R.string.no_internet_connection))
             return
         }
+        if (Flag.somethingWentWrong) {
+            context.toast(context.getString(R.string.internal_issue))
+            return
+        }
         progressBar.show()
-        val repo = repository.updateProfile(context, view, progressBar, username!!, email!!)
-        authListener!!.onSuccess(repo)
+        if (!Flag.networkProblem && !Flag.somethingWentWrong) {
+            val repo = repository.updateProfile(context, view, progressBar, username!!, email!!)
+            authListener!!.onSuccess(repo)
+        }
 
     }
 

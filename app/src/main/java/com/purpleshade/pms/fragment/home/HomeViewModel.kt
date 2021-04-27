@@ -61,7 +61,6 @@ class HomeViewModel(
         loadAdapter(view, context, roomPasswordList)
 
         if (Flag.networkProblem) {
-            Log.d("===>>", "====>>1")
             val roomList = BaseActivity.INSTANCE!!.myDao().getUserRecords(RoomRecordDetail.userId) as ArrayList<RoomRecord>
             roomPasswordList.clear()
             roomPasswordList.addAll(roomList)
@@ -77,12 +76,10 @@ class HomeViewModel(
             }*/
             return
         } else if (!Flag.networkProblem && !Flag.somethingWentWrong) {
-            Log.d("===>>", "====>>2")
             progressBar.show()
             loadRecordList(view)
             return
         } else if (Flag.somethingWentWrong) {
-            Log.d("===>>", "====>>3")
             loadRecordList(view)
             return
         }
