@@ -1,16 +1,11 @@
 package com.purpleshade.pms.repository
 
-import android.app.Activity
 import android.content.Context
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.purpleshade.pms.R
@@ -22,11 +17,13 @@ import com.purpleshade.pms.model.RecordList
 import com.purpleshade.pms.model.Records
 import com.purpleshade.pms.model.SignUpModel
 import com.purpleshade.pms.network.RetrofitClient
-import com.purpleshade.pms.utils.*
 import com.purpleshade.pms.utils.customObject.Flag
 import com.purpleshade.pms.utils.customObject.RoomRecordDetail
+import com.purpleshade.pms.utils.gone
+import com.purpleshade.pms.utils.hide
+import com.purpleshade.pms.utils.snackbar
+import com.purpleshade.pms.utils.toast
 import kotlinx.android.synthetic.main.password_detail_bottomsheet.*
-import kotlinx.android.synthetic.main.password_detail_bottomsheet.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,59 +31,45 @@ import retrofit2.Response
 /**
  * Created by pawan on 17,January,2021
  */
-class HomeRepository : PasswordsAdapter.OnEventListener{
+class HomeRepository {
     var title = ""
     var webAddress = ""
     var email = ""
     var password = ""
     var addNote = ""
-    var view: View? = null
-
-
-    lateinit var bottomSheetDialog: BottomSheetDialog
-    lateinit var context2: Context
-    lateinit var activity2: Activity
 
     val roomRecord = RoomRecord()
     var recordList: List<RoomRecord> = ArrayList()
 
     var roomPasswordList: ArrayList<RoomRecord> = ArrayList()
 
+    lateinit var homeViewModel: HomeViewModel
 
-    lateinit var adapter: PasswordsAdapter
-    var passwordList: ArrayList<RecordList> = ArrayList()
 
-    fun loadAdapter(view: RecyclerView, context: Context) {
-        adapter = PasswordsAdapter(view, context, passwordList, roomPasswordList)
-        adapter.onEventListener = this
-        adapter.notifyDataSetChanged()
-        view.adapter = adapter
-        view.layoutManager = LinearLayoutManager(context)
-
-    }
-
-    fun loadRecordList(context: Context, actvity: Activity,textView: TextView, view: RecyclerView, passwordList: ArrayList<RecordList>, roomRecordList: ArrayList<RoomRecord>, progressBar: ProgressBar, adapter: PasswordsAdapter): LiveData<String> {
+    fun loadRecordList(context: Context, textView: TextView, view: RecyclerView, passwordList: ArrayList<RecordList>, roomRecordList: ArrayList<RoomRecord>, progressBar: ProgressBar, adapter: PasswordsAdapter): LiveData<String> {
         val responseLoadRecordList: MutableLiveData<String> = MutableLiveData()
         val api = RetrofitClient.apiService
         val call = api.allRecords(RoomRecordDetail.userId)
 
         call.enqueue(object : Callback<Records> {
             override fun onFailure(call: Call<Records>, t: Throwable) {
-                context2 = context
-                activity2 = actvity
+                homeViewModel = HomeViewModel(context)
+
                 Flag.somethingWentWrong = true
-                loadAdapter(view, context)
+
+                homeViewModel.loadAdapter(view, context, roomPasswordList)
                 val roomList = BaseActivity.INSTANCE!!.myDao().getUserRecords(RoomRecordDetail.userId) as ArrayList<RoomRecord>
                 roomPasswordList.clear()
                 roomPasswordList.addAll(roomList)
 
-                context.toast("Something went wrong")
+                context.toast(context.getString(R.string.something_went_wrong))
                 progressBar.hide()
-
 
             }
 
             override fun onResponse(call: Call<Records>, response: Response<Records>) {
+                homeViewModel = HomeViewModel(context)
+
                 Flag.somethingWentWrong = false
                 if (response.isSuccessful) {
                     progressBar.hide()
@@ -128,21 +111,6 @@ class HomeRepository : PasswordsAdapter.OnEventListener{
         return responseLoadRecordList
     }
 
-
-
-
-    fun loadRecordListFromRoom(listDB: ArrayList<RoomRecord>, progressBar: ProgressBar): LiveData<String> {
-        progressBar.hide()
-        val responseLoadRecordList: MutableLiveData<String> = MutableLiveData()
-        val recordList = BaseActivity.INSTANCE!!.myDao().getUserRecords(RoomRecordDetail.userId)
-        listDB.addAll(recordList)
-        for (i in listDB.indices) {
-            val title = listDB[i].title
-        }
-        return responseLoadRecordList
-    }
-
-
     fun getRecordDetails(id: String, context: Context, bottomSheetDialog: BottomSheetDialog) {
         val api = RetrofitClient.apiService
         val call = api.recordDetail(id)
@@ -150,7 +118,7 @@ class HomeRepository : PasswordsAdapter.OnEventListener{
         call.enqueue(object : Callback<Records> {
             override fun onFailure(call: Call<Records>, t: Throwable) {
                 bottomSheetDialog.mBottomSheetProgressBar.gone()
-                context.toast("Something went wrong")
+                context.toast(context.getString(R.string.something_went_wrong))
             }
 
             override fun onResponse(call: Call<Records>, response: Response<Records>) {
@@ -192,53 +160,22 @@ class HomeRepository : PasswordsAdapter.OnEventListener{
         }
     }
 
-    fun deleteRecordItem(context: Context, id: String) {
+    fun deleteRecordItem(context: Context, view: View, id: String) {
         val api = RetrofitClient.apiService
         val call = api.deleteRecord(id)
 
         call.enqueue(object : Callback<SignUpModel> {
             override fun onFailure(call: Call<SignUpModel>, t: Throwable) {
-                view!!.snackbar(context, context.getString(R.string.something_went_wrong), R.color.colorWarning)
+                view.snackbar(context, context.getString(R.string.something_went_wrong), R.color.colorWarning)
             }
 
             override fun onResponse(call: Call<SignUpModel>, response: Response<SignUpModel>) {
                 roomRecord.recordId = id
                 BaseActivity.INSTANCE!!.myDao().deleteByRecordId(id)
-                view!!.snackbar(context, context.getString(R.string.delete_record_successfully), R.color.colorGreen)
-//                view!!.snackbar(context,context.getString(R.string.delete_record_successfully), R.color.colorGreen)
+                view.snackbar(context, context.getString(R.string.delete_record_successfully), R.color.colorGreen)
             }
 
         })
-    }
-
-    private fun passwordDetailsBottomSheetVisible(actvity: Activity) {
-        val bottomSheetView = LayoutInflater.from(context2).inflate(R.layout.password_detail_bottomsheet, actvity.findViewById<View>(R.id.bottomSheetContainer) as LinearLayout?)
-        bottomSheetDialog.setContentView(bottomSheetView)
-
-        bottomSheetView.mBottomSheetProgressBar.show()
-
-        bottomSheetView.mClose.setOnClickListener {
-            bottomSheetDialog.dismiss()
-        }
-        bottomSheetView.mWebAddress.setOnClickListener {
-            context2.toast(context2.getString(R.string.internal_issue))
-        }
-
-    }
-
-    override fun viewRecordDetails() {
-    }
-
-
-    override fun viewRecordDetailsUsingRoom() {
-        bottomSheetDialog = BottomSheetDialog(context2)
-        passwordDetailsBottomSheetVisible(activity2)
-        getRecordDetailsByRoom(RoomRecordDetail.recordId, bottomSheetDialog)
-        bottomSheetDialog.show()
-    }
-
-    override fun deleteRecord(id: String, pos: Int) {
-        context2.toast("Something went wrong internet required")
     }
 
 }

@@ -7,8 +7,6 @@ import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.os.Handler
-import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
@@ -29,17 +27,26 @@ import com.purpleshade.pms.utils.customObject.Flag
 import com.purpleshade.pms.utils.customObject.RoomRecordDetail
 import com.purpleshade.pms.utils.gone
 import com.purpleshade.pms.utils.show
+import com.purpleshade.pms.utils.toast
 import kotlinx.android.synthetic.main.delete_warning_dialog.view.*
 import kotlinx.android.synthetic.main.password_detail_bottomsheet.view.*
 
 
-class HomeViewModel(val context: Context, val blankPageMsg: TextView, val actvity: Activity, val repository: HomeRepository, val progressBar: ProgressBar, val user: RoomUser) : ViewModel(), PasswordsAdapter.OnEventListener {
+class HomeViewModel(
+    var context: Context,
+    var view: View = View(context),
+    private val blankPageMsg: TextView = TextView(context),
+    private val actvity: Activity = Activity(),
+    val repository: HomeRepository = HomeRepository(),
+    val progressBar: ProgressBar = ProgressBar(context),
+    val user: RoomUser = RoomUser()
+) : ViewModel(), PasswordsAdapter.OnEventListener {
+
 
     lateinit var adapter: PasswordsAdapter
     var authListener: AuthListener? = null
 
     var passwordList: ArrayList<RecordList> = ArrayList()
-
     var roomPasswordList: ArrayList<RoomRecord> = ArrayList()
 
     lateinit var bottomSheetDialog: BottomSheetDialog
@@ -51,7 +58,7 @@ class HomeViewModel(val context: Context, val blankPageMsg: TextView, val actvit
         if (passwordList.size == 0)
             blankPageMsg.show()
 
-        loadAdapter(view)
+        loadAdapter(view, context, roomPasswordList)
 
         if (Flag.networkProblem) {
             Log.d("===>>", "====>>1")
@@ -80,11 +87,11 @@ class HomeViewModel(val context: Context, val blankPageMsg: TextView, val actvit
             return
         }
 
-        repository.view = view
+        // repository.view = view
     }
 
     private fun loadRecordList(view: RecyclerView) {
-        val repo = repository.loadRecordList(context, actvity,blankPageMsg, view, passwordList, roomPasswordList, progressBar, adapter)
+        val repo = repository.loadRecordList(context, blankPageMsg, view, passwordList, roomPasswordList, progressBar, adapter)
         authListener!!.onSuccess(repo)
         adapter.notifyDataSetChanged()
 
@@ -96,7 +103,7 @@ class HomeViewModel(val context: Context, val blankPageMsg: TextView, val actvit
 
     }
 
-    fun loadAdapter(view: RecyclerView) {
+    fun loadAdapter(view: RecyclerView, context: Context, roomPasswordList: ArrayList<RoomRecord>) {
         adapter = PasswordsAdapter(view, context, passwordList, roomPasswordList)
         adapter.notifyDataSetChanged()
         adapter.onEventListener = this
@@ -105,9 +112,9 @@ class HomeViewModel(val context: Context, val blankPageMsg: TextView, val actvit
 
     }
 
-    private fun passwordDetailsBottomSheetVisible(actvity: Activity) {
-        val bottomSheetView = LayoutInflater.from(context).inflate(R.layout.password_detail_bottomsheet, actvity.findViewById<View>(R.id.bottomSheetContainer) as LinearLayout?)
-        bottomSheetDialog.setContentView(bottomSheetView)
+    private fun passwordDetailsBottomSheetVisible() {
+        val bottomSheetView = LayoutInflater.from(context).inflate(R.layout.password_detail_bottomsheet, null)
+        bottomSheetDialog.setContentView(bottomSheetView!!)
 
         bottomSheetView.mBottomSheetProgressBar.show()
 
@@ -129,8 +136,8 @@ class HomeViewModel(val context: Context, val blankPageMsg: TextView, val actvit
         startActivity(actvity, browserIntent, null)
     }
 
-    private fun deleteBottomSheetVisible(actvity: Activity, id: String, pos: Int) {
-        val deleteBottomSheetView = LayoutInflater.from(context).inflate(R.layout.delete_warning_dialog, actvity.findViewById<View>(R.id.deleteBottomSheetContainer) as LinearLayout?)
+    private fun deleteBottomSheetVisible(id: String, pos: Int) {
+        val deleteBottomSheetView = LayoutInflater.from(context).inflate(R.layout.delete_warning_dialog, null)
         deleteBottomSheetDialog.setContentView(deleteBottomSheetView)
 
         deleteBottomSheetView.mNo.setOnClickListener {
@@ -138,6 +145,12 @@ class HomeViewModel(val context: Context, val blankPageMsg: TextView, val actvit
         }
 
         deleteBottomSheetView.mYes.setOnClickListener {
+
+            if (Flag.somethingWentWrong) {
+                context.toast(context.getString(R.string.internal_issue))
+                deleteBottomSheetDialog.dismiss()
+                return@setOnClickListener
+            }
 
             passwordList.removeAt(pos)
             roomPasswordList.removeAt(pos)
@@ -148,7 +161,7 @@ class HomeViewModel(val context: Context, val blankPageMsg: TextView, val actvit
                 blankPageMsg.show()
             }
 
-            repository.deleteRecordItem(context, id)
+            repository.deleteRecordItem(context, view, id)
             deleteBottomSheetDialog.dismiss()
         }
 
@@ -157,21 +170,21 @@ class HomeViewModel(val context: Context, val blankPageMsg: TextView, val actvit
 
     override fun viewRecordDetails() {
         bottomSheetDialog = BottomSheetDialog(context)
-        passwordDetailsBottomSheetVisible(actvity)
+        passwordDetailsBottomSheetVisible()
         repository.getRecordDetails(RoomRecordDetail.recordId, context, bottomSheetDialog)
         bottomSheetDialog.show()
     }
 
     override fun viewRecordDetailsUsingRoom() {
         bottomSheetDialog = BottomSheetDialog(context)
-        passwordDetailsBottomSheetVisible(actvity)
+        passwordDetailsBottomSheetVisible()
         repository.getRecordDetailsByRoom(RoomRecordDetail.recordId, bottomSheetDialog)
         bottomSheetDialog.show()
     }
 
     override fun deleteRecord(id: String, pos: Int) {
         deleteBottomSheetDialog = BottomSheetDialog(context)
-        deleteBottomSheetVisible(actvity, id, pos)
+        deleteBottomSheetVisible(id, pos)
     }
 
     fun fabButtonClick(view: View) {
@@ -181,6 +194,4 @@ class HomeViewModel(val context: Context, val blankPageMsg: TextView, val actvit
     fun profileImageClick(view: View) {
         view.findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
     }
-
-
 }

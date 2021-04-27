@@ -12,8 +12,8 @@ import com.purpleshade.pms.R
 import com.purpleshade.pms.databinding.PasswordViewholderBinding
 import com.purpleshade.pms.db.RoomRecord
 import com.purpleshade.pms.model.RecordList
-import com.purpleshade.pms.utils.customObject.RoomRecordDetail
 import com.purpleshade.pms.utils.customObject.Flag
+import com.purpleshade.pms.utils.customObject.RoomRecordDetail
 import com.purpleshade.pms.utils.toast
 
 
@@ -31,16 +31,12 @@ class PasswordsAdapter(val view: View, val context: Context, var passwordList: A
     }
 
     override fun getItemCount(): Int {
-        Log.d("====<<",Flag.somethingWentWrong.toString())
-
         return if (Flag.networkProblem)
             roomPasswordList.size
         else if (!Flag.networkProblem && !Flag.somethingWentWrong)
             passwordList.size
-        else if (!Flag.somethingWentWrong) {
+        else if (!Flag.somethingWentWrong)
             roomPasswordList.size
-            Log.d("====<<","====<<")
-        }
         else
             roomPasswordList.size
 
@@ -48,16 +44,14 @@ class PasswordsAdapter(val view: View, val context: Context, var passwordList: A
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.d("====<<",Flag.somethingWentWrong.toString())
 
         if (Flag.networkProblem)
             holder.onBindRoom(roomPasswordList, position)
         else if (!Flag.networkProblem && !Flag.somethingWentWrong)
             holder.onBind(passwordList, position)
-        else if (Flag.somethingWentWrong) {
+        else if (Flag.somethingWentWrong)
             holder.onBindRoom(roomPasswordList, position)
-            Log.d("====<<","====<<")
-        }
+
     }
 
     inner class ViewHolder(val binding: PasswordViewholderBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -92,6 +86,7 @@ class PasswordsAdapter(val view: View, val context: Context, var passwordList: A
 
             binding.mPasswordView.setOnClickListener {
                 RoomRecordDetail.recordId = roomPasswordList[pos].recordId!!
+                Log.d("----->>>",RoomRecordDetail.recordId)
                 onEventListener!!.viewRecordDetailsUsingRoom()
             }
 
@@ -99,7 +94,7 @@ class PasswordsAdapter(val view: View, val context: Context, var passwordList: A
             binding.mEdit.setOnClickListener {
                 when {
                     Flag.networkProblem -> {
-                        context.toast("No internet connection")
+                        context.toast(context.getString(R.string.no_internet_connection))
                     }
                     Flag.somethingWentWrong -> context.toast(context.getString(R.string.internal_issue))
 
@@ -112,7 +107,7 @@ class PasswordsAdapter(val view: View, val context: Context, var passwordList: A
 
             binding.mDelete.setOnClickListener {
                 if (Flag.networkProblem) {
-                    context.toast("No internet connection")
+                    context.toast(context.getString(R.string.no_internet_connection))
                 } else {
                     onEventListener!!.deleteRecord(roomPasswordList[pos].recordId!!, pos)
                     notifyDataSetChanged()

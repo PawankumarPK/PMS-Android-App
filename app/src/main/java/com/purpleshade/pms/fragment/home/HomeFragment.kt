@@ -1,7 +1,6 @@
 package com.purpleshade.pms.fragment.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.purpleshade.pms.R
 import com.purpleshade.pms.activity.BaseActivity
@@ -18,14 +16,13 @@ import com.purpleshade.pms.db.RoomUser
 import com.purpleshade.pms.fragment.BaseFragment
 import com.purpleshade.pms.repository.HomeRepository
 import com.purpleshade.pms.utils.customInterface.AuthListener
-import com.purpleshade.pms.utils.customObject.RoomRecordDetail
 import com.purpleshade.pms.utils.customObject.Flag
+import com.purpleshade.pms.utils.customObject.RoomRecordDetail
 import com.purpleshade.pms.utils.gone
 import com.purpleshade.pms.utils.show
 import com.purpleshade.pms.utils.toast
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.home_fragment.*
-import java.lang.Exception
 
 class HomeFragment : BaseFragment(), AuthListener {
 
@@ -34,7 +31,7 @@ class HomeFragment : BaseFragment(), AuthListener {
     private lateinit var viewModel: HomeViewModel
     lateinit var binding: HomeFragmentBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.home_fragment, container, false)
         return binding.root
     }
@@ -52,7 +49,7 @@ class HomeFragment : BaseFragment(), AuthListener {
         }
 
         val repository = HomeRepository()
-        val factory = HomeViewModelFactory(baseActivity, mBlankPageMsg, baseActivity, repository, baseActivity.mProgressBar, user)
+        val factory = HomeViewModelFactory(baseActivity, view, mBlankPageMsg, baseActivity, repository, baseActivity.mProgressBar, user)
         viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
         viewModel.authListener = this
         binding.viewModel = viewModel
@@ -71,7 +68,6 @@ class HomeFragment : BaseFragment(), AuthListener {
         //viewModel.recyclerViewInvalidate(mRecyclerView)
 
     }
-
 
 
     override fun onSuccess(responseSuccess: LiveData<String>) {
