@@ -33,6 +33,10 @@ class CreateNewPassFragment : BaseFragment(), AuthListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        baseActivity.mToolbar.visibility = View.GONE
+
+
         val repository = CreateNewPassRepository()
         val factory = CreateNewPassViewModelFactory(baseActivity, mPassword,mConfirmPassword, mPasswordVisibility,baseActivity.mProgressBar,repository)
         viewModel = ViewModelProvider(this, factory).get(CreateNewPassViewModel::class.java)

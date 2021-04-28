@@ -16,6 +16,7 @@
         android:layout_height="match_parent"
         tools:context=".fragment.login.forgotPassword.createNewPassword.CreateNewPassFragment">
 
+
         <TextView
             android:id="@+id/mBack"
             android:layout_width="wrap_content"
@@ -24,119 +25,137 @@
             android:layout_marginLeft="@dimen/size20"
             android:layout_marginTop="@dimen/size20"
             android:fontFamily="@font/raleway_medium"
+            android:onClick="@{viewModel.cancelProcessDialog}"
             android:text="@string/back"
             android:textColor="@color/colorBlackLessOpecity"
             android:textSize="@dimen/size20"
-            android:onClick="@{viewModel.cancelProcessDialog}"
             android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:drawableLeftCompat="@drawable/ic_back_black"
             app:drawableStartCompat="@drawable/ic_back_black"
-            app:drawableLeftCompat="@drawable/ic_back_black" />
-
-
-        <TextView
-            android:id="@+id/mLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/size20"
-            android:layout_marginLeft="@dimen/size20"
-            android:layout_marginTop="@dimen/size30"
-            android:fontFamily="@font/raleway_bold"
-            android:text="@={viewModel.label}"
-            android:textColor="@color/colorBlack"
-            android:textSize="@dimen/size25"
-            android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mBack" />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-        <TextView
-            android:id="@+id/mLabel2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/raleway_bold"
-            android:padding="@dimen/size20"
-            android:text="Your new password must be different from previous used passwords."
-            android:textColor="@color/colorDarkGrey"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mLabel" />
-
-
-        <LinearLayout
-            android:id="@+id/mLinearLayout"
+        <ScrollView
+            android:id="@+id/mScrollView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/size20"
-            android:layout_marginTop="@dimen/size30"
-            android:layout_marginEnd="@dimen/size20"
-            android:orientation="horizontal"
-            android:weightSum="10"
-            app:layout_constraintTop_toBottomOf="@+id/mLabel2">
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/mButton"
+            app:layout_constraintTop_toBottomOf="@+id/mBack">
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/size5"
-                android:layout_marginRight="@dimen/size5"
-                android:layout_weight="8"
-                android:hint="@string/password">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/mPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/raleway_medium"
-                    android:text="@={viewModel.editTextText}"
-                    android:textStyle="bold" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <ImageView
-                android:id="@+id/mPasswordVisibility"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_weight="2"
-                android:background="@drawable/border"
-                android:contentDescription="@null"
-                android:onClick="@{viewModel.passwordVisibilityOnClick}"
-                android:padding="15dp"
-                android:src="@drawable/ic_visible" />
-
-        </LinearLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/mConfirmPasswordLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/size20"
-            android:layout_marginTop="@dimen/size10"
-            android:layout_marginEnd="@dimen/size20"
-            android:hint="@string/confirm_password"
-            app:layout_constraintTop_toBottomOf="@+id/mLinearLayout">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/mConfirmPassword"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/raleway_medium"
-                android:text="@={viewModel.confirmEditText}"
-                android:textStyle="bold" />
+                android:paddingBottom="@dimen/size30">
 
-        </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/mLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size20"
+                    android:layout_marginLeft="@dimen/size20"
+                    android:layout_marginTop="@dimen/size30"
+                    android:fontFamily="@font/raleway_bold"
+                    android:text="@={viewModel.label}"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/size25"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/mLabel2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/raleway_bold"
+                    android:padding="@dimen/size20"
+                    android:text="@string/your_new_password_must_be_different_from_previous_used_passwords"
+                    android:textColor="@color/colorDarkGrey"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/mLabel" />
+
+
+                <LinearLayout
+                    android:id="@+id/mLinearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size20"
+                    android:layout_marginTop="@dimen/size30"
+                    android:layout_marginEnd="@dimen/size20"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
+                    app:layout_constraintTop_toBottomOf="@+id/mLabel2">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/size5"
+                        android:layout_marginRight="@dimen/size5"
+                        android:layout_weight="8"
+                        android:hint="@string/password">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/mPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/raleway_medium"
+                            android:text="@={viewModel.editTextText}"
+                            android:textStyle="bold" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <ImageView
+                        android:id="@+id/mPasswordVisibility"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="2"
+                        android:background="@drawable/border"
+                        android:contentDescription="@null"
+                        android:onClick="@{viewModel.passwordVisibilityOnClick}"
+                        android:padding="15dp"
+                        android:src="@drawable/ic_visible" />
+
+                </LinearLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/mConfirmPasswordLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size20"
+                    android:layout_marginTop="@dimen/size10"
+                    android:layout_marginEnd="@dimen/size20"
+                    android:hint="@string/confirm_password"
+                    app:layout_constraintTop_toBottomOf="@+id/mLinearLayout">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/mConfirmPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/raleway_medium"
+                        android:text="@={viewModel.confirmEditText}"
+                        android:textStyle="bold" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/mButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/size20"
-            android:layout_marginTop="@dimen/size50"
             android:layout_marginEnd="@dimen/size20"
+            android:layout_marginBottom="@dimen/size20"
             android:background="@drawable/gradient"
             android:fontFamily="@font/raleway_medium"
             android:onClick="@{viewModel.resetButtonOnClick}"
@@ -144,7 +163,7 @@
             android:textAllCaps="false"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/size16"
-            app:layout_constraintTop_toBottomOf="@+id/mConfirmPasswordLayout" />
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
