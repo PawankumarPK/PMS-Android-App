@@ -33,6 +33,8 @@ class FpVerificationFragment : BaseFragment(), AuthListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        baseActivity.mToolbar.visibility = View.GONE
+
         val repository = FpVerificationRepository()
         val factory = FpVerificationViewModelFactory(view,baseActivity,mEditTextBoxOne, mEditTextBoxTwo, mEditTextBoxThree, mEditTextBoxFour, mEditTextBoxFive, mEditTextBoxSix,baseActivity.mProgressBar,repository)
         viewModel = ViewModelProvider(this, factory).get(FpVerificationViewModel::class.java)

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -11,7 +12,7 @@
     </data>
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -25,146 +26,163 @@
             android:layout_marginLeft="@dimen/size20"
             android:layout_marginTop="@dimen/size20"
             android:fontFamily="@font/raleway_medium"
+            android:onClick="@{viewModel.cancelProcessDialog}"
             android:text="@string/back"
             android:textColor="@color/colorBlackLessOpecity"
             android:textSize="@dimen/size20"
-            android:onClick="@{viewModel.cancelProcessDialog}"
             android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:drawableLeftCompat="@drawable/ic_back_black"
             app:drawableStartCompat="@drawable/ic_back_black"
-            app:drawableLeftCompat="@drawable/ic_back_black" />
-
-
-
-        <TextView
-            android:id="@+id/mVerifyLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:fontFamily="@font/raleway_bold"
-            android:gravity="center_horizontal"
-            android:padding="@dimen/size20"
-            android:text="Enter verification code we just sent you on your email address."
-            android:textColor="@color/colorDarkGrey"
-            android:textSize="@dimen/size25"
-            android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <LinearLayout
-            android:id="@+id/mPinRootLayout"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size30"
-            android:orientation="horizontal"
-            android:padding="@dimen/size20"
-            android:weightSum="6"
-            app:layout_constraintTop_toBottomOf="@+id/mVerifyLabel">
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/mVerify"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mBack">
 
-            <EditText
-                android:id="@+id/mEditTextBoxOne"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_marginEnd="@dimen/size5"
-                android:layout_marginRight="@dimen/size5"
-                android:layout_weight="1"
-                android:background="@drawable/edittext_curve_bg"
-                android:gravity="center"
-                android:inputType="number"
-                android:maxLength="1"
-                android:textSize="30sp" />
-
-            <EditText
-                android:id="@+id/mEditTextBoxTwo"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_marginEnd="@dimen/size5"
-                android:layout_marginRight="@dimen/size5"
-                android:layout_weight="1"
-                android:background="@drawable/edittext_curve_bg"
-                android:gravity="center"
-                android:inputType="number"
-                android:maxLength="1"
-                android:textSize="30sp" />
-
-            <EditText
-                android:id="@+id/mEditTextBoxThree"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_marginEnd="@dimen/size5"
-                android:layout_marginRight="@dimen/size5"
-                android:layout_weight="1"
-                android:background="@drawable/edittext_curve_bg"
-                android:gravity="center"
-                android:inputType="number"
-                android:maxLength="1"
-                android:textSize="30sp" />
-
-            <EditText
-                android:id="@+id/mEditTextBoxFour"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_marginEnd="@dimen/size5"
-                android:layout_marginRight="@dimen/size5"
-                android:layout_weight="1"
-                android:background="@drawable/edittext_curve_bg"
-                android:gravity="center"
-                android:inputType="number"
-                android:maxLength="1"
-                android:textSize="30sp" />
-
-            <EditText
-                android:id="@+id/mEditTextBoxFive"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_marginEnd="@dimen/size5"
-                android:layout_marginRight="@dimen/size5"
-                android:layout_weight="1"
-                android:background="@drawable/edittext_curve_bg"
-                android:gravity="center"
-                android:inputType="number"
-                android:maxLength="1"
-                android:textSize="30sp" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/size30">
 
 
-            <EditText
-                android:id="@+id/mEditTextBoxSix"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_marginEnd="@dimen/size5"
-                android:layout_marginRight="@dimen/size5"
-                android:layout_weight="1"
-                android:background="@drawable/edittext_curve_bg"
-                android:gravity="center"
-                android:inputType="number"
-                android:maxLength="1"
-                android:textSize="30sp" />
+                <TextView
+                    android:id="@+id/mVerifyLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="100dp"
+                    android:fontFamily="@font/raleway_bold"
+                    android:gravity="center_horizontal"
+                    android:padding="@dimen/size20"
+                    android:text="@string/enter_verification_code_we_just_sent_you_on_your_email_address"
+                    android:textColor="@color/colorDarkGrey"
+                    android:textSize="@dimen/size25"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
-        </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/mPinRootLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size30"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/size20"
+                    android:weightSum="6"
+                    app:layout_constraintTop_toBottomOf="@+id/mVerifyLabel">
+
+                    <EditText
+                        android:id="@+id/mEditTextBoxOne"
+                        android:layout_width="0dp"
+                        android:layout_height="60dp"
+                        android:layout_marginEnd="@dimen/size5"
+                        android:layout_marginRight="@dimen/size5"
+                        android:layout_weight="1"
+                        android:background="@drawable/edittext_curve_bg"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:textSize="30sp" />
+
+                    <EditText
+                        android:id="@+id/mEditTextBoxTwo"
+                        android:layout_width="0dp"
+                        android:layout_height="60dp"
+                        android:layout_marginEnd="@dimen/size5"
+                        android:layout_marginRight="@dimen/size5"
+                        android:layout_weight="1"
+                        android:background="@drawable/edittext_curve_bg"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:textSize="30sp" />
+
+                    <EditText
+                        android:id="@+id/mEditTextBoxThree"
+                        android:layout_width="0dp"
+                        android:layout_height="60dp"
+                        android:layout_marginEnd="@dimen/size5"
+                        android:layout_marginRight="@dimen/size5"
+                        android:layout_weight="1"
+                        android:background="@drawable/edittext_curve_bg"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:textSize="30sp" />
+
+                    <EditText
+                        android:id="@+id/mEditTextBoxFour"
+                        android:layout_width="0dp"
+                        android:layout_height="60dp"
+                        android:layout_marginEnd="@dimen/size5"
+                        android:layout_marginRight="@dimen/size5"
+                        android:layout_weight="1"
+                        android:background="@drawable/edittext_curve_bg"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:textSize="30sp" />
+
+                    <EditText
+                        android:id="@+id/mEditTextBoxFive"
+                        android:layout_width="0dp"
+                        android:layout_height="60dp"
+                        android:layout_marginEnd="@dimen/size5"
+                        android:layout_marginRight="@dimen/size5"
+                        android:layout_weight="1"
+                        android:background="@drawable/edittext_curve_bg"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:textSize="30sp" />
 
 
-        <TextView
-            android:id="@+id/mResendPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size10"
-            android:fontFamily="@font/raleway_bold"
-            android:text="@string/resend_code"
-            android:textAllCaps="true"
-            android:textColor="@color/colorBlue"
-            android:onClick="@{viewModel.resendVerificationCodeOnClick}"
-            android:textSize="@dimen/size18"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mPinRootLayout" />
+                    <EditText
+                        android:id="@+id/mEditTextBoxSix"
+                        android:layout_width="0dp"
+                        android:layout_height="60dp"
+                        android:layout_marginEnd="@dimen/size5"
+                        android:layout_marginRight="@dimen/size5"
+                        android:layout_weight="1"
+                        android:background="@drawable/edittext_curve_bg"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:textSize="30sp" />
+
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/mResendPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size10"
+                    android:fontFamily="@font/raleway_bold"
+                    android:onClick="@{viewModel.resendVerificationCodeOnClick}"
+                    android:text="@string/resend_code"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorBlue"
+                    android:textSize="@dimen/size18"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/mPinRootLayout" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/mVerify"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/size20"
