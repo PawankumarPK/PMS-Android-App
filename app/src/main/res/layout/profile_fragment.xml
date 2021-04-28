@@ -14,235 +14,249 @@
         android:layout_height="match_parent"
         tools:context=".fragment.profileSection.userProfile.ProfileFragment">
 
-
-        <LinearLayout
-            android:id="@+id/mConstraintLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:orientation="vertical"
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/mEditProfile"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/mUserName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/size10"
-                android:layout_marginLeft="@dimen/size10"
-                android:fontFamily="@font/raleway_bold"
-                android:gravity="start"
-                android:text="@={viewModel.username}"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/size22"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/mUserMailId"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/size10"
-                android:layout_marginLeft="@dimen/size10"
-                android:layout_marginTop="@dimen/size5"
-                android:fontFamily="@font/raleway_medium"
-                android:text="@={viewModel.email}"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/size16"
-                app:layout_constraintTop_toBottomOf="@+id/mUserName" />
-
-
-            <!-- <ImageView
-                 android:id="@+id/mImageView"
-                 android:layout_width="0dp"
-                 android:layout_height="80dp"
-                 android:layout_margin="@dimen/size20"
-                 android:layout_weight="3"
-                 android:src="@drawable/ic_launcher_background"
-                 android:visibility="gone" />-->
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/mLinearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size30"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="@dimen/size10"
-            app:layout_constraintTop_toBottomOf="@+id/mConstraintLayout">
-
-            <ImageView
-                android:id="@+id/mUserIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/size20"
-                android:layout_marginLeft="@dimen/size20"
-                android:contentDescription="@null"
-                android:src="@drawable/ic_user" />
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/size20"
-                android:layout_marginLeft="@dimen/size20"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/mNickNameLabel"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/mConstraintLayout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/size20"
-                    android:layout_marginLeft="@dimen/size20"
-                    android:fontFamily="@font/raleway_bold"
-                    android:text="@string/nickname"
-                    android:textColor="@color/colorDarkGrey"
-                    android:textSize="@dimen/size17" />
+                    android:layout_margin="20dp"
+                    android:orientation="vertical"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/mNickName"
-                    android:layout_width="wrap_content"
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/mUserName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/size10"
+                        android:layout_marginLeft="@dimen/size10"
+                        android:fontFamily="@font/raleway_bold"
+                        android:gravity="start"
+                        android:text="@={viewModel.username}"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/size22"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/mUserMailId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/size10"
+                        android:layout_marginLeft="@dimen/size10"
+                        android:layout_marginTop="@dimen/size5"
+                        android:fontFamily="@font/raleway_medium"
+                        android:text="@={viewModel.email}"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/size16"
+                        app:layout_constraintTop_toBottomOf="@+id/mUserName" />
+
+
+                    <!-- <ImageView
+                         android:id="@+id/mImageView"
+                         android:layout_width="0dp"
+                         android:layout_height="80dp"
+                         android:layout_margin="@dimen/size20"
+                         android:layout_weight="3"
+                         android:src="@drawable/ic_launcher_background"
+                         android:visibility="gone" />-->
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/mLinearLayout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/size20"
-                    android:layout_marginLeft="@dimen/size20"
-                    android:fontFamily="@font/raleway_bold"
-                    android:text="@={viewModel.username}"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="@dimen/size20" />
+                    android:layout_marginTop="@dimen/size30"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/size10"
+                    app:layout_constraintTop_toBottomOf="@+id/mConstraintLayout">
 
+                    <ImageView
+                        android:id="@+id/mUserIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/size20"
+                        android:layout_marginLeft="@dimen/size20"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_user" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/size20"
+                        android:layout_marginLeft="@dimen/size20"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/mNickNameLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/size20"
+                            android:layout_marginLeft="@dimen/size20"
+                            android:fontFamily="@font/raleway_bold"
+                            android:text="@string/nickname"
+                            android:textColor="@color/colorDarkGrey"
+                            android:textSize="@dimen/size17" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/mNickName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/size20"
+                            android:layout_marginLeft="@dimen/size20"
+                            android:fontFamily="@font/raleway_bold"
+                            android:text="@={viewModel.username}"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/size20" />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/mScreenLockStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/size10"
+                    app:layout_constraintTop_toBottomOf="@+id/mLinearLayout">
+
+                    <ImageView
+                        android:id="@+id/mobileIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/size20"
+                        android:layout_marginLeft="@dimen/size20"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_security" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/size20"
+                        android:layout_marginLeft="@dimen/size20"
+                        android:gravity="center_vertical"
+                        android:onClick="@{viewModel.onEnableScreenLockClick}"
+                        android:orientation="horizontal"
+                        android:weightSum="10">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/mNumberLabel"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/size20"
+                            android:layout_marginLeft="@dimen/size20"
+                            android:layout_weight="9"
+                            android:fontFamily="@font/raleway_bold"
+                            android:text="@={viewModel.screenLock}"
+                            android:textColor="@color/colorDarkGrey"
+                            android:textSize="@dimen/size17" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/size20"
+                            android:layout_weight="1"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_right_arrow" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/mPrivacyPolicy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:onClick="@{viewModel.openWebOnBrowser}"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/size10"
+                    app:layout_constraintTop_toBottomOf="@+id/mScreenLockStatus">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/size20"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_policy" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/size20"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/raleway_bold"
+                            android:text="@string/privacy_amp_policy"
+                            android:textColor="@color/colorDarkGrey"
+                            android:textSize="@dimen/size17" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/mLogoutLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:onClick="@{viewModel.logoutDialog}"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/size10"
+                    app:layout_constraintTop_toBottomOf="@+id/mPrivacyPolicy">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/size20"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_logout" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/size20"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/raleway_bold"
+                            android:text="@string/logout"
+                            android:textColor="@color/colorDarkGrey"
+                            android:textSize="@dimen/size17" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
 
             </LinearLayout>
-
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/mScreenLockStatus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="@dimen/size10"
-            app:layout_constraintTop_toBottomOf="@+id/mLinearLayout">
-
-            <ImageView
-                android:id="@+id/mobileIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/size20"
-                android:layout_marginLeft="@dimen/size20"
-                android:contentDescription="@null"
-                android:src="@drawable/ic_security" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/size20"
-                android:layout_marginLeft="@dimen/size20"
-                android:gravity="center_vertical"
-                android:onClick="@{viewModel.onEnableScreenLockClick}"
-                android:orientation="horizontal"
-                android:weightSum="10">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/mNumberLabel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/size20"
-                    android:layout_marginLeft="@dimen/size20"
-                    android:layout_weight="9"
-                    android:fontFamily="@font/raleway_bold"
-                    android:text="@={viewModel.screenLock}"
-                    android:textColor="@color/colorDarkGrey"
-                    android:textSize="@dimen/size17" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/size20"
-                    android:layout_weight="1"
-                    android:contentDescription="@null"
-                    android:src="@drawable/ic_right_arrow" />
-
-            </LinearLayout>
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/mPrivacyPolicy"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:onClick="@{viewModel.openWebOnBrowser}"
-            android:orientation="horizontal"
-            android:padding="@dimen/size10"
-            app:layout_constraintTop_toBottomOf="@+id/mScreenLockStatus">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/size20"
-                android:contentDescription="@null"
-                android:src="@drawable/ic_policy" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/size20"
-                android:orientation="vertical">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/raleway_bold"
-                    android:text="@string/privacy_amp_policy"
-                    android:textColor="@color/colorDarkGrey"
-                    android:textSize="@dimen/size17" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/mLogoutLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:onClick="@{viewModel.logoutDialog}"
-            android:orientation="horizontal"
-            android:padding="@dimen/size10"
-            app:layout_constraintTop_toBottomOf="@+id/mPrivacyPolicy">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/size20"
-                android:contentDescription="@null"
-                android:src="@drawable/ic_logout" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/size20"
-                android:orientation="vertical">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/raleway_bold"
-                    android:text="@string/logout"
-                    android:textColor="@color/colorDarkGrey"
-                    android:textSize="@dimen/size17" />
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
+        </ScrollView>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/mEditProfile"

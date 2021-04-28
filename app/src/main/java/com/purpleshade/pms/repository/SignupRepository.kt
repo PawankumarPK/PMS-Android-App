@@ -34,14 +34,13 @@ class SignupRepository {
         call.enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
                 view!!.snackbar(context, context.getString(R.string.something_went_wrong), R.color.colorWarning)
-                // context.toast(R.string.something_went_wrong.toString())
                 progressBar.hide()
             }
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 if (response.code() == 400) {
                     progressBar.hide()
-                    view!!.snackbar(context, "Email address is already register", R.color.colorWarning)
+                    view!!.snackbar(context, context.getString(R.string.email_already_register), R.color.colorWarning)
                     return
                 }
                 if (response.isSuccessful) {

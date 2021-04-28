@@ -57,5 +57,8 @@
     <string name="logout">Logout</string>
     <string name="internal_issue">Some internal issue please try again later</string>
     <string name="verify">Verify</string>
+    <string name="email_already_register">Email address is already register</string>
+    <string name="enter_pin">Enter PIN</string>
+    <string name="lock_note">Lock Note</string>
 
 </resources>

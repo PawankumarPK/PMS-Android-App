@@ -18,6 +18,14 @@
         android:layout_height="match_parent"
         tools:context=".fragment.createRecord.CreateRecordFragment">
 
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/mDone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
 
             <LinearLayout
                 android:id="@+id/mLinearLayout"
@@ -144,7 +152,7 @@
                         android:layout_marginStart="@dimen/size15"
                         android:layout_marginLeft="@dimen/size15"
                         android:fontFamily="@font/raleway_medium"
-                        android:text="Lock Note" />
+                        android:text="@string/lock_note" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/mLockNoteInputLayout"
@@ -154,7 +162,7 @@
                         android:layout_marginStart="@dimen/size15"
                         android:layout_marginTop="@dimen/size10"
                         android:layout_marginEnd="@dimen/size15"
-                        android:hint="Enter PIN"
+                        android:hint="@string/enter_pin"
                         app:errorEnabled="true">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -169,6 +177,9 @@
 
                 </LinearLayout>
             </LinearLayout>
+
+        </ScrollView>
+
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/mDone"
