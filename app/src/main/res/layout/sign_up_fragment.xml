@@ -184,8 +184,8 @@
                 <TextView
                     android:id="@+id/mLogin"
                     android:layout_width="wrap_content"
-                    android:layout_gravity="center_horizontal"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/size20"
                     android:fontFamily="@font/raleway_medium"
                     android:onClick="@{viewModel.onLoginClick}"

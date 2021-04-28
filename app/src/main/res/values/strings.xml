@@ -60,5 +60,6 @@
     <string name="email_already_register">Email address is already register</string>
     <string name="enter_pin">Enter PIN</string>
     <string name="lock_note">Lock Note</string>
+    <string name="done">Done</string>
 
 </resources>
