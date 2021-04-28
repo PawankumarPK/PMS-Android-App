@@ -27,7 +27,7 @@
             android:text="@string/back"
             android:textColor="@color/colorBlackLessOpecity"
             android:textSize="@dimen/size20"
-            android:onClick="@{viewModel.backOnClick}"
+            android:onClick="@{viewModel.cancelProcessDialog}"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"

@@ -1,6 +1,8 @@
 package com.purpleshade.pms.fragment.login.forgotPassword
 
+import android.app.Dialog
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.ProgressBar
 import androidx.lifecycle.ViewModel
@@ -13,6 +15,7 @@ import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.show
 import com.purpleshade.pms.utils.snackbar
 import com.purpleshade.pms.utils.toast
+import kotlinx.android.synthetic.main.logout_msg_dialog.*
 
 class ForgotPasswordViewModel(val context: Context, val progressBar: ProgressBar, val repository: ForgotPasswordRepository) : ViewModel() {
 
@@ -23,7 +26,7 @@ class ForgotPasswordViewModel(val context: Context, val progressBar: ProgressBar
     var emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
 
     fun sendInstructionOnClick(view: View) {
-        if (Flag.networkProblem) {
+      /*  if (Flag.networkProblem) {
             context.toast(context.getString(R.string.no_internet_connection))
             return
         }
@@ -43,9 +46,13 @@ class ForgotPasswordViewModel(val context: Context, val progressBar: ProgressBar
         progressBar.show()
         val repo = repository.sendEmail(context, progressBar)
         authListener!!.onSuccess(repo)
-        repository.view = view
+        repository.view = view*/
+
+        view!!.findNavController().navigate(R.id.action_forgotPasswordFragment_to_fpVerificationFragment)
+
 
     }
+
 
     fun backOnClick(view:View){
         view.findNavController().navigate(R.id.loginFragment)

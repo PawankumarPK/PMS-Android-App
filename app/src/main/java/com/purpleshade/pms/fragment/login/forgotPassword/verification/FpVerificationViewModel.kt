@@ -1,8 +1,10 @@
 package com.purpleshade.pms.fragment.login.forgotPassword.verification
 
+import android.app.Dialog
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
 import android.widget.ProgressBar
@@ -15,6 +17,7 @@ import com.purpleshade.pms.utils.customObject.Flag
 import com.purpleshade.pms.utils.hide
 import com.purpleshade.pms.utils.show
 import com.purpleshade.pms.utils.toast
+import kotlinx.android.synthetic.main.logout_msg_dialog.*
 
 class FpVerificationViewModel(
     val context: Context,
@@ -31,12 +34,15 @@ class FpVerificationViewModel(
     var authListener: AuthListener? = null
     val sb = StringBuilder()
 
+    lateinit var mDialog: Dialog
+
+
     fun backOnClick(view:View){
         view.findNavController().navigate(R.id.forgotPasswordFragment)
     }
 
     fun verifyOnClick(view: View) {
-        if (Flag.networkProblem) {
+        /*if (Flag.networkProblem) {
             context.toast(context.getString(R.string.no_internet_connection))
             return
         }
@@ -53,7 +59,11 @@ class FpVerificationViewModel(
         authListener!!.onSuccess(repo)
         repository.view = view
 
-        sb.clear()
+        sb.clear()*/
+
+
+        view!!.findNavController().navigate(R.id.action_fpVerificationFragment_to_createNewPassFragment)
+
     }
 
     fun getVerificationToken() {
@@ -92,6 +102,29 @@ class FpVerificationViewModel(
 
 
     }
+
+    fun cancelProcessDialog(view: View) {
+        if (Flag.networkProblem) {
+            context.toast(context.getString(R.string.no_internet_connection))
+            return
+        }
+
+        mDialog = Dialog(context)
+        val layout = LayoutInflater.from(context).inflate(R.layout.back_msg_warning_dialog, null, false)
+        mDialog.setContentView(layout)
+
+        mDialog.mYes.setOnClickListener {
+            view.findNavController().navigate(R.id.forgotPasswordFragment)
+            mDialog.dismiss()
+        }
+        mDialog.mNo.setOnClickListener {
+            mDialog.dismiss()
+        }
+        mDialog.show()
+
+    }
+
+
 
     inner class GenericTextWatcher(private val view: View, private val editText: Array<EditText>) : TextWatcher {
 

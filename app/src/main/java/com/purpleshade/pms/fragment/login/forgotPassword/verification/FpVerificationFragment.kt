@@ -39,7 +39,7 @@ class FpVerificationFragment : BaseFragment(), AuthListener {
         binding.viewModel = viewModel
         viewModel.authListener = this
         viewModel.createPinBoxes()
-        viewModel.getVerificationToken()
+      //  viewModel.getVerificationToken()
 
     }
 

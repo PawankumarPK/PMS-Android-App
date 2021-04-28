@@ -1,11 +1,13 @@
 package com.purpleshade.pms.fragment.login.forgotPassword.createNewPassword
 
 import android.R.attr.password
+import android.app.Dialog
 import android.content.Context
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.text.InputType
 import android.text.method.PasswordTransformationMethod
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
@@ -23,6 +25,7 @@ import com.purpleshade.pms.utils.show
 import com.purpleshade.pms.utils.snackbar
 import com.purpleshade.pms.utils.toast
 import kotlinx.android.synthetic.main.create_new_pass_fragment.*
+import kotlinx.android.synthetic.main.logout_msg_dialog.*
 
 
 class CreateNewPassViewModel(val context: Context, val editText: EditText, val confirmPassword: EditText, val imageView: ImageView, val progressBar: ProgressBar, val repository: CreateNewPassRepository) : ViewModel() {
@@ -35,6 +38,9 @@ class CreateNewPassViewModel(val context: Context, val editText: EditText, val c
     var visiblity = true
     var maxLength = 4
     val roomUser = RoomUser()
+
+    lateinit var mDialog: Dialog
+
 
 
     fun resetButtonOnClick(view: View) {
@@ -121,5 +127,28 @@ class CreateNewPassViewModel(val context: Context, val editText: EditText, val c
     fun backOnClick(view: View) {
         view.findNavController().navigate(R.id.loginFragment)
     }
+
+    fun cancelProcessDialog(view: View) {
+        if (Flag.networkProblem) {
+            context.toast(context.getString(R.string.no_internet_connection))
+            return
+        }
+
+        mDialog = Dialog(context)
+        val layout = LayoutInflater.from(context).inflate(R.layout.back_msg_warning_dialog, null, false)
+        mDialog.setContentView(layout)
+
+        mDialog.mYes.setOnClickListener {
+//            logoutOnClick(view)
+            view.findNavController().navigate(R.id.loginFragment)
+            mDialog.dismiss()
+        }
+        mDialog.mNo.setOnClickListener {
+            mDialog.dismiss()
+        }
+        mDialog.show()
+
+    }
+
 
 }
