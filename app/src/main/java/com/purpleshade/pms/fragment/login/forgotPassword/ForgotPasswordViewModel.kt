@@ -26,7 +26,7 @@ class ForgotPasswordViewModel(val context: Context, val progressBar: ProgressBar
     var emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
 
     fun sendInstructionOnClick(view: View) {
-      /*  if (Flag.networkProblem) {
+        if (Flag.networkProblem) {
             context.toast(context.getString(R.string.no_internet_connection))
             return
         }
@@ -46,9 +46,9 @@ class ForgotPasswordViewModel(val context: Context, val progressBar: ProgressBar
         progressBar.show()
         val repo = repository.sendEmail(context, progressBar)
         authListener!!.onSuccess(repo)
-        repository.view = view*/
+        repository.view = view
 
-        view!!.findNavController().navigate(R.id.action_forgotPasswordFragment_to_fpVerificationFragment)
+        //view!!.findNavController().navigate(R.id.action_forgotPasswordFragment_to_fpVerificationFragment)
 
 
     }

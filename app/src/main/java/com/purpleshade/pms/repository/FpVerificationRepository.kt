@@ -24,9 +24,8 @@ import retrofit2.Response
  */
 class FpVerificationRepository {
 
-    var view: View? = null
 
-    fun getVerificationTokenForMatch(context: Context, progressBar: ProgressBar): LiveData<String> {
+    fun getVerificationTokenForMatch(view: View, context: Context, progressBar: ProgressBar): LiveData<String> {
         val verificationResponse = MutableLiveData<String>()
         val api = RetrofitClient.apiService
         val call = api.verificationToken(Flag.forgotPassEmail)
@@ -49,7 +48,7 @@ class FpVerificationRepository {
     }
 
 
-    fun verifyForgetPasswordCode(context: Context,progressBar: ProgressBar): LiveData<String> {
+    fun verifyForgetPasswordCode(view: View, context: Context, progressBar: ProgressBar): LiveData<String> {
         val verificationResponse = MutableLiveData<String>()
         val api = RetrofitClient.apiService
         val call = api.forgotPassVerify(Flag.forgotPassEmail, Flag.forgotPassToken)
@@ -75,12 +74,10 @@ class FpVerificationRepository {
     }
 
 
-    fun resendVerificationCode(context: Context,progressBar: ProgressBar): LiveData<String> {
+    fun resendVerificationCode(view: View, context: Context, progressBar: ProgressBar): LiveData<String> {
         val verificationResponse = MutableLiveData<String>()
         val api = RetrofitClient.apiService
         val call = api.forgotPassword(Flag.forgotPassEmail)
-
-        Log.d("----->>Forgot",Flag.forgotPassEmail)
 
         call.enqueue(object : Callback<ResponseBody> {
 
@@ -92,9 +89,6 @@ class FpVerificationRepository {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 progressBar.hide()
                 context.toast("Resend code successful")
-                 //view!!.snackbar(context, "Resend code successful", R.color.colorGreen)
-//                view!!.findNavController().navigate(R.id.action_forgotPasswordFragment_to_fpVerificationFragment)
-
             }
 
 
@@ -104,7 +98,7 @@ class FpVerificationRepository {
     }
 
 
-    fun removeForgotPassField(context: Context,progressBar: ProgressBar): LiveData<String> {
+    fun removeForgotPassField(view: View, context: Context, progressBar: ProgressBar): LiveData<String> {
         val removeForgotPassField = MutableLiveData<String>()
         val api = RetrofitClient.apiService
         val call = api.removeForgotPassField(Flag.forgotPassEmail)
@@ -113,12 +107,14 @@ class FpVerificationRepository {
 
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 progressBar.hide()
-                view!!.snackbar(context, context.getString(R.string.something_went_wrong), R.color.colorWarning)
+                view.snackbar(context, context.getString(R.string.something_went_wrong), R.color.colorWarning)
             }
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 progressBar.hide()
-               // context.toast("Resend code successful")
+                view.findNavController().navigate(R.id.forgotPasswordFragment)
+
+                // context.toast("Resend code successful")
 
             }
 
@@ -127,8 +123,6 @@ class FpVerificationRepository {
 
         return removeForgotPassField
     }
-
-
 
 
 }

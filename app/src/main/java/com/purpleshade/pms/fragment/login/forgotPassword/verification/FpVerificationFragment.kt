@@ -34,12 +34,12 @@ class FpVerificationFragment : BaseFragment(), AuthListener {
         super.onViewCreated(view, savedInstanceState)
 
         val repository = FpVerificationRepository()
-        val factory = FpVerificationViewModelFactory(baseActivity,mEditTextBoxOne, mEditTextBoxTwo, mEditTextBoxThree, mEditTextBoxFour, mEditTextBoxFive, mEditTextBoxSix,baseActivity.mProgressBar,repository)
+        val factory = FpVerificationViewModelFactory(view, baseActivity, mEditTextBoxOne, mEditTextBoxTwo, mEditTextBoxThree, mEditTextBoxFour, mEditTextBoxFive, mEditTextBoxSix, baseActivity.mProgressBar, repository)
         viewModel = ViewModelProvider(this, factory).get(FpVerificationViewModel::class.java)
         binding.viewModel = viewModel
         viewModel.authListener = this
         viewModel.createPinBoxes()
-      //  viewModel.getVerificationToken()
+        //  viewModel.getVerificationToken()
 
     }
 

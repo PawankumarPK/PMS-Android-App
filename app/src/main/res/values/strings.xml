@@ -56,5 +56,6 @@
     <string name="enable_screen_lock">Enable Screen Lock</string>
     <string name="logout">Logout</string>
     <string name="internal_issue">Some internal issue please try again later</string>
+    <string name="verify">Verify</string>
 
 </resources>

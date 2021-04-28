@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
@@ -20,6 +21,7 @@ import com.purpleshade.pms.utils.toast
 import kotlinx.android.synthetic.main.logout_msg_dialog.*
 
 class FpVerificationViewModel(
+    val view: View,
     val context: Context,
     private val box1: EditText,
     private val box2: EditText,
@@ -37,12 +39,8 @@ class FpVerificationViewModel(
     lateinit var mDialog: Dialog
 
 
-    fun backOnClick(view:View){
-        view.findNavController().navigate(R.id.forgotPasswordFragment)
-    }
-
     fun verifyOnClick(view: View) {
-        /*if (Flag.networkProblem) {
+        if (Flag.networkProblem) {
             context.toast(context.getString(R.string.no_internet_connection))
             return
         }
@@ -55,38 +53,36 @@ class FpVerificationViewModel(
             return
         }
 
-        val repo = repository.verifyForgetPasswordCode(context, progressBar)
+        val repo = repository.verifyForgetPasswordCode(view, context, progressBar)
         authListener!!.onSuccess(repo)
-        repository.view = view
 
-        sb.clear()*/
+        sb.clear()
 
 
-        view!!.findNavController().navigate(R.id.action_fpVerificationFragment_to_createNewPassFragment)
+        //  view!!.findNavController().navigate(R.id.action_fpVerificationFragment_to_createNewPassFragment)
 
     }
 
     fun getVerificationToken() {
         progressBar.show()
-        val repo = repository.getVerificationTokenForMatch(context, progressBar)
+        val repo = repository.getVerificationTokenForMatch(view, context, progressBar)
         authListener!!.onSuccess(repo)
     }
 
-    fun resendVerificationCodeOnClick(view:View){
+    fun resendVerificationCodeOnClick(view: View) {
         if (Flag.networkProblem) {
             context.toast(context.getString(R.string.no_internet_connection))
             return
         }
         progressBar.show()
-        val removeForgotPassFieldRepo = repository.removeForgotPassField(context, progressBar)
+        val removeForgotPassFieldRepo = repository.removeForgotPassField(view, context, progressBar)
         authListener!!.onSuccess(removeForgotPassFieldRepo)
 
 
-        val repo = repository.resendVerificationCode(context, progressBar)
+        val repo = repository.resendVerificationCode(view, context, progressBar)
         authListener!!.onSuccess(repo)
 
         view.findNavController().navigate(R.id.fpVerificationFragment)
-        repository.view = view
 
     }
 
@@ -114,8 +110,14 @@ class FpVerificationViewModel(
         mDialog.setContentView(layout)
 
         mDialog.mYes.setOnClickListener {
-            view.findNavController().navigate(R.id.forgotPasswordFragment)
-            mDialog.dismiss()
+            if (!Flag.networkProblem) {
+                progressBar.show()
+                val removeForgotPassFieldRepo = repository.removeForgotPassField(view, context, progressBar)
+                authListener!!.onSuccess(removeForgotPassFieldRepo)
+                mDialog.dismiss()
+            }
+
+
         }
         mDialog.mNo.setOnClickListener {
             mDialog.dismiss()
@@ -123,7 +125,6 @@ class FpVerificationViewModel(
         mDialog.show()
 
     }
-
 
 
     inner class GenericTextWatcher(private val view: View, private val editText: Array<EditText>) : TextWatcher {

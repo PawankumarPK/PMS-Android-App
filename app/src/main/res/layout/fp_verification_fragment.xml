@@ -171,7 +171,7 @@
             android:background="@drawable/gradient"
             android:fontFamily="@font/raleway_medium"
             android:onClick="@{viewModel.verifyOnClick}"
-            android:text="Verify"
+            android:text="@string/verify"
             android:textAllCaps="false"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/size16"
