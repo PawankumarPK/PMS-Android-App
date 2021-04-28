@@ -114,6 +114,8 @@ class FpVerificationViewModel(
                 progressBar.show()
                 val removeForgotPassFieldRepo = repository.removeForgotPassField(view, context, progressBar)
                 authListener!!.onSuccess(removeForgotPassFieldRepo)
+                view.findNavController().navigate(R.id.forgotPasswordFragment)
+
                 mDialog.dismiss()
             }
 
@@ -150,9 +152,6 @@ class FpVerificationViewModel(
                     else if (text.isEmpty()) {
                         editText[4].requestFocus()
                     }
-
-                // view.findNavController().navigate(R.id.profileFragment)
-
             }
         }
 

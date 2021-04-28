@@ -34,7 +34,7 @@ class FpVerificationRepository {
 
             override fun onFailure(call: Call<VerificationModel>, t: Throwable) {
                 progressBar.hide()
-                view!!.snackbar(context, context.getString(R.string.something_went_wrong), R.color.colorWarning)
+                view.snackbar(context, context.getString(R.string.something_went_wrong), R.color.colorWarning)
             }
 
             override fun onResponse(call: Call<VerificationModel>, response: Response<VerificationModel>) {
@@ -57,13 +57,13 @@ class FpVerificationRepository {
 
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 progressBar.hide()
-                view!!.snackbar(context, context.getString(R.string.something_went_wrong), R.color.colorWarning)
+                view.snackbar(context, context.getString(R.string.something_went_wrong), R.color.colorWarning)
             }
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 progressBar.hide()
-                view!!.snackbar(context, context.getString(R.string.yor_are_successfully_verified_the_account), R.color.colorGreen)
-                view!!.findNavController().navigate(R.id.action_fpVerificationFragment_to_createNewPassFragment)
+                view.snackbar(context, context.getString(R.string.yor_are_successfully_verified_the_account), R.color.colorGreen)
+                view.findNavController().navigate(R.id.action_fpVerificationFragment_to_createNewPassFragment)
 
             }
 
@@ -112,7 +112,6 @@ class FpVerificationRepository {
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 progressBar.hide()
-                view.findNavController().navigate(R.id.forgotPasswordFragment)
 
                 // context.toast("Resend code successful")
 

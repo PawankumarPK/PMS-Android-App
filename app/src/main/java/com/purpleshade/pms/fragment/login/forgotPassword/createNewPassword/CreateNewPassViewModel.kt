@@ -139,7 +139,6 @@ class CreateNewPassViewModel(val context: Context, val editText: EditText, val c
         mDialog.setContentView(layout)
 
         mDialog.mYes.setOnClickListener {
-//            logoutOnClick(view)
             view.findNavController().navigate(R.id.loginFragment)
             mDialog.dismiss()
         }
