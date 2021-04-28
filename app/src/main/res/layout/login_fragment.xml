@@ -22,41 +22,55 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/size20"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="5dp">
+            app:cardCornerRadius="@dimen/size10"
+            app:cardElevation="@dimen/size5">
+
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical">
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
-
-                <TextView
-                    android:id="@+id/mLogo"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/size30"
-                    android:fontFamily="@font/audiowide_regular"
-                    android:text="@string/pms"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="40sp"
-                    android:textStyle="bold"
+                    android:padding="@dimen/size20"
+                    app:layout_constraintBottom_toTopOf="@+id/mLinearLayout"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/mLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/audiowide_regular"
-                    android:text="@string/password_management_system"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/size16"
-                    android:textStyle="bold"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/mLogo" />
+                    <TextView
+                        android:id="@+id/mLogo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size30"
+                        android:fontFamily="@font/audiowide_regular"
+                        android:gravity="center_horizontal"
+                        android:text="@string/pms"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/size40"
+                        android:textStyle="bold" />
 
+                    <TextView
+                        android:id="@+id/mLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/mLogo"
+                        android:layout_marginBottom="@dimen/size30"
+                        android:fontFamily="@font/audiowide_regular"
+                        android:gravity="center_horizontal"
+                        android:text="@string/password_management_system"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/size16"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
 
                 <LinearLayout
                     android:id="@+id/mLinearLayout"
@@ -151,10 +165,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/size20"
                     android:fontFamily="@font/raleway_medium"
+                    android:onClick="@{viewModel.forgotPasswordOnClick}"
                     android:text="@string/forgot_password"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/size14"
-                    android:onClick="@{viewModel.forgotPasswordOnClick}"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/mLinearLayout" />
@@ -175,6 +189,9 @@
                     app:layout_constraintTop_toBottomOf="@+id/mForgotPassword" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </ScrollView>
 
         </com.google.android.material.card.MaterialCardView>
 
