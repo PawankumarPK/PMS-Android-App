@@ -39,8 +39,12 @@ class SignupRepository {
             }
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                if (response.code() == 400) {
+                    progressBar.hide()
+                    view!!.snackbar(context, "Email address is already register", R.color.colorWarning)
+                    return
+                }
                 if (response.isSuccessful) {
-                   // view!!.snackbar(context, context.getString(R.string.register_successful), R.color.colorGreen)
                     progressBar.hide()
                     view!!.findNavController().navigate(R.id.action_signUpFragment_to_verificationFragment)
                 }
