@@ -30,6 +30,8 @@ class ForgotPasswordFragment : BaseFragment(), AuthListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        baseActivity.mToolbar.visibility = View.GONE
+
         val repository = ForgotPasswordRepository()
         val factory = ForgotPasswordViewModelFactory(baseActivity, baseActivity.mProgressBar, repository)
         viewModel = ViewModelProvider(this, factory).get(ForgotPasswordViewModel::class.java)
