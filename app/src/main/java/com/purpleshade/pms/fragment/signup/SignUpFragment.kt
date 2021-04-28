@@ -30,6 +30,7 @@ class SignUpFragment : BaseFragment(), AuthListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Flag.backPressString = "signUp"
+        baseActivity.mToolbar.visibility = View.GONE
         binding.lifecycleOwner = this
         val repository = SignupRepository()
         val factory = SignUpViewModelFactory(baseActivity,repository,baseActivity.mProgressBar,mPasswordVisiblity,mPassword)
